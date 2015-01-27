@@ -1,0 +1,31 @@
+{
+  "name": "craftml",
+  "version": "1.0.0",
+  "description": "craftml",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sikuli/craftml"
+  },
+  "keywords": [
+    "craft",
+    "3d",
+    "openjscad"
+  ],
+  "author": "Tom Yeh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sikuli/craftml/issues"
+  },
+  "homepage": "https://github.com/sikuli/craftml",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0"
+  },
+  "dependencies": {
+    "cheerio": "^0.18.0"
+  }
+}
