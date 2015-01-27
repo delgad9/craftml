@@ -26,6 +26,9 @@
     "mocha": "^2.1.0"
   },
   "dependencies": {
-    "cheerio": "^0.18.0"
+    "cheerio": "^0.18.0",
+    "craft-scad": "^1.0.1",
+    "lodash": "^3.0.0",
+    "with": "^4.0.0"
   }
 }

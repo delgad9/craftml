@@ -1,0 +1,31 @@
+var chai = require('chai').should()
+
+var Script = require('../lib').Script
+var Solid = require('../lib').Solid
+
+describe('Script', function() {
+
+    describe('render() function main(){ return cube();}', function() {
+
+        var script = new Script()
+        script.text = ('function main(){ return cube(); }')
+        var solid = script.render()
+
+        it('should return a solid cube', function() {
+            solid.should.be.instanceOf(Solid)
+            solid.should.have.property('csgs')
+            solid.csgs.should.have.length(1)
+            solid.csgs[0].should.have.property('polygons')
+        })
+
+        it('should compute layout width, height, depth', function() {
+
+            solid.should.have.property('layout').have.property('width')
+            solid.layout.width.should.equal(1)
+            solid.layout.height.should.equal(1)
+            solid.layout.depth.should.equal(1)
+        })
+
+    })
+
+})
