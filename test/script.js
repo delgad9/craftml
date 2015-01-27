@@ -13,9 +13,8 @@ describe('Script', function() {
 
         it('should return a solid cube', function() {
             solid.should.be.instanceOf(Solid)
-            solid.should.have.property('csgs')
-            solid.csgs.should.have.length(1)
-            solid.csgs[0].should.have.property('polygons')
+            solid.should.have.property('csg')            
+            solid.csg.should.have.property('polygons')
         })
 
         it('should compute layout width, height, depth', function() {

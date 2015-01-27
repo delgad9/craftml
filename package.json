@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "cheerio": "^0.18.0",
+    "commander": "^2.6.0",
     "craft-scad": "^1.0.1",
     "lodash": "^3.0.0",
     "with": "^4.0.0"

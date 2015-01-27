@@ -8,7 +8,7 @@ var Solid = require('../lib').Solid
 describe('Solid', function() {
 
     var solid = new Solid()
-    solid.csgs = [$$$.cube(), $$$.cube({size:3})]
+    solid.csg = $$$.cube()
 
     describe('toStl()', function() {
 

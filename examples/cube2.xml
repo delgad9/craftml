@@ -1,0 +1,12 @@
+<craft>
+    <script type="text/openjscad">
+        function main(){
+            return cube()
+        }
+    </script>
+    <script type="text/openjscad">
+        function main(){
+            return cube().translate([3,0,0])
+        }
+    </script>
+</craft>

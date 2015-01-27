@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+var craft = require('../lib'),
+    fs = require('fs'),
+    program = require('commander')
+
+
+program
+    .command('build src')
+    .description('run setup commands for all envs')    
+    .action(function(src, options) {
+        var xml = fs.readFileSync(src, 'utf8')
+        console.log(xml)
+        var solid = craft.parse(xml).render()
+        console.log(solid)
+        var stlstring = solid.toStl()
+        var dest = src.replace('.xml','.stl')
+        console.log('writing to %s', dest)
+        fs.writeFileSync(dest, stlstring, 'utf8')
+    })
+
+
+program.parse(process.argv)
