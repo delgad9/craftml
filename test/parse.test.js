@@ -3,6 +3,7 @@ var chai = require('chai').should(),
 
 var craft = require('../lib'),
     Script = require('../lib/script')
+    Stack = require('../lib/stack')
 
 describe('parse', function() {
     it('script1.xml\'s contents should have one script block', function() {
@@ -38,4 +39,16 @@ describe('parse', function() {
         script.type.should.be.equal('text/openjscad')
 
     })
+
+    it('stack.xml ==> [stack, [script, script]]', function() {
+
+        var xml = fs.readFileSync('test/fixtures/stack.xml', 'utf8')
+        var c = craft.parse(xml)
+        c.contents.should.have.length(1)
+        c.contents[0].should.be.instanceOf(Stack)
+        c.contents[0].contents.should.have.length(2)
+        c.contents[0].contents[0].should.be.instanceOf(Script)
+        c.contents[0].contents[1].should.be.instanceOf(Script)
+
+    })    
 })

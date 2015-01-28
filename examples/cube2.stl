@@ -1,170 +1,170 @@
 solid csg.js
-facet normal -1 0 0
+facet normal -1 0 2.4492127076447545e-16
 outer loop
-vertex 0 0 0
-vertex 0 0 50
-vertex 0 50 50
+vertex 2.9390552491737054e-14 20 120
+vertex 2.4492127076447545e-14 20 100
+vertex 2.4492127076447545e-14 0 100
 endloop
 endfacet
-facet normal -1 0 0
+facet normal -1 0 2.4492127076447545e-16
 outer loop
-vertex 0 0 0
-vertex 0 50 50
+vertex 2.9390552491737054e-14 20 120
+vertex 2.4492127076447545e-14 0 100
+vertex 2.9390552491737054e-14 0 120
+endloop
+endfacet
+facet normal -1 0 2.4492127076447545e-16
+outer loop
+vertex 2.4492127076447545e-14 50 100
 vertex 0 50 0
+vertex 0 0 0
+endloop
+endfacet
+facet normal -1 0 2.4492127076447545e-16
+outer loop
+vertex 2.4492127076447545e-14 50 100
+vertex 0 0 0
+vertex 2.4492127076447545e-14 0 100
 endloop
 endfacet
 facet normal 1 0 0
 outer loop
-vertex 50 0 0
-vertex 50 50 0
-vertex 50 50 50
+vertex 50 50 -1.2246063538223773e-14
+vertex 50 50 99.99999999999999
+vertex 50 0 99.99999999999999
 endloop
 endfacet
 facet normal 1 0 0
 outer loop
-vertex 50 0 0
-vertex 50 50 50
-vertex 50 0 50
+vertex 50 50 -1.2246063538223773e-14
+vertex 50 0 99.99999999999999
+vertex 50 0 -1.2246063538223773e-14
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 0 0 0
-vertex 50 0 0
-vertex 50 0 50
+vertex 50 0 -1.2246063538223773e-14
+vertex 50 0 99.99999999999999
+vertex 2.4492127076447545e-14 0 100
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
+vertex 50 0 -1.2246063538223773e-14
+vertex 2.4492127076447545e-14 0 100
 vertex 0 0 0
-vertex 50 0 50
-vertex 0 0 50
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 20 0 99.99999999999999
+vertex 20.000000000000004 0 120
+vertex 2.9390552491737054e-14 0 120
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 20 0 99.99999999999999
+vertex 2.9390552491737054e-14 0 120
+vertex 2.4492127076447545e-14 0 100
 endloop
 endfacet
 facet normal 0 1 0
 outer loop
+vertex 50 50 99.99999999999999
+vertex 50 50 -1.2246063538223773e-14
 vertex 0 50 0
-vertex 0 50 50
-vertex 50 50 50
 endloop
 endfacet
 facet normal 0 1 0
 outer loop
+vertex 50 50 99.99999999999999
 vertex 0 50 0
-vertex 50 50 50
-vertex 50 50 0
+vertex 2.4492127076447545e-14 50 100
 endloop
 endfacet
-facet normal 0 0 -1
+facet normal -2.4492127076447545e-16 0 -1
 outer loop
 vertex 0 0 0
 vertex 0 50 0
-vertex 50 50 0
+vertex 50 50 -1.2246063538223773e-14
 endloop
 endfacet
-facet normal 0 0 -1
+facet normal -2.4492127076447545e-16 0 -1
 outer loop
 vertex 0 0 0
-vertex 50 50 0
-vertex 50 0 0
+vertex 50 50 -1.2246063538223773e-14
+vertex 50 0 -1.2246063538223773e-14
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 0 0 50
-vertex 50 0 50
-vertex 50 50 50
+vertex 50 0 99.99999999999999
+vertex 50 20 100
+vertex 20 20 100
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 0 0 50
-vertex 50 50 50
-vertex 0 50 50
+vertex 50 0 99.99999999999999
+vertex 20 20 100
+vertex 20 0 99.99999999999999
 endloop
 endfacet
-facet normal -1 0 0
+facet normal 0 0 1
 outer loop
-vertex 80 0 0
-vertex 80 0 50
-vertex 80 50 50
+vertex 50 20 100
+vertex 50 50 99.99999999999999
+vertex 2.4492127076447545e-14 50 100
 endloop
 endfacet
-facet normal -1 0 0
+facet normal 0 0 1
 outer loop
-vertex 80 0 0
-vertex 80 50 50
-vertex 80 50 0
+vertex 50 20 100
+vertex 2.4492127076447545e-14 50 100
+vertex 2.4492127076447545e-14 20 100
 endloop
 endfacet
 facet normal 1 0 0
 outer loop
-vertex 130 0 0
-vertex 130 50 0
-vertex 130 50 50
+vertex 20 0 99.99999999999999
+vertex 20 20 100
+vertex 20.000000000000004 20 120
 endloop
 endfacet
 facet normal 1 0 0
 outer loop
-vertex 130 0 0
-vertex 130 50 50
-vertex 130 0 50
-endloop
-endfacet
-facet normal 0 -1 0
-outer loop
-vertex 80 0 0
-vertex 130 0 0
-vertex 130 0 50
-endloop
-endfacet
-facet normal 0 -1 0
-outer loop
-vertex 80 0 0
-vertex 130 0 50
-vertex 80 0 50
+vertex 20 0 99.99999999999999
+vertex 20.000000000000004 20 120
+vertex 20.000000000000004 0 120
 endloop
 endfacet
 facet normal 0 1 0
 outer loop
-vertex 80 50 0
-vertex 80 50 50
-vertex 130 50 50
+vertex 2.4492127076447545e-14 20 100
+vertex 2.9390552491737054e-14 20 120
+vertex 20.000000000000004 20 120
 endloop
 endfacet
 facet normal 0 1 0
 outer loop
-vertex 80 50 0
-vertex 130 50 50
-vertex 130 50 0
-endloop
-endfacet
-facet normal 0 0 -1
-outer loop
-vertex 80 0 0
-vertex 80 50 0
-vertex 130 50 0
-endloop
-endfacet
-facet normal 0 0 -1
-outer loop
-vertex 80 0 0
-vertex 130 50 0
-vertex 130 0 0
+vertex 2.4492127076447545e-14 20 100
+vertex 20.000000000000004 20 120
+vertex 20 20 100
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 80 0 50
-vertex 130 0 50
-vertex 130 50 50
+vertex 2.9390552491737054e-14 0 120
+vertex 20.000000000000004 0 120
+vertex 20.000000000000004 20 120
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 80 0 50
-vertex 130 50 50
-vertex 80 50 50
+vertex 2.9390552491737054e-14 0 120
+vertex 20.000000000000004 20 120
+vertex 2.9390552491737054e-14 20 120
 endloop
 endfacet
 endsolid csg.js

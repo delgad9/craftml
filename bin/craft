@@ -21,9 +21,81 @@ program
         open(dest)
     })
 
+function debug(solid) {
+
+    if (solid.csg) {
+        console.log(solid.csg)
+    } else {
+
+        solid.children.forEach(function(c) {
+            debug(c)
+        })
+    }
+}
+
+var $$$ = require('craft-scad')
+
+function transform_recursively(node, matrix) {
+    if (node.csg) {
+        node.csg = node.csg.transform(matrix)
+    }
+    node.children.forEach(function(c) {
+        transform_recursively(c, matrix)
+    })
+}
+
+function applyTranformation(solid, matrix) {
+
+    var m = $$$.CSG.Matrix4x4.translation([solid.layout.x, solid.layout.y, solid.layout.z])
+    if (matrix){
+        m = m.multiply(matrix)
+    }
+
+    if (solid.csg) {
+        var cb = solid.csg.getBounds()
+
+        console.log('%d,%d,%d --> ', cb[0].x, cb[0].y, cb[0].z)
+        console.log('%d,%d,%d', solid.layout.x, solid.layout.y, solid.layout.z)
+
+        var p1 = cb[0]
+        //var p2 = new $$$.CSG.Vector3D([solid.layout.x, solid.layout.y, solid.layout.z])
+
+        // p2 = p2.transform(m)
+        m = m.multiply($$$.CSG.Matrix4x4.translation([-cb[0].x,-cb[0].y,-cb[0].z]))
+
+        // console.log('%d,%d,%d', p2.x,p2.y,p2.z)
+
+        // var c1 = new $$$.CSG.Connector(p1, [0, 0, -1], [1, 0, 0]);
+        // var c2 = new $$$.CSG.Connector(p2, [0, 0, 1], [1, 0, 0]);
+
+        // var m = c1.getTransformationTo(c2, true, 0)
+        // m = matrix.multiply(m)
+        solid.csg = solid.csg.transform(m)
+        // solid.matrix = 
+
+        var cb = solid.csg.getBounds()
+        console.log('==> %d,%d,%d', cb[0].x, cb[0].y, cb[0].z)
+        // console.log(solid.csg)
+    } else {
+
+        console.log(solid.layout)
+        
+        solid.children.forEach(function(c) {
+                
+            applyTranformation(c, m)
+
+        })
+    }
+
+}
+
 function build(src) {
     var xml = fs.readFileSync(src, 'utf8')
     var solid = craft.parse(xml).render()
+
+    // debug(solid)
+    applyTranformation(solid)
+
     var stlstring = solid.toStl()
     var dest = src.replace('.xml', '.stl')
     console.log('writing to %s', dest)
