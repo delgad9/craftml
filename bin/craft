@@ -2,22 +2,33 @@
 
 var craft = require('../lib'),
     fs = require('fs'),
-    program = require('commander')
+    program = require('commander'),
+    open = require('open')
 
 
 program
     .command('build src')
-    .description('run setup commands for all envs')    
+    .description('run setup commands for all envs')
     .action(function(src, options) {
-        var xml = fs.readFileSync(src, 'utf8')
-        console.log(xml)
-        var solid = craft.parse(xml).render()
-        console.log(solid)
-        var stlstring = solid.toStl()
-        var dest = src.replace('.xml','.stl')
-        console.log('writing to %s', dest)
-        fs.writeFileSync(dest, stlstring, 'utf8')
+        build(src)
     })
 
+program
+    .command('preview src')
+    .description('run setup commands for all envs')
+    .action(function(src, options) {
+        var dest = build(src)
+        open(dest)
+    })
+
+function build(src) {
+    var xml = fs.readFileSync(src, 'utf8')
+    var solid = craft.parse(xml).render()
+    var stlstring = solid.toStl()
+    var dest = src.replace('.xml', '.stl')
+    console.log('writing to %s', dest)
+    fs.writeFileSync(dest, stlstring, 'utf8')
+    return dest
+}
 
 program.parse(process.argv)

@@ -1,12 +1,12 @@
 <craft>
     <script type="text/openjscad">
         function main(){
-            return cube()
+            return cube({size:50})
         }
     </script>
     <script type="text/openjscad">
         function main(){
-            return cube().translate([3,0,0])
+            return cube({size:50}).translate([80,0,0])
         }
     </script>
 </craft>
