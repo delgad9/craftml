@@ -25,7 +25,7 @@ Hello World
 
 __Craft__
 
-	$ craft helloworld.xml // ==> generates `helloworld.stl`
+	$ craft build helloworld.xml // ==> generates `helloworld.stl`
 	
 __View__
 
@@ -68,7 +68,7 @@ Install `craft-pin` and `craft-board` by
 
 Craft the coat hanger
 
-	$ craft hanger.xml
+	$ craft build hanger.xml
 
 # OpenJSCAD
 

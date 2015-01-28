@@ -1,7 +1,7 @@
 var chai = require('chai').should()
 
-var Script = require('../lib').Script
-var Solid = require('../lib').Solid
+var Script = require('../lib/script'),
+    Solid = require('../lib/solid')
 
 describe('Script', function() {
 
@@ -13,7 +13,7 @@ describe('Script', function() {
 
         it('should return a solid cube', function() {
             solid.should.be.instanceOf(Solid)
-            solid.should.have.property('csg')            
+            solid.should.have.property('csg')
             solid.csg.should.have.property('polygons')
         })
 

@@ -1,8 +1,8 @@
  var chai = require('chai').should()
 
- var SolidGroup = require('../lib').SolidGroup,
-     Row = require('../lib').Row,
-     Script = require('../lib').Script
+ var Solid = require('../lib/solid'),
+     Row = require('../lib/row'),
+     Script = require('../lib/script')
 
  describe('Row', function() {
 
@@ -19,9 +19,9 @@
 
          var solid = row.render()
 
-         it('should return a solid group with three child solids', function() {
+         it('should return a solid with three child solids', function() {
              solid.should.exist()
-             solid.should.be.instanceOf(SolidGroup)
+             solid.should.be.instanceOf(Solid)
              solid.children.should.have.length(3)
          })
 

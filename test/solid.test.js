@@ -2,8 +2,7 @@ var chai = require('chai').should(),
     fs = require('fs'),
     $$$ = require('craft-scad')
 
-
-var Solid = require('../lib').Solid
+var Solid = require('../lib/solid')
 
 describe('Solid', function() {
 
