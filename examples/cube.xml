@@ -1,7 +1,7 @@
 <craft>
     <script type="text/openjscad">
         function main(){
-            return cube().scale([20,1,1])
+            return cube().scale([20,20,30])
         }
     </script>
 </craft>

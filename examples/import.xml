@@ -1,0 +1,8 @@
+<craft>
+	<craft name="cube1" src="./examples/cube.xml"/>
+    <craft name="cube2" src="./examples/cube2.xml"/>
+    <stack>
+    	<cube1></cube1>
+    	<cube2></cube2>
+	</stack>
+</craft>

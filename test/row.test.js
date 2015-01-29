@@ -8,7 +8,8 @@
 
      var script = new Script()
      script.text = ('function main(){ return cube(); }')
-     var row = new Row([script, script, script])
+     var row = new Row()
+     row.contents = [script, script, script]
 
      it('can be created three Script objects', function() {
          row.should.be.ok

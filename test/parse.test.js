@@ -61,8 +61,18 @@ describe('parse', function() {
         
         c.contents.should.have.length(2)
         c.contents[0].should.be.instanceOf(Craft)
-        c.contents[1].should.be.instanceOf(CraftRef)
-        
+        c.contents[1].should.be.instanceOf(CraftRef)        
 
     })    
+
+    it('import.xml ==> [craft, ref]', function() {
+
+        var xml = fs.readFileSync('test/fixtures/import.xml', 'utf8')
+        var c = craft.parse(xml)
+        
+        c.contents.should.have.length(2)
+        c.contents[0].should.be.instanceOf(Craft)
+        c.contents[1].should.be.instanceOf(CraftRef)        
+
+    })        
 })

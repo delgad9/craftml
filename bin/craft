@@ -23,6 +23,7 @@ program
 
 function debug(solid) {
 
+    console.log(solid)
     if (solid.csg) {
         console.log(solid.csg)
     } else {
@@ -78,7 +79,7 @@ function applyTranformation(solid, matrix) {
         // console.log(solid.csg)
     } else {
 
-        console.log(solid.layout)
+        // console.log(solid.layout)
         
         solid.children.forEach(function(c) {
                 
@@ -91,9 +92,10 @@ function applyTranformation(solid, matrix) {
 
 function build(src) {
     var xml = fs.readFileSync(src, 'utf8')
-    var solid = craft.parse(xml).render()
 
-    // debug(solid)
+    var block = craft.parse(xml)
+    var solid = block.render()
+    
     applyTranformation(solid)
 
     var stlstring = solid.toStl()

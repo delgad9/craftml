@@ -1,0 +1,4 @@
+<craft>
+    <craft name="cube" src="./test/fixtures/script1.xml"/>    
+    <cube></cube>
+</craft>
