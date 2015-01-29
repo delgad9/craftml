@@ -2,8 +2,10 @@ var chai = require('chai').should(),
     fs = require('fs')
 
 var craft = require('../lib'),
-    Script = require('../lib/script')
-    Stack = require('../lib/stack')
+    Script = require('../lib/script'),
+    Stack = require('../lib/stack'),
+    Craft = require('../lib/craft'),
+    CraftRef = require('../lib/craftref')
 
 describe('parse', function() {
     it('script1.xml\'s contents should have one script block', function() {
@@ -49,6 +51,18 @@ describe('parse', function() {
         c.contents[0].contents.should.have.length(2)
         c.contents[0].contents[0].should.be.instanceOf(Script)
         c.contents[0].contents[1].should.be.instanceOf(Script)
+
+    })    
+
+    it('nested.xml ==> [craft, ref]', function() {
+
+        var xml = fs.readFileSync('test/fixtures/nested.xml', 'utf8')
+        var c = craft.parse(xml)
+        
+        c.contents.should.have.length(2)
+        c.contents[0].should.be.instanceOf(Craft)
+        c.contents[1].should.be.instanceOf(CraftRef)
+        
 
     })    
 })

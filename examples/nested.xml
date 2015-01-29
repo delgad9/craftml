@@ -1,0 +1,17 @@
+<craft>
+    <craft name="cube">
+        <script type="text/openjscad">
+            function main(){
+                return cube({size:50})
+            }
+        </script>
+    </craft>
+    <stack>
+    	<cube></cube>
+    	<cube></cube>
+    	<cube></cube>
+    	<row>
+    		<cube></cube><cube></cube>
+    	</row>
+    </stack>
+</craft>
