@@ -1,0 +1,12 @@
+<craft>
+    <stack>
+    	<place name="contents"></place>
+	    <script type="text/openjscad">
+	        function main(){
+	        	var element = craft.getElementByName('contents')
+	        	var size = element.size
+	            return cube().scale([size.x, size.y, 5])
+	        }
+	    </script>
+    </stack>
+</craft>

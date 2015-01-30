@@ -1,0 +1,29 @@
+<craft>
+	<craft name="instack">    	
+		<stack>
+		<script type="text/openjscad">
+	        function main(){
+	            return cube().scale([20,20,5])
+	        }
+	    </script>
+		<place name="contents"/>
+		<script type="text/openjscad">
+	        function main(){
+	            return cube().scale([20,20,5])
+	        }
+	    </script>		
+		</stack>
+    </craft>
+    <instack>
+	    <script type="text/openjscad">
+        function main(){
+            return cube().scale([10,10,30])
+        }
+	    </script>
+	   	<script type="text/openjscad">
+        function main(){
+            return cube().scale([15,15,30])
+        }
+	    </script>
+    </instack>
+</craft>

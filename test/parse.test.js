@@ -80,9 +80,34 @@ describe('parse', function() {
 
     })
 
+    // describe('place', function() {
+
+    //     it('can inject contents', function() {
+
+    //         //
+    //         // test/craft-simple/index.xml:
+    //         // <craft><box></box></craft>
+    //         //
+    //         var xml = '<craft><craft name="test" src="./test/fixtures/place.xml"/><test><box></box></test></craft>'
+    //         var c = craft.parse(xml)
+
+    //         c.should.containSubset({
+    //             type: 'Craft',
+    //             contents: [{
+    //                 type: 'Craft',
+    //                 contents: [{
+    //                     type: 'CraftRef',
+    //                     name: 'box'
+    //                 }]
+    //             }]
+    //         });
+    //     })
+
+    // })
+
     describe('module', function() {
 
-        it('should load module with a simple index.xml', function() {
+        it('can load module', function() {
 
             //
             // test/craft-simple/index.xml:

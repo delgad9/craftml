@@ -94,7 +94,9 @@ function build(src) {
     var xml = fs.readFileSync(src, 'utf8')
 
     var block = craft.parse(xml)
+    console.log(JSON.stringify(block,null,' '))
     var solid = block.render()
+
     
     applyTranformation(solid)
 
