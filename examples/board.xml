@@ -1,11 +1,14 @@
 <craft>
     <stack>
-    	<place name="contents"></place>
+    	<row name="stuffabove">
+	    	<place name="contents"></place>
+		</row>
 	    <script type="text/openjscad">
 	        function main(){
-	        	var element = craft.getElementByName('contents')
-	        	var size = element.size
-	            return cube().scale([size.x, size.y, 5])
+	        	var element = craft.getElementByName('stuffabove')        	
+	        	var size = element.getSize()
+	        	console.log(element)
+	            return cube().scale([size.x+10, size.y+10, 5]).translate([-5,-5,0])
 	        }
 	    </script>
     </stack>

@@ -14,9 +14,8 @@
              var place = new Place()
              place.name = 'contents'
 
-             var scope = {
-                 contents: [script, script, script]
-             }
+             var scope = new Scope()
+             scope.contents = [script, script, script]             
 
              var c = place.render(scope)
              c.should.have.length(3)

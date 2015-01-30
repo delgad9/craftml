@@ -122,7 +122,7 @@ describe('parse', function() {
                     type: 'Craft',
                     contents: [{
                         type: 'CraftRef',
-                        name: 'box'
+                        ref: 'box'
                     }]
                 }]
             });
@@ -145,12 +145,12 @@ describe('parse', function() {
                 "contents": [{
                     "contents": [{
                         "contents": [],
-                        "name": "box",
+                        "ref": "box",
                         "type": "CraftRef"
                     }, {
                         "contents": [{
                             "contents": [],
-                            "name": "part",
+                            "ref": "part",
                             "type": "CraftRef"
                         }],
                         "type": "Craft",
@@ -184,12 +184,12 @@ describe('parse', function() {
                     "contents": [{
                         "contents": [{
                             "contents": [],
-                            "name": "box",
+                            "ref": "box",
                             "type": "CraftRef"
                         }, {
                             "contents": [{
                                 "contents": [],
-                                "name": "part",
+                                "ref": "part",
                                 "type": "CraftRef"
                             }],
                             "type": "Craft",
@@ -199,11 +199,11 @@ describe('parse', function() {
                         "name": "box"
                     }, {
                         "contents": [],
-                        "name": "box",
+                        "ref": "box",
                         "type": "CraftRef"
                     }, {
                         "contents": [],
-                        "name": "box",
+                        "ref": "box",
                         "type": "CraftRef"
                     }],
                     "type": "Craft",

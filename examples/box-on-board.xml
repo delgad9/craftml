@@ -1,0 +1,15 @@
+<craft>
+    <craft name="board" src="examples/board.xml"/>    	
+    <board>    	
+    	<script type="text/openjscad" name="script.cube">
+            function main(){
+                return cube({size:50})
+            }
+	    </script>
+    	<script type="text/openjscad" name="script.cube">
+            function main(){
+                return cube({size:20})
+            }
+	    </script>	    
+    </board>
+</craft>

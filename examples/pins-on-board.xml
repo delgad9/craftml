@@ -1,0 +1,10 @@
+<craft>
+    <craft name="pin" src="examples/pin.xml"/>
+    <craft name="board" src="examples/board.xml"/>    	
+    <board>
+    	<pin></pin>
+        <pin></pin>
+        <pin></pin>
+        <pin></pin>    
+    </board>
+</craft>
