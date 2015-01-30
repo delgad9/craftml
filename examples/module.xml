@@ -1,0 +1,9 @@
+<craft>
+	<craft name="cube1" module="craft-box"/>    
+	<craft name="cube2" module="craft-box"/>    
+    <stack>
+    	<cube1></cube1>
+    	<cube2></cube2>
+    	<cube2></cube2>
+	</stack>
+</craft>

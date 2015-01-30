@@ -1,5 +1,9 @@
-var chai = require('chai').should(),
+var chai = require('chai'),
     fs = require('fs')
+
+var chaiSubset = require('chai-subset')
+chai.should()
+chai.use(chaiSubset)
 
 var craft = require('../lib'),
     Script = require('../lib/script'),
@@ -52,27 +56,136 @@ describe('parse', function() {
         c.contents[0].contents[0].should.be.instanceOf(Script)
         c.contents[0].contents[1].should.be.instanceOf(Script)
 
-    })    
+    })
 
     it('nested.xml ==> [craft, ref]', function() {
 
         var xml = fs.readFileSync('test/fixtures/nested.xml', 'utf8')
         var c = craft.parse(xml)
-        
+
         c.contents.should.have.length(2)
         c.contents[0].should.be.instanceOf(Craft)
-        c.contents[1].should.be.instanceOf(CraftRef)        
+        c.contents[1].should.be.instanceOf(CraftRef)
 
-    })    
+    })
 
     it('import.xml ==> [craft, ref]', function() {
 
         var xml = fs.readFileSync('test/fixtures/import.xml', 'utf8')
         var c = craft.parse(xml)
-        
+
         c.contents.should.have.length(2)
         c.contents[0].should.be.instanceOf(Craft)
-        c.contents[1].should.be.instanceOf(CraftRef)        
+        c.contents[1].should.be.instanceOf(CraftRef)
 
-    })        
+    })
+
+    describe('module', function() {
+
+        it('should load module with a simple index.xml', function() {
+
+            //
+            // test/craft-simple/index.xml:
+            // <craft><box></box></craft>
+            //
+            var xml = '<craft><craft name="test" module="test/craft-simple"/></craft>'
+            var c = craft.parse(xml)
+
+            c.should.containSubset({
+                type: 'Craft',
+                contents: [{
+                    type: 'Craft',
+                    contents: [{
+                        type: 'CraftRef',
+                        name: 'box'
+                    }]
+                }]
+            });
+        })
+
+        it('can load a module that includes another xml', function() {
+
+            var xml = '<craft><craft name="test" module="test/craft-box"/></craft>'
+                //
+                // test/craft-box/index.xml:
+                // <craft><craft name="boxpart" src="./part.xml"></craft><box></box></craft>
+                //
+                // test/craft-box/part.xml:
+                // <craft><part></part></craft>
+                //
+
+            var c = craft.parse(xml)
+
+            c.should.containSubset({
+                "contents": [{
+                    "contents": [{
+                        "contents": [],
+                        "name": "box",
+                        "type": "CraftRef"
+                    }, {
+                        "contents": [{
+                            "contents": [],
+                            "name": "part",
+                            "type": "CraftRef"
+                        }],
+                        "type": "Craft",
+                        "name": "boxpart"
+                    }],
+                    "type": "Craft",
+                    "name": "test"
+                }],
+                "type": "Craft"
+            });
+        })
+
+        it('can load a module that uses another module', function() {
+
+            var xml = '<craft><craft name="test" module="test/craft-2boxes"/></craft>'
+                //
+                // test/craft-2boxes/index.xml:
+                //
+                // <craft>
+                //     <craft name="box" module="test/craft-box"></craft>
+                //     <box></box>
+                //     <box></box>
+                // </craft>
+                //
+                //
+
+            var c = craft.parse(xml)
+
+            c.should.containSubset({
+                "contents": [{
+                    "contents": [{
+                        "contents": [{
+                            "contents": [],
+                            "name": "box",
+                            "type": "CraftRef"
+                        }, {
+                            "contents": [{
+                                "contents": [],
+                                "name": "part",
+                                "type": "CraftRef"
+                            }],
+                            "type": "Craft",
+                            "name": "boxpart"
+                        }],
+                        "type": "Craft",
+                        "name": "box"
+                    }, {
+                        "contents": [],
+                        "name": "box",
+                        "type": "CraftRef"
+                    }, {
+                        "contents": [],
+                        "name": "box",
+                        "type": "CraftRef"
+                    }],
+                    "type": "Craft",
+                    "name": "test"
+                }],
+                "type": "Craft"
+            });
+        })
+    })
 })

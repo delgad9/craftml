@@ -6,12 +6,20 @@
             }
         </script>
     </craft>
+    <cube></cube>
     <stack>
-    	<cube></cube>
-    	<cube></cube>
-    	<cube></cube>
     	<row>
-    		<cube></cube><cube></cube>
-    	</row>
+            <cube></cube>
+            <column>
+                <cube></cube>
+                <cube></cube>
+            </column>
+        </row>
+        <cube></cube>
+    	<cube></cube>
+    	<cube></cube>
     </stack>
 </craft>
+
+<space width=""></space>
+<space row=""></space>

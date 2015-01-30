@@ -23,6 +23,7 @@
   "homepage": "https://github.com/sikuli/craftml",
   "devDependencies": {
     "chai": "^1.10.0",
+    "chai-subset": "^0.3.0",
     "debug": "^2.1.1",
     "mocha": "^2.1.0"
   },
