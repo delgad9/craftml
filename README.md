@@ -59,6 +59,9 @@ Suppose we want to design a coat hanger consisting of four pins on a flat borad.
 ```
 ![hanger](assets/hanger.png)
 
+
+<script src="https://embed.github.com/view/3d/sikuli/craftml/master/assets/hanger.stl"></script>
+
 Before you can run the `craft` command, you need to install the `craft-pin` and `craft-board` modules. `craftml` uses `npm` to manage, publish, share, discover, and install crafts.
 
 Install `craft-pin` and `craft-board` by
