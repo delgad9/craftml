@@ -57,8 +57,6 @@ Suppose we want to design a coat hanger consisting of four pins on a flat borad.
 	</board>						
 </craft>
 ```
-![hanger](assets/hanger.png)
-
 
 <script src="https://embed.github.com/view/3d/sikuli/craftml/master/assets/hanger.stl"></script>
 
