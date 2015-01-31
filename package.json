@@ -1,44 +1,45 @@
 {
-    "name": "craftml",
-    "version": "0.1.0",
-    "description": "craftml",
-    "main": "index.js",
-    "scripts": {
-        "test": "mocha"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/sikuli/craftml"
-    },
-    "keywords": [
-        "craft",
-        "3d",
-        "openjscad"
-    ],
-    "author": "Tom Yeh",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/sikuli/craftml/issues"
-    },
-    "bin": {
-        "craft": "./bin/craft"
-    },
-    "files": [
-      "lib",
-      "bin"
-    ],
-    "homepage": "https://github.com/sikuli/craftml",
-    "devDependencies": {
-        "chai": "^1.10.0",
-        "chai-subset": "^0.3.0",
-        "mocha": "^2.1.0"
-    },
-    "dependencies": {
-        "debug": "^2.1.1",
-        "cheerio": "^0.18.0",
-        "commander": "^2.6.0",
-        "craft-scad": "^1.0.1",
-        "lodash": "^3.0.0",
-        "with": "^4.0.0"
-    }
+  "name": "craftml",
+  "version": "0.1.1",
+  "description": "craftml",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sikuli/craftml"
+  },
+  "keywords": [
+    "craft",
+    "3d",
+    "openjscad"
+  ],
+  "author": "Tom Yeh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sikuli/craftml/issues"
+  },
+  "bin": {
+    "craft": "./bin/craft"
+  },
+  "files": [
+    "lib",
+    "bin"
+  ],
+  "homepage": "https://github.com/sikuli/craftml",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "chai-subset": "^0.3.0",
+    "mocha": "^2.1.0"
+  },
+  "dependencies": {
+    "cheerio": "^0.18.0",
+    "commander": "^2.6.0",
+    "craft-scad": "^1.0.1",
+    "debug": "^2.1.1",
+    "lodash": "^3.0.0",
+    "open": "0.0.5",
+    "with": "^4.0.0"
+  }
 }
