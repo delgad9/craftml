@@ -3,9 +3,7 @@
 var craft = require('../lib'),
     fs = require('fs'),
     program = require('commander'),
-    open = require('open'),
-    debug = require('debug')
-
+    open = require('open')
 
 program
     .command('build src')

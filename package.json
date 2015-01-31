@@ -31,10 +31,10 @@
     "devDependencies": {
         "chai": "^1.10.0",
         "chai-subset": "^0.3.0",
-        "debug": "^2.1.1",
         "mocha": "^2.1.0"
     },
     "dependencies": {
+        "debug": "^2.1.1",
         "cheerio": "^0.18.0",
         "commander": "^2.6.0",
         "craft-scad": "^1.0.1",
