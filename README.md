@@ -1,17 +1,20 @@
 # craftml
 
 
-## What is a _craft_?
+### What is a _craft_?
 
-We define a `craft` as something that can craft 3D printable models. 
+As a noun, we define a `craft` as a tool or a program that can generate 3D printable models. The technical defnition is _"a generator for parameteric 3D constructive solid geometries."_
 
-A more technical defnition is "a generator for parameteric 3D constructive solid geometries."
+### What is _CraftML_?
 
-# Hello World
+A markup language using an HTML-like syntax for defining a _craft_. One can use CraftML to define the individual parts of a model and the layout of these parts.
 
-__Install__
+# Install
 
 	$ npm install -g craft
+
+
+# Hello World
 
 __Design__
 
@@ -36,14 +39,18 @@ __View__
 __Print__
 
 
-
-# Remixing
+# Getting Started
 
 ## Coat Hanger
 
-Suppose we want to design a coat hanger consisting of four pins on a flat borad. Luckily, someone has already made a craft for boards. Someone else has already made a craft for pins. These crafts have been published and shared online as modules `craft-pin` and `craft-board` respectively.
+Let's craft a coat hanger with four pins on a flat borad. Luckily, we don't need to start from scratch. We can use existing crafts made by others to generate individual parts and use the _CraftML_ language to assemble these parts together into a coat hanger.  
 
-`hanger.xml`
+Install the `craft-pin` and `craft-board` modules.
+
+	$ npm install craft-pin	
+	$ npm install craft-board
+
+Create `hanger.xml` with the contents below.
 
 ```html
 <craft>
@@ -58,18 +65,95 @@ Suppose we want to design a coat hanger consisting of four pins on a flat borad.
 </craft>
 ```
 
-<script src="https://embed.github.com/view/3d/sikuli/craftml/master/assets/hanger.stl"></script>
-
-Before you can run the `craft` command, you need to install the `craft-pin` and `craft-board` modules. `craftml` uses `npm` to manage, publish, share, discover, and install crafts.
-
-Install `craft-pin` and `craft-board` by
-
-	$ npm install craft-pin	
-	$ npm install craft-board
-
-Craft the coat hanger
+Run the `craft` command.
 
 	$ craft build hanger.xml
+	
+This command reads the contents of `hanger.xml`, builds a 3D model, and saves the model as `hanger.stl`.
+
+[Click Here to View in 3D](assets/hanger.stl)
+![hanger](assets/hanger.png)
+
+## Stacking
+
+We can stack things up using the `<stack>` tag.
+
+```html
+<craft>
+	<craft name="pin" module="craft-pin"/>
+	<craft name="board" module="craft-board"/>
+	<board>
+		<stack>
+			<pin></pin>
+			<pin></pin>
+			<pin></pin>
+			<pin></pin>
+		</stack>
+	</board>						
+</craft>
+```
+
+![tower](assets/pins_tower.png)
+
+Four stacks of pins
+
+```html
+<craft>
+	<craft name="pin" module="craft-pin"/>
+	<craft name="board" module="craft-board"/>
+	<board>
+		<stack>
+			<pin></pin>
+			<pin></pin>
+			<pin></pin>
+			<pin></pin>
+		</stack>
+		<stack>
+			<pin></pin>
+			<pin></pin>
+			<pin></pin>
+		</stack>
+		<stack>
+			<pin></pin>
+			<pin></pin>
+		</stack>
+		<stack>
+			<pin></pin>
+		</stack>		
+	</board>						
+</craft>
+```
+
+![stairs](assets/pins_stair.png)
+
+## Subcraft
+
+* can be used to define a sub-component that can be reusable
+
+```html
+<craft>
+	<craft name="pin" module="craft-pin"/>
+	<craft name="board" module="craft-board"/>
+	<craft name="tower">
+        <stack>
+            <pin></pin>
+            <pin></pin>
+            <pin></pin>
+            <pin></pin>    
+        </stack>
+    </craft>
+    <board>
+    	<tower></tower>
+        <tower></tower>
+        <tower></tower>
+        <tower></tower>
+    </board>
+</craft>
+```
+![pins_towers](assets/pins_towers.png)
+
+
+
 
 # OpenJSCAD
 
