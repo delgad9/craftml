@@ -48,7 +48,7 @@ Suppose we want to design a coat hanger consisting of four pins on a flat borad.
 ```html
 <craft>
 	<craft name="pin" module="craft-pin"/>
-	<craft name="board" module="craft-pin"/>
+	<craft name="board" module="craft-board"/>
 	<board>
 		<pin></pin>
 		<pin></pin>
@@ -166,7 +166,7 @@ The `<parameter>` tag can be used to introduce a parameter to a craft.
 
 ```html
 <craft>
-	<parameter name="height" type="init" default="1"/>
+	<parameter name="height" type="int" default="1"/>
 	<script type="text/openjscad">
 		function main(params){
 			return cube().scale([1,params.height,1])

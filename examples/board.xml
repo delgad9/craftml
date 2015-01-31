@@ -6,8 +6,7 @@
 	    <script type="text/openjscad">
 	        function main(){
 	        	var element = craft.getElementByName('stuffabove')        	
-	        	var size = element.getSize()
-	        	console.log(element)
+	        	var size = element.getSize()	        	
 	            return cube().scale([size.x+10, size.y+10, 5]).translate([-5,-5,0])
 	        }
 	    </script>
