@@ -80,30 +80,34 @@ describe('parse', function() {
 
     })
 
-    // describe('place', function() {
+    describe('text', function() {
 
-    //     it('can inject contents', function() {
+        it('can parse hello world', function() {
 
-    //         //
-    //         // test/craft-simple/index.xml:
-    //         // <craft><box></box></craft>
-    //         //
-    //         var xml = '<craft><craft name="test" src="./test/fixtures/place.xml"/><test><box></box></test></craft>'
-    //         var c = craft.parse(xml)
+            var xml = '<craft>hello world</craft>'
+            var c = craft.parse(xml)
 
-    //         c.should.containSubset({
-    //             type: 'Craft',
-    //             contents: [{
-    //                 type: 'Craft',
-    //                 contents: [{
-    //                     type: 'CraftRef',
-    //                     name: 'box'
-    //                 }]
-    //             }]
-    //         });
-    //     })
+            c.should.containSubset({
+                "contents": [{
+                    "text": "hello world",
+                    "type": "TextElement"
+                }]
+            })
+        })
 
-    // })
+        it('can ignore white spaces', function() {
+
+            var xml = '<craft>\n\n<board>hello world</board>\n\n</craft>'
+            var c = craft.parse(xml)
+
+            c.should.not.containSubset({
+                "contents": [{
+                    "text": "\n\n",
+                    "type": "TextElement"
+                }]
+            })
+        })
+    })
 
     describe('module', function() {
 
