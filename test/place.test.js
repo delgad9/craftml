@@ -1,7 +1,8 @@
  var chai = require('chai').should()
 
  var Place = require('../lib/place'),
-     Script = require('../lib/script')
+     Script = require('../lib/script'),
+     Scope = require('../lib/scope')
 
  describe('Place', function() {
 
