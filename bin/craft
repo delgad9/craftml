@@ -44,7 +44,7 @@ function applyTranformation(solid, matrix) {
         // console.log('%d,%d,%d --> ', cb[0].x, cb[0].y, cb[0].z)
         // console.log('%d,%d,%d', solid.layout.x, solid.layout.y, solid.layout.z)
 
-        m = m.multiply($$$.CSG.Matrix4x4.translation([-cb[0].x,-cb[0].y,-cb[0].z]))
+        m = m.multiply($$$.CSG.Matrix4x4.translation([-cb[0].x,-cb[0].y,-cb[0].z]))        
         solid.csg = solid.csg.transform(m)
 
         var cb = solid.csg.getBounds()

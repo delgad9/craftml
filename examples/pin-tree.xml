@@ -1,0 +1,11 @@
+<craft>
+    <craft name="pin" src="examples/pin-params.xml"/>
+    <stack>
+        <pin headRadius="5"></pin>
+        <pin headRadius="7"></pin>
+        <pin headRadius="9"></pin>
+        <pin headRadius="11"></pin>
+        <pin headRadius="13"></pin>
+        <pin headRadius="15"></pin>
+    </stack>
+</craft>
