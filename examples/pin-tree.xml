@@ -1,5 +1,5 @@
 <craft>
-    <craft name="pin" src="examples/pin-params.xml"/>
+    <craft name="pin" module="craft-pin"/>
     <stack>
         <pin headRadius="5"></pin>
         <pin headRadius="7"></pin>

@@ -8,5 +8,6 @@ module.exports = function(parent) {
     var xml = {}
     xml.path = index_xml
     xml.contents = fs.readFileSync(xml.path, 'utf8')
+    xml.module = parent
     return xml
 }
