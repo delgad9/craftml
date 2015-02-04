@@ -321,7 +321,7 @@ var result = craft.render(xml, {height: 5}, function(error, result){
 
 ```html
 <craft>
-	<parameter name="height" type="init" default="1"/>
+	<parameter name="height" type="int" default="1"/>
 	<script type="text/openjscad">
 		function main(params){
 			return cube().scale([1,params.height,1])

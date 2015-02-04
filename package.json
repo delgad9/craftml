@@ -1,6 +1,6 @@
 {
   "name": "craftml",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "craftml",
   "main": "index.js",
   "scripts": {

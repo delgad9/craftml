@@ -3,7 +3,8 @@
 var craft = require('../lib'),
     fs = require('fs'),
     program = require('commander'),
-    open = require('open')
+    open = require('open'),
+    path = require('path')
 
 program
     .command('build src')
@@ -63,7 +64,11 @@ function applyTranformation(solid, matrix) {
 function build(src) {
     var xml = fs.readFileSync(src, 'utf8')
 
-    var block = craft.parse(xml)
+    var absPath = path.resolve(src)
+    var basePath = path.dirname(absPath)
+
+    var context = {basePath: basePath}
+    var block = craft.parse(xml, context)
     // console.log(JSON.stringify(block,null,' '))
     var solid = block.render()
 
