@@ -91,7 +91,7 @@ This command will produce `hanger.stl`. This is how the model looks like in [cur
 
 ![hanger_cura](assets/hanger_cura.png)
 
-[Click here to view the mmodel on Github](assets/hanger.stl)
+[Click here to view the model on Github](assets/hanger.stl)
 
 ## Stacking
 
