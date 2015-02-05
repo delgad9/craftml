@@ -4,7 +4,8 @@ var craft = require('../lib'),
     fs = require('fs'),
     program = require('commander'),
     open = require('open'),
-    path = require('path')
+    path = require('path'),
+    glob = require('glob')
 
 program
     .command('build src')
@@ -15,14 +16,26 @@ program
 
 program
     .command('preview src')
+    .description('preview src in the browser')
+    .action(function(src, options) {
+        preview(src)
+    })
+
+
+var app = require('../viewer/app.js')
+
+program
+    .command('viewer')
     .description('run setup commands for all envs')
     .action(function(src, options) {
-        var dest = build(src)
-        open(dest)
+        //var dest = build(src)
+        //open(dest)
+        preview(src)
     })
 
 
 var $$$ = require('craft-scad')
+
 function transform_recursively(node, matrix) {
     if (node.csg) {
         node.csg = node.csg.transform(matrix)
@@ -35,7 +48,7 @@ function transform_recursively(node, matrix) {
 function applyTranformation(solid, matrix) {
 
     var m = $$$.CSG.Matrix4x4.translation([solid.layout.x, solid.layout.y, solid.layout.z])
-    if (matrix){
+    if (matrix) {
         m = m.multiply(matrix)
     }
 
@@ -45,7 +58,7 @@ function applyTranformation(solid, matrix) {
         // console.log('%d,%d,%d --> ', cb[0].x, cb[0].y, cb[0].z)
         // console.log('%d,%d,%d', solid.layout.x, solid.layout.y, solid.layout.z)
 
-        m = m.multiply($$$.CSG.Matrix4x4.translation([-cb[0].x,-cb[0].y,-cb[0].z]))        
+        m = m.multiply($$$.CSG.Matrix4x4.translation([-cb[0].x, -cb[0].y, -cb[0].z]))
         solid.csg = solid.csg.transform(m)
 
         var cb = solid.csg.getBounds()
@@ -53,7 +66,7 @@ function applyTranformation(solid, matrix) {
     } else {
 
         solid.children.forEach(function(c) {
-                
+
             applyTranformation(c, m)
 
         })
@@ -67,12 +80,14 @@ function build(src) {
     var absPath = path.resolve(src)
     var basePath = path.dirname(absPath)
 
-    var context = {basePath: basePath}
+    var context = {
+        basePath: basePath
+    }
     var block = craft.parse(xml, context)
-    // console.log(JSON.stringify(block,null,' '))
+        // console.log(JSON.stringify(block,null,' '))
     var solid = block.render()
 
-    
+
     applyTranformation(solid)
 
     var stlstring = solid.toStl()
@@ -80,6 +95,80 @@ function build(src) {
     console.log('writing to %s', dest)
     fs.writeFileSync(dest, stlstring, 'utf8')
     return dest
+}
+
+var watchGlob = require('watch-glob')
+
+
+function doPreviewBuild(src, outputDir) {
+    var xml = fs.readFileSync(src, 'utf8')
+
+    var absPath = path.resolve(src)
+    var basePath = path.dirname(absPath)
+
+    var context = {
+        basePath: basePath
+    }
+    var block = craft.parse(xml, context)
+        // console.log(JSON.stringify(block,null,' '))
+    var solid = block.render()
+
+    applyTranformation(solid)
+
+    var stls = solid.toStls()
+
+    // write stls
+    var list = []
+    stls.forEach(function(stlstring, i) {
+        var dest = src.replace('.xml', '-' + i + '.stl')
+        dest = path.join(outputDir, dest)
+        console.log('writing to %s', dest)
+        fs.writeFileSync(dest, stlstring, 'utf8')
+
+        list.push(dest)
+    })
+
+    fs.writeFileSync(outputDir + '/stls.json', JSON.stringify(list))
+
+
+}
+
+function preview(src) {
+
+    var outputDir = path.join(process.cwd(), 'build', 'preview')
+
+    doPreviewBuild(src, outputDir)
+
+    watchGlob([src], {
+        callbackArg: 'relative'
+    }, function(filePath) {
+
+        // console.log('modified', filePath)
+        doPreviewBuild(filePath, outputDir)
+        // Perform livereload
+    })
+
+    var express = require('express')
+
+    app.use('/preview', express.static(outputDir))
+
+    var server = app.listen(3000, function() {
+
+        var host = server.address().address
+        var port = server.address().port
+
+        console.log('App listening at http://%s:%s', host, port)
+
+    })
+
+    var browserSync = require("browser-sync")
+
+    browserSync({
+        files: [outputDir + '/stls.json'],
+        proxy: 'localhost:3000',
+        notify: false
+    })
+    // return dest
 }
 
 program.parse(process.argv)

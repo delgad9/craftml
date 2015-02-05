@@ -22,21 +22,27 @@ __Design__
 
 ```html
 <craft>
-Hello World
+	Hello World
 </craft>
 ```
 
-__Craft__
+__Preview__
 
-	$ craft build helloworld.xml // ==> generates `helloworld.stl`
+	$ craft preview helloworld.xml
 	
-__View__
+![preview_helloworld](assets/preview_helloworld.png)
 
-`helloworld.stl`
 
-![hello world](assets/helloworld.png)
+__Build__
 
+	$ craft build helloworld.xml
+	
+It outputs `helloworld.stl`.
+	
 __Print__
+
+
+![helloworld_replicatorG](assets/helloworld_replicatorG.png)
 
 
 # Getting Started
@@ -65,14 +71,27 @@ Create `hanger.xml` with the contents below.
 </craft>
 ```
 
-Run the `craft` command.
+Run `craft preview` to see the model in a web browser.
+
+	$ craft preview hanger.xml
+	
+This command reads the contents of `hanger.xml`, builds a 3D model, opens up the default web browswer, and displays the model.
+
+![hanger_preview](assets/hanger_preview.png)
+
+Let's add a couple more pins. The browser will automatically refreshes itself to dislay the updated model.
+
+![hanger_preview2](assets/hanger_preview2.png)
+
+Once you are happy with the model, run `craft build` to build an _stl_ file that can be sent to a 3D printer.
 
 	$ craft build hanger.xml
-	
-This command reads the contents of `hanger.xml`, builds a 3D model, and saves the model as `hanger.stl`.
 
-[Click Here to View in 3D](assets/hanger.stl)
-![hanger](assets/hanger.png)
+This command will produce `hanger.stl`. This is how the model looks like in [cura](https://ultimaker.com/en/products/software). 
+
+![hanger_cura](assets/hanger_cura.png)
+
+[Click here to view the mmodel on Github](assets/hanger.stl)
 
 ## Stacking
 
