@@ -22,7 +22,7 @@ program
     })
 
 
-var app = require(__dirname + '/../viewer/app.js')
+var app = require('../viewer/app.js')
 
 program
     .command('viewer')
