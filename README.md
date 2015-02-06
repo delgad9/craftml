@@ -266,6 +266,107 @@ Let's stack a bunch of these pyramids.
 ```
 ![pyramidstack](assets/pyramidstack.png)
 
+# Template Engines
+
+```html
+<craft>
+    <craft name="pyramid">
+        <parameter name="n" default="1" type="int"/>
+        <script type="text/craftml">
+            function main(params){
+	            // compute a context object given 'params'
+                var sizes = []
+                for (var i = 1;i <= params.n; i++){
+                    sizes.push(i)
+                }
+                // sizes = [1,2,3,...,n]
+                var context = {sizes: sizes}
+                return render(context)
+            }                
+                        
+            // use a template engine to render craftxml given a context object
+            function render(context) {
+               // see different implmentations below
+            }
+        </script>
+    </craft>
+    <stack>
+        <pyramid n="5"/>
+    </stack>
+</craft>
+```
+
+![pyramid2](assets/pyramid2.png)
+
+## Jade
+
+[Jade](http://jade-lang.com/)
+
+	$ npm install jade
+	
+```javascript
+var jade = require("jade")
+
+function render(context) {
+    return jade.renderFile('./templates/pyramid.jade', context)
+}
+```
+
+```jade
+//- templates/pyramid.jade
+stack
+    each size in sizes
+        cube(xsize=size, ysize=size, zsize=1)
+```
+
+## Markup.js
+
+[Markup.js](https://github.com/adammark/Markup.js)
+
+	$ npm install markup-js
+
+```javascript
+var Mark = require("markup-js")
+
+function render(context) {
+    var txt = fs.readFileSync('./templates/pyramid.markupjs', 'utf8')
+    return Mark.up(txt, context)
+}
+```       
+
+```html
+<!-- templates/pyramid.markupjs -->
+<stack>
+{{sizes}}
+    <cube xsize="{{.}}" ysize="{{.}}" zsize="1"/>
+{{/sizes}}
+</stack>
+```    
+
+## Lodash
+
+	$ npm install lodash
+
+```javascript
+var _ = require("lodash"),
+    fs = require("fs")
+
+function render(context) {
+    var txt = fs.readFileSync('./templates/pyramid.lodash', 'utf8')
+    var compiled = _.template(txt)
+    return compiled(context)
+}
+```
+
+```html
+<!-- templates/pyramid.lodash -->
+<stack>
+    <% _.forEach(sizes, function(size) { %>
+        <cube xsize="<%- size %>"  ysize="<%- size %>" zsize="1"/>
+    <% }); %>
+</stack>
+```
+
 # OpenJSCAD
 
 ```html
