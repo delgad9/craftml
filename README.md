@@ -172,7 +172,38 @@ Four stacks of pins
 ![pins_towers](assets/pins_towers.png)
 
 
+# Positioning
+
+```html
+<craft position="absolute">
+    <cube x="-10" y="-5"></cube>    
+    <cube x="10" y="5"></cube>    
+    <cube x="20" y="10"></cube>
+    <cube x="30" y="15"></cube>
+</craft>
+```
+
+![4cubes_abspos](assets/4cubes_abspos.png)
+
+
+`<row>` causes the layout engine to ignore the _x_ values and arranges the four cubes tightly along the x-axs, while respecting the _y_ values.
+
+```html
+<craft position="absolute">
+    <row>
+	    <cube x="-10" y="-5"></cube>    
+	    <cube x="10" y="5"></cube>    
+	    <cube x="20" y="10"></cube>
+	    <cube x="30" y="15"></cube>
+    </row>
+</craft>
+```
+
+![4cubes_row_y](assets/4cubes_row_y.png)
+
 # Scripting
+
+Write a function to generate CraftML tags
 
 ```html
 <craft>
@@ -185,6 +216,8 @@ Four stacks of pins
 ```
 
 ![cube](assets/5cubes.png)
+
+Define a subcraft to generate a row of cubes. _n_ is defined as a parameter to control how many cubes in the row.
 
 ```html
 <craft>
@@ -265,6 +298,29 @@ Let's stack a bunch of these pyramids.
 </stack>
 ```
 ![pyramidstack](assets/pyramidstack.png)
+
+# Circle
+
+```html
+<craft position="absolute">
+    <script type="text/craftml">
+        function main(){
+            var cubes = []
+            var r = 30, n = 30, theta = 0
+            var delta = 2 * Math.PI / n
+            for (var i = 0; i < n; i++){                
+                var x = r * Math.cos(theta)
+                var y = r * Math.sin(theta)
+                cubes.push('<cube x="' + x + '" y="' + y + '" size="2"/>')
+                theta = theta + delta
+            }                        
+            return cubes.join('\n') 
+        }                                        
+    </script>
+</craft>
+```
+
+![cubecircle](assets/cubecircle.png)
 
 # Template Engines
 
