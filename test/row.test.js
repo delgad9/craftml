@@ -30,21 +30,21 @@
          it('children should lineup along the x-axis', function() {
              var s0 = solid.children[0]
              var s1 = solid.children[1]
-             var s2 = solid.children[2]
+             var s2 = solid.children[2]             
 
-             s1.layout.x.should.be.equal(
-                 s0.layout.x +
-                 s0.layout.width)
+             s1.layout.location.x.should.be.equal(
+                 s0.layout.location.x +
+                 s0.layout.size.x)
 
-             s2.layout.x.should.be.equal(
-                 s1.layout.x +
-                 s1.layout.width)
+             s2.layout.location.x.should.be.equal(
+                 s1.layout.location.x +
+                 s1.layout.size.x)
          })
 
          it('dimensions should fit to the children', function() {
-             solid.layout.width.should.be.equal(3)
-             solid.layout.height.should.be.equal(1)
-             solid.layout.depth.should.be.equal(1)
+             solid.layout.size.x.should.be.equal(3)
+             solid.layout.size.y.should.be.equal(1)
+             solid.layout.size.z.should.be.equal(1)
          })
 
      })

@@ -18,14 +18,6 @@ describe('Script', function() {
             solid.csg.should.have.property('polygons')
         })
 
-        it('should compute layout width, height, depth', function() {
-
-            solid.should.have.property('layout').have.property('width')
-            solid.layout.width.should.equal(1)
-            solid.layout.height.should.equal(1)
-            solid.layout.depth.should.equal(1)
-        })
-
     })
 
     describe('text/craftml <cube></cube>', function() {

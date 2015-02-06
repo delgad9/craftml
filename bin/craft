@@ -48,7 +48,9 @@ function transform_recursively(node, matrix) {
 
 function applyTranformation(solid, matrix) {
 
-    var m = $$$.CSG.Matrix4x4.translation([solid.layout.x, solid.layout.y, solid.layout.z])
+    var loc = solid.layout.location
+
+    var m = $$$.CSG.Matrix4x4.translation([loc.x, loc.y, loc.z])
     if (matrix) {
         m = m.multiply(matrix)
     }
