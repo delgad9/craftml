@@ -172,7 +172,99 @@ Four stacks of pins
 ![pins_towers](assets/pins_towers.png)
 
 
+# Scripting
 
+```html
+<craft>
+    <script type="text/craftml">
+        function main(){
+            return '<cube/><cube/><cube/><cube/><cube/>' 
+        }
+    </script>
+</craft>
+```
+
+![cube](assets/5cubes.png)
+
+```html
+<craft>
+    <craft name="ncubes">
+        <parameter name="n" default="1" type="int"/>
+        <script type="text/craftml">
+            function main(params){
+                var xml = ''
+                for (var i = 0; i < params.n; i++){
+                    xml = xml + '<cube/>'
+                }                
+                return xml
+            }
+        </script>
+    </craft>
+    <ncubes n="10"/>    
+</craft>
+```
+![cube](assets/10cubes.png)
+
+```html
+<stack>
+   <ncubes n="1"/>
+   <ncubes n="3"/>
+   <ncubes n="5"/>
+   <ncubes n="7"/>    
+</stack>
+```
+
+![pyramid](assets/pyramid.png)
+
+## Pyramid
+
+```html
+<craft>
+    <craft name="pyramid">
+        <parameter name="n" default="1" type="int"/>
+        <script type="text/craftml">
+            function main(params){
+                var xml = '<stack>'
+                for (var i = 1; i <= params.n; i++){
+                    xml = xml + '<cube xsize="' + i + '" ysize="' + i + '" zsize="1"/>'
+                }                
+                xml = xml + '</stack>'
+                return xml
+            }
+        </script>
+    </craft>
+    <stack>
+        <pyramid n="5"/>          
+    </stack>
+</craft>
+```
+
+`main(params)` with `params.n` equal to 5 returns the following
+
+```html
+<stack>
+	<cube xsize="1" ysize="1" zsize="1"/>
+	<cube xsize="2" ysize="2" zsize="1"/>
+	<cube xsize="3" ysize="3" zsize="1"/>
+	<cube xsize="4" ysize="4" zsize="1"/>
+	<cube xsize="5" ysize="5" zsize="1"/>
+</stack>
+```
+which is rendered as
+
+![pyramid2](assets/pyramid2.png)
+
+Let's stack a bunch of these pyramids.
+
+```html
+<stack>
+   <pyramid n="3"/>
+   <pyramid n="5"/>
+   <pyramid n="7"/>
+   <pyramid n="9"/>        
+</stack>
+```
+![pyramidstack](assets/pyramidstack.png)
 
 # OpenJSCAD
 
@@ -215,17 +307,17 @@ Suppose we want to generate a cube and repeat it four times. We can define a nes
 
 ```html
 <craft>
-	<craft name="cube">
+	<craft name="mycube">
 		<script type="text/openjscad">
 			function main(){
 				return cube()
 			}
 		</script>
 	</craft>
-	<cube></cube>
-	<cube></cube>
-	<cube></cube>
-	<cube></cube>
+	<mycube></mycube>
+	<mycube></mycube>
+	<mycube></mycube>
+	<mycube></mycube>
 </craft>
 ```
 
@@ -233,12 +325,12 @@ Suppose we want to generate a cube and repeat it four times. We can define a nes
 
 ### Include
 
-We can refactor the previous example by extracting the contents of `<craft name="cube">` and save them to another file called `cube.xml`.
+We can refactor the previous example by extracting the contents of `<craft name="mycube">` and save them to another file called `mycube.xml`.
 
-`cube.xml`:
+`mycube `:
 
 ```html
-<craft name="cube">
+<craft>
 	<script type="text/openjscad">
 		function main(){
 			return cube()
@@ -247,15 +339,15 @@ We can refactor the previous example by extracting the contents of `<craft name=
 </craft>
 ```
 
-We can now reuse `cube.xml` to craft as many cubes as we want.
+We can now reuse `mycube.xml` to craft as many cubes as we want.
 
 ```html
 <craft>
-	<craft name="cube" src="./cube.xml"/>
-	<cube></cube>
-	<cube></cube>
-	<cube></cube>
-	<cube></cube>
+	<craft name="mycube" src="./mycube.xml"/>
+	<mycube></mycube>
+	<mycube></mycube>
+	<mycube></mycube>
+	<mycube></mycube>
 </craft>
 
 ```
@@ -290,11 +382,11 @@ This example crafts four cubes with increasing heights.
 
 ```html
 <craft>
-	<craft name="cube" src="./cube.xml"/>
-	<cube></cube>
-	<cube height="2"></cube>
-	<cube height="3"></cube>
-	<cube height="4"></cube>
+	<craft name="mycube" src="./mycube.xml"/>
+	<mycube></mycube>
+	<mycube height="2"></mycube>
+	<mycube height="3"></mycube>
+	<mycube height="4"></mycube>
 </craft>
 ```
 

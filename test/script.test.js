@@ -5,7 +5,7 @@ var Script = require('../lib/script'),
 
 describe('Script', function() {
 
-    describe('render() function main(){ return cube();}', function() {
+    describe('text/openjscad cube()}', function() {
 
         var script = new Script()
         script.text = ('function main(){ return cube(); }')
@@ -27,5 +27,22 @@ describe('Script', function() {
         })
 
     })
+
+    describe('text/craftml <cube></cube>', function() {
+
+        var script = new Script()
+        script.text = ('function main(){ return "<cube></cube>";}')
+        script.type = 'text/craftml'
+        var solid = script.render()
+
+        it('should return [solid cube]', function() {
+            solid.should.have.length(1)
+            // solid[0].should.be.instanceOf(Solid)
+            // console.log(solid[0])
+            solid[0].children[0].should.have.property('csg')
+            solid[0].children[0].csg.should.have.property('polygons')
+        })
+
+    })    
 
 })

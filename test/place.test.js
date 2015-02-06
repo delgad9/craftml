@@ -8,6 +8,7 @@
 
      var script = new Script()
      script.text = 'function main(){ return cube(); }'
+     script.type = 'text/openjscad'
 
      describe('render()', function() {
 
