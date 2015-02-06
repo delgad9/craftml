@@ -423,7 +423,11 @@ function render(context) {
 
 Tangible visualization using D3
 
+
 ## Barchart
+
+	$ npm install d3
+	$ npm install craft-board
 
 ```html
 <craft>
