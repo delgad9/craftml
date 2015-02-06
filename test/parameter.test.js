@@ -9,7 +9,8 @@ chai.should()
 chai.use(chaiSubset)
 
 var craft = require('../lib'),
-    Parameter = require('../lib/parameter')
+    Parameter = require('../lib/parameter'),
+    Scope = require('../lib/scope')
 
 describe('parameter', function() {
     it('can parse one parameter', function() {

@@ -23,6 +23,7 @@ program
 
 
 var app = require('../viewer/app.js')
+var mkdirp = require('mkdirp')
 
 program
     .command('viewer')
@@ -133,10 +134,12 @@ function doPreviewBuild(src, outputDir) {
 
 }
 
+var mkdirp = require('mkdirp')
 function preview(src) {
 
     var outputDir = path.join(process.cwd(), 'build', 'preview')
-
+    mkdirp.sync(outputDir)
+    
     doPreviewBuild(src, outputDir)
 
     watchGlob([src], {

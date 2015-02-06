@@ -9,6 +9,7 @@ describe('Script', function() {
 
         var script = new Script()
         script.text = ('function main(){ return cube(); }')
+        script.type = 'text/openjscad'
         var solid = script.render()
 
         it('should return a solid cube', function() {

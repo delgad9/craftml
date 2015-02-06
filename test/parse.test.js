@@ -89,8 +89,7 @@ describe('parse', function() {
 
             c.should.containSubset({
                 "contents": [{
-                    "text": "hello world",
-                    "type": "TextElement"
+                    "text": "hello world"
                 }]
             })
         })
@@ -102,8 +101,7 @@ describe('parse', function() {
 
             c.should.not.containSubset({
                 "contents": [{
-                    "text": "\n\n",
-                    "type": "TextElement"
+                    "text": "\n\n"
                 }]
             })
         })
@@ -121,11 +119,10 @@ describe('parse', function() {
             var c = craft.parse(xml)
 
             c.should.containSubset({
-                type: 'Craft',
+                tag: 'Craft',
                 contents: [{
-                    type: 'Craft',
+                    tag: 'Craft',
                     contents: [{
-                        type: 'CraftRef',
                         ref: 'box'
                     }]
                 }]
@@ -150,20 +147,20 @@ describe('parse', function() {
                     "contents": [{
                         "contents": [],
                         "ref": "box",
-                        "type": "CraftRef"
+                        "tag": "CraftRef"
                     }, {
                         "contents": [{
                             "contents": [],
                             "ref": "part",
-                            "type": "CraftRef"
+                            "tag": "CraftRef"
                         }],
-                        "type": "Craft",
+                        "tag": "Craft",
                         "name": "boxpart"
                     }],
-                    "type": "Craft",
+                    "tag": "Craft",
                     "name": "test"
                 }],
-                "type": "Craft"
+                "tag": "Craft"
             });
         })
 
@@ -189,31 +186,31 @@ describe('parse', function() {
                         "contents": [{
                             "contents": [],
                             "ref": "box",
-                            "type": "CraftRef"
+                            "tag": "CraftRef"
                         }, {
                             "contents": [{
                                 "contents": [],
                                 "ref": "part",
-                                "type": "CraftRef"
+                                "tag": "CraftRef"
                             }],
-                            "type": "Craft",
+                            "tag": "Craft",
                             "name": "boxpart"
                         }],
-                        "type": "Craft",
+                        "tag": "Craft",
                         "name": "box"
                     }, {
                         "contents": [],
                         "ref": "box",
-                        "type": "CraftRef"
+                        "tag": "CraftRef"
                     }, {
                         "contents": [],
                         "ref": "box",
-                        "type": "CraftRef"
+                        "tag": "CraftRef"
                     }],
-                    "type": "Craft",
+                    "tag": "Craft",
                     "name": "test"
                 }],
-                "type": "Craft"
+                "tag": "Craft"
             });
         })
     })
