@@ -16,10 +16,10 @@ describe('parse', function() {
 
         var xml = fs.readFileSync('test/fixtures/script1.xml', 'utf8')
         var c = craft.parse(xml)
-        c.contents.should.have.length(1)
-        c.contents[0].should.be.instanceOf(Script)
+        c.children.should.have.length(1)
+        c.children[0].should.be.instanceOf(Script)
 
-        var script = c.contents[0]
+        var script = c.children[0]
         script.should.have.property('text')
         script.text.should.have.string('cube()')
         script.type.should.be.equal('text/openjscad')
@@ -30,16 +30,16 @@ describe('parse', function() {
 
         var xml = fs.readFileSync('test/fixtures/script2.xml', 'utf8')
         var c = craft.parse(xml)
-        c.contents.should.have.length(2)
-        c.contents[0].should.be.instanceOf(Script)
-        c.contents[1].should.be.instanceOf(Script)
+        c.children.should.have.length(2)
+        c.children[0].should.be.instanceOf(Script)
+        c.children[1].should.be.instanceOf(Script)
 
-        var script = c.contents[0]
+        var script = c.children[0]
         script.should.have.property('text')
         script.text.should.have.string('cube()')
         script.type.should.be.equal('text/openjscad')
 
-        var script = c.contents[1]
+        var script = c.children[1]
         script.should.have.property('text')
         script.text.should.have.string('cylinder()')
         script.type.should.be.equal('text/openjscad')
@@ -50,11 +50,11 @@ describe('parse', function() {
 
         var xml = fs.readFileSync('test/fixtures/stack.xml', 'utf8')
         var c = craft.parse(xml)
-        c.contents.should.have.length(1)
-        c.contents[0].should.be.instanceOf(Stack)
-        c.contents[0].contents.should.have.length(2)
-        c.contents[0].contents[0].should.be.instanceOf(Script)
-        c.contents[0].contents[1].should.be.instanceOf(Script)
+        c.children.should.have.length(1)
+        c.children[0].should.be.instanceOf(Stack)
+        c.children[0].children.should.have.length(2)
+        c.children[0].children[0].should.be.instanceOf(Script)
+        c.children[0].children[1].should.be.instanceOf(Script)
 
     })
 
@@ -63,9 +63,9 @@ describe('parse', function() {
         var xml = fs.readFileSync('test/fixtures/nested.xml', 'utf8')
         var c = craft.parse(xml)
 
-        c.contents.should.have.length(2)
-        c.contents[0].should.be.instanceOf(Craft)
-        c.contents[1].should.be.instanceOf(CraftRef)
+        c.children.should.have.length(2)
+        c.children[0].should.be.instanceOf(Craft)
+        c.children[1].should.be.instanceOf(CraftRef)
 
     })
 
@@ -74,9 +74,9 @@ describe('parse', function() {
         var xml = fs.readFileSync('test/fixtures/import.xml', 'utf8')
         var c = craft.parse(xml)
 
-        c.contents.should.have.length(2)
-        c.contents[0].should.be.instanceOf(Craft)
-        c.contents[1].should.be.instanceOf(CraftRef)
+        c.children.should.have.length(2)
+        c.children[0].should.be.instanceOf(Craft)
+        c.children[1].should.be.instanceOf(CraftRef)
 
     })
 
@@ -88,7 +88,7 @@ describe('parse', function() {
             var c = craft.parse(xml)
 
             c.should.containSubset({
-                "contents": [{
+                "children": [{
                     "text": "hello world"
                 }]
             })
@@ -100,7 +100,7 @@ describe('parse', function() {
             var c = craft.parse(xml)
 
             c.should.not.containSubset({
-                "contents": [{
+                "children": [{
                     "text": "\n\n"
                 }]
             })
@@ -119,10 +119,10 @@ describe('parse', function() {
             var c = craft.parse(xml)
 
             c.should.containSubset({
-                tag: 'Craft',
-                contents: [{
-                    tag: 'Craft',
-                    contents: [{
+                class: 'Craft',
+                children: [{
+                    class: 'Craft',
+                    children: [{
                         ref: 'box'
                     }]
                 }]
@@ -143,24 +143,24 @@ describe('parse', function() {
             var c = craft.parse(xml)
 
             c.should.containSubset({
-                "contents": [{
-                    "contents": [{
-                        "contents": [],
+                "children": [{
+                    "children": [{
+                        "children": [],
                         "ref": "box",
-                        "tag": "CraftRef"
+                        "class": "CraftRef"
                     }, {
-                        "contents": [{
-                            "contents": [],
+                        "children": [{
+                            "children": [],
                             "ref": "part",
-                            "tag": "CraftRef"
+                            "class": "CraftRef"
                         }],
-                        "tag": "Craft",
+                        "class": "Craft",
                         "name": "boxpart"
                     }],
-                    "tag": "Craft",
+                    "class": "Craft",
                     "name": "test"
                 }],
-                "tag": "Craft"
+                "class": "Craft"
             });
         })
 
@@ -181,36 +181,36 @@ describe('parse', function() {
             var c = craft.parse(xml)
 
             c.should.containSubset({
-                "contents": [{
-                    "contents": [{
-                        "contents": [{
-                            "contents": [],
+                "children": [{
+                    "children": [{
+                        "children": [{
+                            "children": [],
                             "ref": "box",
-                            "tag": "CraftRef"
+                            "class": "CraftRef"
                         }, {
-                            "contents": [{
-                                "contents": [],
+                            "children": [{
+                                "children": [],
                                 "ref": "part",
-                                "tag": "CraftRef"
+                                "class": "CraftRef"
                             }],
-                            "tag": "Craft",
+                            "class": "Craft",
                             "name": "boxpart"
                         }],
-                        "tag": "Craft",
+                        "class": "Craft",
                         "name": "box"
                     }, {
-                        "contents": [],
+                        "children": [],
                         "ref": "box",
-                        "tag": "CraftRef"
+                        "class": "CraftRef"
                     }, {
-                        "contents": [],
+                        "children": [],
                         "ref": "box",
-                        "tag": "CraftRef"
+                        "class": "CraftRef"
                     }],
-                    "tag": "Craft",
+                    "class": "Craft",
                     "name": "test"
                 }],
-                "tag": "Craft"
+                "class": "Craft"
             });
         })
     })

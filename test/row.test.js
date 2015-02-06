@@ -9,11 +9,11 @@
      var script = new Script()
      script.text = ('function main(){ return cube(); }')
      var row = new Row()
-     row.contents = [script, script, script]
+     row.children = [script, script, script]
 
      it('can be created three Script objects', function() {
          row.should.be.ok
-         row.contents.should.have.length(3)
+         row.children.should.have.length(3)
      })
 
      describe('render()', function() {

@@ -17,9 +17,9 @@ describe('parameter', function() {
 
         var xml = '<craft><parameter name="foo" default="3" type="int"/></craft>'
         var c = craft.parse(xml)
-        c.contents.should.have.length(1)
+        c.children.should.have.length(1)
 
-        var e = c.contents[0]
+        var e = c.children[0]
         e.on('render', function(element, scope){            
             scope.parameters.should.have.property('foo').equal(3)
         })
@@ -32,7 +32,7 @@ describe('parameter', function() {
         var xml = '<craft><parameter name="foo" default="3" type="int"/></craft>'
         var c = craft.parse(xml)        
 
-        var e = c.contents[0]
+        var e = c.children[0]
         e.on('render', function(element, scope){            
             scope.parameters.should.have.property('foo').equal(3)
         })
@@ -45,7 +45,7 @@ describe('parameter', function() {
         var xml = '<craft><parameter name="foo" default="3" type="string"/></craft>'
         var c = craft.parse(xml)        
 
-        var e = c.contents[0]
+        var e = c.children[0]
         e.on('render', function(element, scope){            
             scope.parameters.should.have.property('foo').equal('3')
         })
@@ -57,9 +57,9 @@ describe('parameter', function() {
 
         var xml = '<craft><parameter name="foo"/><parameter name="bar"/><parameter name="tee"/></craft>'
         var c = craft.parse(xml)
-        c.contents.should.have.length(3)
+        c.children.should.have.length(3)
 
-        var e = c.contents[0]
+        var e = c.children[0]
         e.on('render', function(element, scope){            
             scope.parameters.should.have.property('foo')
             scope.parameters.should.have.property('bar')
@@ -74,7 +74,7 @@ describe('parameter', function() {
         var xml = '<craft><parameter name="foo"/><parameter name="bar" default="3" type="int"/></craft>'
         var c = craft.parse(xml)
 
-        var e = c.contents[0]
+        var e = c.children[0]
         e.on('render', function(element, scope){            
             scope.parameters.should.have.property('foo').equal(5)
             scope.parameters.should.have.property('bar').equal(3)
@@ -91,13 +91,13 @@ describe('parameter', function() {
         var c = craft.parse(xml)
 
         // <box bar="3">
-        c.contents[1].on('render', function(element, scope){            
+        c.children[1].on('render', function(element, scope){            
             // inspect(scope.parameters)
             scope.parameters.should.have.property('bar').equal('3')
         })
 
         // <craft name="box"><row>
-        c.contents[0].contents[1].on('render', function(element, scope){            
+        c.children[0].children[1].on('render', function(element, scope){            
             // inspect(scope.parameters)
             scope.parameters.should.have.property('bar').equal(3)
         })

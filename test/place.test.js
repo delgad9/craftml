@@ -16,7 +16,7 @@
              place.name = 'contents'
 
              var scope = new Scope()
-             scope.contents = [script, script, script]             
+             scope.children = [script, script, script]             
 
              var c = place.render(scope)
              c.should.have.length(3)
