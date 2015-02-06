@@ -266,9 +266,7 @@ Define a subcraft to generate a row of cubes. _n_ is defined as a parameter to c
             }
         </script>
     </craft>
-    <stack>
-        <pyramid n="5"/>          
-    </stack>
+    <pyramid n="5"/>    
 </craft>
 ```
 
@@ -346,9 +344,7 @@ Let's stack a bunch of these pyramids.
             }
         </script>
     </craft>
-    <stack>
-        <pyramid n="5"/>
-    </stack>
+    <pyramid n="5"/>
 </craft>
 ```
 
@@ -422,6 +418,55 @@ function render(context) {
     <% }); %>
 </stack>
 ```
+
+# D3
+
+Tangible visualization using D3
+
+## Barchart
+
+```html
+<craft>
+    <craft name="board" module="craft-board"/>
+    <board>
+    <script type="text/craftml">
+
+        var d3 = require('d3')
+
+        function main(params) {
+
+            var data = [20, 14, 50, 23, 30, 32, 12, 35, 16, 9, 10]
+
+            var width = 40,
+                barHeight = 5
+
+            var x = d3.scale.linear()
+                .range([0, width])
+                .domain([0, d3.max(data, function(d) {
+                    return d
+                })])
+
+            d3.select("body")
+                .selectAll("cube")
+                .data(data)
+                .enter()
+                .append("cube")
+                .attr("xsize", barHeight)
+                .attr("ysize", function(d) {
+
+                    return x(d)
+                })
+
+            var xml = d3.select("body").html()
+            return xml
+
+        }
+    </script>    
+    </board>
+</craft>
+```
+
+![d3barchart](assets/d3barchart.png)
 
 # OpenJSCAD
 
