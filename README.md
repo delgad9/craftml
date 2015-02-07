@@ -93,6 +93,40 @@ This command will produce `hanger.stl`. This is how the model looks like in [cur
 
 [Click here to view the model on Github](assets/hanger.stl)
 
+# Primitives
+
+## Cube
+
+```html
+    <cube></cube>
+    <cube xsize="10" ysize="10" zsize="10"/>    
+    <cube xsize="20" ysize="20" zsize="10"/>
+```
+
+![cube](assets/primitives_cube.png)
+
+## Cylinder
+
+```html
+    <cylinder/>
+    <cylinder radius="2" height="10"/>
+    <cylinder radius="10" height="15"/>    
+```
+
+![cylinder](assets/primitives_cylinder.png)
+
+## Sphere
+
+```html
+    <sphere/>
+    <sphere radius="2"/>
+    <sphere radius="10"/>    
+```
+
+![sphere](assets/primitives_sphere.png)
+
+# Layout
+
 ## Stacking
 
 We can stack things up using the `<stack>` tag.
