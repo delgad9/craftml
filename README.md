@@ -472,6 +472,22 @@ Tangible visualization using D3
 
 ![d3barchart](assets/d3barchart.png)
 
+## Fractals
+
+[examples/fractal](examples/fractal)
+
+```html
+<fractal angle1="45" depth="5"/>
+```
+
+![fractal](examples/fractal/depth5.png)
+
+```html
+<fractal angle1="45" depth="6"/>
+```
+
+![fractal](examples/fractal/depth6.png)
+
 # OpenJSCAD
 
 ```html
