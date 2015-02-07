@@ -172,6 +172,72 @@ Stack things up using `<stack>`.
 
 ![stack](assets/layout_stack.png)
 
+## Absolute Positioning
+
+Specify `position="absolute"` attribute to turn on absolute positioning.
+
+```html
+<craft position="absolute">
+    <cube x="-10" y="-5"></cube>    
+    <cube x="10" y="5"></cube>    
+    <cube x="20" y="10"></cube>
+    <cube x="30" y="15"></cube>
+</craft>
+```
+
+![4cubes_abspos](assets/4cubes_abspos.png)
+
+
+`<row>` causes the layout engine to ignore the _x_, _y_ values and just arrange the four cubes in a row along the x-axis.
+
+```html
+<craft position="absolute">
+    <row>
+	    <cube x="-10" y="-5"></cube>    
+	    <cube x="10" y="5"></cube>    
+	    <cube x="20" y="10"></cube>
+	    <cube x="30" y="15"></cube>
+    </row>
+</craft>
+```
+
+![override](assets/layout_rowoverride.png)
+
+But the row itself can be positioned.
+
+```html	
+<craft position="absolute">
+    <row x="10" y="10">
+	    <cube x="-10" y="-5"></cube>    
+	    <cube x="10" y="5"></cube>    
+	    <cube x="20" y="10"></cube>
+	    <cube x="30" y="15"></cube>
+    </row>
+</craft>
+```
+![layout_abspos_row](assets/layout_abspos_row.png)
+
+## Layout Examples
+
+A column of two cynlinders on top and a row of two cubes at the botton. Inbetween are two flat cubes at 90 degree angles.
+
+```html
+<stack>
+   <column>
+       <cylinder></cylinder>
+       <cylinder></cylinder>
+   </column>
+   <cube xsize="2"></cube>
+   <cube ysize="2"></cube>
+   <row>
+       <cube></cube>
+       <cube></cube>
+   </row>
+</stack>
+```
+
+![layout_combo](assets/layout_combo.png)
+
 Stacking four pins on a board
 
 ```html
@@ -222,7 +288,7 @@ Four stacks of pins
 
 ![stairs](assets/pins_stair.png)
 
-## Subcraft
+# Subcraft
 
 * can be used to define a sub-component that can be reusable
 
@@ -249,34 +315,6 @@ Four stacks of pins
 ![pins_towers](assets/pins_towers.png)
 
 
-# Positioning
-
-```html
-<craft position="absolute">
-    <cube x="-10" y="-5"></cube>    
-    <cube x="10" y="5"></cube>    
-    <cube x="20" y="10"></cube>
-    <cube x="30" y="15"></cube>
-</craft>
-```
-
-![4cubes_abspos](assets/4cubes_abspos.png)
-
-
-`<row>` causes the layout engine to ignore the _x_ values and arranges the four cubes tightly along the x-axs, while respecting the _y_ values.
-
-```html
-<craft position="absolute">
-    <row>
-	    <cube x="-10" y="-5"></cube>    
-	    <cube x="10" y="5"></cube>    
-	    <cube x="20" y="10"></cube>
-	    <cube x="30" y="15"></cube>
-    </row>
-</craft>
-```
-
-![4cubes_row_y](assets/4cubes_row_y.png)
 
 # Scripting
 

@@ -1,0 +1,9 @@
+<craft>
+    <parameter name="radius" default="2.5" type="float"/>    
+    <parameter name="resolution" default="36" type="int"/>    
+    <script type="text/openjscad">
+        function main(params){
+            return new CSG.sphere({radius: params.radius, resolution: params.resolution})
+        }
+    </script>
+</craft>
