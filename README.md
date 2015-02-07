@@ -98,9 +98,9 @@ This command will produce `hanger.stl`. This is how the model looks like in [cur
 ## Cube
 
 ```html
-    <cube></cube>
-    <cube xsize="10" ysize="10" zsize="10"/>    
-    <cube xsize="20" ysize="20" zsize="10"/>
+<cube></cube>
+<cube xsize="10" ysize="10" zsize="10"/>    
+<cube xsize="20" ysize="20" zsize="10"/>
 ```
 
 ![cube](assets/primitives_cube.png)
@@ -108,9 +108,9 @@ This command will produce `hanger.stl`. This is how the model looks like in [cur
 ## Cylinder
 
 ```html
-    <cylinder/>
-    <cylinder radius="2" height="10"/>
-    <cylinder radius="10" height="15"/>    
+<cylinder/>
+<cylinder radius="2" height="10"/>
+<cylinder radius="10" height="15"/>    
 ```
 
 ![cylinder](assets/primitives_cylinder.png)
@@ -118,18 +118,61 @@ This command will produce `hanger.stl`. This is how the model looks like in [cur
 ## Sphere
 
 ```html
-    <sphere/>
-    <sphere radius="2"/>
-    <sphere radius="10"/>    
+<sphere/>
+<sphere radius="2"/>
+<sphere radius="10"/>    
 ```
 
 ![sphere](assets/primitives_sphere.png)
 
 # Layout
 
-## Stacking
+## Row
 
-We can stack things up using the `<stack>` tag.
+Arrange things in a row using `<row>` along the x-axis.
+
+```html 
+<row>
+   <cylinder radius="3"/>
+   <cylinder radius="4"/>
+   <cylinder radius="5"/>
+   <cylinder radius="6"/>
+   <cylinder radius="7"/>   
+</row>
+```
+![row](assets/layout_row.png)
+
+## Column
+
+Arrange things in a column using `<column>` along the y-axis.
+
+```html 
+<column>
+   <sphere radius="7"/>        
+   <sphere radius="6"/>
+   <sphere radius="5"/>
+   <sphere radius="4"/>
+   <sphere radius="3"/>
+</column>
+```
+![column](assets/layout_column.png)
+
+
+## Stack
+
+Stack things up using `<stack>`.
+
+```html
+<stack>
+   <cylinder radius="5"/>
+   <cylinder radius="7"/>
+   <cylinder radius="9"/>        
+</stack>
+```
+
+![stack](assets/layout_stack.png)
+
+Stacking four pins on a board
 
 ```html
 <craft>
