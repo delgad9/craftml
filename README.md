@@ -174,8 +174,6 @@ Stack things up using `<stack>`.
 
 ## Absolute Positioning
 
-Specify `position="absolute"` attribute to turn on absolute positioning.
-
 ```html
 <craft position="absolute">
     <cube x="-10" y="-5"></cube>    
