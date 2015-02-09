@@ -278,109 +278,116 @@ describe('render#', function() {
         // inspect(c)
 
         var r = render(c)
-        // inspect(r)
+            // inspect(r)
 
         match(r, [solid(), solid(), solid()])
 
     })
 
 
-    it.only('can apply default parameter', function() {
+    it('can inject default parameter values', function() {
         var u = unit()
         var spy = sinon.spy(u, 'create')
 
         var c = [
-            parameter(a('name','p1'), a('default',2), a('type','int')),
-            parameter(a('name','p2'), a('default',5), a('type','int')),
+            parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
+            parameter(a('name', 'p2'), a('default', 5), a('type', 'int')),
             u
         ]
 
         // inspect(c)
         var r = render(c)
-        
-        spy.should.have.been.calledWith({'p1':2,'p2':5})
-        
+
+        spy.should.have.been.calledWith({
+            'p1': 2,
+            'p2': 5
+        })
+
     })
 
-    // it.only('can override with default parameter', function() {
-    //     var u = unit()
-    //     var spy = sinon.spy(u, 'create')
+    it('can override default parameter values', function() {
+        var u = unit()
+        var spy = sinon.spy(u, 'create')
 
-    //     var c = [
-    //         parameter(a('name','p1'), a('default',2), a('type','int')),
-    //         u,
-    //         u
-    //     ]
+        var c = [
+            parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
+            parameter(a('name', 'p2'), a('default', 5), a('type', 'int')),
+            u
+        ]
 
-    //     // inspect(c)
-    //     var r = render(c)
-        
-    //     spy.should.have.been.calledWith({'p1':2})
-        
-    // })
+        // inspect(c)
+        var r = render(c, {parameters: {'p1': 5}})
 
-    // describe('mock script', function() {
+        spy.should.have.been.calledWith({
+            'p1': 5,
+            'p2': 5
+        })
 
-    //     it('a script is evaluated once', function() {
+    })
 
-    //         var spy = sinon.spy()
-    //         var c = script()
+    it('can inject tag attribues as parameters to an inner craft', function() {
+        var u = unit()
+        var spy = sinon.spy(u, 'create')
 
-    //         c.eval = spy
-    //         render(c)
+        var c = [
+            craft(a('name', 'foo'),
+                parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
+                u),
+            foo(a('p1', 5))
+        ]
 
-    //         spy.should.have.been.calledOnce
-    //     })
+        // inspect(c)
 
+        var r = render(c)
 
-    //     it('a craft\'s children scripts are both evaluated', function() {
+        spy.should.have.been.calledWith({
+            'p1': 5
+        })
+          
+    })
 
-    //         var c = craft(script(), script())
+    it('can inject default parameter values to an inner craft', function() {
+        var u = unit()
+        var spy = sinon.spy(u, 'create')
 
-    //         c.children[0].eval = sinon.spy()
-    //         c.children[1].eval = sinon.spy()
+        var c = [
+            craft(a('name', 'foo'),
+                parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
+                parameter(a('name', 'p2'), a('default', 10), a('type', 'int')),
+                u),
+            foo()
+        ]
 
-    //         render(c)
+        // inspect(c)
 
-    //         c.children[0].eval.should.have.been.calledOnce
-    //         c.children[1].eval.should.have.been.calledOnce
+        var r = render(c)
 
-    //     })
+        spy.should.have.been.calledWith({
+            'p1': 2,
+            'p2': 10
+        })          
+    })
 
-    //     it('an array of scripts are all evaluated', function() {
+     it('can resolve {{param}} in tag attributes', function() {
+        var u = unit()
+        var spy = sinon.spy(u, 'create')
 
-    //         var c = [script(), script()]
+        var c = [
+            parameter(a('name', 'q1'), a('default', 10), a('type', 'int')),
+            craft(a('name', 'foo'),
+                parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),                
+                u),
+            foo(a('p1','{{q1}}'))
+        ]
 
-    //         c[0].eval = sinon.spy()
-    //         c[1].eval = sinon.spy()
+        // inspect(c)
 
-    //         render(c)
+        var r = render(c)
 
-    //         c[0].eval.should.have.been.calledOnce
-    //         c[1].eval.should.have.been.calledOnce
-
-    //     })
-
-    //     it.only('an embedded script', function() {
-
-    //         var s = script()
-
-    //         var c = [
-    //             craft(name('foo'),
-    //                 parameter(a('name','p1'), a('default',3), a('type','int')),
-    //                 script()),
-    //             foo(p1('a')),
-    //             foo(p1('b'))
-    //         ]
-
-    //         var d = [csg(),csg()]
-    //         inspect(c)
-    //         render(c)
-    //         inspect(d)
-
-    //     })
-
-    // })
+        spy.should.have.been.calledWith({
+            'p1': 10
+        })          
+    })
 
 
 })
