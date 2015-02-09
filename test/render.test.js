@@ -284,6 +284,41 @@ describe('render#', function() {
 
     })
 
+
+    it.only('can apply default parameter', function() {
+        var u = unit()
+        var spy = sinon.spy(u, 'create')
+
+        var c = [
+            parameter(a('name','p1'), a('default',2), a('type','int')),
+            parameter(a('name','p2'), a('default',5), a('type','int')),
+            u
+        ]
+
+        // inspect(c)
+        var r = render(c)
+        
+        spy.should.have.been.calledWith({'p1':2,'p2':5})
+        
+    })
+
+    // it.only('can override with default parameter', function() {
+    //     var u = unit()
+    //     var spy = sinon.spy(u, 'create')
+
+    //     var c = [
+    //         parameter(a('name','p1'), a('default',2), a('type','int')),
+    //         u,
+    //         u
+    //     ]
+
+    //     // inspect(c)
+    //     var r = render(c)
+        
+    //     spy.should.have.been.calledWith({'p1':2})
+        
+    // })
+
     // describe('mock script', function() {
 
     //     it('a script is evaluated once', function() {
