@@ -9,6 +9,7 @@ chai.use(sinonChai);
 
 var render = require('../lib/render'),
     Solid = require('../lib/solid1'),
+    Scope = require('../lib/scope'),
     chaiSubset = require('chai-subset'),
     inspect = require('eyes').inspector(),
     EventEmitter = require("events").EventEmitter
@@ -316,7 +317,11 @@ describe('render#', function() {
         ]
 
         // inspect(c)
-        var r = render(c, {parameters: {'p1': 5}})
+        var r = render(c, {
+            parameters: {
+                'p1': 5
+            }
+        })
 
         spy.should.have.been.calledWith({
             'p1': 5,
@@ -343,7 +348,7 @@ describe('render#', function() {
         spy.should.have.been.calledWith({
             'p1': 5
         })
-          
+
     })
 
     it('can inject default parameter values to an inner craft', function() {
@@ -365,19 +370,19 @@ describe('render#', function() {
         spy.should.have.been.calledWith({
             'p1': 2,
             'p2': 10
-        })          
+        })
     })
 
-     it('can resolve {{param}} in tag attributes', function() {
+    it('can resolve {{param}} from default parameter values', function() {
         var u = unit()
         var spy = sinon.spy(u, 'create')
 
         var c = [
             parameter(a('name', 'q1'), a('default', 10), a('type', 'int')),
             craft(a('name', 'foo'),
-                parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),                
+                parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
                 u),
-            foo(a('p1','{{q1}}'))
+            foo(a('p1', '{{q1}}'))
         ]
 
         // inspect(c)
@@ -386,8 +391,51 @@ describe('render#', function() {
 
         spy.should.have.been.calledWith({
             'p1': 10
-        })          
+        })
     })
 
+    it('can resolve {{param}} from supplied parameter values', function() {
+        var u = unit()
+        var spy = sinon.spy(u, 'create')
+
+        var c = [
+            parameter(a('name', 'q1'), a('default', 10), a('type', 'int')),
+            craft(a('name', 'foo'),
+                parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
+                u),
+            foo(a('p1', '{{q1}}'))
+        ]
+
+        // inspect(c)
+
+        var scope = new Scope()
+        scope.parameters = {
+            q1: 20
+        }
+        var r = render(c, scope)
+
+        spy.should.have.been.calledWith({
+            'p1': 20
+        })
+    })
+
+    it('can resolve <content>', function() {
+        var u = unit()
+        var spy = sinon.spy(u, 'create')
+
+        var c = [
+            craft(a('name', 'foo'),
+                content()),
+            foo(u, u)
+        ]
+        // inspect(c)
+
+        var r = render(c)
+
+        // inspect(r)
+
+        spy.should.have.been.calledTwice
+
+    })
 
 })
