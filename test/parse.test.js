@@ -107,4 +107,18 @@ describe('parse()', function() {
 
     })
 
+    describe.only('#module', function(){
+
+        it('can load an installed module', function(){
+            var actual = parse('<craft><craft module="craft-box" name="foo"/></craft>')
+            inspect(actual)
+
+            actual.children[0].children[0].type.should.be.equal('factory')
+            actual.children[0].children[0].code.should.contain('cube()')
+
+        })
+
+
+    })
+
 })
