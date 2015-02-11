@@ -41,18 +41,18 @@ function build(src) {
     var context = {
         basePath: basePath
     }
-    var block = craft.parse(xml, context)
+    var block = craft.build(xml, context)
         // console.log(JSON.stringify(block,null,' '))
-    var solid = block.render()
+    // var solid = block.render()
 
 
-    applyTranformation(solid)
+    // applyTranformation(solid)
 
-    var stlstring = solid.toStl()
-    var dest = src.replace('.xml', '.stl')
-    console.log('writing to %s', dest)
-    fs.writeFileSync(dest, stlstring, 'utf8')
-    return dest
+    // var stlstring = solid.toStl()
+    // var dest = src.replace('.xml', '.stl')
+    // console.log('writing to %s', dest)
+    // fs.writeFileSync(dest, stlstring, 'utf8')
+    // return dest
 }
 
 var watchGlob = require('watch-glob')

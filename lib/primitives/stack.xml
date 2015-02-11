@@ -9,7 +9,7 @@
             var contentSolids = scope.solids[0].children
 
             var tz = 0
-            contentSolids.forEach(function(solid){
+            contentSolids.reverse().forEach(function(solid){
 
                 solid.layout.location.z = tz
                 tz = tz + solid.layout.size.z

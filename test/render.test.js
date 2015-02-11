@@ -247,7 +247,7 @@ describe('render()', function() {
             })
         })
 
-         it('can run a script that generates more tags', function() {            
+         it('can run a script that generates craftml tags', function() {            
             var u = unit()
             var spy = sinon.spy(u, 'create')
 
