@@ -23,7 +23,7 @@ var script = mock.script,
     parameter = mock.parameter,
     group = mock.group,
     solid = mock.solid,
-    grp = mock.grp,
+    solidGroup = mock.solidGroup,
     content = mock.content,
     foo = mock.foo
 
@@ -49,7 +49,7 @@ function match(actual, expected) {
     }
 }    
 
-describe('render#', function() {
+describe('render()', function() {
 
     it('can render a single unit', function() {
 
@@ -76,7 +76,7 @@ describe('render#', function() {
         var r = render(c)
 
         match(r,
-            grp(solid(),
+            solidGroup(solid(),
                 solid()))
     })
 
@@ -89,8 +89,8 @@ describe('render#', function() {
             // inspect(r)
 
         match(r,
-            grp(solid(),
-                grp(solid(),
+            solidGroup(solid(),
+                solidGroup(solid(),
                     solid())))
     })
 
@@ -314,6 +314,28 @@ describe('render#', function() {
 
         })
 
+
+        it('can inject a string attribue, automatically cast as int, to an inner craft', function() {
+            var u = unit()
+            var spy = sinon.spy(u, 'create')
+
+            var c = [
+                craft(a('name', 'foo'),
+                    parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
+                    u),
+                foo(a('p1', '5'))
+            ]
+
+            // inspect(c)
+
+            var r = render(c)
+
+            spy.should.have.been.calledWith({
+                'p1': 5
+            })
+
+        })
+
         it('can inject default parameter values to an inner craft', function() {
             var u = unit()
             var spy = sinon.spy(u, 'create')
@@ -335,6 +357,7 @@ describe('render#', function() {
                 'p2': 10
             })
         })
+
 
         it('can resolve {{param}} from default parameter values', function() {
             var u = unit()

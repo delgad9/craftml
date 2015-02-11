@@ -89,21 +89,55 @@ lib.solid = function() {
     }
 }
 
-lib.grp = function() {
+lib.solidGroup = function() {
     var args = Array.prototype.slice.call(arguments)
 
     return {
         type: 'group',
+        layout: {
+            location: {
+                x: 0,
+                y: 0,
+                z: 0
+            },
+            size:{
+                x: 1,
+                y: 1,
+                z: 1
+            }
+        },
         children: args
     }
 }
 
-lib.script = function(func){
+lib.script = function(func) {
     return {
         type: 'script',
         run: func
     }
 }
 
-module.exports = lib
+var $$$ = require('craft-scad')
+lib.cube = function() {
+    var solid = new Solid()
+    solid.name = 'cube'
+    solid.create = function(params) {
+        return $$$.cube()
+    }
+    solid.csg = solid.create()
+    solid.layout = {
+        size: {
+            x: 1,
+            y: 1,
+            z: 1
+        },
+        location: {
+            x: 0,
+            y: 0,
+            z: 0
+        }
+    }
+    return solid
+}
 
+module.exports = lib
