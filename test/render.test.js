@@ -1,8 +1,7 @@
 var chai = require('chai'),
     assert = require('chai').assert,
     sinon = require("sinon"),
-    sinonChai = require("sinon-chai"),
-    debug = require('debug')('craftml.test.render')
+    sinonChai = require("sinon-chai")
 
 chai.should()
 chai.use(sinonChai);
@@ -13,6 +12,8 @@ var render = require('../lib/render'),
     chaiSubset = require('chai-subset'),
     inspect = require('eyes').inspector(),
     EventEmitter = require("events").EventEmitter
+
+var _ = require('lodash')
 
 
 var mock = require('./mock')
@@ -280,11 +281,10 @@ describe('render()', function() {
             ]
 
             // inspect(c)
-            var r = render(c, {
-                parameters: {
-                    'p1': 5
-                }
-            })
+            var scope = new Scope()
+            scope.parameters.p1 = 5
+
+            var r = render(c, scope)                
 
             spy.should.have.been.calledWith({
                 'p1': 5,

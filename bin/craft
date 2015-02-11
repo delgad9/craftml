@@ -29,53 +29,8 @@ program
     .command('viewer')
     .description('run setup commands for all envs')
     .action(function(src, options) {
-        //var dest = build(src)
-        //open(dest)
         preview(src)
     })
-
-
-// var $$$ = require('craft-scad')
-
-// function transform_recursively(node, matrix) {
-//     if (node.csg) {
-//         node.csg = node.csg.transform(matrix)
-//     }
-//     node.children.forEach(function(c) {
-//         transform_recursively(c, matrix)
-//     })
-// }
-
-// function applyTranformation(solid, matrix) {
-
-//     var loc = solid.layout.location
-
-//     var m = $$$.CSG.Matrix4x4.translation([loc.x, loc.y, loc.z])
-//     if (matrix) {
-//         m = m.multiply(matrix)
-//     }
-
-//     if (solid.csg) {
-//         var cb = solid.csg.getBounds()
-
-//         // console.log('%d,%d,%d --> ', cb[0].x, cb[0].y, cb[0].z)
-//         // console.log('%d,%d,%d', solid.layout.x, solid.layout.y, solid.layout.z)
-
-//         m = m.multiply($$$.CSG.Matrix4x4.translation([-cb[0].x, -cb[0].y, -cb[0].z]))
-//         solid.csg = solid.csg.transform(m)
-
-//         var cb = solid.csg.getBounds()
-
-//     } else {
-
-//         solid.children.forEach(function(c) {
-
-//             applyTranformation(c, m)
-
-//         })
-//     }
-
-// }
 
 function build(src) {
     var xml = fs.readFileSync(src, 'utf8')

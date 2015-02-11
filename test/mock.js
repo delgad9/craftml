@@ -1,5 +1,7 @@
 var lib = {}
 
+var _ = require('lodash')
+
 var Solid = require('../lib/solid1')
 
 function make(name) {
