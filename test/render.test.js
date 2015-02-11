@@ -16,7 +16,6 @@ var render = require('../lib/render'),
 
 
 var mock = require('./mock')
-
 var script = mock.script,
     a = mock.a,
     unit = mock.unit,
