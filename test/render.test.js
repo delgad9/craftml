@@ -246,6 +246,32 @@ describe('render()', function() {
                 }
             })
         })
+
+         it('can run a script that generates more tags', function() {            
+            var u = unit()
+            var spy = sinon.spy(u, 'create')
+
+            var c = [
+                unit(),
+                script(function(params, scope){
+                    return '<foo></foo>'
+                })
+            ]
+
+            var foo = craft(u, u)
+
+            // inspect(c)
+
+            var scope = new Scope()
+            scope.foo = foo
+
+            var r = render(c, scope)
+            // inspect(r)
+
+            spy.should.have.been.calledTwice
+
+            match(r, [solid(), solid(), solid()])
+        })
     })
 
     describe('parameters', function() {
