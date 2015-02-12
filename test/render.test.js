@@ -48,16 +48,16 @@ function match(actual, expected) {
             match(actual.children, expected.children)
 
     }
-}    
+}
 
 describe('render()', function() {
 
     it('can render a single unit', function() {
 
         var c = unit()
-        // inspect(c)
+            // inspect(c)
         var r = render(c)
-        // inspect(r)
+            // inspect(r)
         match(r, solid())
     })
 
@@ -181,6 +181,32 @@ describe('render()', function() {
 
     })
 
+    it('can resolve x,y,z attributes as numbers', function() {
+
+        var c = [
+            craft(a('name', 'foo'), unit()),
+            foo(a('x','10'), a('y','15'), a('z','20'))
+        ]
+        // inspect(c)
+        var r = render(c)
+        // inspect(r)
+        r[0].layout.should.containSubset({location:{x:10, y:15, z:20}})
+    })
+
+    it('can resolve x,y,z attributes as {{p1}}', function() {
+
+        var c = [
+            parameter(a('name', 'p1'), a('default', 10), a('type', 'int')),
+            parameter(a('name', 'p2'), a('default', '15'), a('type', 'int')),
+            craft(a('name', 'foo'), unit()),        
+            foo(a('x','{{p1}}'), a('y','{{p2}}'))
+        ]
+        // inspect(c)
+        var r = render(c)
+        // inspect(r)
+        r[0].layout.should.containSubset({location:{x:10, y:15}})
+    })
+
     describe('layout', function() {
 
         it('can compute group size', function() {
@@ -201,10 +227,10 @@ describe('render()', function() {
                 }
             })
         })
-        
+
     })
 
-    describe('script', function(){
+    describe('script', function() {
 
         it('can run a script in an array', function() {
             var spy = sinon.spy()
@@ -218,26 +244,28 @@ describe('render()', function() {
         it('can run a script with parameters injected', function() {
             var spy = sinon.spy()
             var c = [
-                parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
-                script(spy)
-            ]
-            //inspect(c)
+                    parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
+                    script(spy)
+                ]
+                //inspect(c)
             render(c)
-            spy.should.have.been.calledWith({p1:2})
+            spy.should.have.been.calledWith({
+                p1: 2
+            })
         })
 
         it('can run a script that changes the layout', function() {
             var spy = sinon.spy()
             var c = [
-                unit(),
-                script(function(params, scope){
-                    scope.solids[0].layout.size.x = 100
-                })
-            ]
-            // inspect(c)
+                    unit(),
+                    script(function(params, scope) {
+                        scope.solids[0].layout.size.x = 100
+                    })
+                ]
+                // inspect(c)
             var r = render(c)
-            // inspect(r)
-            
+                // inspect(r)
+
             r[0].should.containSubset({
                 layout: {
                     size: {
@@ -247,13 +275,13 @@ describe('render()', function() {
             })
         })
 
-         it('can run a script that generates craftml tags', function() {            
+        it('can run a script that generates craftml tags', function() {
             var u = unit()
             var spy = sinon.spy(u, 'create')
 
             var c = [
                 unit(),
-                script(function(params, scope){
+                script(function(params, scope) {
                     return '<foo></foo>'
                 })
             ]
@@ -266,7 +294,7 @@ describe('render()', function() {
             scope.foo = foo
 
             var r = render(c, scope)
-            // inspect(r)
+                // inspect(r)
 
             spy.should.have.been.calledTwice
 
@@ -310,7 +338,7 @@ describe('render()', function() {
             var scope = new Scope()
             scope.parameters.p1 = 5
 
-            var r = render(c, scope)                
+            var r = render(c, scope)
 
             spy.should.have.been.calledWith({
                 'p1': 5,

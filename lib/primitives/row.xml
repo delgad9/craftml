@@ -17,6 +17,9 @@
                 // center along y
                 solid.layout.location.y = - solid.layout.size.y / 2
 
+                // place on x-y plane (z = 0)
+                solid.layout.location.z = 0
+
             })
 
             var ymin = _.min(contentSolids.map(function(c) {
@@ -24,7 +27,7 @@
             }))
 
             contentSolids.forEach(function(solid){
-                solid.layout.location.y = solid.layout.location.y - ymin
+                solid.layout.location.y = solid.layout.location.y - ymin                
             })
 
             scope.solids[0].fitToChildren()

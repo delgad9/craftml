@@ -72,6 +72,14 @@ describe('parse()', function() {
 
     })
 
+    it('craft(foo(x="1", y="1", z="1"))', function() {
+
+        var t = parse('<craft><foo x="1" y="1" z="{{p1}}"></foo></craft>')
+        // inspect(t)
+        t.children[0].should.containSubset(foo((a('x','1'),a('y','1'),a('z','{{p1}}'))))
+
+    })    
+
     it('craft(craft(craft)))', function() {
 
         var t = parse('<craft><craft></craft><craft></craft></craft>')

@@ -17,6 +17,9 @@
                 // center along x
                 solid.layout.location.x = - solid.layout.size.x / 2
 
+                // place on x-y plane (z = 0)
+                solid.layout.location.z = 0
+
             })
 
             var xmin = _.min(contentSolids.map(function(c) {
