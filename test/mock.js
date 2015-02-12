@@ -76,6 +76,10 @@ make('factory')
 make('unit')
 make('group')
 make('solid')
+// make('text')
+
+
+// delete lib.text.children
 
 lib.a = function(name, value) {
     var o = {}
@@ -109,6 +113,14 @@ lib.solidGroup = function() {
             }
         },
         children: args
+    }
+}
+
+lib.text = function(string){
+    return {
+        type: 'tag',
+        name: 'text',
+        attribs: {text: string}
     }
 }
 

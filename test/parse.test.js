@@ -17,7 +17,8 @@ var script = mock.script,
     solid = mock.solid,
     grp = mock.grp,
     content = mock.content,
-    foo = mock.foo
+    foo = mock.foo,
+    text = mock.text
 
 var parse = require('../lib/parse1')
 
@@ -89,6 +90,21 @@ describe('parse()', function() {
 
     })
 
+    it('craft(hello world)', function() {
+
+        var t = parse('<craft>hello world</craft>')        
+        t.children[0].attribs.text.should.be.equal('hello world')
+
+    })    
+
+    it('craft(row("hello world")) can ignore white spaces', function() {
+
+        var t = parse('<craft>\n\n<row>hello world</row>\n\n</craft>')        
+        // inspect(t)      
+
+    })    
+
+
     it('script craftml', function() {
 
         var actual = parse('<craft><script type="text/craftml">function main(){}</script></craft>')
@@ -107,11 +123,11 @@ describe('parse()', function() {
 
     })
 
-    describe.only('#module', function(){
+    describe('#module', function(){
 
         it('can load an installed module', function(){
             var actual = parse('<craft><craft module="craft-box" name="foo"/></craft>')
-            inspect(actual)
+            // inspect(actual)
 
             actual.children[0].children[0].type.should.be.equal('factory')
             actual.children[0].children[0].code.should.contain('cube()')
