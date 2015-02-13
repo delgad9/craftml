@@ -1,6 +1,6 @@
 {
   "name": "craftml",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "craftml",
   "main": "index.js",
   "scripts": {
@@ -46,6 +46,7 @@
     "craft-scad": "^1.0.1",
     "debug": "^2.1.1",
     "express": "^4.11.2",
+    "eyes": "^0.1.8",
     "glob": "^4.3.5",
     "jade": "^1.9.1",
     "lodash": "^3.0.0",
