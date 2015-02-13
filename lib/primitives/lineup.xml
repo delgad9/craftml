@@ -1,5 +1,6 @@
 <craft>
     <parameter name="axis" default="x" type="string"/>
+    <parameter name="spacing" default="0" type="int"/>
     <content></content>
     <script type="text/craftml">
 
@@ -14,7 +15,7 @@
             contentSolids.forEach(function(solid){
 
                 solid.layout.location[a] = tx
-                tx = tx + solid.layout.size[a]
+                tx = tx + solid.layout.size[a] + params.spacing
 
             })
         }
