@@ -7,7 +7,7 @@ chai.should()
 chai.use(sinonChai);
 
 var render = require('../lib/render'),
-    Solid = require('../lib/solid1'),
+    Solid = require('../lib/solid'),
     Scope = require('../lib/scope'),
     chaiSubset = require('chai-subset'),
     inspect = require('eyes').inspector(),

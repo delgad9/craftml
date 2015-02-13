@@ -19,7 +19,7 @@ var script = mock.script,
     foo = mock.foo,
     cube = mock.cube
 
-var Solid = require('../lib/solid1')
+var Solid = require('../lib/solid')
 
 var craft = require('../lib/craft'),
     build = craft.build,

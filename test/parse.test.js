@@ -20,7 +20,7 @@ var script = mock.script,
     foo = mock.foo,
     text = mock.text
 
-var parse = require('../lib/parse1')
+var parse = require('../lib/parse')
 
 describe('parse()', function() {
 
