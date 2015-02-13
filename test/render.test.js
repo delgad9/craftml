@@ -310,7 +310,7 @@ describe('render()', function() {
 
             var c = [
                 parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
-                parameter(a('name', 'p2'), a('default', 5), a('type', 'int')),
+                parameter(a('name', 'p2'), a('default', '5'), a('type', 'string')),
                 u
             ]
 
@@ -319,7 +319,7 @@ describe('render()', function() {
 
             spy.should.have.been.calledWith({
                 'p1': 2,
-                'p2': 5
+                'p2': '5'
             })
 
         })

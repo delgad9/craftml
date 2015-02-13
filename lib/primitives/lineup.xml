@@ -1,0 +1,22 @@
+<craft>
+    <parameter name="axis" default="x" type="string"/>
+    <content></content>
+    <script type="text/craftml">
+
+        function main(params, scope){
+
+            var a = params.axis
+
+            var contentSolids = scope.solids
+            
+            var tx = 0
+
+            contentSolids.forEach(function(solid){
+
+                solid.layout.location[a] = tx
+                tx = tx + solid.layout.size[a]
+
+            })
+        }
+    </script>
+</craft>
