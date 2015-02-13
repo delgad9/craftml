@@ -1,0 +1,95 @@
+<craft>
+    <parameter name="side" default="south" type="string"/>
+    <content></content>
+    <script type="text/craftml">
+
+        function min(axis, solids) {
+            return _.min(solids.map(function(c) {
+                return c.layout.location[axis]
+            }))
+        }
+
+        function max(axis, solids) {
+            return _.max(solids.map(function(c) {
+                return c.layout.location[axis] + c.layout.size[axis]
+            }))
+        }
+
+        function xmin(solids) {
+            return min('x', solids)
+        }
+
+        function xmax(solids) {
+            return max('x', solids)
+        }
+
+        function ymin(solids) {
+            return min('y', solids)
+        }
+
+        function ymax(solids) {
+            return max('y', solids)
+        }        
+
+        function zmin(solids) {
+            return min('z', solids)
+        }
+
+        function zmax(solids) {
+            return max('z', solids)
+        }
+
+        function main(params, scope) {
+
+            var a = params.axis
+
+            var contentSolids = scope.solids
+
+            if (params.side === 'east') {
+
+                var m = xmax(contentSolids)
+                contentSolids.forEach(function(solid) {
+                    solid.layout.location.x = m - solid.layout.size.x
+                })
+
+            } else if (params.side === 'west') {
+
+                var m = xmin(contentSolids)
+                contentSolids.forEach(function(solid) {
+                    solid.layout.location.x = solid.layout.location.x - m
+                })
+
+            } else if (params.side === 'top') {
+
+                var m = zmax(contentSolids)
+                console.log(m)
+                contentSolids.forEach(function(solid) {
+                    solid.layout.location.z = m - solid.layout.location.z - solid.layout.size.z
+                })
+
+            } else if (params.side === 'bottom') {
+
+                var m = zmin(contentSolids)
+                contentSolids.forEach(function(solid) {
+                    solid.layout.location.z = solid.layout.location.z - m
+                })
+
+            } else if (params.side === 'north') {
+
+                var m = ymax(contentSolids)
+                contentSolids.forEach(function(solid) {
+                    solid.layout.location.y = m - solid.layout.location.y - solid.layout.size.y
+                })
+
+            }  else if (params.side === 'south') {
+
+                var m = ymin(contentSolids)
+                contentSolids.forEach(function(solid) {
+                    solid.layout.location.y = solid.layout.location.y - m
+                })
+
+            }
+
+        }
+    </script>
+</craft>
