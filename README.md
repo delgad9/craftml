@@ -63,10 +63,12 @@ Create `hanger.xml` with the contents below.
 	<craft name="pin" module="craft-pin"/>
 	<craft name="board" module="craft-board"/>
 	<board>
-		<pin></pin>
-		<pin></pin>
-		<pin></pin>
-		<pin></pin>
+		<row>
+			<pin></pin>
+			<pin></pin>
+			<pin></pin>
+			<pin></pin>
+		</row>
 	</board>						
 </craft>
 ```
@@ -175,7 +177,7 @@ Stack things up using `<stack>`.
 ## Absolute Positioning
 
 ```html
-<craft position="absolute">
+<craft>
     <cube x="-10" y="-5"></cube>    
     <cube x="10" y="5"></cube>    
     <cube x="20" y="10"></cube>
@@ -189,7 +191,7 @@ Stack things up using `<stack>`.
 `<row>` causes the layout engine to ignore the _x_, _y_ values and just arrange the four cubes in a row along the x-axis.
 
 ```html
-<craft position="absolute">
+<craft>
     <row>
 	    <cube x="-10" y="-5"></cube>    
 	    <cube x="10" y="5"></cube>    
@@ -204,12 +206,12 @@ Stack things up using `<stack>`.
 But the row itself can be positioned.
 
 ```html	
-<craft position="absolute">
+<craft>
     <row x="10" y="10">
-	    <cube x="-10" y="-5"></cube>    
-	    <cube x="10" y="5"></cube>    
-	    <cube x="20" y="10"></cube>
-	    <cube x="30" y="15"></cube>
+        <cube x="-10" y="-5"></cube>    
+        <cube x="10" y="5"></cube>    
+        <cube x="20" y="10"></cube>
+        <cube x="30" y="15"></cube>
     </row>
 </craft>
 ```
@@ -259,28 +261,30 @@ Four stacks of pins
 
 ```html
 <craft>
-	<craft name="pin" module="craft-pin"/>
-	<craft name="board" module="craft-board"/>
-	<board>
-		<stack>
-			<pin></pin>
-			<pin></pin>
-			<pin></pin>
-			<pin></pin>
-		</stack>
-		<stack>
-			<pin></pin>
-			<pin></pin>
-			<pin></pin>
-		</stack>
-		<stack>
-			<pin></pin>
-			<pin></pin>
-		</stack>
-		<stack>
-			<pin></pin>
-		</stack>		
-	</board>						
+    <craft name="pin" module="craft-pin"/>
+    <craft name="board" module="craft-board"/>
+    <board>
+        <row>
+            <stack>
+                <pin></pin>
+                <pin></pin>
+                <pin></pin>
+                <pin></pin>
+            </stack>
+            <stack>
+                <pin></pin>
+                <pin></pin>
+                <pin></pin>
+            </stack>
+            <stack>
+                <pin></pin>
+                <pin></pin>
+            </stack>
+            <stack>
+                <pin></pin>
+            </stack>        
+        </row>
+    </board>                            
 </craft>
 ```
 
@@ -292,9 +296,9 @@ Four stacks of pins
 
 ```html
 <craft>
-	<craft name="pin" module="craft-pin"/>
-	<craft name="board" module="craft-board"/>
-	<craft name="tower">
+    <craft name="pin" module="craft-pin"/>
+    <craft name="board" module="craft-board"/>
+    <craft name="tower">
         <stack>
             <pin></pin>
             <pin></pin>
@@ -303,10 +307,12 @@ Four stacks of pins
         </stack>
     </craft>
     <board>
-    	<tower></tower>
-        <tower></tower>
-        <tower></tower>
-        <tower></tower>
+        <row>
+            <tower></tower>
+            <tower></tower>
+            <tower></tower>
+            <tower></tower>
+        </row>
     </board>
 </craft>
 ```
@@ -346,7 +352,9 @@ Define a subcraft to generate a row of cubes. _n_ is defined as a parameter to c
             }
         </script>
     </craft>
-    <ncubes n="10"/>    
+    <row>
+        <ncubes n="10"/>    
+    </row>
 </craft>
 ```
 ![cube](assets/10cubes.png)
@@ -546,39 +554,41 @@ Tangible visualization using D3
 <craft>
     <craft name="board" module="craft-board"/>
     <board>
-    <script type="text/craftml">
+        <lineup axis="x">
+            <script type="text/craftml">
 
-        var d3 = require('d3')
+                var d3 = require('d3')
 
-        function main(params) {
+                function main(params) {
 
-            var data = [20, 14, 50, 23, 30, 32, 12, 35, 16, 9, 10]
+                    var data = [20, 14, 50, 23, 30, 32, 12, 35, 16, 9, 10]
 
-            var width = 40,
-                barHeight = 5
+                    var width = 40,
+                        barHeight = 5
 
-            var x = d3.scale.linear()
-                .range([0, width])
-                .domain([0, d3.max(data, function(d) {
-                    return d
-                })])
+                    var x = d3.scale.linear()
+                        .range([0, width])
+                        .domain([0, d3.max(data, function(d) {
+                            return d
+                        })])
 
-            d3.select("body")
-                .selectAll("cube")
-                .data(data)
-                .enter()
-                .append("cube")
-                .attr("xsize", barHeight)
-                .attr("ysize", function(d) {
+                    d3.select("body")
+                        .selectAll("cube")
+                        .data(data)
+                        .enter()
+                        .append("cube")
+                        .attr("xsize", barHeight)
+                        .attr("ysize", function(d) {
 
-                    return x(d)
-                })
+                            return x(d)
+                        })
 
-            var xml = d3.select("body").html()
-            return xml
+                    var xml = d3.select("body").html()
+                    return xml
 
-        }
-    </script>    
+                }
+            </script>    
+        </lineup>
     </board>
 </craft>
 ```
@@ -618,16 +628,18 @@ Tangible visualization using D3
 ### Multiple Script Blocks
 ```html
 <craft>
-	<script type="text/openjscad">
-		function main(){
-			return cube()
-		}
-	</script>
-	<script type="text/openjscad">
-		function main(){
-			return cube().scale([1,0.5,1])
-		}
-	</script>	
+	<row>
+		<script type="text/openjscad">
+			function main(){
+				return cube()
+			}
+		</script>
+		<script type="text/openjscad">
+			function main(){
+				return cube().scale([1,0.5,1])
+			}
+		</script>	
+	</row>
 </craft>
 ```
 
@@ -649,10 +661,12 @@ Suppose we want to generate a cube and repeat it four times. We can define a nes
 			}
 		</script>
 	</craft>
-	<mycube></mycube>
-	<mycube></mycube>
-	<mycube></mycube>
-	<mycube></mycube>
+	<row>
+		<mycube></mycube>
+		<mycube></mycube>
+		<mycube></mycube>
+		<mycube></mycube>
+	</row>
 </craft>
 ```
 
