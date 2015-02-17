@@ -477,7 +477,7 @@ Let's stack a bunch of these pyramids.
 # Circle
 
 ```html
-<craft position="absolute">
+<craft>
     <script type="text/craftml">
         function main(){
             var cubes = []
