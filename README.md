@@ -11,7 +11,7 @@ A markup language using an HTML-like syntax for defining a _craft_. One can use 
 
 # Install
 
-	$ npm install -g craft
+	$ npm install -g craftml
 
 
 # Hello World
