@@ -17,8 +17,9 @@ program
 program
     .command('preview src')
     .description('preview src in the browser')
+    .option('-p, --port [port]', 'Port')
     .action(function(src, options) {
-        preview(src)
+        preview(src, options)
     })
 
 
@@ -43,7 +44,7 @@ function build(src) {
     }
     var block = craft.build(xml, context)
         // console.log(JSON.stringify(block,null,' '))
-    // var solid = block.render()
+        // var solid = block.render()
 
 
     // applyTranformation(solid)
@@ -88,11 +89,12 @@ function doPreviewBuild(src, outputDir) {
 }
 
 var mkdirp = require('mkdirp')
-function preview(src) {
+
+function preview(src, options) {
 
     var outputDir = path.join(process.cwd(), 'build', 'preview')
     mkdirp.sync(outputDir)
-    
+
     doPreviewBuild(src, outputDir)
 
     watchGlob([src], {
@@ -108,10 +110,12 @@ function preview(src) {
 
     app.use('/preview', express.static(outputDir))
 
-    var server = app.listen(3000, function() {
+    var port = options.port || '5333'
+
+    var server = app.listen(port, function() {
 
         var host = server.address().address
-        var port = server.address().port
+            // var port = server.address().port
 
         console.log('App listening at http://%s:%s', host, port)
 
@@ -120,8 +124,11 @@ function preview(src) {
     var browserSync = require("browser-sync")
 
     browserSync({
+        port: port,
+        ui: false, // disable UI completely
         files: [outputDir + '/stls.json'],
-        proxy: 'localhost:3000',
+        proxy: 'localhost:' + port,
+        online: false,
         notify: false
     })
     // return dest

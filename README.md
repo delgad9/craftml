@@ -127,6 +127,24 @@ This command will produce `hanger.stl`. This is how the model looks like in [cur
 
 ![sphere](assets/primitives_sphere.png)
 
+# Transformation
+
+## Scaling
+
+```html
+<scale factor="2">
+    <sphere></sphere>
+</scale>                
+<scale x="2">
+    <sphere></sphere>
+</scale>        
+<scale x="2" y="4" z="0.5">
+    <sphere></sphere>
+</scale>            
+```
+
+![scaling_spheres](assets/scaling_spheres.png)
+
 # Layout
 
 ## Row
@@ -174,6 +192,9 @@ Stack things up using `<stack>`.
 
 ![stack](assets/layout_stack.png)
 
+
+
+
 ## Absolute Positioning
 
 ```html
@@ -216,6 +237,41 @@ But the row itself can be positioned.
 </craft>
 ```
 ![layout_abspos_row](assets/layout_abspos_row.png)
+
+
+## Lineup
+
+```html
+<craft>
+    <craft name="somecubes">
+        <cube x="-30" y="-5" xsize="10"></cube>
+        <cube x="5"   y="2"  xsize="15"></cube>
+        <cube x="25"  y="15" xsize="20"></cube>
+    </craft>
+    <somecubes></somecubes>
+</craft>
+```
+![lineup_before](assets/lineup_before.png)
+
+Lineup along the x-axis
+
+```html
+<lineup axis="x" spacing="2">
+   <somecubes></somecubes>
+</lineup>
+```
+![lineup_x](assets/lineup_x.png)
+
+Lineup along the y-axis
+
+```html
+<lineup axis="y" spacing="2">
+   <somecubes></somecubes>
+</lineup>
+```
+![lineup_y](assets/lineup_y.png)
+
+
 
 ## Layout Examples
 
