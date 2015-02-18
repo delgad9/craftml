@@ -76,7 +76,7 @@ make('factory')
 make('unit')
 make('group')
 make('solid')
-// make('text')
+make('stl')
 
 
 // delete lib.text.children
@@ -153,5 +153,6 @@ lib.cube = function() {
     }
     return solid
 }
+
 
 module.exports = lib

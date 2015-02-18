@@ -26,7 +26,8 @@ var script = mock.script,
     solid = mock.solid,
     solidGroup = mock.solidGroup,
     content = mock.content,
-    foo = mock.foo
+    foo = mock.foo,
+    stl = mock.stl
 
 function match(actual, expected) {
 
@@ -226,6 +227,32 @@ describe('render()', function() {
                     z: 1
                 }
             })
+        })
+
+    })
+
+    describe('stl', function(){
+
+        it('can load pin.stl (282 polygons)', function(){
+            var path = require('path')
+            var src = path.resolve(__dirname, 'fixtures/pin.stl')
+            var c = stl(a('src',src))
+            // inspect(c)
+            var r = render(c)
+            // inspect(r)
+            match(r, solid())
+            r.should.has.property('layout')
+        })
+
+        it('can load giraffe.stl (binary, 11820 polygons)', function(){
+            var path = require('path')
+            var src = path.resolve(__dirname, 'fixtures/giraffe.stl')
+            var c = stl(a('src',src))
+            // inspect(c)
+            var r = render(c)
+            // inspect(r)
+            match(r, solid())
+            r.should.has.property('layout')
         })
 
     })
