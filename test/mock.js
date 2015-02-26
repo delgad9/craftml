@@ -77,6 +77,7 @@ make('unit')
 make('group')
 make('solid')
 make('stl')
+make('crop')
 
 
 // delete lib.text.children

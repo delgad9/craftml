@@ -26,6 +26,7 @@ var script = mock.script,
     solid = mock.solid,
     solidGroup = mock.solidGroup,
     content = mock.content,
+    crop = mock.crop,
     foo = mock.foo,
     stl = mock.stl
 
@@ -185,27 +186,38 @@ describe('render()', function() {
     it('can resolve x,y,z attributes as numbers', function() {
 
         var c = [
-            craft(a('name', 'foo'), unit()),
-            foo(a('x','10'), a('y','15'), a('z','20'))
-        ]
-        // inspect(c)
+                craft(a('name', 'foo'), unit()),
+                foo(a('x', '10'), a('y', '15'), a('z', '20'))
+            ]
+            // inspect(c)
         var r = render(c)
-        // inspect(r)
-        r[0].layout.should.containSubset({location:{x:10, y:15, z:20}})
+            // inspect(r)
+        r[0].layout.should.containSubset({
+            location: {
+                x: 10,
+                y: 15,
+                z: 20
+            }
+        })
     })
 
     it('can resolve x,y,z attributes as {{p1}}', function() {
 
         var c = [
-            parameter(a('name', 'p1'), a('default', 10), a('type', 'int')),
-            parameter(a('name', 'p2'), a('default', '15'), a('type', 'int')),
-            craft(a('name', 'foo'), unit()),        
-            foo(a('x','{{p1}}'), a('y','{{p2}}'))
-        ]
-        // inspect(c)
+                parameter(a('name', 'p1'), a('default', 10), a('type', 'int')),
+                parameter(a('name', 'p2'), a('default', '15'), a('type', 'int')),
+                craft(a('name', 'foo'), unit()),
+                foo(a('x', '{{p1}}'), a('y', '{{p2}}'))
+            ]
+            // inspect(c)
         var r = render(c)
-        // inspect(r)
-        r[0].layout.should.containSubset({location:{x:10, y:15}})
+            // inspect(r)
+        r[0].layout.should.containSubset({
+            location: {
+                x: 10,
+                y: 15
+            }
+        })
     })
 
     describe('layout', function() {
@@ -229,28 +241,30 @@ describe('render()', function() {
             })
         })
 
+
+
     })
 
-    describe('stl', function(){
+    describe('stl', function() {
 
-        it('can load pin.stl (282 polygons)', function(){
+        it('can load pin.stl (282 polygons)', function() {
             var path = require('path')
             var src = path.resolve(__dirname, 'fixtures/pin.stl')
-            var c = stl(a('src',src))
-            // inspect(c)
+            var c = stl(a('src', src))
+                // inspect(c)
             var r = render(c)
-            // inspect(r)
+                // inspect(r)
             match(r, solid())
             r.should.has.property('layout')
         })
 
-        it('can load giraffe.stl (binary, 11820 polygons)', function(){
+        it('can load giraffe.stl (binary, 11820 polygons)', function() {
             var path = require('path')
             var src = path.resolve(__dirname, 'fixtures/giraffe.stl')
-            var c = stl(a('src',src))
-            // inspect(c)
+            var c = stl(a('src', src))
+                // inspect(c)
             var r = render(c)
-            // inspect(r)
+                // inspect(r)
             match(r, solid())
             r.should.has.property('layout')
         })

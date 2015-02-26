@@ -9,7 +9,7 @@ var craft = require('../lib/craft'),
 
 program
     .command('build src')
-    .description('run setup commands for all envs')
+    .description('build src into an stl file')
     .action(function(src, options) {
         build(src)
     })
@@ -42,18 +42,18 @@ function build(src) {
     var context = {
         basePath: basePath
     }
-    var block = craft.build(xml, context)
+    var csg = craft.build(xml, context)
         // console.log(JSON.stringify(block,null,' '))
         // var solid = block.render()
 
 
     // applyTranformation(solid)
 
-    // var stlstring = solid.toStl()
-    // var dest = src.replace('.xml', '.stl')
-    // console.log('writing to %s', dest)
-    // fs.writeFileSync(dest, stlstring, 'utf8')
-    // return dest
+    var stlstring = csg.toStlString()
+    var dest = src.replace('.xml', '.stl')
+    console.log('writing to %s', dest)
+    fs.writeFileSync(dest, stlstring, 'utf8')
+    return dest
 }
 
 var watchGlob = require('watch-glob')
@@ -75,8 +75,9 @@ function doPreviewBuild(src, outputDir) {
     var list = []
     r.csgs.forEach(function(csg, i) {
         var stlstring = csg.toStlString()
-        var dest = src.replace('.xml', '-' + i + '.stl')
-        dest = path.join(outputDir, dest)
+        var destname = path.basename(src,'.xml')
+        var dest = path.join(outputDir, destname) + '-' + i + '.stl'
+        // dest = path.join(outputDir, dest)
         console.log('writing to %s', dest)
         fs.writeFileSync(dest, stlstring, 'utf8')
 
@@ -124,7 +125,7 @@ function preview(src, options) {
     var browserSync = require("browser-sync")
 
     browserSync({
-        port: port,
+        port: Number(port)+1,
         ui: false, // disable UI completely
         files: [outputDir + '/stls.json'],
         proxy: 'localhost:' + port,
