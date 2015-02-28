@@ -78,7 +78,7 @@ describe('render()', function() {
     it('can render a group of two units', function() {
 
         var c = group(unit(), unit())
-        // inspect(c)
+            // inspect(c)
 
         render(c)
             .then(function(r) {
@@ -321,12 +321,12 @@ describe('render()', function() {
         it('can run a script that changes the layout', function() {
             var spy = sinon.spy()
             var c = [
-                unit(),
-                script(function(params, scope) {
-                    scope.solids[0].layout.size.x = 100
-                })
-            ]
-            // inspect(c)
+                    unit(),
+                    script(function(params, scope) {
+                        scope.solids[0].layout.size.x = 100
+                    })
+                ]
+                // inspect(c)
             render(c)
                 .then(function(r) {
                     // inspect(r)
@@ -340,7 +340,7 @@ describe('render()', function() {
                 })
         })
 
-        it('can run a script that generates craftml tags', function() {
+        it.only('can run a script that generates craftml tags', function() {
             var u = unit()
             var spy = sinon.spy(u, 'create')
 
@@ -348,6 +348,37 @@ describe('render()', function() {
                 unit(),
                 script(function(params, scope) {
                     return '<foo></foo>'
+                })
+            ]
+
+            var foo = craft(u, u)
+
+            // inspect(c)
+
+            var scope = new Scope()
+            scope.foo = foo
+
+            render(c, scope)
+                .then(function(r) {
+                    // inspect(r)
+
+                    spy.should.have.been.calledTwice
+
+                    match(r, [solid(), solid(), solid()])
+                })
+
+        })
+
+        it('can run a script with a callback', function() {
+            var u = unit()
+            var spy = sinon.spy(u, 'create')
+
+            var c = [
+                unit(),
+                script(function(params, scope, cb) {
+                    setTimeout(function() {
+                        cb(null, '<foo></foo>')
+                    })
                 })
             ]
 
