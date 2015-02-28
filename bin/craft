@@ -42,18 +42,17 @@ function build(src) {
     var context = {
         basePath: basePath
     }
-    var csg = craft.build(xml, context)
-        // console.log(JSON.stringify(block,null,' '))
-        // var solid = block.render()
+    
+    craft.build(xml, context)
+        .then(function(csg) {
 
+            var stlstring = csg.toStlString()
+            var dest = src.replace('.xml', '.stl')
+            console.log('writing to %s', dest)
+            fs.writeFileSync(dest, stlstring, 'utf8')
+            return dest
 
-    // applyTranformation(solid)
-
-    var stlstring = csg.toStlString()
-    var dest = src.replace('.xml', '.stl')
-    console.log('writing to %s', dest)
-    fs.writeFileSync(dest, stlstring, 'utf8')
-    return dest
+        })
 }
 
 var watchGlob = require('watch-glob')
@@ -69,24 +68,25 @@ function doPreviewBuild(src, outputDir) {
         basePath: basePath
     }
 
-    var r = craft.preview(xml)
+    return craft.preview(xml)
+        .then(function(r) {
 
-    // write stls
-    var list = []
-    r.csgs.forEach(function(csg, i) {
-        var stlstring = csg.toStlString()
-        var destname = path.basename(src,'.xml')
-        var dest = path.join(outputDir, destname) + '-' + i + '.stl'
-        // dest = path.join(outputDir, dest)
-        console.log('writing to %s', dest)
-        fs.writeFileSync(dest, stlstring, 'utf8')
+            // write stls
+            var list = []
+            r.csgs.forEach(function(csg, i) {
+                var stlstring = csg.toStlString()
+                var destname = path.basename(src, '.xml')
+                var dest = path.join(outputDir, destname) + '-' + i + '.stl'
+                    // dest = path.join(outputDir, dest)
+                console.log('writing to %s', dest)
+                fs.writeFileSync(dest, stlstring, 'utf8')
 
-        list.push(dest)
-    })
+                list.push(dest)
+            })
 
-    fs.writeFileSync(outputDir + '/stls.json', JSON.stringify(list))
+            fs.writeFileSync(outputDir + '/stls.json', JSON.stringify(list))
 
-
+        })
 }
 
 var mkdirp = require('mkdirp')
@@ -97,42 +97,44 @@ function preview(src, options) {
     mkdirp.sync(outputDir)
 
     doPreviewBuild(src, outputDir)
+        .then(function() {
 
-    watchGlob([src], {
-        callbackArg: 'relative'
-    }, function(filePath) {
+            watchGlob([src], {
+                callbackArg: 'relative'
+            }, function(filePath) {
 
-        // console.log('modified', filePath)
-        doPreviewBuild(filePath, outputDir)
-        // Perform livereload
-    })
+                // console.log('modified', filePath)
+                doPreviewBuild(filePath, outputDir)
+                // Perform livereload
+            })
 
-    var express = require('express')
+            var express = require('express')
 
-    app.use('/preview', express.static(outputDir))
+            app.use('/preview', express.static(outputDir))
 
-    var port = options.port || '5333'
+            var port = options.port || '5333'
 
-    var server = app.listen(port, function() {
+            var server = app.listen(port, function() {
 
-        var host = server.address().address
-            // var port = server.address().port
+                var host = server.address().address
+                    // var port = server.address().port
 
-        console.log('App listening at http://%s:%s', host, port)
+                console.log('App listening at http://%s:%s', host, port)
 
-    })
+            })
 
-    var browserSync = require("browser-sync")
+            var browserSync = require("browser-sync")
 
-    browserSync({
-        port: Number(port)+1,
-        ui: false, // disable UI completely
-        files: [outputDir + '/stls.json'],
-        proxy: 'localhost:' + port,
-        online: false,
-        notify: false
-    })
-    // return dest
+            browserSync({
+                port: Number(port) + 1,
+                ui: false, // disable UI completely
+                files: [outputDir + '/stls.json'],
+                proxy: 'localhost:' + port,
+                online: false,
+                notify: false
+            })
+
+        })
 }
 
 program.parse(process.argv)

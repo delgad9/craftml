@@ -57,30 +57,37 @@ describe('render()', function() {
     it('can render a single unit', function() {
 
         var c = unit()
-            // inspect(c)
-        var r = render(c)
-            // inspect(r)
-        match(r, solid())
+
+        render(c)
+            .then(function(r) {
+                match(r, solid())
+            })
     })
 
     it('can render an array of two units', function() {
 
         var c = [unit(), unit()]
 
-        var r = render(c)
-
-        match(r, [solid(), solid()])
+        render(c)
+            .then(function(r) {
+                // inspect(r)
+                match(r, [solid(), solid()])
+            })
     })
 
     it('can render a group of two units', function() {
 
         var c = group(unit(), unit())
+        // inspect(c)
 
-        var r = render(c)
+        render(c)
+            .then(function(r) {
+                // inspect(r)
+                match(r,
+                    solidGroup(solid(),
+                        solid()))
+            })
 
-        match(r,
-            solidGroup(solid(),
-                solid()))
     })
 
     it('can render a group of two units within another group', function() {
@@ -88,13 +95,15 @@ describe('render()', function() {
         var c = group(unit(), group(unit(), unit()))
             // inspect(c)
 
-        var r = render(c)
-            // inspect(r)
+        render(c)
+            .then(function(r) {
+                // inspect(r)    
+                match(r,
+                    solidGroup(solid(),
+                        solidGroup(solid(),
+                            solid())))
+            })
 
-        match(r,
-            solidGroup(solid(),
-                solidGroup(solid(),
-                    solid())))
     })
 
     it('does not render <craft> to anything', function() {
@@ -102,10 +111,10 @@ describe('render()', function() {
         var c = craft(unit())
             // inspect(c)
 
-        var r = render(c)
-            // inspect(r)
-
-        assert.isUndefined(r)
+        render(c)
+            .then(function(r) {
+                assert.isNull(r)
+            })
 
     })
 
@@ -119,10 +128,11 @@ describe('render()', function() {
 
         // inspect(c)
 
-        var r = render(c)
-            // inspect(r)
-
-        match(r, [solid()])
+        render(c)
+            .then(function(r) {
+                // inspect(r)    
+                match(r, [solid()])
+            })
 
     })
 
@@ -138,10 +148,11 @@ describe('render()', function() {
 
         // inspect(c)
 
-        var r = render(c)
-            // inspect(r)
-
-        match(r, [solid(), solid(), solid()])
+        render(c)
+            .then(function(r) {
+                // inspect(r)
+                match(r, [solid(), solid(), solid()])
+            })
 
     })
 
@@ -156,11 +167,11 @@ describe('render()', function() {
             ]
             // inspect(c)
 
-        var r = render(c)
-
-        // inspect(r)
-
-        spy.should.have.been.calledTwice
+        render(c)
+            .then(function(r) {
+                //inspect(r)
+                spy.should.have.been.calledTwice
+            })
 
     })
 
@@ -175,11 +186,11 @@ describe('render()', function() {
             ]
             // inspect(c)
 
-        var r = render(c)
-
-        // inspect(r)
-
-        spy.should.have.been.calledTwice
+        render(c)
+            .then(function(r) {
+                // inspect(r)
+                spy.should.have.been.calledTwice
+            })
 
     })
 
@@ -190,15 +201,17 @@ describe('render()', function() {
                 foo(a('x', '10'), a('y', '15'), a('z', '20'))
             ]
             // inspect(c)
-        var r = render(c)
-            // inspect(r)
-        r[0].layout.should.containSubset({
-            location: {
-                x: 10,
-                y: 15,
-                z: 20
-            }
-        })
+        render(c)
+            .then(function(r) {
+                // inspect(r)
+                r[0].layout.should.containSubset({
+                    location: {
+                        x: 10,
+                        y: 15,
+                        z: 20
+                    }
+                })
+            })
     })
 
     it('can resolve x,y,z attributes as {{p1}}', function() {
@@ -211,13 +224,16 @@ describe('render()', function() {
             ]
             // inspect(c)
         var r = render(c)
-            // inspect(r)
-        r[0].layout.should.containSubset({
-            location: {
-                x: 10,
-                y: 15
-            }
-        })
+            .then(function(r) {
+                // inspect(r)
+                r[0].layout.should.containSubset({
+                    location: {
+                        x: 10,
+                        y: 15
+                    }
+                })
+            })
+
     })
 
     describe('layout', function() {
@@ -227,18 +243,21 @@ describe('render()', function() {
             var c = group(unit(), unit())
 
             // inspect(c)
-            var r = render(c)
+            render(c)
+                .then(function(r) {
 
-            // inspect(r)
+                    // inspect(r)
 
-            r.should.has.property('layout')
-            r.layout.should.containSubset({
-                size: {
-                    x: 1,
-                    y: 1,
-                    z: 1
-                }
-            })
+                    r.should.has.property('layout')
+                    r.layout.should.containSubset({
+                        size: {
+                            x: 1,
+                            y: 1,
+                            z: 1
+                        }
+                    })
+
+                })
         })
 
 
@@ -279,7 +298,9 @@ describe('render()', function() {
 
             // inspect(c)
             render(c)
-            spy.should.have.been.calledOnce
+                .then(function(r) {
+                    spy.should.have.been.calledOnce
+                })
         })
 
         it('can run a script with parameters injected', function() {
@@ -290,30 +311,33 @@ describe('render()', function() {
                 ]
                 //inspect(c)
             render(c)
-            spy.should.have.been.calledWith({
-                p1: 2
-            })
+                .then(function(r) {
+                    spy.should.have.been.calledWith({
+                        p1: 2
+                    })
+                })
         })
 
         it('can run a script that changes the layout', function() {
             var spy = sinon.spy()
             var c = [
-                    unit(),
-                    script(function(params, scope) {
-                        scope.solids[0].layout.size.x = 100
+                unit(),
+                script(function(params, scope) {
+                    scope.solids[0].layout.size.x = 100
+                })
+            ]
+            // inspect(c)
+            render(c)
+                .then(function(r) {
+                    // inspect(r)
+                    r[0].should.containSubset({
+                        layout: {
+                            size: {
+                                x: 100
+                            }
+                        }
                     })
-                ]
-                // inspect(c)
-            var r = render(c)
-                // inspect(r)
-
-            r[0].should.containSubset({
-                layout: {
-                    size: {
-                        x: 100
-                    }
-                }
-            })
+                })
         })
 
         it('can run a script that generates craftml tags', function() {
@@ -334,12 +358,15 @@ describe('render()', function() {
             var scope = new Scope()
             scope.foo = foo
 
-            var r = render(c, scope)
-                // inspect(r)
+            render(c, scope)
+                .then(function(r) {
+                    // inspect(r)
 
-            spy.should.have.been.calledTwice
+                    spy.should.have.been.calledTwice
 
-            match(r, [solid(), solid(), solid()])
+                    match(r, [solid(), solid(), solid()])
+                })
+
         })
     })
 
@@ -356,12 +383,14 @@ describe('render()', function() {
             ]
 
             // inspect(c)
-            var r = render(c)
+            render(c)
+                .then(function() {
+                    spy.should.have.been.calledWith({
+                        'p1': 2,
+                        'p2': '5'
+                    })
 
-            spy.should.have.been.calledWith({
-                'p1': 2,
-                'p2': '5'
-            })
+                })
 
         })
 
@@ -379,12 +408,14 @@ describe('render()', function() {
             var scope = new Scope()
             scope.parameters.p1 = 5
 
-            var r = render(c, scope)
+            render(c, scope)
+                .then(function() {
 
-            spy.should.have.been.calledWith({
-                'p1': 5,
-                'p2': 5
-            })
+                    spy.should.have.been.calledWith({
+                        'p1': 5,
+                        'p2': 5
+                    })
+                })
 
         })
 
@@ -401,12 +432,12 @@ describe('render()', function() {
 
             // inspect(c)
 
-            var r = render(c)
-
-            spy.should.have.been.calledWith({
-                'p1': 5
-            })
-
+            render(c)
+                .then(function() {
+                    spy.should.have.been.calledWith({
+                        'p1': 5
+                    })
+                })
         })
 
 
@@ -423,11 +454,14 @@ describe('render()', function() {
 
             // inspect(c)
 
-            var r = render(c)
 
-            spy.should.have.been.calledWith({
-                'p1': 5
-            })
+            render(c)
+                .then(function() {
+
+                    spy.should.have.been.calledWith({
+                        'p1': 5
+                    })
+                })
 
         })
 
@@ -445,12 +479,13 @@ describe('render()', function() {
 
             // inspect(c)
 
-            var r = render(c)
-
-            spy.should.have.been.calledWith({
-                'p1': 2,
-                'p2': 10
-            })
+            render(c)
+                .then(function() {
+                    spy.should.have.been.calledWith({
+                        'p1': 2,
+                        'p2': 10
+                    })
+                })
         })
 
 
@@ -468,11 +503,14 @@ describe('render()', function() {
 
             // inspect(c)
 
-            var r = render(c)
+            render(c)
+                .then(function() {
+                    spy.should.have.been.calledWith({
+                        'p1': 10
+                    })
+                })
 
-            spy.should.have.been.calledWith({
-                'p1': 10
-            })
+
         })
 
         it('can resolve {{param}} from supplied parameter values', function() {
@@ -493,11 +531,12 @@ describe('render()', function() {
             scope.parameters = {
                 q1: 20
             }
-            var r = render(c, scope)
-
-            spy.should.have.been.calledWith({
-                'p1': 20
-            })
+            render(c, scope)
+                .then(function() {
+                    spy.should.have.been.calledWith({
+                        'p1': 20
+                    })
+                })
         })
     })
 

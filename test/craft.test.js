@@ -24,39 +24,45 @@ var Solid = require('../lib/solid')
 var craft = require('../lib/craft'),
     build = craft.build,
     preview = craft.preview,
-    
+
     _loadPrimitives = craft._test._loadPrimitives
-    _apply = craft._test._applyTransformation
+_apply = craft._test._applyTransformation
 
 describe('#craft', function() {
 
-    describe('preview()', function(){
+    describe('preview()', function() {
 
-        it('can preview a cube', function(){
+        it('can preview a cube', function() {
 
-            var v = preview('<craft><cube></cube></craft>')
+            preview('<craft><cube></cube></craft>')
+                .then(function(v) {
+                    v.csgs.should.have.length(1)
+                })
             // inspect(v)
-            v.csgs.should.have.length(1)
         })
 
-        it('can preview two cubes', function(){
+        it('can preview two cubes', function() {
 
-            var v = preview('<craft><cube></cube><cube></cube></craft>')
-            v.csgs.should.have.length(2)
+            preview('<craft><cube></cube><cube></cube></craft>')
+                .then(function(v) {
+                    v.csgs.should.have.length(2)
+                })
+
         })
 
-        it('can preview a parameterized cube', function(){
+        it('can preview a parameterized cube', function() {
 
-            var v = preview('<craft><cube xsize="100"></cube></craft>')
-            // inspect(v)
-            v.csgs.should.have.length(1)
+            preview('<craft><cube xsize="100"></cube></craft>')
+                .then(function(v) {
+                    v.csgs.should.have.length(1)
+                })
         })
 
     })
 
-    describe('_loadPrimitives()', function(){
+    describe('_loadPrimitives()', function() {
 
-        it('can load', function(){
+        it('can load', function() {
 
             _loadPrimitives()
 
@@ -72,7 +78,7 @@ describe('#craft', function() {
                 // inspect(t)
             _apply(t)
 
-            should.be.ok            
+            should.be.ok
         })
 
         it('can handle a group of cubes', function() {
@@ -81,9 +87,9 @@ describe('#craft', function() {
                 // inspect(t)
 
             _apply(t)
-                // inspect(b)
+            // inspect(b)
 
-            should.be.ok            
+            should.be.ok
         })
 
         it('can translate a child cube w.t.r its parent', function() {
