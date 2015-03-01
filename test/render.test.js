@@ -327,21 +327,31 @@ describe('render()', function() {
             var src = path.resolve(__dirname, 'fixtures/pin.stl')
             var c = stl(a('src', src))
                 // inspect(c)
-            var r = render(c)
-                // inspect(r)
-            match(r, solid())
-            r.should.has.property('layout')
+            render(c)
+                .then(function(r) {
+                    // inspect(r)
+                    match(r, solid())
+                    r.should.has.property('layout')
+                    r.csg.polygons.length.should.be.equal(282)
+                })
+
+
         })
 
-        it('can load giraffe.stl (binary, 11820 polygons)', function() {
+        it('can load giraffe.stl (binary, 11948 polygons)', function() {
             var path = require('path')
             var src = path.resolve(__dirname, 'fixtures/giraffe.stl')
             var c = stl(a('src', src))
                 // inspect(c)
-            var r = render(c)
-                // inspect(r)
-            match(r, solid())
-            r.should.has.property('layout')
+
+            render(c)
+                .then(function(r) {
+                    // inspect(r)
+                    match(r, solid())
+                    r.should.has.property('layout')
+                    r.csg.polygons.length.should.be.equal(11948)
+                })
+
         })
 
     })
@@ -459,7 +469,7 @@ describe('render()', function() {
                 })
         })
 
-        
+
     })
 
     describe('parameters', function() {
