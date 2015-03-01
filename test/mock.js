@@ -78,6 +78,7 @@ make('group')
 make('solid')
 make('stl')
 make('crop')
+make('scale')
 
 
 // delete lib.text.children
@@ -125,10 +126,10 @@ lib.text = function(string){
     }
 }
 
-lib.script = function(func) {
+lib.script = function(code) {
     return {
         type: 'script',
-        run: func
+        code: code
     }
 }
 

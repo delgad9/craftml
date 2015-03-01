@@ -28,7 +28,8 @@ var script = mock.script,
     content = mock.content,
     crop = mock.crop,
     foo = mock.foo,
-    stl = mock.stl
+    stl = mock.stl,
+    scale = mock.scale
 
 function match(actual, expected) {
 
@@ -260,6 +261,61 @@ describe('render()', function() {
                 })
         })
 
+        it('can scale individual dimensions', function() {
+
+
+            var c = scale(a('x', 3), a('y', 5), a('z', 4), unit())
+                // inspect(c)
+
+            render(c)
+                .then(function(r) {
+
+                    // inspect(r)
+                    r.layout.should.containSubset({
+                        size: {
+                            x: 3,
+                            y: 5,
+                            z: 4
+                        },
+                        scale: {
+                            x: 3,
+                            y: 5,
+                            z: 4
+                        }
+                    })
+
+                })
+
+        })
+
+        it('can scale multiple times', function() {
+
+
+            var c = scale(a('x', 2),
+                scale(a('x', 3),
+                    unit()))
+
+            // inspect(c)
+
+            render(c)
+                .then(function(r) {
+
+                    // inspect(r)
+                    r.layout.should.containSubset({
+                        size: {
+                            x: 6
+                        },
+                        scale: {
+                            x: 2,
+                            y: 1,
+                            z: 1
+                        }
+                    })
+
+                })
+
+        })
+
 
 
     })
@@ -292,39 +348,53 @@ describe('render()', function() {
 
     describe('script', function() {
 
-        it('can run a script in an array', function() {
-            var spy = sinon.spy()
-            var c = [unit(), script(spy)]
+        it('can run main()', function() {
+            var c = script('function main(){ return 1; }')
+                // inspect(c)
 
-            // inspect(c)
             render(c)
                 .then(function(r) {
-                    spy.should.have.been.calledOnce
+                    // inspect(r)
+                    r.should.be.equal(1)
                 })
         })
 
-        it('can run a script with parameters injected', function() {
+        it('can run two scripts in an array', function() {
+
+            var c = [script('function main(){ return 1}'), script('function main(){ return 2}')]
+                // inspect(c)
+
+            render(c)
+                .then(function(r) {
+                    // inspect(r)
+                    r.should.be.eql([1, 2])
+                })
+        })
+
+        it('can be injected with parameters', function() {
             var spy = sinon.spy()
             var c = [
                     parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
-                    script(spy)
+                    script('function main(params){ return params}')
                 ]
-                //inspect(c)
+                // inspect(c)
             render(c)
                 .then(function(r) {
-                    spy.should.have.been.calledWith({
-                        p1: 2
-                    })
+                    // inspect(r)
+                    r[0].p1.should.be.equal(2)
                 })
         })
 
-        it('can run a script that changes the layout', function() {
-            var spy = sinon.spy()
+        it('can change the layout of a preceeding solid', function() {
+
+            function main(params, scope) {
+                scope.solids[0].layout.size.x = 100
+            }
+
+
             var c = [
                     unit(),
-                    script(function(params, scope) {
-                        scope.solids[0].layout.size.x = 100
-                    })
+                    script(main.toString())
                 ]
                 // inspect(c)
             render(c)
@@ -340,20 +410,21 @@ describe('render()', function() {
                 })
         })
 
-        it.only('can run a script that generates craftml tags', function() {
+        it('can run a script that generates craftml tags', function() {
             var u = unit()
             var spy = sinon.spy(u, 'create')
 
+            function main(params) {
+                return '<foo></foo>'
+            }
+
             var c = [
                 unit(),
-                script(function(params, scope) {
-                    return '<foo></foo>'
-                })
+                script(main.toString())
             ]
 
             var foo = craft(u, u)
-
-            // inspect(c)
+                // inspect(c)
 
             var scope = new Scope()
             scope.foo = foo
@@ -369,36 +440,26 @@ describe('render()', function() {
 
         })
 
-        it('can run a script with a callback', function() {
-            var u = unit()
-            var spy = sinon.spy(u, 'create')
+        it('can run async', function(done) {
 
-            var c = [
-                unit(),
-                script(function(params, scope, cb) {
-                    setTimeout(function() {
-                        cb(null, '<foo></foo>')
-                    })
-                })
-            ]
+            function main(params, scope, cb) {
+                setTimeout(function() {
+                    cb(null, 101)
+                }, 50)
+            }
 
-            var foo = craft(u, u)
+            var c = script(main.toString())
 
             // inspect(c)
-
-            var scope = new Scope()
-            scope.foo = foo
-
-            render(c, scope)
+            render(c)
                 .then(function(r) {
                     // inspect(r)
-
-                    spy.should.have.been.calledTwice
-
-                    match(r, [solid(), solid(), solid()])
+                    r.should.be.equal(101)
+                    done()
                 })
-
         })
+
+        
     })
 
     describe('parameters', function() {
