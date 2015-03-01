@@ -338,6 +338,22 @@ describe('render()', function() {
 
         })
 
+        it.only('can load pin.stl from a remote url', function(done) {
+
+            var c = stl(a('src', 'https://raw.githubusercontent.com/sikuli/craftml/master/test/fixtures/pin.stl'))
+            inspect(c)
+
+            render(c)
+                .then(function(r) {
+                    // inspect(r)
+                    match(r, solid())
+                    r.should.has.property('layout')
+                    r.csg.polygons.length.should.be.equal(282)
+                    done()
+                })
+        })
+
+
         it('can load giraffe.stl (binary, 11948 polygons)', function() {
             var path = require('path')
             var src = path.resolve(__dirname, 'fixtures/giraffe.stl')
