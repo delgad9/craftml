@@ -133,6 +133,13 @@ lib.script = function(code) {
     }
 }
 
+lib.jscad = function(code) {
+    return {
+        type: 'factory',
+        code: code
+    }
+}
+
 var $$$ = require('craft-scad')
 lib.cube = function() {
     var solid = new Solid()

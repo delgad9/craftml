@@ -29,7 +29,8 @@ var script = mock.script,
     crop = mock.crop,
     foo = mock.foo,
     stl = mock.stl,
-    scale = mock.scale
+    scale = mock.scale,
+    jscad = mock.jscad
 
 function match(actual, expected) {
 
@@ -338,10 +339,10 @@ describe('render()', function() {
 
         })
 
-        it.only('can load pin.stl from a remote url', function(done) {
+        it('can load pin.stl from a remote url', function(done) {
 
             var c = stl(a('src', 'https://raw.githubusercontent.com/sikuli/craftml/master/test/fixtures/pin.stl'))
-            inspect(c)
+                // inspect(c)
 
             render(c)
                 .then(function(r) {
@@ -485,6 +486,46 @@ describe('render()', function() {
                 })
         })
 
+
+    })
+
+    describe('openjsacd', function() {
+
+        it('can run openjsacd main()', function() {
+
+            var c = jscad('function main(){ return cube(); }')
+                // inspect(c)
+
+            render(c)
+                .then(function(r) {
+                    // inspect(r)
+                    // should return a cube with six faces
+                    r.should.have.property('csg')
+                    r.csg.polygons.length.should.be.equal(6)
+                })
+
+        })
+
+        it('can run two in an array', function() {
+
+            var c = [jscad('function main(){ return cube(); }'),
+                    jscad('function main(){ return cube().scale(2,2,2); }')
+                ]
+                // inspect(c)
+
+            render(c)
+                .then(function(r) {
+                    // inspect(r)
+
+                    r.should.have.length(2)
+
+                    r[0].csg.getBounds()[1].x.should.be.equal(1)
+
+                    r[1].csg.getBounds()[1].x.should.be.equal(2)
+
+                })
+
+        })
 
     })
 
