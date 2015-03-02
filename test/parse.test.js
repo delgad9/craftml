@@ -1,7 +1,8 @@
 var chai = require('chai'),
     fs = require('fs'),
     inspect = require('eyes').inspector(),
-    chaiSubset = require('chai-subset')
+    chaiSubset = require('chai-subset'),
+    nock = require('nock')
 
 chai.should()
 chai.use(chaiSubset)
@@ -26,7 +27,7 @@ describe('parse()', function() {
 
     it('craft', function() {
 
-       return  parse('<craft></craft>')
+        return parse('<craft></craft>')
             .then(function(t) {
                 // inspect(t)
                 t.should.containSubset(craft())
@@ -36,7 +37,7 @@ describe('parse()', function() {
 
     it('foo', function() {
 
-       return  parse('<foo></foo>')
+        return parse('<foo></foo>')
             .then(function(t) {
                 t.should.containSubset(foo())
             })
@@ -163,7 +164,7 @@ describe('parse()', function() {
 
     })
 
-    describe('#import', function() {
+    describe('#loader', function() {
         it('can load a craft via src', function() {
             return parse('<craft><craft src="test/fixtures/foo.xml" name="foo"/></craft>')
                 .then(function(actual) {
@@ -183,6 +184,71 @@ describe('parse()', function() {
                         type: 'tag',
                         name: 'foo'
                     })
+                })
+        })
+
+        it('can load a craft remotely via http', function() {
+
+            nock('http://test.craftml.org')
+                .get('/foo.xml')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/foo.xml')
+                })
+
+            return parse('<craft><craft src="http://test.craftml.org/foo.xml" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.should.have.deep.property('children[0].children[0]')
+                        .and.containSubset({
+                            type: 'tag',
+                            name: 'foo'
+                        })
+                })
+        })
+
+        it('can load a craft remotely via http, recursively', function() {
+
+            nock('http://test.craftml.org')
+                .get('/foo.xml')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/foo.xml')
+                })
+                .get('/bar.xml')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/bar.xml')
+                })
+
+            return parse('<craft><craft src="http://test.craftml.org/bar.xml" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.should.have.deep.property('children[0].children[0].children[0]')
+                        .and.containSubset({
+                            type: 'tag',
+                            name: 'foo'
+                        })
+                })
+        })
+
+        it('can load a craft remotely via http, recursively and relatively', function() {
+
+            nock('http://test.craftml.org')
+                .get('/bar.xml')
+                .reply(200, function(uri, requestBody) {
+                    return '<craft><craft src="a/b/c/foo.xml"></craft></craft>'
+                })
+                .get('/a/b/c/foo.xml')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/foo.xml')
+                })
+
+            return parse('<craft><craft src="http://test.craftml.org/bar.xml" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.should.have.deep.property('children[0].children[0].children[0]')
+                        .and.containSubset({
+                            type: 'tag',
+                            name: 'foo'
+                        })
                 })
         })
     })
