@@ -108,12 +108,12 @@ describe('render()', function() {
 
     it('does not render <craft> to anything', function() {
 
-        var c = craft(unit())
+        var c = [craft(unit())]
             // inspect(c)
 
         return render(c)
             .then(function(r) {
-                assert.isNull(r)
+                r.should.have.length(0)
             })
 
     })
@@ -260,60 +260,60 @@ describe('render()', function() {
                 })
         })
 
-        it('can scale individual dimensions', function() {
+        // it('can scale individual dimensions', function() {
 
 
-            var c = scale(a('x', 3), a('y', 5), a('z', 4), unit())
-                // inspect(c)
+        //     var c = scale(a('x', 3), a('y', 5), a('z', 4), unit())
+        //         // inspect(c)
 
-            return render(c)
-                .then(function(r) {
+        //     return render(c)
+        //         .then(function(r) {
 
-                    // inspect(r)
-                    r.layout.should.containSubset({
-                        size: {
-                            x: 3,
-                            y: 5,
-                            z: 4
-                        },
-                        scale: {
-                            x: 3,
-                            y: 5,
-                            z: 4
-                        }
-                    })
+        //             // inspect(r)
+        //             r.layout.should.containSubset({
+        //                 size: {
+        //                     x: 3,
+        //                     y: 5,
+        //                     z: 4
+        //                 },
+        //                 scale: {
+        //                     x: 3,
+        //                     y: 5,
+        //                     z: 4
+        //                 }
+        //             })
 
-                })
+        //         })
 
-        })
+        // })
 
-        it('can scale multiple times', function() {
+        // it('can scale multiple times', function() {
 
 
-            var c = scale(a('x', 2),
-                scale(a('x', 3),
-                    unit()))
+        //     var c = scale(a('x', 2),
+        //         scale(a('x', 3),
+        //             unit()))
 
-            // inspect(c)
+        //     // inspect(c)
 
-            return render(c)
-                .then(function(r) {
+        //     return render(c)
+        //         .then(function(r) {
 
-                    // inspect(r)
-                    r.layout.should.containSubset({
-                        size: {
-                            x: 6
-                        },
-                        scale: {
-                            x: 2,
-                            y: 1,
-                            z: 1
-                        }
-                    })
+        //             // inspect(r)
+        //             r.layout.should.containSubset({
+        //                 size: {
+        //                     x: 6
+        //                 },
+        //                 scale: {
+        //                     x: 2,
+        //                     y: 1,
+        //                     z: 1
+        //                 }
+        //             })
 
-                })
+        //         })
 
-        })
+        // })
 
 
 
