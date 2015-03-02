@@ -84,7 +84,7 @@ describe('parse()', function() {
             .then(function(t) {
                 // inspect(t)
                 var e = foo((a('x', '1'), a('y', '1'), a('z', '{{p1}}')))
-                // inspect(e)
+                    // inspect(e)
                 t.children[0].should.containSubset(e)
             })
 
@@ -163,14 +163,39 @@ describe('parse()', function() {
 
     })
 
+    describe('#import', function() {
+        it('can load a craft via src', function() {
+            return parse('<craft><craft src="test/fixtures/foo.xml" name="foo"/></craft>')
+                .then(function(actual) {
+                    inspect(actual)
+                    actual.children[0].children[0].should.containSubset({
+                        type: 'tag',
+                        name: 'foo'
+                    })
+                })
+        })
+
+        it.only('can load a craft recuresively', function() {
+            return parse('<craft><craft src="test/fixtures/bar.xml" name="bar"/></craft>')
+                .then(function(actual) {
+                    inspect(actual)
+                    actual.children[0].children[0].children[0].should.containSubset({
+                        type: 'tag',
+                        name: 'foo'
+                    })
+                })
+        })
+    })
+
     describe('#module', function() {
 
         it('can load an installed module', function() {
             parse('<craft><craft module="craft-box" name="foo"/></craft>')
                 .then(function(actual) {
-                    // inspect(actual)
+                    // inspect(actual)                    
+                    // inspect(e)
                     actual.children[0].children[0].type.should.be.equal('factory')
-                    actual.children[0].children[0].code.should.contain('cube()')                    
+                    actual.children[0].children[0].code.should.contain('cube()')
                 })
         })
 
