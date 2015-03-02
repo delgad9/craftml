@@ -25,8 +25,8 @@ var craft = require('../lib/craft'),
     build = craft.build,
     preview = craft.preview,
 
-    _loadPrimitives = craft._test._loadPrimitives
-_apply = craft._test._applyTransformation
+    _loadPrimitives = craft._test._loadPrimitives,
+    _apply = craft._test._applyTransformation
 
 describe('#craft', function() {
 
@@ -34,16 +34,16 @@ describe('#craft', function() {
 
         it('can preview a cube', function() {
 
-            preview('<craft><cube></cube></craft>')
+            return preview('<craft><cube></cube></craft>')
                 .then(function(v) {
                     v.csgs.should.have.length(1)
                 })
-            // inspect(v)
+                // inspect(v)
         })
 
         it('can preview two cubes', function() {
 
-            preview('<craft><cube></cube><cube></cube></craft>')
+            return preview('<craft><cube></cube><cube></cube></craft>')
                 .then(function(v) {
                     v.csgs.should.have.length(2)
                 })
@@ -52,7 +52,7 @@ describe('#craft', function() {
 
         it('can preview a parameterized cube', function() {
 
-            preview('<craft><cube xsize="100"></cube></craft>')
+            return preview('<craft><cube xsize="100"></cube></craft>')
                 .then(function(v) {
                     v.csgs.should.have.length(1)
                 })
@@ -60,12 +60,48 @@ describe('#craft', function() {
 
     })
 
+    describe('build()', function() {
+
+        it('can build a cube', function() {
+
+            return build('<craft><cube></cube></craft>')
+                .then(function(v) {
+                    // inspect(v)
+                    v.should.have.property('polygons').and.have.length(6)
+                })
+        })        
+
+        it('can build a row of two cubes', function() {
+
+            return build('<craft><row><cube></cube><cube></cube></row></craft>')
+                .then(function(v) {
+                    // inspect(v)
+                    v.should.have.property('polygons').and.have.length(10)
+                })
+        })        
+
+    })
+
     describe('_loadPrimitives()', function() {
 
         it('can load', function() {
 
-            _loadPrimitives()
-
+            return _loadPrimitives()
+                .then(function(ret) {
+                    // inspect(ret)
+                    ret.should.have.property('cube').and.containSubset({
+                        type: 'tag',
+                        name: 'craft'
+                    })
+                    ret.should.have.property('sphere').and.containSubset({
+                        type: 'tag',
+                        name: 'craft'
+                    })
+                    ret.should.have.property('cylinder').and.containSubset({
+                        type: 'tag',
+                        name: 'craft'
+                    })
+                })
         })
 
     })

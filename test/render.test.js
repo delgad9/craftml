@@ -60,7 +60,7 @@ describe('render()', function() {
 
         var c = unit()
 
-        render(c)
+        return render(c)
             .then(function(r) {
                 match(r, solid())
             })
@@ -70,7 +70,7 @@ describe('render()', function() {
 
         var c = [unit(), unit()]
 
-        render(c)
+        return render(c)
             .then(function(r) {
                 // inspect(r)
                 match(r, [solid(), solid()])
@@ -82,7 +82,7 @@ describe('render()', function() {
         var c = group(unit(), unit())
             // inspect(c)
 
-        render(c)
+        return render(c)
             .then(function(r) {
                 // inspect(r)
                 match(r,
@@ -97,7 +97,7 @@ describe('render()', function() {
         var c = group(unit(), group(unit(), unit()))
             // inspect(c)
 
-        render(c)
+        return render(c)
             .then(function(r) {
                 // inspect(r)    
                 match(r,
@@ -113,7 +113,7 @@ describe('render()', function() {
         var c = craft(unit())
             // inspect(c)
 
-        render(c)
+        return render(c)
             .then(function(r) {
                 assert.isNull(r)
             })
@@ -130,7 +130,7 @@ describe('render()', function() {
 
         // inspect(c)
 
-        render(c)
+        return render(c)
             .then(function(r) {
                 // inspect(r)    
                 match(r, [solid()])
@@ -150,7 +150,7 @@ describe('render()', function() {
 
         // inspect(c)
 
-        render(c)
+        return render(c)
             .then(function(r) {
                 // inspect(r)
                 match(r, [solid(), solid(), solid()])
@@ -169,7 +169,7 @@ describe('render()', function() {
             ]
             // inspect(c)
 
-        render(c)
+        return render(c)
             .then(function(r) {
                 //inspect(r)
                 spy.should.have.been.calledTwice
@@ -188,7 +188,7 @@ describe('render()', function() {
             ]
             // inspect(c)
 
-        render(c)
+        return render(c)
             .then(function(r) {
                 // inspect(r)
                 spy.should.have.been.calledTwice
@@ -203,7 +203,7 @@ describe('render()', function() {
                 foo(a('x', '10'), a('y', '15'), a('z', '20'))
             ]
             // inspect(c)
-        render(c)
+        return render(c)
             .then(function(r) {
                 // inspect(r)
                 r[0].layout.should.containSubset({
@@ -225,7 +225,7 @@ describe('render()', function() {
                 foo(a('x', '{{p1}}'), a('y', '{{p2}}'))
             ]
             // inspect(c)
-        var r = render(c)
+        return render(c)
             .then(function(r) {
                 // inspect(r)
                 r[0].layout.should.containSubset({
@@ -245,7 +245,7 @@ describe('render()', function() {
             var c = group(unit(), unit())
 
             // inspect(c)
-            render(c)
+            return render(c)
                 .then(function(r) {
 
                     // inspect(r)
@@ -268,7 +268,7 @@ describe('render()', function() {
             var c = scale(a('x', 3), a('y', 5), a('z', 4), unit())
                 // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function(r) {
 
                     // inspect(r)
@@ -298,7 +298,7 @@ describe('render()', function() {
 
             // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function(r) {
 
                     // inspect(r)
@@ -328,7 +328,7 @@ describe('render()', function() {
             var src = path.resolve(__dirname, 'fixtures/pin.stl')
             var c = stl(a('src', src))
                 // inspect(c)
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
                     match(r, solid())
@@ -339,18 +339,17 @@ describe('render()', function() {
 
         })
 
-        it('can load pin.stl from a remote url', function(done) {
+        it('can load pin.stl from a remote url', function() {
 
             var c = stl(a('src', 'https://raw.githubusercontent.com/sikuli/craftml/master/test/fixtures/pin.stl'))
                 // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
                     match(r, solid())
                     r.should.has.property('layout')
                     r.csg.polygons.length.should.be.equal(282)
-                    done()
                 })
         })
 
@@ -361,7 +360,7 @@ describe('render()', function() {
             var c = stl(a('src', src))
                 // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
                     match(r, solid())
@@ -379,7 +378,7 @@ describe('render()', function() {
             var c = script('function main(){ return 1; }')
                 // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
                     r.should.be.equal(1)
@@ -391,7 +390,7 @@ describe('render()', function() {
             var c = [script('function main(){ return 1}'), script('function main(){ return 2}')]
                 // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
                     r.should.be.eql([1, 2])
@@ -405,7 +404,7 @@ describe('render()', function() {
                     script('function main(params){ return params}')
                 ]
                 // inspect(c)
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
                     r[0].p1.should.be.equal(2)
@@ -424,7 +423,7 @@ describe('render()', function() {
                     script(main.toString())
                 ]
                 // inspect(c)
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
                     r[0].should.containSubset({
@@ -456,7 +455,7 @@ describe('render()', function() {
             var scope = new Scope()
             scope.foo = foo
 
-            render(c, scope)
+            return render(c, scope)
                 .then(function(r) {
                     // inspect(r)
 
@@ -478,7 +477,7 @@ describe('render()', function() {
             var c = script(main.toString())
 
             // inspect(c)
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
                     r.should.be.equal(101)
@@ -495,7 +494,7 @@ describe('render()', function() {
             var c = jscad('function main(){ return cube(); }')
                 // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
                     // should return a cube with six faces
@@ -512,7 +511,7 @@ describe('render()', function() {
                 ]
                 // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function(r) {
                     // inspect(r)
 
@@ -541,7 +540,7 @@ describe('render()', function() {
             ]
 
             // inspect(c)
-            render(c)
+            return render(c)
                 .then(function() {
                     spy.should.have.been.calledWith({
                         'p1': 2,
@@ -566,7 +565,7 @@ describe('render()', function() {
             var scope = new Scope()
             scope.parameters.p1 = 5
 
-            render(c, scope)
+            return render(c, scope)
                 .then(function() {
 
                     spy.should.have.been.calledWith({
@@ -590,7 +589,7 @@ describe('render()', function() {
 
             // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function() {
                     spy.should.have.been.calledWith({
                         'p1': 5
@@ -613,7 +612,7 @@ describe('render()', function() {
             // inspect(c)
 
 
-            render(c)
+            return render(c)
                 .then(function() {
 
                     spy.should.have.been.calledWith({
@@ -637,7 +636,7 @@ describe('render()', function() {
 
             // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function() {
                     spy.should.have.been.calledWith({
                         'p1': 2,
@@ -661,7 +660,7 @@ describe('render()', function() {
 
             // inspect(c)
 
-            render(c)
+            return render(c)
                 .then(function() {
                     spy.should.have.been.calledWith({
                         'p1': 10
@@ -689,7 +688,7 @@ describe('render()', function() {
             scope.parameters = {
                 q1: 20
             }
-            render(c, scope)
+            return render(c, scope)
                 .then(function() {
                     spy.should.have.been.calledWith({
                         'p1': 20
