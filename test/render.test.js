@@ -486,7 +486,6 @@ describe('render()', function() {
                 })
         })
 
-
     })
 
     describe('openjsacd', function() {

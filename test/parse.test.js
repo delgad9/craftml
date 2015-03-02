@@ -26,122 +26,153 @@ describe('parse()', function() {
 
     it('craft', function() {
 
-        var t = parse('<craft></craft>')
-
-        t.should.containSubset(craft())
+        parse('<craft></craft>')
+            .then(function(t) {
+                // inspect(t)
+                t.should.containSubset(craft())
+            })
 
     })
 
     it('foo', function() {
 
-        var t = parse('<foo></foo>')
-
-        t.should.containSubset(foo())
+        parse('<foo></foo>')
+            .then(function(t) {
+                t.should.containSubset(foo())
+            })
 
     })
 
     it('foo,foo', function() {
 
-        var t = parse('<foo></foo><foo></foo>')
-
-        t.should.containSubset([foo(), foo()])
+        parse('<foo></foo><foo></foo>')
+            .then(function(t) {
+                t.should.containSubset([foo(), foo()])
+            })
 
     })
 
     it('craft(foo,foo)', function() {
 
-        var t = parse('<craft><foo></foo><foo></foo></craft>')
-
-        t.should.containSubset(craft(foo(), foo()))
+        parse('<craft><foo></foo><foo></foo></craft>')
+            .then(function(t) {
+                t.should.containSubset(craft(foo(), foo()))
+            })
 
     })
 
     it('craft(foo(foo(foo)))', function() {
 
-        var t = parse('<craft><foo><foo><foo></foo></foo></foo></craft>')
-
-        t.should.containSubset(craft(foo(foo(foo()))))
+        parse('<craft><foo><foo><foo></foo></foo></foo></craft>')
+            .then(function(t) {
+                t.should.containSubset(craft(foo(foo(foo()))))
+            })
 
     })
 
     it('craft(name="a", id="b")', function() {
 
-        var t = parse('<craft name="a" id="b"></craft>')
-            // inspect(t)
-        t.should.containSubset(craft(a('name', 'a'), a('id', 'b')))
-
+        parse('<craft name="a" id="b"></craft>')
+            .then(function(t) {
+                t.should.containSubset(craft(a('name', 'a'), a('id', 'b')))
+            })
     })
 
     it('craft(foo(x="1", y="1", z="1"))', function() {
 
-        var t = parse('<craft><foo x="1" y="1" z="{{p1}}"></foo></craft>')
-        // inspect(t)
-        t.children[0].should.containSubset(foo((a('x','1'),a('y','1'),a('z','{{p1}}'))))
+        parse('<craft><foo x="1" y="1" z="{{p1}}"></foo></craft>')
+            .then(function(t) {
+                // inspect(t)
+                var e = foo((a('x', '1'), a('y', '1'), a('z', '{{p1}}')))
+                // inspect(e)
+                t.children[0].should.containSubset(e)
+            })
 
-    })    
+
+
+    })
 
     it('craft(craft(craft)))', function() {
 
-        var t = parse('<craft><craft></craft><craft></craft></craft>')
-        t.should.containSubset(craft(craft(), craft()))
-        t.children.should.have.length(2)
-
+        parse('<craft><craft></craft><craft></craft></craft>')
+            .then(function(t) {
+                t.should.containSubset(craft(craft(), craft()))
+                t.children.should.have.length(2)
+            })
     })
 
     it('craft(parameter)', function() {
 
-        var actual = parse('<craft><parameter name="p1" default="1" type="int"></parameter></craft>')
-        // inspect(actual)
-        var expected = craft(parameter(a('name','p1'), a('default','1'), a('type','int')))
-        // inspect(expected)
-        actual.should.containSubset(expected)
+        var expected = craft(parameter(a('name', 'p1'), a('default', '1'), a('type', 'int')))
 
+        parse('<craft><parameter name="p1" default="1" type="int"></parameter></craft>')
+            .then(function(t) {
+                t.should.containSubset(expected)
+            })
     })
 
     it('craft(hello world)', function() {
 
-        var t = parse('<craft>hello world</craft>')        
-        t.children[0].attribs.text.should.be.equal('hello world')
-
-    })    
-
-    it('craft(row("hello world")) can ignore white spaces', function() {
-
-        var t = parse('<craft>\n\n<row>hello world</row>\n\n</craft>')        
-        // inspect(t)      
-
-    })    
-
-
-    it('script craftml', function() {
-
-        var actual = parse('<craft><script type="text/craftml">function main(){}</script></craft>')
-        // inspect(actual)
-        actual.children[0].type.should.be.equal('script')
-        actual.children[0].code.should.be.equal('function main(){}')
+        parse('<craft>hello world</craft>')
+            .then(function(t) {
+                t.children[0].attribs.text.should.be.equal('hello world')
+            })
 
     })
 
-    it('script openjscad', function() {
+    it.skip('craft(row("hello world")) can ignore white spaces', function() {
 
-        var actual = parse('<craft><script type="text/openjscad">function main(){}</script></craft>')
-        // inspect(actual)        
-        actual.children[0].type.should.be.equal('factory')
-        actual.children[0].code.should.be.equal('function main(){}')
+        var t = parse('<craft>\n\n<row>hello world</row>\n\n</craft>')
+            // inspect(t)      
 
     })
 
-    describe('#module', function(){
+    describe('script', function() {
 
-        it('can load an installed module', function(){
-            var actual = parse('<craft><craft module="craft-box" name="foo"/></craft>')
-            // inspect(actual)
+        it('script craftml', function() {
 
-            actual.children[0].children[0].type.should.be.equal('factory')
-            actual.children[0].children[0].code.should.contain('cube()')
+            parse('<craft><script type="text/craftml">function main(){}</script></craft>')
+                .then(function(actual) {
+                    actual.children[0].type.should.be.equal('script')
+                    actual.children[0].code.should.be.equal('function main(){}')
+                })
 
         })
 
+        it('script craftml include a script locally', function() {
+
+            parse('<craft><script type="text/craftml" src="test/fixtures/cube.js"></script></craft>')
+                .then(function(actual) {
+                    inspect(actual)
+                    actual.children[0].type.should.be.equal('script')
+                    actual.children[0].code.should.contain('main()')
+                })
+
+        })
+
+        it('script openjscad', function() {
+
+            parse('<craft><script type="text/openjscad">function main(){}</script></craft>')
+                .then(function(actual) {
+                    // inspect(actual)        
+                    actual.children[0].type.should.be.equal('factory')
+                    actual.children[0].code.should.be.equal('function main(){}')
+                })
+
+        })
+
+    })
+
+    describe('#module', function() {
+
+        it('can load an installed module', function() {
+            parse('<craft><craft module="craft-box" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].children[0].type.should.be.equal('factory')
+                    actual.children[0].children[0].code.should.contain('cube()')                    
+                })
+        })
 
     })
 
