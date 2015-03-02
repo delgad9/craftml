@@ -1,20 +1,18 @@
 var chai = require('chai'),
+    chaiSubset = require('chai-subset'),
     assert = require('chai').assert,
     sinon = require("sinon"),
-    sinonChai = require("sinon-chai")
+    sinonChai = require("sinon-chai"),
+    nock = require('nock'),
+    fs = require('fs'),
+    inspect = require('eyes').inspector(),
+    _ = require('lodash')
 
 chai.should()
 chai.use(sinonChai);
 
 var render = require('../lib/render'),
-    Solid = require('../lib/solid'),
-    Scope = require('../lib/scope'),
-    chaiSubset = require('chai-subset'),
-    inspect = require('eyes').inspector(),
-    EventEmitter = require("events").EventEmitter
-
-var _ = require('lodash')
-
+    Scope = require('../lib/scope')
 
 var mock = require('./mock')
 var script = mock.script,
@@ -341,8 +339,14 @@ describe('render()', function() {
 
         it('can load pin.stl from a remote url', function() {
 
-            var c = stl(a('src', 'https://raw.githubusercontent.com/sikuli/craftml/master/test/fixtures/pin.stl'))
-                // inspect(c)
+            nock('http://test.craftml.org')
+                .get('/pin.stl')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/pin.stl');
+                })
+
+            // var c = stl(a('src', 'https://raw.githubusercontent.com/sikuli/craftml/master/test/fixtures/pin.stl'))
+            var c = stl(a('src', 'http://test.craftml.org/pin.stl'))
 
             return render(c)
                 .then(function(r) {
