@@ -45,7 +45,7 @@
     "commander": "^2.6.0",
     "connect-livereload": "^0.5.2",
     "craft-module": "^1.0.1",
-    "craft-scad": "^1.0.1",
+    "craft-scad": "sikuli/craft-scad",
     "debug": "^2.1.1",
     "express": "^4.11.2",
     "eyes": "^0.1.8",
