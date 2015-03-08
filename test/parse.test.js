@@ -251,6 +251,28 @@ describe('parse()', function() {
                         })
                 })
         })
+
+        it('can load a script locally', function() {
+
+            return parse('<craft><script type="text/craftml" src="test/fixtures/cube.js"></script></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].type.should.be.equal('script')
+                    actual.children[0].code.should.contain('main()')
+                })
+
+        })        
+
+        it('can load a script refered in an external file', function() {
+
+            return parse('<craft><craft src="test/fixtures/cube.xml" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].children[0].type.should.be.equal('script')
+                    actual.children[0].children[0].code.should.contain('main()')
+                })
+
+        }) 
     })
 
     describe('#module', function() {
@@ -259,7 +281,6 @@ describe('parse()', function() {
             return parse('<craft><craft module="craft-box" name="foo"/></craft>')
                 .then(function(actual) {
                     // inspect(actual)                    
-                    // inspect(e)
                     actual.children[0].children[0].type.should.be.equal('factory')
                     actual.children[0].children[0].code.should.contain('cube()')
                 })
