@@ -30,6 +30,7 @@
   ],
   "homepage": "https://github.com/sikuli/craftml",
   "devDependencies": {
+    "browserify": "^9.0.3",
     "chai": "^1.10.0",
     "chai-subset": "^0.3.0",
     "eyes": "^0.1.8",
