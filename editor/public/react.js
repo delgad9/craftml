@@ -2,41 +2,50 @@ var viewer
 
 var CraftEditor = React.createClass({
 
-    componentDidMount: function() {        
-        var editor = ace.edit("editor");
-        var self = this;
+    componentDidMount: function() {
+
+        var defaultText = '<craft>\n\t<craft name="pin" module="sikuli/craft-pin"/>\n\t\t<pin></pin>\n\t\t\n</craft>'
+
+        var editor = ace.edit("editor")
+        var self = this
         editor.$blockScrolling = Infinity
-        editor.setTheme("ace/theme/tomorrow");
-        editor.getSession().setMode("ace/mode/xml");
-        editor.setValue('<craft>\n\t<craft name="pin" module="sikuli/craft-pin"/>\n\t\t<pin></pin>\n\t\t\n</craft>')
+        editor.setTheme("ace/theme/tomorrow")
+        editor.getSession().setMode("ace/mode/xml")
+        editor.setValue(defaultText, -1)
         editor.commands.addCommand({
             name: "refresh",
             bindKey: {
                 win: "Shift-Return",
                 mac: "Shift-Return"
             },
-            exec: function(editor) {    
+            exec: function(editor) {
                 console.debug('shift-return pressed')
                 self.props.onRefreshHotkey()
             }
-        })    
-        this.setState({editor: editor})
+        })
+        this.setState({
+            editor: editor
+        })
     },
 
     getValue: function() {
         return this.state.editor.getValue()
     },
 
-    render: function() {    
+    render: function() {
         var style = {
-            height: '100%'
+            height: '100%',
+            background: 'rgba(240,240,240,0.15)'
         }
 
-        return (
-            <div>
-              <div className="editor" id="editor" style={style}>
-              </div>
-            </div>
+        return ( < div >
+            < div className = "editor"
+            id = "editor"
+            style = {
+                style
+            } >
+            < /div>
+            </div >
         )
     }
 })
@@ -49,22 +58,25 @@ var CraftViewer = React.createClass({
         this.viewer.render()
     },
 
-    add: function(csg){
+    add: function(csg) {
         this.viewer.addCSG(csg)
     },
 
-    clear: function(){
+    clear: function() {
         this.viewer.clear()
     },
 
-    render: function() {    
+    render: function() {
         var style = {
             height: '100%'
         }
 
-        return (
-          <div className="viewer" id="viewer" style={style}>
-          </div>
+        return ( < div className = "viewer"
+            id = "viewer"
+            style = {
+                style
+            } >
+            < /div>
         )
     }
 })
@@ -101,17 +113,31 @@ var CraftApp = React.createClass({
 
     render: function() {   
 
-        return (
+        var s1 = {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '50%',
+            height: '100%'        
+        }
+        var s2 = {position: 'absolute', top:0, left: 50, height:'100%', width:'100%'}
+        var b = {
+            position: 'absolute',
+            right: 100,
+            margin: 5
+        }
+
+        return (          
           <div className="row">
-            <div className="six columns">
-                <CraftEditor ref='editor' onRefreshHotkey={this.refresh}/>
-            </div>  
-            <div className="six columns">
-              <div className="button" onClick={this.refresh}>
+            <div className="row" style={s2}>            
+              <div className="button" onClick={this.refresh} style={b}>
                     Build (shift+return)
-              </div>
-              <CraftViewer ref='viewer'/>
+              </div >
+            <CraftViewer ref='viewer'/>
             </div>
+            <div style={s1}>
+                <CraftEditor ref='editor' onRefreshHotkey={this.refresh}/>
+            </div>            
           </div>
         )
     }
