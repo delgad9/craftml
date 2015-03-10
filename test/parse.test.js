@@ -261,7 +261,7 @@ describe('parse()', function() {
                     actual.children[0].code.should.contain('main()')
                 })
 
-        })        
+        })
 
         it('can load a script refered in an external file', function() {
 
@@ -272,7 +272,7 @@ describe('parse()', function() {
                     actual.children[0].children[0].code.should.contain('main()')
                 })
 
-        }) 
+        })
     })
 
     describe('#module', function() {
@@ -283,6 +283,22 @@ describe('parse()', function() {
                     // inspect(actual)                    
                     actual.children[0].children[0].type.should.be.equal('factory')
                     actual.children[0].children[0].code.should.contain('cube()')
+                })
+        })
+
+        it('can load a module from github', function() {
+
+            nock('https://raw.githubusercontent.com/')
+                .get('/sikuli/craft-pin/master/index.xml')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/pin.xml');
+                })
+
+            return parse('<craft><craft module="sikuli/craft-pin" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)                    
+                    actual.children[0].children[0].type.should.be.equal('tag')
+                    actual.children[0].children[0].name.should.be.equal('parameter')
                 })
         })
 
