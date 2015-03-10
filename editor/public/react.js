@@ -6,7 +6,9 @@ var CraftEditor = React.createClass({
 
         var defaultText = '<craft>\n\t<craft name="pin" module="sikuli/craft-pin"/>\n\t\t<pin></pin>\n\t\t\n</craft>'
 
-        var editor = ace.edit("editor")
+        var ed = this.refs.editor.getDOMNode()
+
+        var editor = ace.edit(ed)//"editor")
         var self = this
         editor.$blockScrolling = Infinity
         editor.setTheme("ace/theme/tomorrow")
@@ -26,6 +28,7 @@ var CraftEditor = React.createClass({
         this.setState({
             editor: editor
         })
+        //$(ed).height(100)
     },
 
     getValue: function() {
@@ -38,14 +41,12 @@ var CraftEditor = React.createClass({
             background: 'rgba(240,240,240,0.15)'
         }
 
-        return ( < div >
-            < div className = "editor"
-            id = "editor"
-            style = {
-                style
-            } >
-            < /div>
-            </div >
+        return (<div>
+                <div className="editor"
+                    ref="editor"
+                    style={style}>
+                </div>
+            </div>
         )
     }
 })
@@ -53,7 +54,8 @@ var CraftEditor = React.createClass({
 var CraftViewer = React.createClass({
 
     componentDidMount: function() {
-        this.viewer = new Viewer('viewer')
+        var v = this.refs.viewer.getDOMNode()
+        this.viewer = new Viewer(v)
         this.viewer.setCameraPosition(0, -2.5, 3)
         this.viewer.render()
     },
@@ -71,12 +73,10 @@ var CraftViewer = React.createClass({
             height: '100%'
         }
 
-        return ( < div className = "viewer"
-            id = "viewer"
-            style = {
-                style
-            } >
-            < /div>
+        return ( <div className="viewer"
+                    ref="viewer"
+                    style={style}>
+                 </div>
         )
     }
 })
@@ -120,20 +120,26 @@ var CraftApp = React.createClass({
             width: '50%',
             height: '100%'        
         }
-        var s2 = {position: 'absolute', top:0, left: 50, height:'100%', width:'100%'}
+        var s2 = {
+            position: 'absolute',
+            top: 0,
+            left: 50,
+            height: '100%',
+            width: '100%'
+        }
         var b = {
             position: 'absolute',
-            right: 100,
-            margin: 5
+            margin: 5,            
+            right: 50
         }
 
         return (          
           <div className="row">
-            <div className="row" style={s2}>            
+            <div style={s2}>            
               <div className="button" onClick={this.refresh} style={b}>
                     Build (shift+return)
-              </div >
-            <CraftViewer ref='viewer'/>
+              </div>
+                <CraftViewer ref='viewer'/>
             </div>
             <div style={s1}>
                 <CraftEditor ref='editor' onRefreshHotkey={this.refresh}/>

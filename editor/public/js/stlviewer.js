@@ -172,7 +172,8 @@ Viewer.prototype = {
 
     init: function(element) {
 
-        this.container = document.getElementById(element);
+        // this.container = document.getElementById(element);
+        this.container = element
         this.fog = new THREE.Fog(0xffffff, 2, 15);
 
 
