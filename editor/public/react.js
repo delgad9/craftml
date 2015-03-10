@@ -8,7 +8,7 @@ var CraftEditor = React.createClass({
         editor.$blockScrolling = Infinity
         editor.setTheme("ace/theme/tomorrow");
         editor.getSession().setMode("ace/mode/xml");
-        editor.setValue('<craft>\n\t<row>\n\t\t<cube></cube>\n\t\t<cube></cube>\n\t<stl src="https://raw.githubusercontent.com/sikuli/craftml/master/test/fixtures/giraffe.stl"/></row>\n</craft>')
+        editor.setValue('<craft>\n\t<craft name="pin" module="sikuli/craft-pin"/>\n\t\t<pin></pin>\n\t\t\n</craft>')
         editor.commands.addCommand({
             name: "refresh",
             bindKey: {

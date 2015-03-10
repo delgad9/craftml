@@ -461,6 +461,7 @@ Group.prototype.fitToChildren = function() {
     }
 }
 },{"lodash":296}],4:[function(require,module,exports){
+(function (global){
 var Promise = require("bluebird"),
     path = require('path'),
     url = require('url')
@@ -489,21 +490,96 @@ function _searchForModulePath(currentPath, name) {
     }
 }
 
+function _doCORSRequest(options, cb) {
+    var cors_api_host = 'cors-anywhere.herokuapp.com';
+    var cors_api_url = 'https://' + cors_api_host + '/';
+    var x = new XMLHttpRequest();
+    x.open(options.method, cors_api_url + options.url);
+    // x.overrideMimeType("text/plain; charset=x-user-defined")
+    x.onload = x.onerror = function() {
+        // var blob = new Blob([x.response])
+        if (x.response) {
+            cb(null, x.response)
+        } else {
+            cb(x)
+        }
+    }
+    if (/^POST/i.test(options.method)) {
+        x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    }
+    x.send(options.data);
+}
+
+function _getContentsPromise(url) {
+
+    if (!global.window) {
+        return request
+            .getAsync(url)
+            .spread(function(response, body) {
+
+                return body
+
+            })
+
+    } else {
+
+        // load an stl using CORS anywhere workaround
+        return new Promise(function(resolve, reject) {
+
+            _doCORSRequest({
+                method: 'get',
+                url: url
+            }, function(error, response) {
+                if (error)
+                    reject(error)
+                else
+                    resolve(response)
+            })
+
+        })
+    }
+}
+
 function loadModule(context, moduleId) {
-    var modulePath = _searchForModulePath(context.basePath, moduleId)
-    if (modulePath) {
 
-        context.basePath = modulePath
-        var indexXml = path.join(modulePath, 'index.xml')
+    var toks = moduleId.split('/')
+    if (toks.length == 2) {
+        // github
+        // sikuli/craft-pin
 
-        return fs.readFileAsync(indexXml, 'utf8')
+        var scope = toks[0]
+        var id = toks[1]
+        var url = 'https://raw.githubusercontent.com/' + scope + '/' + id + '/master/index.xml'
+        console.log('importing module %s from %s', moduleId, url)
+
+        return _getContentsPromise(url)        
             .then(function(contents) {
-
                 return {
                     contents: contents,
-                    context: context
+                    context: context,
+                    path: url
                 }
             })
+
+    } else {
+
+
+        var modulePath = _searchForModulePath(context.basePath, moduleId)
+        if (modulePath) {
+
+            context.basePath = modulePath
+            var indexXml = path.join(modulePath, 'index.xml')
+
+            return fs.readFileAsync(indexXml, 'utf8')
+                .then(function(contents) {
+
+                    return {
+                        contents: contents,
+                        context: context,
+                        path: modulePath
+                    }
+                })
+        }
     }
 }
 
@@ -525,7 +601,7 @@ function loadSrc(context, src) {
         })
         context.basePath = abspath
     } else {
-        readPromise = fs.readFileAsync(abspath,'utf8')
+        readPromise = fs.readFileAsync(abspath, 'utf8')
         context.basePath = path.dirname(abspath)
     }
 
@@ -539,6 +615,7 @@ function loadSrc(context, src) {
             }
         })
 }
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"bluebird":30,"fs":31,"path":194,"request":297,"url":355}],5:[function(require,module,exports){
 (function (process){
 var $ = require('cheerio'),
