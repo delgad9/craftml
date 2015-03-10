@@ -1,4 +1,3 @@
-React.render(
-  <CraftApp/>,
-  document.getElementById('content')
+React.render( <CraftApp/>,
+    document.getElementById('content')
 )

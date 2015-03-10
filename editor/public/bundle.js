@@ -1174,6 +1174,7 @@ module.exports = function(render, element, scope) {
         })
 }
 },{"../parse":5,"bluebird":30,"get-parameter-names":295,"lodash":296}],25:[function(require,module,exports){
+(function (global){
 var stl = require('../stl'),
     Solid = require('../solid'),
     _ = require('lodash'),
@@ -1234,6 +1235,26 @@ function _createSolidFromStlString(stlstring, src, element) {
     return solid
 }
 
+function doCORSRequest(options, cb) {
+    var cors_api_host = 'cors-anywhere.herokuapp.com';
+    var cors_api_url = 'https://' + cors_api_host + '/';
+    var x = new XMLHttpRequest();
+    x.open(options.method, cors_api_url + options.url);
+    x.overrideMimeType("text/plain; charset=x-user-defined")
+    x.onload = x.onerror = function() {
+        var blob = new Blob([x.response])
+        if (x.response) {
+            cb(null, x.response)
+        } else {
+            cb(x)
+        }
+    }
+    if (/^POST/i.test(options.method)) {
+        x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    }
+    x.send(options.data);
+}
+
 module.exports = function(render, element, scope) {
 
     var src = element.attribs['src']
@@ -1241,14 +1262,45 @@ module.exports = function(render, element, scope) {
     console.log('importing %s', src)
 
     if (src.match(/^http/)) {
-        // from a remote url
-        return request
-            .getAsync(src)
-            .then(function(results) {
-                // results = [response, body]
-                var stlstring = results[1]
-                return _createSolidFromStlString(stlstring, src, element)
-            })
+        // from a remote url        
+        
+
+        if (!global.window){
+        
+            // in Node.js
+        
+            return request
+                .getAsync(src)
+                .then(function(results) {
+                    // results = [response, body]
+
+                    var stlstring = results[1]
+                    return _createSolidFromStlString(stlstring, src, element)
+                })
+
+        } else {
+        
+            // in Browser
+
+            // load an stl using CORS anywhere workaround
+            return new Promise(function(resolve, reject) {
+
+                    doCORSRequest({
+                        method: 'get',
+                        url: src
+                    }, function(error, response) {
+                        if (error)
+                            reject(error)
+                        else
+                            resolve(response)
+                    })
+
+                })
+                .then(function(stlstring) {
+                    return _createSolidFromStlString(stlstring, src, element)
+                })
+
+        }
 
     } else {
         // from the local file system
@@ -1261,6 +1313,7 @@ module.exports = function(render, element, scope) {
 
     }
 }
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"../solid":27,"../stl":29,"bluebird":30,"fs":31,"lodash":296,"request":297}],26:[function(require,module,exports){
 module.exports = Scope
 

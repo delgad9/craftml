@@ -5,20 +5,21 @@ var CraftEditor = React.createClass({
     componentDidMount: function() {        
         var editor = ace.edit("editor");
         var self = this;
+        editor.$blockScrolling = Infinity
         editor.setTheme("ace/theme/tomorrow");
         editor.getSession().setMode("ace/mode/xml");
-        editor.setValue('<craft>\n\t<row>\n\t\t<cube></cube>\n\t\t<cube></cube>\n\t</row>\n</craft>')
+        editor.setValue('<craft>\n\t<row>\n\t\t<cube></cube>\n\t\t<cube></cube>\n\t<stl src="https://raw.githubusercontent.com/sikuli/craftml/master/test/fixtures/giraffe.stl"/></row>\n</craft>')
         editor.commands.addCommand({
             name: "refresh",
             bindKey: {
                 win: "Shift-Return",
                 mac: "Shift-Return"
             },
-            exec: function(editor) {
+            exec: function(editor) {    
                 console.debug('shift-return pressed')
                 self.props.onRefreshHotkey()
             }
-        })
+        })    
         this.setState({editor: editor})
     },
 
@@ -70,9 +71,7 @@ var CraftViewer = React.createClass({
 
 var CraftApp = React.createClass({
 
-    refresh: function(){
-        console.log('refresh')        
-
+    refresh: function(){        
         var code = this.refs.editor.getValue()
         var viewer = this.refs.viewer
 
@@ -86,7 +85,6 @@ var CraftApp = React.createClass({
 
                 r.csgs.forEach(function(csg, index) {
                     var stlstring = csg.toStlString()
-                    console.log(stlstring)
                     var csg = {
                         color: colors[index % 6],
                         stl: stlstring
@@ -105,10 +103,10 @@ var CraftApp = React.createClass({
 
         return (
           <div className="row">
-            <div className="four columns">
+            <div className="six columns">
                 <CraftEditor ref='editor' onRefreshHotkey={this.refresh}/>
             </div>  
-            <div className="eight columns">
+            <div className="six columns">
               <div className="button" onClick={this.refresh}>
                     Build (shift+return)
               </div>

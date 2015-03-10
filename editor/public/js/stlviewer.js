@@ -14,7 +14,11 @@ var Viewer = function(element) {
 };
 
 //var keyboard = new KeyboardState();
-var grids = [[1,0,0,0],[0,1,0,0],[0,0,1,0]];
+var grids = [
+    [1, 0, 0, 0],
+    [0, 1, 0, 0],
+    [0, 0, 1, 0]
+];
 
 Viewer.prototype = {
     constructor: Viewer,
@@ -23,7 +27,7 @@ Viewer.prototype = {
         this.camera.position.set(x, y, z);
     },
 
-    clear: function(){
+    clear: function() {
         this.initScene()
     },
 
@@ -122,37 +126,40 @@ Viewer.prototype = {
         this.scene.fog = this.fog;
         this.scene.add(this.camera);
 
-        //Grids
+        if (1) {
+            //Grids
 
-        var grid;
-        //x - yz
-        grid = new Grid(1, 0.05);
-        //grid.material = new THREE.MeshBasicMaterial({transparent:true});
-        grid.rotation.z = Math.PI/2;
-        this.scene.add(grid);
+            var grid;
+            //x - yz
+            grid = new Grid(1, 0.05);
+            //grid.material = new THREE.MeshBasicMaterial({transparent:true});
+            grid.rotation.z = Math.PI / 2;
+            this.scene.add(grid);
 
-        //y - xz
-        grid = new Grid(1, 0.05);
-        //grid.material = new THREE.MeshBasicMaterial({transparent:true});
-        grid.rotation.y = Math.PI/2;
-        this.scene.add(grid);
+            //y - xz
+            grid = new Grid(1, 0.05);
+            //grid.material = new THREE.MeshBasicMaterial({transparent:true});
+            grid.rotation.y = Math.PI / 2;
+            this.scene.add(grid);
 
-        //z - xy
-        grid = new Grid(1, 0.05);
-        //grid.material = new THREE.MeshBasicMaterial({transparent:true});
-        grid.rotation.x = Math.PI/2;
-        this.scene.add(grid);
+            //z - xy
+            grid = new Grid(1, 0.05);
+            //grid.material = new THREE.MeshBasicMaterial({transparent:true});
+            grid.rotation.x = Math.PI / 2;
+            this.scene.add(grid);
 
-        var color = 0xBBBBBB;
-        this.scene.children[1].material.color.setHex(color);
-        this.scene.children[2].material.color.setHex(color);
-        this.scene.children[3].material.color.setHex(color);
+            var color = 0xBBBBBB;
+            this.scene.children[1].material.color.setHex(color);
+            this.scene.children[2].material.color.setHex(color);
+            this.scene.children[3].material.color.setHex(color);
+
+        }
 
         // Axis
         var axis;
 
         axis = new THREE.AxisHelper(1);
-        axis.position.set(0.01,0.01,0.01);
+        axis.position.set(0.01, 0.01, 0.01);
         //axis.material = new THREE.MeshBasicMaterial({transparent:true});
         this.scene.add(axis);
 
@@ -214,12 +221,12 @@ Viewer.prototype = {
 
 
         this.controls = new THREE.TrackballControls(this.camera, this.renderer.domElement);
-        this.controls.rotateSpeed = 1.0;    
+        this.controls.rotateSpeed = 1.0;
         this.controls.zoomSpeed = 1.2;
         this.controls.panSpeed = 0.2;
         this.controls.noZoom = false;
         this.controls.noPan = false;
-        this.controls.staticMoving = false;  
+        this.controls.staticMoving = false;
         this.controls.dynamicDampingFactor = 0.3;
         this.controls.keys = [65, 83, 68];
 
@@ -306,57 +313,64 @@ Viewer.prototype = {
 
         //                                     /
         //calculate camera direction vector   v
-        var dir = [ -this.camera.position.x,
-                    -this.camera.position.y,
-                    -this.camera.position.z];
+        var dir = [-this.camera.position.x, -this.camera.position.y, -this.camera.position.z];
 
-        var length = Math.sqrt(Math.pow(dir[0],2) + Math.pow(dir[1],2) + Math.pow(dir[2],2));
+        var length = Math.sqrt(Math.pow(dir[0], 2) + Math.pow(dir[1], 2) + Math.pow(dir[2], 2));
 
-        dir[0] = dir[0]/length;
-        dir[1] = dir[1]/length;
-        dir[2] = dir[2]/length;
+        dir[0] = dir[0] / length;
+        dir[1] = dir[1] / length;
+        dir[2] = dir[2] / length;
 
-        for(var i = 0; i < grids.length; i++)
-        {
+        for (var i = 0; i < grids.length; i++) {
             //                           /
             //calculate relative angle  v
-            var alpha = Math.abs(grids[i][0]*dir[0] + grids[i][1]*dir[1] + grids[i][2]*dir[2])/4;
-            if(alpha < 0.05){this.scene.children[i+1].visible = false;}else
-                            {this.scene.children[i+1].visible = true; }
+            var alpha = Math.abs(grids[i][0] * dir[0] + grids[i][1] * dir[1] + grids[i][2] * dir[2]) / 4;
+            if (alpha < 0.05) {
+                this.scene.children[i + 1].visible = false;
+            } else {
+                this.scene.children[i + 1].visible = true;
+            }
             //              /
             //assign alpha v
-            this.scene.children[i+1].material.opacity = alpha;
-            this.scene.children[i+1].needsUpdate = true;
+            this.scene.children[i + 1].material.opacity = alpha;
+            this.scene.children[i + 1].needsUpdate = true;
         }
 
         this.renderer.render(this.scene, this.camera);
     }
 };
 
-Grid = function ( size, step ) {
+Grid = function(size, step) {
 
     var geometry = new THREE.Geometry();
-    var material = new THREE.MeshBasicMaterial({transparent:true});
+    // var material = new THREE.MeshBasicMaterial({
+    //     transparent: true
+    // });
 
-    this.color1 = new THREE.Color( 0x444444 );
-    this.color2 = new THREE.Color( 0x888888 );
+    var material = new THREE.LineBasicMaterial({
+        color: 0x0000ff,
+        transparent: true
+    })
 
-    for ( var i = - size; i <= size+step; i += step ) {
+    this.color1 = new THREE.Color(0x444444);
+    this.color2 = new THREE.Color(0x888888);
+
+    for (var i = -size; i <= size + step; i += step) {
 
         geometry.vertices.push(
-            new THREE.Vector3( - size, 0, i ), new THREE.Vector3( size, 0, i ),
-            new THREE.Vector3( i, 0, - size ), new THREE.Vector3( i, 0, size )
+            new THREE.Vector3(-size, 0, i), new THREE.Vector3(size, 0, i),
+            new THREE.Vector3(i, 0, -size), new THREE.Vector3(i, 0, size)
         );
 
         var color = i === 0 ? this.color1 : this.color2;
 
-        geometry.colors.push( color, color, color, color );
+        geometry.colors.push(color, color, color, color);
 
     }
 
-    THREE.Line.call( this, geometry, material, THREE.LinePieces );
+    THREE.Line.call(this, geometry, material, THREE.LinePieces);
 
 };
 
-Grid.prototype = Object.create( THREE.Line.prototype );
+Grid.prototype = Object.create(THREE.Line.prototype);
 Grid.prototype.constructor = Grid;
