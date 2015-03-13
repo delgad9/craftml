@@ -1,0 +1,12 @@
+<craft name="repeat">
+    <parameter name="n" type="int" default="1"/>
+    <script type="text/craftml">
+            function main(params){
+                var r = ''
+                for (var i=0;i<params.n;i++){
+                    r = r + '<content></content>'
+                }
+                return r
+            }
+    </script>
+</craft>

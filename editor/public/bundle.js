@@ -605,9 +605,9 @@ function loadSrc(context, src) {
         context.basePath = path.dirname(abspath)
     }
 
+
     return readPromise
         .then(function(contents) {
-
             return {
                 contents: contents,
                 context: context,
@@ -642,7 +642,7 @@ function parse(xml, context) {
             basePath: process.cwd()
         }
     }
-
+    
     return _parse(root, context)
         .then(function(ret) {
             return ret.length === 1 ? ret[0] : ret
@@ -726,6 +726,7 @@ function _parse(arg, context) {
             if (node.attribs.src) {
 
                 var src = node.attribs.src
+                // console.log(context)
                 return loader
                     .src(context, src)
                     .then(function(file) {
@@ -823,7 +824,7 @@ module.exports = promise
 },{"../parse":5,"./align.xml":6,"./column.xml":7,"./cube.xml":8,"./cylinder.xml":9,"./lineup.xml":11,"./row.xml":12,"./scale.xml":13,"./sphere.xml":14,"./stack.xml":15,"./text.xml":16,"bluebird":30,"fs":31,"lodash":296}],11:[function(require,module,exports){
 module.exports = '<craft>\n    <parameter name="axis" default="x" type="string"/>\n    <parameter name="spacing" default="0" type="int"/>\n    <content></content>\n    <script type="text/craftml">\n\n        function main(params, scope){\n\n            var a = params.axis\n\n            var contentSolids = scope.solids\n            \n            var tx = 0\n\n            console.log(params)\n\n            contentSolids.forEach(function(solid){\n\n                solid.layout.location[a] = tx\n                tx = tx + solid.layout.size[a] + params.spacing\n\n            })\n        }\n    </script>\n</craft>';
 },{}],12:[function(require,module,exports){
-module.exports = '<craft>\n    <group>\n        <content></content>\n    </group>\n    <script type="text/craftml">\n\n        function main(params, scope){\n\n            var contentSolids = scope.solids[0].children\n\n            var tx = 0\n            contentSolids.forEach(function(solid){\n\n                solid.layout.location.x = tx\n                tx = tx + solid.layout.size.x\n\n                // center along y\n                solid.layout.location.y = - solid.layout.size.y / 2\n\n                // place on x-y plane (z = 0)\n                solid.layout.location.z = 0\n\n            })\n\n            var ymin = _.min(contentSolids.map(function(c) {\n                return c.layout.location.y\n            }))\n\n            contentSolids.forEach(function(solid){\n                solid.layout.location.y = solid.layout.location.y - ymin                \n            })\n\n            scope.solids[0].fitToChildren()\n\n        }\n\n    </script>\n</craft>';
+module.exports = '<craft>\n    <parameter name="spacing" type="float" default="0"/>\n    <group>\n        <content></content>\n    </group>\n    <script type="text/craftml">\n\n        function main(params, scope){\n\n            var contentSolids = scope.solids[0].children\n\n            var tx = 0\n            contentSolids.forEach(function(solid){\n\n                solid.layout.location.x = tx\n                tx = tx + solid.layout.size.x + params.spacing\n\n                // center along y\n                solid.layout.location.y = - solid.layout.size.y / 2\n\n                // place on x-y plane (z = 0)\n                solid.layout.location.z = 0\n\n            })\n\n            var ymin = _.min(contentSolids.map(function(c) {\n                return c.layout.location.y\n            }))\n\n            contentSolids.forEach(function(solid){\n                solid.layout.location.y = solid.layout.location.y - ymin                \n            })\n\n            scope.solids[0].fitToChildren()\n\n        }\n\n    </script>\n</craft>';
 },{}],13:[function(require,module,exports){
 module.exports = '<craft>\n    <parameter name="x" default="1" type="float"/>\n    <parameter name="y" default="1" type="float"/>\n    <parameter name="z" default="1" type="float"/>   \n    <parameter name="factor" default="1" type="float"/>\n    <group>\n        <content></content>\n    </group>\n    <script type="text/craftml">\n\n        function main(params, scope) {\n            var grp = scope.solids[0]\n            var s\n            if (params.factor != 1) {\n                var f = params.factor\n                s = {\n                    x: f,\n                    y: f,\n                    z: f\n                }\n            } else {\n                var x = params.x\n                var y = params.y\n                var z = params.z\n                s = {\n                    x: x,\n                    y: y,\n                    z: z\n                }\n            }\n            grp.scale(s)\n        }\n    </script>\n</craft>';
 },{}],14:[function(require,module,exports){
@@ -45492,10 +45493,7 @@ for solid CAD anyway.
 
 */
 
-
-// (function(module){
-
-var debug = require('debug')('csg')
+(function(module){
 
 var _CSGDEBUG = false;
 
@@ -45706,7 +45704,6 @@ CSG.prototype = {
 	//          +-------+
 	//
 	subtract: function(csg) {
-		debug('subtract')
 		var csgs;
 		if(csg instanceof Array) {
 			csgs = csg;
@@ -45722,28 +45719,17 @@ CSG.prototype = {
 	},
 
 	subtractSub: function(csg, retesselate, canonicalize) {
-		debug('a <- CSG.Tree')
 		var a = new CSG.Tree(this.polygons);
-		debug('done')
-		debug('b <- CSG.Tree')
 		var b = new CSG.Tree(csg.polygons);
-		debug('done')
 		a.invert();
-		debug('invert')
 		a.clipTo(b);
-		debug('clipTo(b)')
 		b.clipTo(a, true);
-		debug('clipTo(a)')
 		a.addPolygons(b.allPolygons());
-		debug('addPolygons')
 		a.invert();
-		debug('invert')
 		var result = CSG.fromPolygons(a.allPolygons());
-		result.properties = this.properties._merge(csg.properties);		
+		result.properties = this.properties._merge(csg.properties);
 		if(retesselate) result = result.reTesselated();
-		debug('reTesselated')
 		if(canonicalize) result = result.canonicalized();
-		debug('canonicalized')
 		return result;
 	},
 
@@ -46371,9 +46357,7 @@ CSG.prototype = {
 					destpolygons = destpolygons.concat(retesselayedpolygons);
 				}
 			}
-			debug('fromPolygons begin')
 			var result = CSG.fromPolygons(destpolygons);
-			debug('fromPolygons end')
 			result.isRetesselated = true;
 			result = result.canonicalized();
 			//      result.isCanonicalized = true;
@@ -48766,13 +48750,10 @@ CSG.Tree.prototype = {
 
 	addPolygons: function(polygons) {
 		var _this = this;
-		debug('polygons map begin')
 		var polygontreenodes = polygons.map(function(p) {
 			return _this.polygonTree.addChild(p);
 		});
-		debug('polygons map end')
 		this.rootnode.addPolygonTreeNodes(polygontreenodes);
-		debug('addPolygonTreeNodes')
 	}
 };
 
@@ -48844,7 +48825,6 @@ CSG.Node.prototype = {
 	},
 
 	addPolygonTreeNodes: function(polygontreenodes) {
-		// debug('addPolygonTreeNodes')
 		if(polygontreenodes.length === 0) return;
 		var _this = this;
 		if(!this.plane) {
@@ -48879,14 +48859,10 @@ CSG.Node.prototype = {
 		});
 		if(frontnodes.length > 0) {
 			if(!this.front) this.front = new CSG.Node(this);
-			// debug('addPolygonTreeNodes|front:%d/%d', frontnodes.length, polygontreenodes.length)
 			this.front.addPolygonTreeNodes(frontnodes);
 		}
 		if(backnodes.length > 0) {
 			if(!this.back) this.back = new CSG.Node(this);
-			// debug('addPolygonTreeNodes|back:%d/%d', backnodes.length, polygontreenodes.length)
-			// some terminal condition check
-			// if (polygontreenodes.length > 2)
 			this.back.addPolygonTreeNodes(backnodes);
 		}
 	},
@@ -50780,7 +50756,6 @@ CAG.prototype = {
 	},
 
 	subtract: function(cag) {
-		debug('subtract')
 		var cags;
 		if(cag instanceof Array) {
 			cags = cag;
@@ -50790,15 +50765,11 @@ CAG.prototype = {
 		var r = this.toCSG(-1, 1);
 		cags.map(function(cag) {
 			r = r.subtractSub(cag.toCSG(-1, 1), false, false);
-		});		
+		});
 		r = r.reTesselated();
-		debug('reTesselated')
 		r = r.canonicalized();
-		debug('canonicalized')
 		r = CAG.fromFakeCSG(r);
-		debug('fromFakeCSG')
 		r = r.canonicalized();
-		debug('canonicalized')
 		return r;
 	},
 
@@ -51434,16 +51405,13 @@ CSG.Polygon2D = function(points) {
 CSG.Polygon2D.prototype = CAG.prototype;
 
 
-module.exports = {
-	CSG: CSG,
-	CAG: CAG
-}
-// module.CAG = CAG;
+module.CSG = CSG;
+module.CAG = CAG;
 // module.exports.CSG = CSG;
 // module.exports.CAG = CAG;
-// })(this); //module to export to
+})(this); //module to export to
 
-},{"debug":291}],289:[function(require,module,exports){
+},{}],289:[function(require,module,exports){
 module.exports = require('./openscad')
 },{"./openscad":290}],290:[function(require,module,exports){
 // openscad.js, a few functions to simplify coding OpenSCAD-like
@@ -54176,28 +54144,43 @@ if(typeof module !== 'undefined') {    // we are used as module in nodejs requir
       // -- list all functions we export
       parseSTL: function(stl,fn) { return parseSTL(stl,fn); },
       parseAMF: function(amf,fn) { return parseAMF(amf,fn); },
-      cube: cube,
-      cylinder: cylinder,
-		torus: torus,
-      sphere: sphere,
+      //boolean operations
       group: group,
       union: union,
-      center: center,
-      translate: translate,
-      polygon: polygon,
-      scale: scale,
-      rotate: rotate,
-      torus: torus,     	
-      rotate_extrude: rotate_extrude,
-      linear_extrude: linear_extrude,
+      intersection: intersection,
+      difference: difference,
+
+      //CAGs
+      CAG: CAG,
       square: square,
       circle: circle,
-      difference: difference,
-      color: color,
-      rectangular_extrude: rectangular_extrude,
+      polygon: polygon,
       vector_text: vector_text,
+
+      //CSGs
       CSG: CSG,
-      CAG: CAG
+      cube: cube,
+      cylinder: cylinder,
+      torus: torus,
+      sphere: sphere,
+      polyhedron: polyhedron,
+
+      //transformations
+      center: center,
+      translate: translate,
+      scale: scale,
+      rotate: rotate,
+
+   	//modifiers
+      rotate_extrude: rotate_extrude,
+      linear_extrude: linear_extrude,
+      rectangular_extrude: rectangular_extrude,
+      hull: hull,
+      chain_hull: chain_hull,
+      expand: expand,
+      contract: contract,
+      
+      color: color
    };
    //me = 'cli';
 }

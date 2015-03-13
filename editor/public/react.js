@@ -4,16 +4,18 @@ var CraftEditor = React.createClass({
 
     componentDidMount: function() {
 
-        var defaultText = '<craft>\n\t<craft name="pin" module="sikuli/craft-pin"/>\n\t\t<pin></pin>\n\t\t\n</craft>'
+        var contents = this.props.contents
+        contents = _.trim(contents)
+        // console.log(contents)
 
         var ed = this.refs.editor.getDOMNode()
 
-        var editor = ace.edit(ed)//"editor")
+        var editor = ace.edit(ed)
         var self = this
         editor.$blockScrolling = Infinity
         editor.setTheme("ace/theme/tomorrow")
         editor.getSession().setMode("ace/mode/xml")
-        editor.setValue(defaultText, -1)
+        editor.setValue(contents, -1)
         editor.commands.addCommand({
             name: "refresh",
             bindKey: {
@@ -114,7 +116,6 @@ var CraftApp = React.createClass({
     render: function() {   
 
         var s1 = {
-            position: 'absolute',
             top: 0,
             left: 0,
             width: '50%',
@@ -123,26 +124,37 @@ var CraftApp = React.createClass({
         var s2 = {
             position: 'absolute',
             top: 0,
-            left: 50,
+            left: 0,
             height: '100%',
             width: '100%'
         }
         var b = {
-            position: 'absolute',
+            position: 'inherit',
             margin: 5,            
             right: 50
         }
 
+        var r = {
+            position: 'relative',
+            border: '1px #999 solid'
+        }
+
+        var n = {
+            fontSize: '65%'
+        }
+
         return (          
-          <div className="row">
+          <div style={r}>
             <div style={s2}>            
               <div className="button" onClick={this.refresh} style={b}>
-                    Build (shift+return)
+                    <span>Run</span>
               </div>
                 <CraftViewer ref='viewer'/>
             </div>
             <div style={s1}>
-                <CraftEditor ref='editor' onRefreshHotkey={this.refresh}/>
+                <CraftEditor ref='editor' 
+                    contents={this.props.contents}
+                    onRefreshHotkey={this.refresh}/>
             </div>            
           </div>
         )

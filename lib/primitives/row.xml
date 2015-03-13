@@ -1,4 +1,5 @@
 <craft>
+    <parameter name="spacing" type="float" default="0"/>
     <group>
         <content></content>
     </group>
@@ -12,7 +13,7 @@
             contentSolids.forEach(function(solid){
 
                 solid.layout.location.x = tx
-                tx = tx + solid.layout.size.x
+                tx = tx + solid.layout.size.x + params.spacing
 
                 // center along y
                 solid.layout.location.y = - solid.layout.size.y / 2
