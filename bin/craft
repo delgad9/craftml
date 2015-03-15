@@ -67,7 +67,8 @@ function doPreviewBuild(src, outputDir) {
     var context = {
         basePath: basePath
     }
-
+    console.log('previewing ', src)
+        
     return craft.preview(xml)
         .then(function(r) {
 
