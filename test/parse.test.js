@@ -302,6 +302,54 @@ describe('parse()', function() {
                 })
         })
 
+        it('can load pin.stl locally', function() {
+
+            return parse('<craft><craft stl="test/fixtures/pin.stl" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].children[0].contents.length.should.be.equal(53850)
+                })
+        })
+
+        it('can load pin.stl from a remote url', function() {
+
+            nock('http://test.craftml.org')
+                .get('/pin.stl')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/pin.stl');
+                })
+
+            return parse('<craft><craft stl="http://test.craftml.org/pin.stl" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].children[0].contents.length.should.be.equal(53850)
+                })
+        })     
+
+        it('can load pin.stl from a relative url', function() {
+
+            nock('http://test.craftml.org')
+                .get('/pin.stl')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/pin.stl');
+                })
+
+            return parse('<craft><craft stl="pin.stl" name="foo"/></craft>', {basePath: 'http://test.craftml.org/'})
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].children[0].contents.length.should.be.equal(53850)
+                })
+        })           
+
+        it('can load giraffe.stl (binary, 11948 polygons)', function() {
+
+            return parse('<craft><craft stl="test/fixtures/giraffe.stl" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].children[0].contents.length.should.be.equal(575423)
+                })
+        })   
+
     })
 
 })

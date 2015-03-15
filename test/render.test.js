@@ -321,10 +321,11 @@ describe('render()', function() {
 
     describe('stl', function() {
 
-        it('can load pin.stl (282 polygons)', function() {
+        it('can render pin.stl (282 polygons)', function() {
             var path = require('path')
             var src = path.resolve(__dirname, 'fixtures/pin.stl')
-            var c = stl(a('src', src))
+            var contents = fs.readFileSync(src, 'utf8')
+            var c = stl(a('contents', contents))
                 // inspect(c)
             return render(c)
                 .then(function(r) {
@@ -334,45 +335,44 @@ describe('render()', function() {
                     r.csg.polygons.length.should.be.equal(282)
                 })
 
-
         })
 
-        it('can load pin.stl from a remote url', function() {
+        // it('can load pin.stl from a remote url', function() {
 
-            nock('http://test.craftml.org')
-                .get('/pin.stl')
-                .reply(200, function(uri, requestBody) {
-                    return fs.createReadStream('test/fixtures/pin.stl');
-                })
+        //     nock('http://test.craftml.org')
+        //         .get('/pin.stl')
+        //         .reply(200, function(uri, requestBody) {
+        //             return fs.createReadStream('test/fixtures/pin.stl');
+        //         })
 
-            // var c = stl(a('src', 'https://raw.githubusercontent.com/sikuli/craftml/master/test/fixtures/pin.stl'))
-            var c = stl(a('src', 'http://test.craftml.org/pin.stl'))
+        //     // var c = stl(a('src', 'https://raw.githubusercontent.com/sikuli/craftml/master/test/fixtures/pin.stl'))
+        //     var c = stl(a('src', 'http://test.craftml.org/pin.stl'))
 
-            return render(c)
-                .then(function(r) {
-                    // inspect(r)
-                    match(r, solid())
-                    r.should.has.property('layout')
-                    r.csg.polygons.length.should.be.equal(282)
-                })
-        })
+        //     return render(c)
+        //         .then(function(r) {
+        //             // inspect(r)
+        //             match(r, solid())
+        //             r.should.has.property('layout')
+        //             r.csg.polygons.length.should.be.equal(282)
+        //         })
+        // })
 
 
-        it('can load giraffe.stl (binary, 11948 polygons)', function() {
-            var path = require('path')
-            var src = path.resolve(__dirname, 'fixtures/giraffe.stl')
-            var c = stl(a('src', src))
-                // inspect(c)
+        // it('can load giraffe.stl (binary, 11948 polygons)', function() {
+        //     var path = require('path')
+        //     var src = path.resolve(__dirname, 'fixtures/giraffe.stl')
+        //     var c = stl(a('src', src))
+        //         // inspect(c)
 
-            return render(c)
-                .then(function(r) {
-                    // inspect(r)
-                    match(r, solid())
-                    r.should.has.property('layout')
-                    r.csg.polygons.length.should.be.equal(11948)
-                })
+        //     return render(c)
+        //         .then(function(r) {
+        //             // inspect(r)
+        //             match(r, solid())
+        //             r.should.has.property('layout')
+        //             r.csg.polygons.length.should.be.equal(11948)
+        //         })
 
-        })
+        // })
 
     })
 
