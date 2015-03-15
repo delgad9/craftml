@@ -307,7 +307,7 @@ describe('parse()', function() {
             return parse('<craft><craft stl="test/fixtures/pin.stl" name="foo"/></craft>')
                 .then(function(actual) {
                     // inspect(actual)
-                    actual.children[0].children[0].contents.length.should.be.equal(53850)
+                    actual.children[0].children[0].attribs.contents.length.should.be.equal(53850)
                 })
         })
 
@@ -322,7 +322,7 @@ describe('parse()', function() {
             return parse('<craft><craft stl="http://test.craftml.org/pin.stl" name="foo"/></craft>')
                 .then(function(actual) {
                     // inspect(actual)
-                    actual.children[0].children[0].contents.length.should.be.equal(53850)
+                    actual.children[0].children[0].attribs.contents.length.should.be.equal(53850)
                 })
         })     
 
@@ -337,7 +337,7 @@ describe('parse()', function() {
             return parse('<craft><craft stl="pin.stl" name="foo"/></craft>', {basePath: 'http://test.craftml.org/'})
                 .then(function(actual) {
                     // inspect(actual)
-                    actual.children[0].children[0].contents.length.should.be.equal(53850)
+                    actual.children[0].children[0].attribs.contents.length.should.be.equal(53850)
                 })
         })           
 
@@ -346,7 +346,7 @@ describe('parse()', function() {
             return parse('<craft><craft stl="test/fixtures/giraffe.stl" name="foo"/></craft>')
                 .then(function(actual) {
                     // inspect(actual)
-                    actual.children[0].children[0].contents.length.should.be.equal(575423)
+                    actual.children[0].children[0].attribs.contents.length.should.be.equal(575423)
                 })
         })   
 
