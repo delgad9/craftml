@@ -329,17 +329,32 @@ describe('parse()', function() {
         it('can load pin.stl from a relative url', function() {
 
             nock('http://test.craftml.org')
-                .get('/pin.stl')
+                .get('/foo/pin.stl')
                 .reply(200, function(uri, requestBody) {
                     return fs.createReadStream('test/fixtures/pin.stl');
                 })
 
-            return parse('<craft><craft stl="pin.stl" name="foo"/></craft>', {basePath: 'http://test.craftml.org/'})
+            return parse('<craft><craft stl="pin.stl" name="foo"/></craft>', {basePath: 'http://test.craftml.org/foo/'})
                 .then(function(actual) {
                     // inspect(actual)
                     actual.children[0].children[0].attribs.contents.length.should.be.equal(53850)
                 })
-        })           
+        })  
+
+        it('can load pin.stl from a relative url (index.html)', function() {
+
+            nock('http://test.craftml.org')
+                .get('/foo/pin.stl')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/pin.stl');
+                })
+
+            return parse('<craft><craft stl="pin.stl" name="foo"/></craft>', {basePath: 'http://test.craftml.org/foo/index.html'})
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].children[0].attribs.contents.length.should.be.equal(53850)
+                })
+        })                       
 
         it('can load giraffe.stl (binary, 11948 polygons)', function() {
 
