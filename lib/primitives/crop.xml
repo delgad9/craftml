@@ -1,0 +1,114 @@
+<craft>
+    <parameter name="x" default="0,0" type="string"/>
+    <parameter name="y" default="0,0" type="string"/>
+    <parameter name="z" default="0,0" type="string"/>
+    <group>
+        <group>
+            <content></content>
+        </group>
+    </group>
+    <script type="text/craftml">
+
+        function main(params, scope) {
+            var grp = scope.solids[0].children[0]
+            grp.fitToChildren()
+
+            // parse cropping parameter
+            grp.layout.crop = crop            
+            var f = function(v){
+                return v.split(',').map(Number)
+            }
+
+            var crop = {
+                x: f(params.x),
+                y: f(params.y),
+                z: f(params.z)
+            }
+            grp.layout.crop = crop
+         
+            // caculate the CSG to subtract from all nodes in <content></content>
+            var csg = calculateCSGtoCrop(grp)
+            grp.layout.crop.csg = csg
+
+            // caculate the new layout size and location after crop            
+            var size = grp.layout.size
+            var location = grp.layout.location
+
+            var dims = ['x', 'y', 'z']
+            var sides = [0, 1]
+            dims.forEach(function(dim) {
+
+                var min = Number(crop[dim][0]) / 100
+                var max = 1 - Number(crop[dim][1]) / 100
+
+                location[dim] = location[dim] + size[dim] * min
+                size[dim] = size[dim] * (max - min)
+
+            })
+
+            grp.layout.size = size
+            // provide an offset to the original so that after cropping,
+            // the remaining portion will be positioned correctly
+            grp.layout.location = {
+                x: -location.x,
+                y: -location.y,
+                z: -location.z
+            }
+
+            var outter = scope.solids[0]
+            outter.layout.size= _.clone(size)
+            outter.layout.location = {x:0, y:0, z:0}
+        }
+
+        function calculateCSGtoCrop(node){
+             var size = node.layout.size
+
+            // an array to collect things to subtract
+            var toSubtractList = []
+
+            var crop = node.layout.crop
+
+            var dims = ['x', 'y', 'z']
+            var sides = [0, 1]
+            dims.forEach(function(dim) {
+
+                sides.forEach(function(side) {
+
+                    var cropsize = size[dim] * Number(crop[dim][side]) / 100
+
+                    if (cropsize === 0) {
+                        return
+                    }
+
+                    var csize = {
+                        x: size.x,
+                        y: size.y,
+                        z: size.z
+                    }
+
+                    var ctran = {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    }
+
+                    csize[dim] = cropsize
+
+                    if (side === 1) {                     
+                        ctran[dim] = size[dim] - cropsize
+                    }
+
+                    var toSubtract = $$$.cube()
+                        .scale([csize.x, csize.y, csize.z])
+                        .translate([ctran.x, ctran.y, ctran.z])
+
+                    toSubtractList.push(toSubtract)
+                })
+            })
+            
+            var combined = $$$.union(toSubtractList)
+            return combined
+        }
+
+    </script>
+</craft>

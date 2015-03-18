@@ -361,7 +361,7 @@ describe('parse()', function() {
             return parse('<craft><craft stl="test/fixtures/giraffe.stl" name="foo"/></craft>')
                 .then(function(actual) {
                     // inspect(actual)
-                    actual.children[0].children[0].attribs.contents.length.should.be.equal(575423)
+                    actual.children[0].children[0].attribs.contents.length.should.be.equal(597484)
                 })
         })   
 
