@@ -1,4 +1,5 @@
 <craft>
+    <parameter name="spacing" type="float" default="0"/>
     <group>
         <content></content>
     </group>
@@ -9,10 +10,10 @@
             var contentSolids = scope.solids[0].children
 
             var ty = 0
-            contentSolids.forEach(function(solid){
+            contentSolids.reverse().forEach(function(solid){
 
-                solid.layout.location.y = ty
-                ty = ty + solid.layout.size.y
+                solid.layout.location.y = ty 
+                ty = ty + solid.layout.size.y + params.spacing
 
                 // center along x
                 solid.layout.location.x = - solid.layout.size.x / 2

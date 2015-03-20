@@ -11,7 +11,7 @@
         function main(params, scope) {
             var grp = scope.solids[0]
             var s
-            if (params.factor != 1) {
+            if (params.factor && params.factor != 1) {
                 var f = params.factor
                 s = {
                     x: f,

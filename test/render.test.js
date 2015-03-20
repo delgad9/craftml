@@ -457,7 +457,7 @@ describe('render()', function() {
                 // inspect(c)
 
             var scope = new Scope()
-            scope.foo = foo
+            scope.crafts.foo = foo
 
             return render(c, scope)
                 .then(function(r) {
