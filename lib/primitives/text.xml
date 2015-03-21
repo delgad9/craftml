@@ -20,7 +20,7 @@
 
             // var r = union(o).scale([scaleFactor,scaleFactor,depthScaleFactor]);  
             // speedup for now
-            var r = group(o).scale([scaleFactor, scaleFactor, depthScaleFactor]);
+            var r = union(o).scale([scaleFactor, scaleFactor, depthScaleFactor]);
 
             return r
         }

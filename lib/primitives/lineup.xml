@@ -14,7 +14,9 @@
 
             console.log(params)
 
-            contentSolids.forEach(function(solid){
+            var solids = contentSolids.reverse()
+
+            solids.forEach(function(solid){
 
                 solid.layout.location[a] = tx
                 tx = tx + solid.layout.size[a] + params.spacing

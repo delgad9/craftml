@@ -1,4 +1,4 @@
-<craft name="fit">
+<craft name="resize">
     <parameter name="x" default="5" type="float"/>
     <parameter name="y" default="5" type="float"/>
     <parameter name="z" default="5" type="float"/>
