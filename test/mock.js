@@ -80,6 +80,34 @@ make('stl')
 make('crop')
 make('scale')
 
+lib.tag = function(){
+    
+    var args = Array.prototype.slice.call(arguments)
+    name = args[0]
+    
+    var el = {
+        type: 'tag',
+        name: name,
+        attribs: {}
+    }
+
+    var children = []
+
+    args.slice(1).forEach(function(arg) {
+
+        if ('a' in arg) {
+            _.extend(el.attribs, arg.a)
+
+        } else {
+
+            children.push(arg)
+        }
+
+        // console.log('arg',arg)
+    })
+    el.children = children
+    return el
+}
 
 // delete lib.text.children
 

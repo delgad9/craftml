@@ -1,4 +1,4 @@
-<craft>
+<craft name="cube">
     <parameter name="xsize" default="5" type="int"/>
     <parameter name="ysize" default="5" type="int"/>
     <parameter name="zsize" default="5" type="int"/>

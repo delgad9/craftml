@@ -1,5 +1,7 @@
-<craft>
-    <parameter name="side" default="south" type="string"/>
+<craft name="align">
+    <parameter name="x" default="null" type="percent"/>
+    <parameter name="y" default="null" type="percent"/>
+    <parameter name="z" default="null" type="percent"/>
     <content></content>
     <script type="text/craftml">
 
@@ -13,30 +15,18 @@
             return _.max(solids.map(function(c) {
                 return c.layout.location[axis] + c.layout.size[axis]
             }))
-        }
+        }      
 
-        function xmin(solids) {
-            return min('x', solids)
-        }
+        function _do_alignment(solids, dim, percent){
+            
+            var m = min(dim, solids)            
 
-        function xmax(solids) {
-            return max('x', solids)
-        }
+            solids.forEach(function(solid) {
 
-        function ymin(solids) {
-            return min('y', solids)
-        }
-
-        function ymax(solids) {
-            return max('y', solids)
-        }        
-
-        function zmin(solids) {
-            return min('z', solids)
-        }
-
-        function zmax(solids) {
-            return max('z', solids)
+                var newPos
+                newPos = m - solid.layout.size[dim] * percent / 100            
+                solid.layout.location[dim] = newPos                 
+            })
         }
 
         function main(params, scope) {
@@ -45,51 +35,17 @@
 
             var contentSolids = scope.solids
 
-            if (params.side === 'east') {
+            _.forEach(['x','y','z'], function(dim){
 
-                var m = xmax(contentSolids)
-                contentSolids.forEach(function(solid) {
-                    solid.layout.location.x = m - solid.layout.size.x
-                })
+                if (!isNaN(params[dim])) {
 
-            } else if (params.side === 'west') {
+                    _do_alignment(contentSolids, dim, params[dim])
 
-                var m = xmin(contentSolids)
-                contentSolids.forEach(function(solid) {
-                    solid.layout.location.x = solid.layout.location.x - m
-                })
+                }
 
-            } else if (params.side === 'top') {
-
-                var m = zmax(contentSolids)
-                console.log(m)
-                contentSolids.forEach(function(solid) {
-                    solid.layout.location.z = m - solid.layout.location.z - solid.layout.size.z
-                })
-
-            } else if (params.side === 'bottom') {
-
-                var m = zmin(contentSolids)
-                contentSolids.forEach(function(solid) {
-                    solid.layout.location.z = solid.layout.location.z - m
-                })
-
-            } else if (params.side === 'north') {
-
-                var m = ymax(contentSolids)
-                contentSolids.forEach(function(solid) {
-                    solid.layout.location.y = m - solid.layout.location.y - solid.layout.size.y
-                })
-
-            }  else if (params.side === 'south') {
-
-                var m = ymin(contentSolids)
-                contentSolids.forEach(function(solid) {
-                    solid.layout.location.y = solid.layout.location.y - m
-                })
-
-            }
+            })
 
         }
+
     </script>
 </craft>
