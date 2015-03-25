@@ -47,7 +47,7 @@ function match(actual, expected) {
 
         actual.type.should.be.equal(expected.type)
 
-        if (actual.children)
+        if (actual.children && actual.children.length > 1)
             match(actual.children, expected.children)
 
     }
@@ -61,6 +61,7 @@ describe('render()', function() {
 
         return render(c)
             .then(function(r) {
+                // inspect(r)      
                 match(r, solid())
             })
     })

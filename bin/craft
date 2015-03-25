@@ -5,7 +5,8 @@ var craft = require('../lib/craft'),
     program = require('commander'),
     open = require('open'),
     path = require('path'),
-    glob = require('glob')
+    glob = require('glob'),
+    _s = require('../lib/solids')
 
 program
     .command('build src')
@@ -70,11 +71,12 @@ function doPreviewBuild(src, outputDir) {
     console.log('previewing ', src)
         
     return craft.preview(xml)
-        .then(function(r) {
+        .then(function(solids) {
 
+            var csgs = _s(solids).csgs()
             // write stls
             var list = []
-            r.csgs.forEach(function(csg, i) {
+            csgs.forEach(function(csg, i) {
                 var stlstring = csg.toStlString()
                 var destname = path.basename(src, '.xml')
                 var dest = path.join(outputDir, destname) + '-' + i + '.stl'

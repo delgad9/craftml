@@ -2,6 +2,7 @@ var chai = require('chai'),
     fs = require('fs'),
     inspect = require('eyes').inspector(),
     chaiSubset = require('chai-subset')
+    // S = require('./solid')
 
 chai.should()
 chai.use(chaiSubset)
@@ -24,6 +25,7 @@ var Solid = require('../lib/solid')
 var craft = require('../lib/craft'),
     build = craft.build,
     preview = craft.preview,
+    _s = require('../lib/solids')
 
     _loadPrimitives = craft._test._loadPrimitives,
     _apply = craft._test._applyTransformation
@@ -35,8 +37,8 @@ describe('#craft', function() {
         it('can preview a cube', function() {
 
             return preview('<craft><cube></cube></craft>')
-                .then(function(v) {
-                    v.csgs.should.have.length(1)
+                .then(function(solids) {
+                    _s(solids).csgs().should.have.length(1)                    
                 })
                 // inspect(v)
         })
@@ -44,8 +46,8 @@ describe('#craft', function() {
         it('can preview two cubes', function() {
 
             return preview('<craft><cube></cube><cube></cube></craft>')
-                .then(function(v) {
-                    v.csgs.should.have.length(2)
+                .then(function(solids) {
+                    _s(solids).csgs().should.have.length(2)
                 })
 
         })
@@ -53,8 +55,8 @@ describe('#craft', function() {
         it('can preview a parameterized cube', function() {
 
             return preview('<craft><cube xsize="100"></cube></craft>')
-                .then(function(v) {
-                    v.csgs.should.have.length(1)
+                .then(function(solids) {
+                    _s(solids).csgs().should.have.length(1)
                 })
         })
 
@@ -106,7 +108,7 @@ describe('#craft', function() {
 
     })
 
-    describe('_applyTranformation()', function() {
+    describe.skip('_applyTranformation()', function() {
 
         it('can handle a unit cube', function() {
 
