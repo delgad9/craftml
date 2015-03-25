@@ -1,4 +1,4 @@
-<craft>
+<craft name="cylinder">
     <parameter name="radius" default="2.5" type="float"/>
     <parameter name="height" default="5" type="float"/>   
     <parameter name="resolution" default="24" type="int"/>

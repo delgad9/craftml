@@ -1,4 +1,4 @@
-<craft>
+<craft name="lineup">
     <parameter name="axis" default="x" type="string"/>
     <parameter name="spacing" default="0" type="int"/>
     <content></content>

@@ -1,4 +1,4 @@
-<craft>
+<craft name="text">
     <parameter name="text" default="" type="string"/>
     <script type="text/openjscad">
         function main(params) {

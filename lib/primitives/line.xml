@@ -1,4 +1,4 @@
-<craft>
+<craft name="line">
     <parameter name="x1" default="0" type="int"/>
     <parameter name="y1" default="0" type="int"/>
     <parameter name="x2" default="1" type="int"/>

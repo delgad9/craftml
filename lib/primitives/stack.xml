@@ -1,4 +1,4 @@
-<craft>
+<craft name="stack">
     <parameter name="spacing" type="float" default="0"/>
     <group>
         <content></content>

@@ -25,6 +25,100 @@ describe('builtins', function() {
             })
     })
 
+    describe.only('primitive shapes', function() {
+
+        it('cube 5x5x5', function() {
+            var c = tag('craft',
+                builtins.cube,
+                tag('cube'))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {                    
+                    solids[0].csg.polygons.should.have.length(6)                    
+                })
+        })
+
+        it('cylinder 5x5x5', function() {
+            var c = tag('craft',
+                builtins.cylinder,
+                tag('cylinder'))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {                    
+                    solids[0].csg.polygons.should.have.length(72)                    
+                })
+        })   
+
+        it('sphere 5x5x5', function() {
+            var c = tag('craft',
+                builtins.sphere,
+                tag('sphere'))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {                    
+                    solids[0].csg.polygons.should.have.length(648)                    
+                })
+        })
+
+        it('sphere resolution=10', function() {
+            var c = tag('craft',
+                builtins.sphere,
+                tag('sphere', a('resolution',10)))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {                    
+                    solids[0].csg.polygons.should.have.length(60)
+                })
+        })        
+    })
+
+
+    describe('repeat', function() {
+
+        it('n=5 cubes', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.repeat,
+                tag('repeat', a('n', 5),
+                    tag('cube')))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    // inspect(solids.length)
+
+                    solids.should.have.length(5)
+                })
+        })
+    })
+
+    describe('resize', function() {
+
+        it('should resize a cube to 5x10x20', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.group,
+                builtins.resize,
+                tag('resize', a('x', 5), a('y', 10), a('z', 20),
+                    tag('cube')))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    // inspect(solids[0].layout)
+                    solids[0].layout.size.should.be.eql({
+                        x: 5,
+                        y: 10,
+                        z: 20
+                    })
+                })
+        })
+    })
+
     describe('align', function() {
 
 

@@ -1,4 +1,4 @@
-<craft>
+<craft name="scale">
     <parameter name="x" default="1" type="float"/>
     <parameter name="y" default="1" type="float"/>
     <parameter name="z" default="1" type="float"/>   
