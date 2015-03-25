@@ -5,7 +5,7 @@
     <parameter name="y2" default="1" type="int"/>
     <parameter name="thickness" default="2" type="int"/>
     <parameter name="height" default="1" type="int"/>
-    <script type="text/openjscad">
+    <script type="text/craftml">
         function main(params){
             var x1 = params.x1
             var y1 = params.y1

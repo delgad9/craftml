@@ -1,6 +1,6 @@
 <craft name="text">
     <parameter name="text" default="" type="string"/>
-    <script type="text/openjscad">
+    <script type="text/craftml">
         function main(params) {
 
             var text = params.text

@@ -2,7 +2,7 @@
     <parameter name="xsize" default="5" type="int"/>
     <parameter name="ysize" default="5" type="int"/>
     <parameter name="zsize" default="5" type="int"/>
-    <script type="text/openjscad">
+    <script type="text/craftml">
         function main(params){
             return cube([params.xsize,params.ysize,params.zsize])
         }

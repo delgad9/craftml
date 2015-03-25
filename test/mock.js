@@ -9,12 +9,7 @@ function make(name) {
     var f = function() {
         var args = Array.prototype.slice.call(arguments)
 
-        var el = {
-            type: 'tag',
-            name: name,
-            attribs: {}
-        }
-
+        var el = new Element('tag',name,{})
         var children = []
 
         args.forEach(function(arg) {
@@ -26,36 +21,32 @@ function make(name) {
 
                 children.push(arg)
             }
-
-            // console.log('arg',arg)
-
         })
 
         // console.log(el.attribs)
+        function main() {
+            var s = new Solid()
+            s.layout = {
+                size: {
+                    x: 1,
+                    y: 1,
+                    z: 1
+                },
+                location: {
+                    x: 0,
+                    y: 0,
+                    z: 0
+                }
+            }
+            return s
+        }
 
         if (name === 'script' || name === 'factory' || name === 'unit') {
-            el.type = 'factory'
-            // el.attribs.type = 'text/openjscad'
-            el.create = function() {
-                var s = new Solid()
-                s.layout = {
-                    size: {
-                        x: 1,
-                        y: 1,
-                        z: 1
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                        z: 0
-                    }
-                }
-                return s
-            }
+            el = new Element(name, 'script', {type:'text/craftml'})
+            el.code = main.toString()            
             delete el.children
 
         } else {
-            //el.type = 'tag'
             el.children = children
         }
 
@@ -73,23 +64,22 @@ make('u2')
 make('csg')
 make('foo')
 make('factory')
-make('unit')
+// make('unit')
 make('group')
 make('solid')
 make('stl')
 make('crop')
 make('scale')
 
-lib.tag = function(){
-    
+var ee = require('event-emitter')
+var Element = require('../lib/element')
+
+lib.tag = function() {
+
     var args = Array.prototype.slice.call(arguments)
     name = args[0]
-    
-    var el = {
-        type: 'tag',
-        name: name,
-        attribs: {}
-    }
+
+    var el = new Element('tag', name, {})
 
     var children = []
 
@@ -107,6 +97,32 @@ lib.tag = function(){
     })
     el.children = children
     return el
+}
+
+// lib.unit = _.partial(lib.tag, 'unit')
+lib.unit = function(){
+
+    function main() {
+            var s = new Solid()
+            s.layout = {
+                size: {
+                    x: 1,
+                    y: 1,
+                    z: 1
+                },
+                location: {
+                    x: 0,
+                    y: 0,
+                    z: 0
+                }
+            }
+            return s
+        }
+
+        
+    var el = new Element('script', 'unit', {type:'text/craftml'})
+    el.code = main.toString()
+    return el    
 }
 
 // delete lib.text.children
@@ -136,7 +152,7 @@ lib.solidGroup = function() {
                 y: 0,
                 z: 0
             },
-            size:{
+            size: {
                 x: 1,
                 y: 1,
                 z: 1
@@ -146,11 +162,13 @@ lib.solidGroup = function() {
     }
 }
 
-lib.text = function(string){
+lib.text = function(string) {
     return {
         type: 'tag',
         name: 'text',
-        attribs: {text: string}
+        attribs: {
+            text: string
+        }
     }
 }
 
@@ -163,7 +181,7 @@ lib.script = function(code) {
 
 lib.jscad = function(code) {
     return {
-        type: 'factory',
+        type: 'script',
         code: code
     }
 }

@@ -108,6 +108,8 @@ describe('parse()', function() {
 
         return parse('<craft><parameter name="p1" default="1" type="int"></parameter></craft>')
             .then(function(t) {
+                // inspect(expected)
+                // inspect(t)
                 t.should.containSubset(expected)
             })
     })
@@ -156,7 +158,7 @@ describe('parse()', function() {
             return parse('<craft><script type="text/openjscad">function main(){}</script></craft>')
                 .then(function(actual) {
                     // inspect(actual)        
-                    actual.children[0].type.should.be.equal('factory')
+                    actual.children[0].type.should.be.equal('script')
                     actual.children[0].code.should.be.equal('function main(){}')
                 })
 
@@ -281,7 +283,7 @@ describe('parse()', function() {
             return parse('<craft><craft module="craft-box" name="foo"/></craft>')
                 .then(function(actual) {
                     // inspect(actual)                    
-                    actual.children[0].children[0].type.should.be.equal('factory')
+                    actual.children[0].children[0].type.should.be.equal('script')
                     actual.children[0].children[0].code.should.contain('cube()')
                 })
         })

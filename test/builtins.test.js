@@ -25,7 +25,7 @@ describe('builtins', function() {
             })
     })
 
-    describe.only('primitive shapes', function() {
+    describe('primitive shapes', function() {
 
         it('cube 5x5x5', function() {
             var c = tag('craft',
