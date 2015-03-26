@@ -6,13 +6,8 @@
     </group>
     <script type="text/craftml">
         function main(params, scope) {
-            
             var grp = scope.solids[0]
             grp.rotate(params.axis, params.degrees)
-            grp.apply()
-            grp.fitToChildren()
-            // console.log(grp)
-            // console.log(grp.children[0])
         }
     </script>
 </craft>
