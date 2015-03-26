@@ -34,8 +34,8 @@ describe('builtins', function() {
 
             // inspect(c)
             return render(c)
-                .then(function(solids) {                    
-                    solids[0].csg.polygons.should.have.length(6)                    
+                .then(function(solids) {
+                    solids[0].csg.polygons.should.have.length(6)
                 })
         })
 
@@ -46,10 +46,10 @@ describe('builtins', function() {
 
             // inspect(c)
             return render(c)
-                .then(function(solids) {                    
-                    solids[0].csg.polygons.should.have.length(72)                    
+                .then(function(solids) {
+                    solids[0].csg.polygons.should.have.length(72)
                 })
-        })   
+        })
 
         it('sphere 5x5x5', function() {
             var c = tag('craft',
@@ -58,24 +58,44 @@ describe('builtins', function() {
 
             // inspect(c)
             return render(c)
-                .then(function(solids) {                    
-                    solids[0].csg.polygons.should.have.length(648)                    
+                .then(function(solids) {
+                    solids[0].csg.polygons.should.have.length(648)
                 })
         })
 
         it('sphere resolution=10', function() {
             var c = tag('craft',
                 builtins.sphere,
-                tag('sphere', a('resolution',10)))
+                tag('sphere', a('resolution', 10)))
 
             // inspect(c)
             return render(c)
-                .then(function(solids) {                    
+                .then(function(solids) {
                     solids[0].csg.polygons.should.have.length(60)
                 })
-        })        
+        })
     })
 
+    describe.only('rotate', function() {
+
+        it('cube x-axis 45 degrees', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.group,
+                builtins.rotate,
+                tag('rotate', a('z', 45),
+                    tag('cube')))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    // inspect(solids)
+
+                    // solids.should.have.length(5)
+                })
+        })
+
+    })
 
     describe('repeat', function() {
 

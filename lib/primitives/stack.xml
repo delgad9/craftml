@@ -11,30 +11,41 @@
 
             var tz = 0
             contentSolids.reverse().forEach(function(solid){
-
-                solid.layout.location.z = tz
+                solid.translateTo({
+                    x:0,
+                    y:0,
+                    z: tz
+                })
                 tz = tz + solid.layout.size.z + params.spacing
-
-                // center along y
-                solid.layout.location.y = - solid.layout.size.y / 2
-
-                // center along x
-                solid.layout.location.x = - solid.layout.size.x / 2
-
             })
 
-            var ymin = _.min(contentSolids.map(function(c) {
-                return c.layout.location.y
-            }))
 
-            var xmin = _.min(contentSolids.map(function(c) {
-                return c.layout.location.x
-            }))            
+            // var tz = 0
+            // contentSolids.reverse().forEach(function(solid){
 
-            contentSolids.forEach(function(solid){
-                solid.layout.location.y = solid.layout.location.y - ymin
-                solid.layout.location.x = solid.layout.location.x - xmin
-            })
+            //     solid.layout.location.z = tz
+            //     tz = tz + solid.layout.size.z + params.spacing
+
+            //     // center along y
+            //     solid.layout.location.y = - solid.layout.size.y / 2
+
+            //     // center along x
+            //     solid.layout.location.x = - solid.layout.size.x / 2
+
+            // })
+
+            // var ymin = _.min(contentSolids.map(function(c) {
+            //     return c.layout.location.y
+            // }))
+
+            // var xmin = _.min(contentSolids.map(function(c) {
+            //     return c.layout.location.x
+            // }))            
+
+            // contentSolids.forEach(function(solid){
+            //     solid.layout.location.y = solid.layout.location.y - ymin
+            //     solid.layout.location.x = solid.layout.location.x - xmin
+            // })
 
             scope.solids[0].fitToChildren()
         }

@@ -6,8 +6,8 @@
 
             var grp = new Solid()
             grp.children = _.flatten(solids)
-            grp.fitToChildren()                
-            scope.solids = [grp]                
+            grp.fitToChildren()
+            scope.solids = [grp]
         }
     </script>
 </craft>

@@ -1,4 +1,4 @@
-<craft>
+<craft name="column">
     <parameter name="spacing" type="float" default="0"/>
     <group>
         <content></content>
@@ -12,24 +12,23 @@
             var ty = 0
             contentSolids.reverse().forEach(function(solid){
 
-                solid.layout.location.y = ty 
+                solid.translateTo({
+                    x: 0,//- solid.layout.size.x / 2, // center along x
+                    y: ty,
+                    z: 0   // place on x-y plane (z = 0)
+                })
+
                 ty = ty + solid.layout.size.y + params.spacing
-
-                // center along x
-                solid.layout.location.x = - solid.layout.size.x / 2
-
-                // place on x-y plane (z = 0)
-                solid.layout.location.z = 0
-
             })
 
-            var xmin = _.min(contentSolids.map(function(c) {
-                return c.layout.location.x
-            }))
 
-            contentSolids.forEach(function(solid){
-                solid.layout.location.x = solid.layout.location.x - xmin
-            })
+            // var xmin = _.min(contentSolids.map(function(c) {
+            //     return c.layout.location.x
+            // }))
+
+            // contentSolids.forEach(function(solid){
+            //     solid.translate({x: -xmin, y:0, z:0})
+            // })
 
             scope.solids[0].fitToChildren()
 
