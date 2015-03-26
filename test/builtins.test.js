@@ -76,25 +76,79 @@ describe('builtins', function() {
         })
     })
 
-    describe.only('rotate', function() {
+    describe('rotate', function() {
 
-        it('cube x-axis 45 degrees', function() {
+        it('cube x-axis 90 degrees', function() {
             var c = tag('craft',
                 builtins.cube,
                 builtins.group,
                 builtins.rotate,
-                tag('rotate', a('z', 45),
-                    tag('cube')))
+                tag('rotate', a('axis', 'x'), a('degrees', 90),
+                    tag('cube', a('ysize',20))))
 
             // inspect(c)
             return render(c)
                 .then(function(solids) {
                     // inspect(solids)
-
-                    // solids.should.have.length(5)
+                    solids[0].layout.size.z.should.be.eql(20)
                 })
         })
 
+        it('cube z-axis 90 degrees', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.group,
+                builtins.rotate,
+                tag('rotate', a('axis', 'z'), a('degrees', 90),
+                    tag('cube', a('ysize',20))))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    // inspect(solids)
+                    solids[0].layout.size.x.should.be.eql(20)
+                })
+        })
+
+    })
+
+    describe('lineup', function() {
+
+        it('axis=x', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.lineup,
+                tag('lineup', a('axis', 'x'),
+                    tag('cube'), tag('cube'), tag('cube')))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    // inspect(solids.length)
+                    solids.should.have.length(3)                    
+                    _.map(solids, function(s){
+                        return s.layout.location.x
+                    }).should.be.eql([0,5,10])
+                })
+        })
+
+        it('axis=y, spacing=2', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.lineup,
+                tag('lineup', a('axis', 'y'), a('spacing', 2),
+                    tag('cube'), tag('cube'), tag('cube')))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    // inspect(solids.length)
+                    solids.should.have.length(3)                    
+                    _.map(solids, function(s){
+                        return s.layout.location.y
+                    }).should.be.eql([0,7,14])
+                })
+        })        
     })
 
     describe('repeat', function() {
@@ -156,7 +210,7 @@ describe('builtins', function() {
 
                     _.forEach(solids, function(s) {
                         // inspect(s.layout)
-                        s.layout.location.x.should.be.equal(-5)
+                        s.layout.location.x.should.be.eql(-5)
                     })
                 })
 
@@ -176,7 +230,7 @@ describe('builtins', function() {
                     _.forEach(solids, function(s) {
                         // inspect(s.layout.location)
                         s.layout.location.y.should.be.equal(-5)
-                        s.layout.location.x.should.be.equal(-15)
+                        s.layout.location.x.should.be.equal(0)
                     })
                 })
 
@@ -198,7 +252,7 @@ describe('builtins', function() {
                         return s.layout.location.z
                     })
 
-                    zs.should.be.eql([-2.5, -10, -2.5, -2.5])
+                    zs.should.be.eql([0, -7.5, 0, 0])
                 })
 
         })

@@ -11,16 +11,20 @@
             var contentSolids = scope.solids
             
             var tx = 0
-
-            console.log(params)
-
+            
             var solids = contentSolids.reverse()
-
             solids.forEach(function(solid){
 
-                solid.layout.location[a] = tx
-                tx = tx + solid.layout.size[a] + params.spacing
+                var d = {
+                    x: 0,
+                    y: 0,
+                    z: 0
+                }
+                
+                d[a] = tx - solid.layout.location[a]
+                solid.translate(d)
 
+                tx = tx + solid.layout.size[a] + params.spacing
             })
         }
     </script>

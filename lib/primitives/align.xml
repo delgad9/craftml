@@ -5,46 +5,55 @@
     <content></content>
     <script type="text/craftml">
 
-        function min(axis, solids) {
-            return _.min(solids.map(function(c) {
-                return c.layout.location[axis]
-            }))
-        }
+        // function min(axis, solids) {
+        //     return _.min(solids.map(function(c) {
+        //         return c.layout.location[axis]
+        //     }))
+        // }
 
-        function max(axis, solids) {
-            return _.max(solids.map(function(c) {
-                return c.layout.location[axis] + c.layout.size[axis]
-            }))
-        }      
+        // function max(axis, solids) {
+        //     return _.max(solids.map(function(c) {
+        //         return c.layout.location[axis] + c.layout.size[axis]
+        //     }))
+        // }      
 
-        function _do_alignment(solids, dim, percent){
+        // function _do_alignment(solids, dim, percent){
             
-            var m = min(dim, solids)            
+        //     var m = min(dim, solids)            
 
-            solids.forEach(function(solid) {
+        //     var newLoc
+        //     solids.forEach(function(solid) {
 
-                var newPos
-                newPos = m - solid.layout.size[dim] * percent / 100            
-                solid.layout.location[dim] = newPos                 
-            })
-        }
+        //         newLoc[dim] = m - solid.layout.size[dim] * percent / 100            
+        //         solid.layout.location[dim] = newPos                 
+        //     })
+        // }
 
         function main(params, scope) {
 
-            var a = params.axis
+            if (scope.solids.length === 0){
+                return
+            }
+            
+            var first = scope.solids[0]
 
-            var contentSolids = scope.solids
+            scope.solids.slice(1).forEach(function(solid) {
 
-            _.forEach(['x','y','z'], function(dim){
+                var newLoc = _.clone(solid.layout.location)
 
-                if (!isNaN(params[dim])) {
+                _.forEach(['x','y','z'], function(dim){
 
-                    _do_alignment(contentSolids, dim, params[dim])
+                    var percent = params[dim]
 
-                }
+                    if (!isNaN(percent)) {
 
+                        newLoc[dim] = first.layout.location[dim] + 
+                            (first.layout.size[dim] - solid.layout.size[dim]) * percent / 100                           
+                    }
+                })
+
+                solid.translateTo(newLoc)
             })
-
         }
 
     </script>
