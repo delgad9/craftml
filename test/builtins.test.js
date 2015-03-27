@@ -84,7 +84,7 @@ describe('builtins', function() {
                 builtins.group,
                 builtins.rotate,
                 tag('rotate', a('axis', 'x'), a('degrees', 90),
-                    tag('cube', a('ysize',20))))
+                    tag('cube', a('ysize', 20))))
 
             // inspect(c)
             return render(c)
@@ -100,7 +100,7 @@ describe('builtins', function() {
                 builtins.group,
                 builtins.rotate,
                 tag('rotate', a('axis', 'z'), a('degrees', 90),
-                    tag('cube', a('ysize',20))))
+                    tag('cube', a('ysize', 20))))
 
             // inspect(c)
             return render(c)
@@ -125,10 +125,10 @@ describe('builtins', function() {
             return render(c)
                 .then(function(solids) {
                     // inspect(solids.length)
-                    solids.should.have.length(3)                    
-                    _.map(solids, function(s){
+                    solids.should.have.length(3)
+                    _.map(solids, function(s) {
                         return s.layout.location.x
-                    }).should.be.eql([0,5,10])
+                    }).should.be.eql([0, 5, 10])
                 })
         })
 
@@ -143,12 +143,12 @@ describe('builtins', function() {
             return render(c)
                 .then(function(solids) {
                     // inspect(solids.length)
-                    solids.should.have.length(3)                    
-                    _.map(solids, function(s){
+                    solids.should.have.length(3)
+                    _.map(solids, function(s) {
                         return s.layout.location.y
-                    }).should.be.eql([0,7,14])
+                    }).should.be.eql([0, 7, 14])
                 })
-        })        
+        })
     })
 
     describe('repeat', function() {
@@ -166,6 +166,49 @@ describe('builtins', function() {
                     // inspect(solids.length)
 
                     solids.should.have.length(5)
+                })
+        })
+    })
+
+    describe('scale', function() {
+
+        it('can scale by a factor of 2', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.group,
+                builtins.scale,
+                tag('scale', a('factor', 2),
+                    tag('cube')))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    // inspect(solids[0].layout)
+                    solids[0].layout.size.should.be.eql({
+                        x: 10,
+                        y: 10,
+                        z: 10
+                    })
+                })
+        })
+
+        it('can scale by x=2 y=3 z=4', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.group,
+                builtins.scale,
+                tag('scale', a('x', 2), a('y', 3), a('z', 4),
+                    tag('cube')))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    // inspect(solids[0].layout)
+                    solids[0].layout.size.should.be.eql({
+                        x: 10,
+                        y: 15,
+                        z: 20
+                    })
                 })
         })
     })
