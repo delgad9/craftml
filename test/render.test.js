@@ -362,6 +362,30 @@ describe('render()', function() {
 
     })
 
+    describe('stl', function(){
+
+        it.only('can render pin.stl', function() {
+
+            var c = [
+                stl(a('contents',fs.readFileSync(__dirname + '/fixtures/pin.stl', 'binary')))
+            ]
+
+            inspect(c)
+            return render(c)
+                .then(function(r) {
+                    inspect(r)
+                    // spy.should.have.been.calledWith(u,
+                    //     sinon.match({
+                    //         parameters: {
+                    //             p1: 2,
+                    //             p2: '5'
+                    //         }
+                    //     }))
+                })
+
+        })
+    })
+
     describe('parameters', function() {
 
         it('can inject default parameter values', function() {
