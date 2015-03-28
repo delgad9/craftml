@@ -13,9 +13,9 @@
             contentSolids.reverse().forEach(function(solid){
 
                 solid.translateTo({
-                    x: 0,//- solid.layout.size.x / 2, // center along x
+                    x: solid.layout.location.x, // 2, // center along x
                     y: ty,
-                    z: 0   // place on x-y plane (z = 0)
+                    z: solid.layout.location.z //0   // place on x-y plane (z = 0)
                 })
 
                 ty = ty + solid.layout.size.y + params.spacing

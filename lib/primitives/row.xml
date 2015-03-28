@@ -14,8 +14,8 @@
 
                 solid.translateTo({
                     x: tx,
-                    y: 0,//- solid.layout.size.y / 2, // center along y
-                    z: 0    // place on x-y plane (z = 0)
+                    y: solid.layout.location.y, // 2, // center along y
+                    z: solid.layout.location.z //    // place on x-y plane (z = 0)
                 })
 
                 tx = tx + solid.layout.size.x + params.spacing

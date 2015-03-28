@@ -12,8 +12,8 @@
             var tz = 0
             contentSolids.reverse().forEach(function(solid){
                 solid.translateTo({
-                    x:0,
-                    y:0,
+                    x: solid.layout.location.x,
+                    y: solid.layout.location.y,
                     z: tz
                 })
                 tz = tz + solid.layout.size.z + params.spacing
