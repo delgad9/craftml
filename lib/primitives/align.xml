@@ -5,37 +5,14 @@
     <content></content>
     <script type="text/craftml">
 
-        // function min(axis, solids) {
-        //     return _.min(solids.map(function(c) {
-        //         return c.layout.location[axis]
-        //     }))
-        // }
-
-        // function max(axis, solids) {
-        //     return _.max(solids.map(function(c) {
-        //         return c.layout.location[axis] + c.layout.size[axis]
-        //     }))
-        // }      
-
-        // function _do_alignment(solids, dim, percent){
-            
-        //     var m = min(dim, solids)            
-
-        //     var newLoc
-        //     solids.forEach(function(solid) {
-
-        //         newLoc[dim] = m - solid.layout.size[dim] * percent / 100            
-        //         solid.layout.location[dim] = newPos                 
-        //     })
-        // }
-
-        function main(params, scope) {
+        function main(params, scope) {            
 
             if (scope.solids.length === 0){
                 return
             }
             
             var first = scope.solids[0]
+
 
             scope.solids.slice(1).forEach(function(solid) {
 
