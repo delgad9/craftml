@@ -128,7 +128,7 @@ describe('builtins', function() {
                     solids.should.have.length(3)
                     _.map(solids, function(s) {
                         return s.layout.location.x
-                    }).should.be.eql([0, 5, 10])
+                    }).should.be.eql([0, 10, 20])
                 })
         })
 
@@ -146,7 +146,7 @@ describe('builtins', function() {
                     solids.should.have.length(3)
                     _.map(solids, function(s) {
                         return s.layout.location.y
-                    }).should.be.eql([0, 7, 14])
+                    }).should.be.eql([0, 12, 24])
                 })
         })
     })
@@ -185,9 +185,9 @@ describe('builtins', function() {
                 .then(function(solids) {
                     // inspect(solids[0].layout)
                     solids[0].layout.size.should.be.eql({
-                        x: 10,
-                        y: 10,
-                        z: 10
+                        x: 20,
+                        y: 20,
+                        z: 20
                     })
                 })
         })
@@ -205,9 +205,9 @@ describe('builtins', function() {
                 .then(function(solids) {
                     // inspect(solids[0].layout)
                     solids[0].layout.size.should.be.eql({
-                        x: 10,
-                        y: 15,
-                        z: 20
+                        x: 20,
+                        y: 30,
+                        z: 40
                     })
                 })
         })
@@ -295,7 +295,7 @@ describe('builtins', function() {
                         return s.layout.location.z
                     })
 
-                    zs.should.be.eql([0, -7.5, 0, 0])
+                    zs.should.be.eql([0, -5, 0, 0])
                 })
 
         })

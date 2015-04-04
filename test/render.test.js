@@ -364,7 +364,7 @@ describe('render()', function() {
 
     describe('stl', function(){
 
-        it.only('can render pin.stl', function() {
+        it('can render pin.stl', function() {
 
             var c = [
                 stl(a('contents',fs.readFileSync(__dirname + '/fixtures/pin.stl', 'binary')))
