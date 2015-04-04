@@ -584,5 +584,35 @@ describe('render()', function() {
                         }))
                 })
         })
+
+        it.only('can resolve expressions e.g., {{q1+q2}} in attributes', function() {
+            var u = unit()
+            var spy = sinon.spy()
+
+            u.on('render', spy)
+
+            var c = [
+                parameter(a('name', 'q1'), a('default', 10), a('type', 'int')),
+                parameter(a('name', 'q2'), a('default', 15), a('type', 'int')),
+                craft(a('name', 'foo'),
+                    parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
+                    u),
+                foo(a('p1', '{{q1+q2}}'))
+            ]
+
+            // inspect(c)
+            return render(c)
+                .then(function() {
+                    spy.should.have.been.calledWith(u,
+                        sinon.match({
+                            parameters: {
+                                p1: 25
+                            }
+                        }))
+                })
+
+
+        })
+
     })
 })

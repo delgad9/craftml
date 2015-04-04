@@ -9,7 +9,8 @@ var loadPromise = require('../lib/primitives')
 var mock = require('./mock')
 
 var a = mock.a,
-    tag = mock.tag
+    tag = mock.tag,
+    parameter = mock.parameter
 
 var render = require('../lib/render')
 
@@ -166,6 +167,25 @@ describe('builtins', function() {
                     // inspect(solids.length)
 
                     solids.should.have.length(5)
+                })
+        })
+
+        it('can iterate through [1,2,3]', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.repeat,
+                parameter(a('name', 'xs'), a('default', [1,2,3])),
+                tag('repeat', a('each', 'x'),a('in','xs'),
+                    tag('cube', a('xsize','{{x}}'))))
+
+             //inspect(c)
+            return render(c)
+                .then(function(solids) {
+                     inspect(solids.length)
+
+                    _.map(solids, function(s) {
+                        return s.layout.size.x
+                    }).should.be.eql([1, 2, 3])
                 })
         })
     })
