@@ -370,17 +370,10 @@ describe('render()', function() {
                 stl(a('contents',fs.readFileSync(__dirname + '/fixtures/pin.stl', 'binary')))
             ]
 
-            inspect(c)
+            //inspect(c)
             return render(c)
                 .then(function(r) {
-                    inspect(r)
-                    // spy.should.have.been.calledWith(u,
-                    //     sinon.match({
-                    //         parameters: {
-                    //             p1: 2,
-                    //             p2: '5'
-                    //         }
-                    //     }))
+                    //inspect(r)
                 })
 
         })
@@ -585,7 +578,7 @@ describe('render()', function() {
                 })
         })
 
-        it.only('can resolve expressions e.g., {{q1+q2}} in attributes', function() {
+        it('can resolve expressions e.g., {{q1+q2}} in attributes', function() {
             var u = unit()
             var spy = sinon.spy()
 

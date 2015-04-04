@@ -1,6 +1,6 @@
 <craft name="repeat">
     <parameter name="n" type="int" default=""/>
-    <parameter name="in" type="string" default=""/>
+    <parameter name="in" default=""/>
     <parameter name="each" type="string" default=""/>
     <script type="text/craftml">
             function main(params, scope){
@@ -13,9 +13,8 @@
                 } else if (params.in && params.each){
 
                     var name = params.each
-                    var vs = scope.parent.parameters[params.in]
+                    var vs = params.in
                     scope.locals = {vs: vs}
-
                     var r = _.map(vs, function(v,i){
                         return '<content ' + name + '="{{ vs[' + i + '] }}"></content>'
                     }).join('\n')

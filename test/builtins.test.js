@@ -175,14 +175,28 @@ describe('builtins', function() {
                 builtins.cube,
                 builtins.repeat,
                 parameter(a('name', 'xs'), a('default', [1,2,3])),
-                tag('repeat', a('each', 'x'),a('in','xs'),
+                tag('repeat', a('each', 'x'),a('in','{{xs}}'),
                     tag('cube', a('xsize','{{x}}'))))
 
              //inspect(c)
             return render(c)
                 .then(function(solids) {
-                     inspect(solids.length)
+                    _.map(solids, function(s) {
+                        return s.layout.size.x
+                    }).should.be.eql([1, 2, 3])
+                })
+        })
 
+        it('can iterate through an inline array in attribute', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.repeat,
+                tag('repeat', a('each', 'x'),a('in','{{[1,2,3]}}'),
+                    tag('cube', a('xsize','{{x}}'))))
+
+            //inspect(c)
+            return render(c)
+                .then(function(solids) {
                     _.map(solids, function(s) {
                         return s.layout.size.x
                     }).should.be.eql([1, 2, 3])
