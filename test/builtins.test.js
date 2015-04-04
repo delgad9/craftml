@@ -158,13 +158,13 @@ describe('builtins', function() {
             var c = tag('craft',
                 builtins.cube,
                 builtins.repeat,
-                tag('repeat', a('n', 5),
+                tag('repeat', a('n', '5'),
                     tag('cube')))
 
             // inspect(c)
             return render(c)
                 .then(function(solids) {
-                    // inspect(solids.length)
+                     //inspect(solids.length)
 
                     solids.should.have.length(5)
                 })

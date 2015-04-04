@@ -17,7 +17,7 @@
                     scope.locals = {vs: vs}
                     var r = _.map(vs, function(v,i){
                         return '<content ' + name + '="{{ vs[' + i + '] }}"></content>'
-                    }).join('\n')
+                    }).join(' ')
                     return r
                 }
             }
