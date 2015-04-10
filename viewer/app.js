@@ -3,33 +3,38 @@ var app = express()
 var path = require('path')
 var fs = require('fs')
 
-
-
-var glob = require("glob")
-
-
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views')
 
 // set where the static contents are (e.g., css, js)
 app.use(express.static(__dirname + '/public'));
 
+//function file() {
+//    return function(req, res, next) {
+//        req.file = {contents: '<craftml><row><cube></cube><cube></cube></row></craftml>'}
+//        next()
+//    }
+//}
+//app.use(file())
+
 app.get('/', function(req, res) {
-
-    var dir = 'build/preview'
-    // glob(dir + '/*.stl', function(er, files) {
-
-    var files = JSON.parse(fs.readFileSync(dir + '/stls.json', 'utf8'))
-
-    var names = files.map(function(file) {
-        return path.basename(file)
-    })    
-
+    // if (req.query.file){
+    //     var localPath = req.query.file
+    //     fs.readFile(localPath, 'utf8', function(err, contents){
+    //         res.render('viewer.jade', {
+    //             contents: contents
+    //         })
+    //     })
+    // }
     res.render('viewer.jade', {
-        names: names
+        contents: '',
+        port: app.port
     })
-
-    // })
 })
+
+app.get('/status', function(req, res) {
+    res.render('viewer.jade')
+})
+
 
 module.exports = app

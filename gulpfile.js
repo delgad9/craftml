@@ -5,16 +5,16 @@ var source = require('vinyl-source-stream')
 // var buffer = require('vinyl-buffer')
 var watchify = require('watchify')
 var browserify = require('browserify')
-// var reactify = require('reactify')
+ var reactify = require('reactify')
 var rename = require('gulp-rename')
 var replace = require('gulp-replace')
 var p = require('partialify/custom')
 // var brfs = require('brfs')
 
-var bundler = watchify(browserify('./lib/browser.js', watchify.args));
-// bundler.require('./lib/brcraft.js')
+var bundler = watchify(browserify('./lib/editor/index.js', watchify.args));
+//bundler.require('./lib/brcraft.js')
 // add any other browserify options or transforms here
-// bundler.transform(reactify)
+bundler.transform(reactify)
 // bundler.transform('brfs');
 bundler.transform(p.alsoAllow('xml'))
 
@@ -34,5 +34,15 @@ function bundle() {
       // .pipe(sourcemaps.write('./')) // writes .map file
     //
     // .pipe(rename('bundle.js'))
-    .pipe(gulp.dest('../craftml-docs/contents'));
+    .pipe(gulp.dest('./viewer/public/js'))
 }
+
+gulp.task('lib', function(){
+
+    var bundler = watchify(browserify('./lib/browser.js', watchify.args));
+    bundler.transform(p.alsoAllow('xml'))
+    return bundler.bundle()
+        .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest('./viewer/public'))
+})
