@@ -8,40 +8,24 @@ if (typeof craft == 'undefined') {
     craft = {}
 }
 
-
-
-
 craft.edit = function(element, options) {
-    var unescaped_contents = _.unescape(options.contents)
-    var app = React.createElement(CraftApp, {
-        contents: unescaped_contents,
-        useWorker: options.useWorker,
-        autoResize: options.autoResize,
-        file: options.file
-    })
+    var app = React.createElement(CraftApp, options)
     React.render(app, element)
     return app
 }
 
-$('.craftml').each(function() {
-    // var contents = $(this).find('.source')[0].innerHTML
+$('#craftml').each(function() {
     var s = $(this).html()
         // unwrap comment to obtain the script conents
     var m = s.match(/<!--\s*([^]*)\s*-->/)
     var contents = m ? m[1] : ''
 
-    var useWorker = !($(this).attr('useWorker') == 'false')
-    var autoResize = !($(this).attr('autoResize') == 'false')
+    // var useWorker = !($(this).attr('useWorker') == 'false')
+    // var autoResize = !($(this).attr('autoResize') == 'false')
 
-    
-    var app = craft.edit(this, {
-        contents: contents,
-        useWorker: useWorker,
-        autoResize: true,
-        file: socket
-    })
-
-    
+    var props = options
+    props.contents = contents
+    craft.edit(this, props)
 })
 
 
@@ -73,7 +57,7 @@ var worker = cw({
             craft
                 .preview(input.code, input.context)
                 .then(function(solids) {                    
-                    console.log('worker preview done', solids)
+                    console.log('worker preview done', solids)                    
                     var csgs = _s(solids).csgs()
                     var result = {}
                     result.csgs = csgs.map(function(csg) {
@@ -81,8 +65,10 @@ var worker = cw({
                             stl: csg.toStlString()
                         }
                     })
-                    var s = solids[0]                    
-                    result.layout = s.layout
+                    if (solids.length > 0){                    
+                        var s = solids[0]       
+                        result.layout = s.layout
+                    }
                     callback(result)
                 }).catch(function(err) {
                     console.log('error',err.stack)
@@ -189,21 +175,19 @@ module.exports = React.createClass({displayName: "exports",
             })
     },
 
-    doRender2: function(contents) {
+    doRender2: function(contents, basePath) {
         this.setState({status: 'Rendering ...'})
 
-        // var code = this.state.contents//.editor.getValue()
-        var self = this        
         var context = {
-            basePath: window.location.href,
+            basePath: basePath,
             origin: window.location.origin
         }
 
         brcraft
             .preview(contents, context, {useWorker: this.state.useWorker})
             .then(function(results){
-                self.didRender(results)
-            })
+                this.didRender(results)
+            }.bind(this))
     },    
 
     doExport: function(){
@@ -280,16 +264,15 @@ module.exports = React.createClass({displayName: "exports",
         }
     },
 
-    componentDidMount: function() {        
-        this.doRender()
+    componentDidMount: function() {
 
         window.addEventListener('resize', this.onWindowResize, false);
 
         if (this.props.file){
             this.props.file.emit('ready')
             this.props.file.on('modified', function(data) {
-                this.setState({contents: data.contents})
-                this.doRender2(data.contents)
+                this.setState(data)
+                this.doRender2(data.contents, data.basePath)
             }.bind(this))
         }
     },
@@ -311,6 +294,11 @@ module.exports = React.createClass({displayName: "exports",
             overflow: 'hidden',          
             height: '100%'
         }
+
+        if (this.props.hideEditor){
+            s1.display = 'none'
+        }
+
         var s2 = {
             position: 'absolute',
             top: 0,
@@ -318,10 +306,18 @@ module.exports = React.createClass({displayName: "exports",
             height: '100%',
             width: '100%'
         }
-        var b = {
+        var b1 = {
             position: 'inherit',
             fontFamily: 'arial',
             margin: 0,
+            right: 10
+        }
+
+        var b2 = {
+            position: 'inherit',
+            fontFamily: 'arial',
+            margin: 0,
+            top: 20,
             right: 10
         }
 
@@ -352,10 +348,16 @@ module.exports = React.createClass({displayName: "exports",
         }
 
         var contents = this.state.contents || this.props.contents
-        console.log('contents:', contents)
-        // contents = 'this is my contents'
+                
 
-        var status = React.createElement("div", {style: b}, this.state.status)   
+        var status = React.createElement("div", {style: b2}, this.state.status)  
+
+        var src
+        if (this.state.src){
+            src = React.createElement("div", {style: b1}, 
+                        "source: ", React.createElement("a", {href: this.state.url}, this.state.src)
+                  )    
+        }    
 
         // var b = <div style={b}>
         //           <div className="button" onClick={this.doRender}>
@@ -371,13 +373,12 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("div", {style: r}, 
             React.createElement("a", {ref: "download", style: a}), 
             React.createElement("div", {style: s2}, 
+                src, 
                 status, 
                 React.createElement(CraftViewer, {ref: "viewer"})
             ), 
             React.createElement("div", {style: s1}, 
-                React.createElement(CraftEditor, {ref: "editor", 
-                    contents: contents, 
-                    onRefreshHotkey: this.doRender})
+                React.createElement(CraftEditor, {ref: "editor", contents: contents, onRefreshHotkey: this.doRender})
             )
           )
         )
@@ -402,7 +403,7 @@ module.exports = React.createClass({displayName: "exports",
 
 
     componentDidMount: function() {
-        console.log('componentDidMount',this)
+        // console.log('componentDidMount',this)
 
         var contents = this.props.contents
         contents = _.trim(contents)
@@ -438,12 +439,12 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     componentDidUpdate: function(){
-        console.log('componentDidUpdate',this)
+        // console.log('componentDidUpdate',this)
         // editor.setValue(this.props.contents, -1)
     },
 
     componentWillUpdate: function(){
-        console.log('componentWillUpdate',this)
+        // console.log('componentWillUpdate',this)
         // console.log(this.props.contents)
         // this.editor.setValue(this.props.contents, -1)
         // editor.setValue(this.props.contents, -1)
@@ -481,20 +482,18 @@ module.exports = React.createClass({displayName: "exports",
     },    
 
     render: function() {
-        console.log('render',this)
+        // console.log('render',this)
         var style = {
             height: '100%',
             paddingRight: 30,
             background: 'rgba(240,240,240,0.15)'
         }
 
-        console.log('contents:', this.props.contents)
+        // console.log('contents:', this.props.contents)
         if (this.editor){
             this.editor.setValue(this.props.contents, -1)
             style.width = this.getContentWidth()
         }
-
-
 
         return (React.createElement("div", {className: "editor", 
                 ref: "editor", 
@@ -2466,7 +2465,6 @@ var Viewer = function(element) {
     this.init(element);
 };
 
-//var keyboard = new KeyboardState();
 var grids = [
     [1, 0, 0, 0],
     [0, 1, 0, 0],
@@ -2511,73 +2509,8 @@ Viewer.prototype = {
         this.render()
     },
 
-    // addCSGs: function(csgs) {
-
-    //     this.initScene();
-
-    //     var loader = new THREE.STLLoader();
-
-    //     var self = this
-    //     csgs.forEach(function(csg) {
-    //         var stlstring = csg.stl
-    //         var geometry = loader.parse(stlstring)
-    //         var material = new THREE.MeshPhongMaterial({
-    //             ambient: 0xff5533,
-    //             // color: 0xff5533,
-    //             color: csg.color,
-    //             specular: 0x111111,
-    //             shininess: 200
-    //         });
-    //         var mesh = new THREE.Mesh(geometry, material);
-    //         mesh.position.set(0, 0, 0);
-    //         mesh.scale.set(0.02, 0.02, 0.02); //, 0.1, 0.1 );
-    //         mesh.castShadow = true;
-    //         mesh.receiveShadow = true;
-    //         self.scene.add(mesh);
-    //     })
-    // },
-
-    // setStl: function(stlstring) {
-    //     var loader = new THREE.STLLoader();
-    //     var geometry = loader.parse(stlstring);
-    //     var material = new THREE.MeshPhongMaterial({
-    //         ambient: 0xff5533,
-    //         color: 0xff5533,
-    //         specular: 0x111111,
-    //         shininess: 200
-    //     });
-    //     if (this.mesh) {
-    //         this.scene.remove(this.mesh)
-    //     }
-    //     this.mesh = new THREE.Mesh(geometry, material);
-    //     this.mesh.position.set(0, 0, 0);
-    //     this.mesh.scale.set(0.02, 0.02, 0.02); //, 0.1, 0.1 );
-    //     this.mesh.castShadow = true;
-    //     this.mesh.receiveShadow = true;
-    //     this.scene.add(this.mesh);
-    // },
-
-    // Viewer.prototype.addStl = function(stlstring) {
-    //     var loader = new THREE.STLLoader();
-    //     var geometry = loader.parse(stlstring);
-    //     var material = new THREE.MeshPhongMaterial({
-    //         ambient: 0xff5533,
-    //         color: 0x333355,
-    //         specular: 0x111111,
-    //         shininess: 100,
-    //         opacity: 0.2,
-    //         transparent: true
-    //     });
-    //     var mesh = new THREE.Mesh(geometry, material);
-    //     mesh.position.set(0, 0, 0);
-    //     mesh.scale.set(0.02, 0.02, 0.02); //, 0.1, 0.1 );
-    //     mesh.castShadow = true;
-    //     mesh.receiveShadow = true;
-    //     this.scene.add(mesh);
-    // }
-
     initScene: function(offset) {
-        console.log('initScene')
+        // console.log('initScene')
         // New Scene
         this.scene = new THREE.Scene();
         this.scene.fog = this.fog;
@@ -2748,7 +2681,7 @@ Viewer.prototype = {
     },
 
     onWindowResize: function() {
-        console.debug("viewer resized:", this.container.clientWidth, this.container.clientHeight);
+        // console.debug("viewer resized:", this.container.clientWidth, this.container.clientHeight);
         this.controls.handleResize()
         this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
         this.camera.updateProjectionMatrix();

@@ -1,18 +1,11 @@
 <craft>
-    <craft name="chair" module="calebhsu/craft-chair"/>
     <row>
-    <script type="text/openjscad">
-        function main(){
-            return cube().scale([20,20,20])
-        }
-    </script>
-    <script type="text/openjscad">
-        function main(){
-            return cube().scale([20,20,30])
-        }
-    </script>    
-    <scale factor="2">
-        <chair></chair>
-    </scale>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>        
+        <cube></cube>
+        <cube></cube>
     </row>
 </craft>

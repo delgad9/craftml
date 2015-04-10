@@ -130,6 +130,26 @@ describe('parse()', function() {
 
     })
 
+    describe('edge cases', function(){
+
+        it('can handle empty string', function() {
+
+            return parse('')
+                .then(function(t) {
+                    t.should.be.empty
+                })
+        })
+
+        it('can handle undefined', function() {
+
+            return parse(undefined)
+                .then(function(t) {
+                    t.should.be.empty
+                })
+        })
+
+    })
+
     describe('script', function() {
 
         it('script craftml', function() {

@@ -1,5 +1,17 @@
 body {    
-    width: 100%;
     padding: 0px;
     margin: 0px;
+    position: absolute;
+}
+
+#gist{
+    width: 500px;    
+    z-index: 2;
+    margin: 5px;
+}
+
+#craftml{
+    position: absolute;    
+    top: 0px;
+    z-index: -1;
 }

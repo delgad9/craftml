@@ -4,7 +4,9 @@ html(lang="en")
     title CraftML
     link(href="css/custom.css" rel="stylesheet")
   body
-    div#craftml(autoResize=false)!= '<!--' + contents + '-->'    
+    div#gist
+        script(src="https://gist.github.com/doubleshow/fd30cddee15a72683a53.js")        
+    div#craftml        
     script(src="/socket.io/socket.io.js")
     script(type='text/javascript').
         socket = io('http://localhost:#{port}')
@@ -12,6 +14,6 @@ html(lang="en")
             useWorker: true,
             autoResize: true,
             file: socket,
-            hideEditor: false
+            hideEditor: true
         }
     script(src="js/bundle.js")

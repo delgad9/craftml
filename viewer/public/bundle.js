@@ -257,6 +257,13 @@ var Element = require('./element')
 module.exports = parse
 
 function parse(xml, context) {
+
+    if (xml === undefined){
+        return new Promise(function(resolve, reject) {
+            resolve([])
+        })
+    }
+
     // https://github.com/cheeriojs/cheerio/issues/598
     // set recognizeSelfClosing to true in order to handle self-closing tags, like <cube/>
     // https://github.com/fb55/htmlparser2/wiki/Parser-options
@@ -275,6 +282,7 @@ function parse(xml, context) {
     
     return _parse(root, context)
         .then(function(ret) {
+            // console.log(''+ret)
             return ret.length === 1 ? ret[0] : ret
         })        
 }
@@ -552,7 +560,7 @@ function render(arg, scope) {
             .then(_.flatten)
             .then(_.compact)
 
-    } else {
+    } else if (arg){
 
         // arg is element
         var element = arg
@@ -587,6 +595,8 @@ function render(arg, scope) {
 
         }
 
+    } else {
+        return []
     }
 }
 },{"./render/content":24,"./render/craft":25,"./render/others":26,"./render/parameter":27,"./render/script":28,"./render/stl":29,"./scope":30,"./solid":31,"bluebird":37,"fs":38,"lodash":315}],24:[function(require,module,exports){

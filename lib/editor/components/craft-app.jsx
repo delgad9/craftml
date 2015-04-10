@@ -30,21 +30,19 @@ module.exports = React.createClass({
             })
     },
 
-    doRender2: function(contents) {
+    doRender2: function(contents, basePath) {
         this.setState({status: 'Rendering ...'})
 
-        // var code = this.state.contents//.editor.getValue()
-        var self = this        
         var context = {
-            basePath: window.location.href,
+            basePath: basePath,
             origin: window.location.origin
         }
 
         brcraft
             .preview(contents, context, {useWorker: this.state.useWorker})
             .then(function(results){
-                self.didRender(results)
-            })
+                this.didRender(results)
+            }.bind(this))
     },    
 
     doExport: function(){
@@ -121,16 +119,15 @@ module.exports = React.createClass({
         }
     },
 
-    componentDidMount: function() {        
-        this.doRender()
+    componentDidMount: function() {
 
         window.addEventListener('resize', this.onWindowResize, false);
 
         if (this.props.file){
             this.props.file.emit('ready')
             this.props.file.on('modified', function(data) {
-                this.setState({contents: data.contents})
-                this.doRender2(data.contents)
+                this.setState(data)
+                this.doRender2(data.contents, data.basePath)
             }.bind(this))
         }
     },
@@ -152,6 +149,11 @@ module.exports = React.createClass({
             overflow: 'hidden',          
             height: '100%'
         }
+
+        if (this.props.hideEditor){
+            s1.display = 'none'
+        }
+
         var s2 = {
             position: 'absolute',
             top: 0,
@@ -159,10 +161,18 @@ module.exports = React.createClass({
             height: '100%',
             width: '100%'
         }
-        var b = {
+        var b1 = {
             position: 'inherit',
             fontFamily: 'arial',
             margin: 0,
+            right: 10
+        }
+
+        var b2 = {
+            position: 'inherit',
+            fontFamily: 'arial',
+            margin: 0,
+            top: 20,
             right: 10
         }
 
@@ -193,10 +203,16 @@ module.exports = React.createClass({
         }
 
         var contents = this.state.contents || this.props.contents
-        console.log('contents:', contents)
-        // contents = 'this is my contents'
+                
 
-        var status = <div style={b}>{this.state.status}</div>   
+        var status = <div style={b2}>{this.state.status}</div>  
+
+        var src
+        if (this.state.src){
+            src = <div style={b1}>
+                        source: <a href={this.state.url}>{this.state.src}</a>
+                  </div>    
+        }    
 
         // var b = <div style={b}>
         //           <div className="button" onClick={this.doRender}>
@@ -211,14 +227,13 @@ module.exports = React.createClass({
         return (          
           <div style={r}>
             <a ref="download" style={a}/>
-            <div style={s2}>                        
+            <div style={s2}>     
+                {src}                   
                 {status}
                 <CraftViewer ref='viewer'/>
-            </div>
+            </div>            
             <div style={s1}>
-                <CraftEditor ref='editor'
-                    contents={contents}
-                    onRefreshHotkey={this.doRender}/>
+                <CraftEditor ref='editor' contents={contents} onRefreshHotkey={this.doRender}/>
             </div>            
           </div>
         )

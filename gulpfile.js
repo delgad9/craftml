@@ -39,10 +39,16 @@ function bundle() {
 
 gulp.task('lib', function(){
 
-    var bundler = watchify(browserify('./lib/browser.js', watchify.args));
-    bundler.transform(p.alsoAllow('xml'))
-    return bundler.bundle()
+    function doBundle(){
+      return bundler.bundle()
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./viewer/public'))
+    }
+
+    var bundler = watchify(browserify('./lib/browser.js', watchify.args));
+    bundler.transform(p.alsoAllow('xml'))
+    bundler.on('update', doBundle) // on any dep update, runs the bundler
+
+    return doBundle()
 })
