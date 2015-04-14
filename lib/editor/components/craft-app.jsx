@@ -3,7 +3,7 @@ var CraftViewer = require('./craft-viewer')
 var CraftEditor = require('./craft-editor')
 var brcraft = require('../brcraft')
 
-var ResizableBox = require('react-resizable').ResizableBox
+//var ResizableBox = require('react-resizable').ResizableBox
 
 module.exports = React.createClass({
 
@@ -18,12 +18,13 @@ module.exports = React.createClass({
     },
 
     doRender: function() {
+        this.setState({status: 'Rendering ...'})
         this.setState({renderCommandText: 'Rendering ...'})
 
         // var code = this.refs.editor.getValue()
         var code = this.state.contents
         var basePath = this.props.basePath
-        var self = this        
+        var self = this
         var context = {
             basePath: basePath,//window.location.href,
             origin: window.location.origin
@@ -51,7 +52,7 @@ module.exports = React.createClass({
             .then(function(results){
                 this.didRender(results)
             }.bind(this))
-    },    
+    },
 
     doExport: function(){
         this.setState({exportCommandText: 'Exporting ...'})
@@ -61,7 +62,7 @@ module.exports = React.createClass({
         var context = {
             basePath: window.location.href,
             origin: window.location.origin
-        }        
+        }
 
 
         brcraft
@@ -90,7 +91,7 @@ module.exports = React.createClass({
 
     didRender: function(result) {
         console.log('didRender',result)
-        
+
         var viewer = this.refs.viewer
 
         var offset = {x:result.layout.size.x/2,y:result.layout.size.y/2,z:result.layout.size.z/2}
@@ -111,12 +112,12 @@ module.exports = React.createClass({
         })
 
         // var editorHeight = this.refs.editor.getHeight()
-        this.setState({renderCommandText: 'Refresh'})//, editorHeight: editorHeight})        
-        this.setState({status: ''})//, editorHeight: editorHeight})        
+        this.setState({renderCommandText: 'Refresh'})//, editorHeight: editorHeight})
+        this.setState({status: ''})//, editorHeight: editorHeight})
         // console.log(editorHeight)
     },
 
-    // handleHeightChange: function(height){                
+    // handleHeightChange: function(height){
     //     // if (this.props.autoResize){
     //         console.log('height:', height)
     //         var h = Math.max(height, 200) + 0  // enforce min height
@@ -129,11 +130,11 @@ module.exports = React.createClass({
 
     componentDidMount: function() {
 
-        window.addEventListener('resize', this.onWindowResize, false);        
+        window.addEventListener('resize', this.onWindowResize, false);
         this.doRender()
         // if (this.props.file){
         //     this.props.file.emit('ready')
-            
+
         //     this.props.file.on('modified', function(data) {
         //         this.setState(data)
         //         this.doRender2(data.contents, data.basePath)
@@ -182,11 +183,11 @@ module.exports = React.createClass({
 
     render: function() {
 
-        var s1 = {   
-            position: 'absolute',         
+        var s1 = {
+            position: 'absolute',
             top: 0,
-            left: 0,            
-            overflow: 'hidden',          
+            left: 0,
+            overflow: 'hidden',
             height: '100%'
         }
 
@@ -226,8 +227,8 @@ module.exports = React.createClass({
 
         if (this.props.fitTo === 'container') {
             r.height = '100%'
-        } else if (this.props.fitTo === 'contents') {        
-            // r.height = this.refs.editor ? this.refs.editor.getHeight() : '100%'            
+        } else if (this.props.fitTo === 'contents') {
+            // r.height = this.refs.editor ? this.refs.editor.getHeight() : '100%'
             r.height =  this.refs.editor ? this.refs.editor.computeHeight(contents) : '100%'
             console.log(r.height)
         }
@@ -240,40 +241,40 @@ module.exports = React.createClass({
             display: 'none'
         }
 
-        var status = <div style={b2}>{this.state.status}</div>  
+        var status = <div style={b2}>{this.state.status}</div>
 
         var src
         if (this.state.src){
             src = <div style={b1}>
                         source: <a href={this.state.url}>{this.state.src}</a>
-                  </div>    
-        }    
+                  </div>
+        }
 
         // var b = <div style={b}>
         //           <div className="button" onClick={this.doRender}>
-        //                 <span>{this.state.renderCommandText}</span>                        
+        //                 <span>{this.state.renderCommandText}</span>
         //                 <br/><span className="button-caption">(shift-return)</span>
         //           </div>
         //           <div className="button" onClick={this.doExport}>
         //                 <span>{this.state.exportCommandText}</span>
-        //           </div>         
-        //       </div>    
+        //           </div>
+        //       </div>
 
         return (
             <div style={r}>
                 <a ref="download" style={a}/>
-                <div style={s2}>     
-                    {src}                   
+                <div style={s2}>
+                    {src}
                     {status}
                     <CraftViewer ref='viewer'/>
-                </div>            
+                </div>
                 <div style={s1}>
-                    <CraftEditor ref='editor' 
+                    <CraftEditor ref='editor'
                         contents={contents}
                         onRefreshHotkey={this.doRender}
                         onChange={this.editorOnChange}
                     />
-                </div>            
+                </div>
             </div>
         )
     }

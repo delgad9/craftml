@@ -5,10 +5,10 @@ html(lang="en")
     link(href="/css/custom.css" rel="stylesheet")
   body
     div#gist
-        script(src="https://gist.github.com/doubleshow/fd30cddee15a72683a53.js")        
+        script(src=src)
     div#craftml!= '<!-- ' + contents + '-->'
     script(src="/js/bundle.js")
-    script(type='text/javascript').        
+    script(type='text/javascript').
         var options = {
             useWorker: true,
             fitTo: 'container',

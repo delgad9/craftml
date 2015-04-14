@@ -23,7 +23,7 @@ var request = Promise.promisifyAll(require('request'))
 
 // load gist
 // https://gist.githubusercontent.com/
-function loadGist(loc) {    
+function loadGist(loc) {
     var url = 'https://gist.githubusercontent.com/' + loc + '/raw/index.xml'
     return request
         .getAsync({
@@ -32,8 +32,8 @@ function loadGist(loc) {
         .spread(function(response, body) {
             return {
                 basePath: 'https://gist.githubusercontent.com/' + loc + '/raw/',
-                contents: body
-                // src: src,
+                contents: body,
+                src: 'https://gist.github.com/' + loc + '.js'
                 // url: 'http://gist.github.com/' + m[1]
             }
         })
@@ -46,8 +46,9 @@ app.get('/gist/:username/:gistid', function(req, res) {
             res.render('gist.jade', {
                 contents: o.contents,
                 basePath: o.basePath,
+                src: o.src,
                 port: app.port
-            })        
+            })
         })
 })
 

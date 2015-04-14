@@ -26,7 +26,6 @@ program
 
 
 var app = require('../viewer/app.js')
-var mkdirp = require('mkdirp')
 
 program
     .command('viewer')
@@ -164,8 +163,8 @@ function _preview_locally(src, options) {
 
             craft
                 .preview(contents, context)
-                .then(function(solids) {                    
-                    console.log('worker preview done', solids)                    
+                .then(function(solids) {
+                    console.log('worker preview done', solids)
                     var csgs = _s(solids).csgs()
                     var result = {}
                     result.csgs = csgs.map(function(csg) {
@@ -173,8 +172,8 @@ function _preview_locally(src, options) {
                             stl: csg.toStlString()
                         }
                     })
-                    if (solids.length > 0){                    
-                        var s = solids[0]       
+                    if (solids.length > 0){
+                        var s = solids[0]
                         result.layout = s.layout
                     }
 
@@ -185,7 +184,7 @@ function _preview_locally(src, options) {
                         rendered: result
                     })
                 })
-                    
+
         })
 
         socket.on('disconnect', function() {
