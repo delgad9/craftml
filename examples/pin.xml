@@ -1,24 +1,10 @@
 <craft>
-    <script type="text/openjscad">
-        function main(){
-
-            var headRadius = 5
-            var headDepth = 1
-            var depth = 10
-
-            // needle
-            var needle = cylinder({
-                r: 1,
-                h: depth                
-            })
-
-            // head
-            var head = cylinder({
-                r: headRadius,
-                h: headDepth                
-            })
-            head = head.translate([0, 0, depth]);
-            return union(head, needle).translate([headRadius,headRadius,0]);
-        }
-    </script>
-</craft>    
+  <craft name="head" src="head.xml"/>
+  <craft name="body" src="body.xml"/>
+  <stack>
+    <align x="50" y="50">
+      <head></head>
+      <body></body>
+    </align>
+  </stack>
+</craft>

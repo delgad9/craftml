@@ -94,36 +94,41 @@ function preview(src, options) {
 }
 
 function _preview_gist(src, options) {
-    loadGist(src)
-        .then(function(file) {
 
-            io.on('connection', function(socket) {                
-                socket.on('ready', function() {                    
-                    socket.emit('modified',file)
-                })
-                socket.on('disconnect', function() {
-                    // TODO: auto exit the server
-                })
-            })
+    var m = src.match(/^https:\/\/gist.github.com\/(.*)/)
+    // loadGist(m)
+    //     .then(function(file) {
 
-            // find a port automatically
-            findPort(8100, 8199, function(ports) {
-                if (ports.length === 0) {
-                    throw new Error('no available ports found between 8100 - 8199')
-                } else {
-                    var port = ports.pop()
-                    app.port = port
-                    // start the server for previewing
-                    http.listen(port, function() {
-                        console.log('previewing ' + src + ' at http://localhost:' + port)
-                        console.log('(press ctrl-c to quit)')
-                        var url = 'http://localhost:' + port + '/gist'
-                        open(url)
-                    })
-                }
+    //         // io.on('connection', function(socket) {
+    //         //     socket.on('ready', function() {
+    //         //         socket.emit('modified', file)
+    //         //     })
+    //         //     socket.on('disconnect', function() {
+    //         //         // TODO: auto exit the server
+    //         //     })
+    //         // })
+
+    // find a port automatically
+    findPort(8100, 8199, function(ports) {
+        if (ports.length === 0) {
+            throw new Error('no available ports found between 8100 - 8199')
+        } else {
+            var port = ports.pop()
+            app.port = port
+            // start the server for previewing
+            http.listen(port, function() {
+                console.log('previewing ' + src + ' at http://localhost:' + port)
+                console.log('(press ctrl-c to quit)')
+                var url = 'http://localhost:' + port + '/gist/' + m[1]
+                open(url)
             })
-        })
+        }
+    })
+        // })
 }
+
+
+var parse = require('../lib/parse')
 
 function _preview_locally(src, options) {
 
@@ -145,10 +150,42 @@ function _preview_locally(src, options) {
         sockets.push(socket)
         socket.on('ready', function() {
             var contents = fs.readFileSync(src, 'utf8')
-            socket.emit('modified', {
-                src: src,
-                contents: contents
-            })
+
+            var context = {}
+            context.basePath = path.dirname(src)
+            // parse(contents, context)
+            //     .then(function(parsed) {
+            //         console.log(parsed)
+            //         socket.emit('parsed', {
+            //             src: src,
+            //             parsed: parsed
+            //         })
+            //     })
+
+            craft
+                .preview(contents, context)
+                .then(function(solids) {                    
+                    console.log('worker preview done', solids)                    
+                    var csgs = _s(solids).csgs()
+                    var result = {}
+                    result.csgs = csgs.map(function(csg) {
+                        return {
+                            stl: csg.toStlString()
+                        }
+                    })
+                    if (solids.length > 0){                    
+                        var s = solids[0]       
+                        result.layout = s.layout
+                    }
+
+                    // console.log(parsed)
+                    socket.emit('rendered', {
+                        src: src,
+                        contents: contents,
+                        rendered: result
+                    })
+                })
+                    
         })
 
         socket.on('disconnect', function() {

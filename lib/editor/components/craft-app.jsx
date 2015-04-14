@@ -3,10 +3,14 @@ var CraftViewer = require('./craft-viewer')
 var CraftEditor = require('./craft-editor')
 var brcraft = require('../brcraft')
 
+var ResizableBox = require('react-resizable').ResizableBox
+
 module.exports = React.createClass({
 
     getInitialState: function() {
+        console.log(this.props)
         return {
+            contents: this.props.initialContents,
             useWorker: this.props.useWorker,
             renderCommandText: 'Initializing ...',
             exportCommandText: 'Export'
@@ -16,16 +20,20 @@ module.exports = React.createClass({
     doRender: function() {
         this.setState({renderCommandText: 'Rendering ...'})
 
-        var code = this.refs.editor.getValue()
+        // var code = this.refs.editor.getValue()
+        var code = this.state.contents
+        var basePath = this.props.basePath
         var self = this        
         var context = {
-            basePath: window.location.href,
+            basePath: basePath,//window.location.href,
             origin: window.location.origin
         }
+        console.log(context)
 
         brcraft
             .preview(code, context, {useWorker: this.state.useWorker})
             .then(function(results){
+                console.log(results)
                 self.didRender(results)
             })
     },
@@ -108,36 +116,68 @@ module.exports = React.createClass({
         // console.log(editorHeight)
     },
 
-    handleHeightChange: function(height){                
-        if (this.props.autoResize){
-            // console.log('height:', height)
-            var h = Math.max(height, 200) + 0  // enforce min height
-            // this.setState({editorHeight:h})
-            //this.refs.viewer.setHeight(h)
-            this.refs.viewer.setHeight('100%')
+    // handleHeightChange: function(height){                
+    //     // if (this.props.autoResize){
+    //         console.log('height:', height)
+    //         var h = Math.max(height, 200) + 0  // enforce min height
+    //         // this.setState({editorHeight:h})
+    //         //this.refs.viewer.setHeight(h)
+    //         // this.refs.viewer.setHeight('100%')
 
-        }
-    },
+    //     // }
+    // },
 
     componentDidMount: function() {
 
-        window.addEventListener('resize', this.onWindowResize, false);
+        window.addEventListener('resize', this.onWindowResize, false);        
+        this.doRender()
+        // if (this.props.file){
+        //     this.props.file.emit('ready')
+            
+        //     this.props.file.on('modified', function(data) {
+        //         this.setState(data)
+        //         this.doRender2(data.contents, data.basePath)
+        //     }.bind(this))
 
-        if (this.props.file){
-            this.props.file.emit('ready')
-            this.props.file.on('modified', function(data) {
-                this.setState(data)
-                this.doRender2(data.contents, data.basePath)
-            }.bind(this))
-        }
+
+        //     this.props.file.on('parsed', function(data) {
+        //         console.log('parsed', data)
+        //     }.bind(this))
+
+        //     this.props.file.on('rendered', function(data) {
+        //         // console.log('r', data)
+        //         // console.log(data)
+        //         // this.refs.editor.setState({contents:contents})
+        //         this.setState({contents: data.contents})
+        //         this.didRender(data.rendered)
+        //     }.bind(this))
+
+        // }
+
+
+
+        // console.log('h:',this.refs.editor.computeHeight('test\ntest'))
     },
 
     onWindowResize: function() {
+        console.log('onWindowResize')
         this.setState({height: window.innerHeight - 40})
     },
 
-    componentDidUpdate: function(){
+    handleResize: function(){
+        console.log('resizing')
         this.refs.viewer.refresh()
+    },
+
+    componentDidUpdate: function(){
+        console.log('app:componentDidUpdate')
+        this.refs.viewer.refresh()
+    },
+
+    editorOnChange: function(contents){
+        console.log('app:editorOnChange')
+        // this.forceUpdate()
+        this.setState({contents:contents})
     },
 
     render: function() {
@@ -180,19 +220,17 @@ module.exports = React.createClass({
             position: 'relative',
             height: '100%',
             padding: 0
-            //border: '1px #999 solid'
         }
 
-        // if (this.state.editorHeight && this.props.autoResize){
-            //r.height = this.state.editorHeight
-        if (this.state.height){
-            // r.height = this.state.height
-        } else {
-            // r.height = window.innerHeight// - 20//'100%'
+        var contents = this.state.contents //|| this.props.contents
+
+        if (this.props.fitTo === 'container') {
+            r.height = '100%'
+        } else if (this.props.fitTo === 'contents') {        
+            // r.height = this.refs.editor ? this.refs.editor.getHeight() : '100%'            
+            r.height =  this.refs.editor ? this.refs.editor.computeHeight(contents) : '100%'
+            console.log(r.height)
         }
-        r.height = window.innerHeight// - 20//'100%'
-        r.width = window.innerWidth// - 20
-        // }
 
         var n = {
             fontSize: '65%'
@@ -201,9 +239,6 @@ module.exports = React.createClass({
         var a = {
             display: 'none'
         }
-
-        var contents = this.state.contents || this.props.contents
-                
 
         var status = <div style={b2}>{this.state.status}</div>  
 
@@ -224,18 +259,22 @@ module.exports = React.createClass({
         //           </div>         
         //       </div>    
 
-        return (          
-          <div style={r}>
-            <a ref="download" style={a}/>
-            <div style={s2}>     
-                {src}                   
-                {status}
-                <CraftViewer ref='viewer'/>
-            </div>            
-            <div style={s1}>
-                <CraftEditor ref='editor' contents={contents} onRefreshHotkey={this.doRender}/>
-            </div>            
-          </div>
+        return (
+            <div style={r}>
+                <a ref="download" style={a}/>
+                <div style={s2}>     
+                    {src}                   
+                    {status}
+                    <CraftViewer ref='viewer'/>
+                </div>            
+                <div style={s1}>
+                    <CraftEditor ref='editor' 
+                        contents={contents}
+                        onRefreshHotkey={this.doRender}
+                        onChange={this.editorOnChange}
+                    />
+                </div>            
+            </div>
         )
     }
 })

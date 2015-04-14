@@ -2,18 +2,17 @@ doctype html
 html(lang="en")
   head
     title CraftML
-    link(href="css/custom.css" rel="stylesheet")
+    link(href="/css/custom.css" rel="stylesheet")
   body
     div#gist
         script(src="https://gist.github.com/doubleshow/fd30cddee15a72683a53.js")        
-    div#craftml        
-    script(src="/socket.io/socket.io.js")
-    script(type='text/javascript').
-        socket = io('http://localhost:#{port}')
-        options = {            
+    div#craftml!= '<!-- ' + contents + '-->'
+    script(src="/js/bundle.js")
+    script(type='text/javascript').        
+        var options = {
             useWorker: true,
-            autoResize: true,
-            file: socket,
-            hideEditor: true
+            fitTo: 'container',
+            hideEditor: true,
+            basePath: '#{basePath}'
         }
-    script(src="js/bundle.js")
+        craft.edit('#craftml', options)

@@ -16,11 +16,39 @@ app.get('/', function(req, res) {
     })
 })
 
-app.get('/gist', function(req, res) {
-    res.render('gist.jade', {
-        contents: '',
-        port: app.port
-    })
+
+
+var Promise = require('bluebird')
+var request = Promise.promisifyAll(require('request'))
+
+// load gist
+// https://gist.githubusercontent.com/
+function loadGist(loc) {    
+    var url = 'https://gist.githubusercontent.com/' + loc + '/raw/index.xml'
+    return request
+        .getAsync({
+            url: url
+        })
+        .spread(function(response, body) {
+            return {
+                basePath: 'https://gist.githubusercontent.com/' + loc + '/raw/',
+                contents: body
+                // src: src,
+                // url: 'http://gist.github.com/' + m[1]
+            }
+        })
+}
+
+app.get('/gist/:username/:gistid', function(req, res) {
+    var loc = req.params.username + '/' + req.params.gistid
+    loadGist(loc)
+        .then(function(o){
+            res.render('gist.jade', {
+                contents: o.contents,
+                basePath: o.basePath,
+                port: app.port
+            })        
+        })
 })
 
 app.get('/status', function(req, res) {
