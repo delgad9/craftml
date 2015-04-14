@@ -2,7 +2,7 @@
   "name": "craftml",
   "version": "0.3.3",
   "description": "craftml",
-  "main": "lib/index.js",
+  "main": "lib/craft.js",
   "scripts": {
     "test": "mocha"
   },
