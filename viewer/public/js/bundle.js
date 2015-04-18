@@ -13,7 +13,7 @@ if (typeof craft == 'undefined') {
 //     // React.render(app, element, function(){
 
 //     // })
-    
+
 //     socket.on('rendered', function(data) {
 //         console.log('index:rendered')
 //                 // console.log('r', data)
@@ -23,7 +23,7 @@ if (typeof craft == 'undefined') {
 //         var app = React.createElement(CraftApp, options)
 //         // console.log(app, options)
 //         options.initialContents = data.contents
-//         React.render(app, element)        
+//         React.render(app, element)
 
 //         // this.setState({contents: data.contents})
 //     // this.didRender(data.rendered)
@@ -37,8 +37,8 @@ craft.editLocally = function(selector, options){
     socket.on('rendered', function(data) {
         console.log('index:rendered')
         options.initialContents = data.contents
-        var app = React.createElement(CraftApp, options)    
-        React.render(app, element)        
+        var app = React.createElement(CraftApp, options)
+        React.render(app, element)
     })
     socket.emit('ready')
 }
@@ -48,11 +48,11 @@ craft.edit = function(selector, options){
 
     var s = $(selector).html()
     console.log(selector, s)
-    
+
     // unwrap comment to obtain the script conents
     var m = s.match(/<!--\s*([^]*)\s*-->/)
     var contents = m ? m[1] : ''
-    
+
     options.initialContents = contents
     var app = React.createElement(CraftApp, options)
     React.render(app, element)
@@ -60,10 +60,10 @@ craft.edit = function(selector, options){
 
 global.craft = craft
 // $('.craftml').each(function() {
-    
+
 //     // get the content in the element
 //     var s = $(this).html()
-    
+
 //     // unwrap comment to obtain the script conents
 //     var m = s.match(/<!--\s*([^]*)\s*-->/)
 //     var contents = m ? m[1] : ''
@@ -80,10 +80,10 @@ global.craft = craft
 // })
 
 // $('.craftml').each(function() {
-    
+
 //     // get the content in the element
 //     var s = $(this).html()
-    
+
 //     // unwrap comment to obtain the script conents
 //     var m = s.match(/<!--\s*([^]*)\s*-->/)
 //     var contents = m ? m[1] : ''
@@ -98,8 +98,6 @@ global.craft = craft
 //     craft.edit(this, props)
 //     // craft.edit(this, props)
 // })
-
-
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
@@ -322,6 +320,8 @@ module.exports = React.createClass({displayName: "exports",
             viewer.add(csg, offset)
         })
 
+        viewer.exportImage()
+
         // var editorHeight = this.refs.editor.getHeight()
         this.setState({renderCommandText: 'Refresh'})//, editorHeight: editorHeight})
         this.setState({status: ''})//, editorHeight: editorHeight})
@@ -382,7 +382,7 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     componentDidUpdate: function(){
-        console.log('app:componentDidUpdate')
+        // console.log('app:componentDidUpdate')
         this.refs.viewer.refresh()
     },
 
@@ -637,19 +637,48 @@ module.exports = React.createClass({displayName: "exports",
 var React = require('react')
 var Viewer = require('../viewer/viewer')
 
+var saveFile = function (strData, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            document.body.appendChild(link); //Firefox requires the link to be in the body
+            link.download = filename;
+            link.href = strData;
+            link.click();
+            document.body.removeChild(link); //remove the link when done
+        } else {
+            location.replace(uri);
+        }
+    }
+
 module.exports = React.createClass({displayName: "exports",
 
     getInitialState: function() {
         return {
-            height: '100%'            
+            height: '100%'
         }
-    },    
+    },
 
     componentDidMount: function() {
         var v = this.refs.viewer.getDOMNode()
         this.viewer = new Viewer(v)
         this.viewer.setCameraPosition(0, -2.5, 3)
         this.viewer.render()
+    },
+
+    exportImage: function(){
+        var strMime = "image/jpeg";
+        console.log('viewer:export')
+        var strMime = "image/jpeg"
+        var strDownloadMime = "image/octet-stream"
+        // imgData = this.refs.viewer.getDOMNode().toDataURL(strMime)
+        // var imgData = this.viewer.renderer.domElement.toDataURL(strMime)
+        console.log(this.viewer.renderer.domElement)
+        this.viewer.renderer.domElement.toBlob(function(blob){
+          console.lg('blob',blob)
+        })
+
+        // saveFile(imgData.replace(strMime, strDownloadMime), "test.png");
+        // this.viewer.exportImage()
     },
 
     add: function(csg, offset) {
@@ -674,7 +703,7 @@ module.exports = React.createClass({displayName: "exports",
             height: '100%'
         }
 
-        console.log('viewer:render')        
+        console.log('viewer:render')
 
         return ( React.createElement("div", {className: "viewer", 
                     ref: "viewer", 
@@ -683,6 +712,7 @@ module.exports = React.createClass({displayName: "exports",
         )
     }
 })
+
 
 },{"../viewer/viewer":9,"react":175}],6:[function(require,module,exports){
 THREE = require('./three.min')
@@ -2604,8 +2634,29 @@ var grids = [
     [0, 0, 1, 0]
 ];
 
+var saveFile = function (strData, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            document.body.appendChild(link); //Firefox requires the link to be in the body
+            link.download = filename;
+            link.href = strData;
+            link.click();
+            document.body.removeChild(link); //remove the link when done
+        } else {
+            location.replace(uri);
+        }
+    }
+
 Viewer.prototype = {
     constructor: Viewer,
+
+    exportImage: function() {
+        // console.log('viewer:export')
+        // var strMime = "image/jpeg"
+        // var strDownloadMime = "image/octet-stream"
+        // imgData = this.renderer.domElement.toDataURL(strMime)
+        // saveFile(imgData.replace(strMime, strDownloadMime), "test.png");
+    },
 
     setCameraPosition: function(x, y, z) {
         this.camera.position.set(x, y, z);
@@ -2671,7 +2722,7 @@ Viewer.prototype = {
             grid.rotation.z = Math.PI / 2;
             if (offset){
                 grid.position.set(-offset.x/50, -offset.y/50, -offset.z/50)
-            }            
+            }
             this.scene.add(grid);
 
             //z - xy
@@ -2680,7 +2731,7 @@ Viewer.prototype = {
             grid.rotation.x = Math.PI / 2;
             if (offset){
                 grid.position.set(-offset.x/50, -offset.y/50, -offset.z/50)
-            }            
+            }
             this.scene.add(grid);
 
             var color = 0xBBBBBB;
@@ -2696,7 +2747,7 @@ Viewer.prototype = {
         axis = new THREE.AxisHelper(1);
         // axis.position.set(0.01, 0.01, 0.01);
         // console.log('here')
-        if (offset){            
+        if (offset){
             axis.position.set(-offset.x/50, -offset.y/50, -offset.z/50);
         } else {
             axis.position.set(0.01, 0.01, 0.01);
@@ -2919,6 +2970,7 @@ Grid.prototype = Object.create(THREE.Line.prototype);
 Grid.prototype.constructor = Grid;
 
 module.exports = Viewer
+
 
 },{"./STLLoader":6,"./TrackballControls":7,"./three.min.js":8}],10:[function(require,module,exports){
 /* ***** BEGIN LICENSE BLOCK *****

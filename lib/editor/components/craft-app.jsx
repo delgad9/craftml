@@ -1,14 +1,10 @@
 var React = require('react')
 var CraftViewer = require('./craft-viewer')
 var CraftEditor = require('./craft-editor')
-var brcraft = require('../brcraft')
-
-//var ResizableBox = require('react-resizable').ResizableBox
 
 module.exports = React.createClass({
 
     getInitialState: function() {
-        console.log(this.props)
         return {
             contents: this.props.initialContents,
             useWorker: this.props.useWorker,
@@ -21,37 +17,25 @@ module.exports = React.createClass({
         this.setState({status: 'Rendering ...'})
         this.setState({renderCommandText: 'Rendering ...'})
 
-        // var code = this.refs.editor.getValue()
         var code = this.state.contents
         var basePath = this.props.basePath
-        var self = this
         var context = {
             basePath: basePath,//window.location.href,
             origin: window.location.origin
         }
-        console.log(context)
 
-        brcraft
-            .preview(code, context, {useWorker: this.state.useWorker})
-            .then(function(results){
-                console.log(results)
-                self.didRender(results)
-            })
-    },
+        this.props.craftml
+            .preview(code, context)
+            .then(function(previewable){
+                console.log('app:previewable', previewable)
+                this.setState({previewable: previewable})
+                this.setState({renderCommandText: 'Refresh'})
+                this.setState({status: ''})
 
-    doRender2: function(contents, basePath) {
-        this.setState({status: 'Rendering ...'})
-
-        var context = {
-            basePath: basePath,
-            origin: window.location.origin
-        }
-
-        brcraft
-            .preview(contents, context, {useWorker: this.state.useWorker})
-            .then(function(results){
-                this.didRender(results)
             }.bind(this))
+            .catch(function(e){
+                console.log(e)
+            })
     },
 
     doExport: function(){
@@ -91,73 +75,14 @@ module.exports = React.createClass({
 
     didRender: function(result) {
         console.log('didRender',result)
-
-        var viewer = this.refs.viewer
-
-        var offset = {x:result.layout.size.x/2,y:result.layout.size.y/2,z:result.layout.size.z/2}
-
-        // viewer.offset = offset
-        // viewer.clear()
-        viewer.initScene(offset)
-
-        var colors = ['blue', 'orange', 'yellow', 'green', 'fuchsia', 'red']
-        result.csgs.forEach(function(r, index) {
-            var stlstring = r.stl
-            var csg = {
-                color: colors[index % 6],
-                stl: stlstring
-            }
-
-            viewer.add(csg, offset)
-        })
-
-        // var editorHeight = this.refs.editor.getHeight()
-        this.setState({renderCommandText: 'Refresh'})//, editorHeight: editorHeight})
-        this.setState({status: ''})//, editorHeight: editorHeight})
-        // console.log(editorHeight)
+        this.setState({previewable: previewable})
+        this.setState({renderCommandText: 'Refresh'})
+        this.setState({status: ''})
     },
 
-    // handleHeightChange: function(height){
-    //     // if (this.props.autoResize){
-    //         console.log('height:', height)
-    //         var h = Math.max(height, 200) + 0  // enforce min height
-    //         // this.setState({editorHeight:h})
-    //         //this.refs.viewer.setHeight(h)
-    //         // this.refs.viewer.setHeight('100%')
-
-    //     // }
-    // },
-
     componentDidMount: function() {
-
         window.addEventListener('resize', this.onWindowResize, false);
         this.doRender()
-        // if (this.props.file){
-        //     this.props.file.emit('ready')
-
-        //     this.props.file.on('modified', function(data) {
-        //         this.setState(data)
-        //         this.doRender2(data.contents, data.basePath)
-        //     }.bind(this))
-
-
-        //     this.props.file.on('parsed', function(data) {
-        //         console.log('parsed', data)
-        //     }.bind(this))
-
-        //     this.props.file.on('rendered', function(data) {
-        //         // console.log('r', data)
-        //         // console.log(data)
-        //         // this.refs.editor.setState({contents:contents})
-        //         this.setState({contents: data.contents})
-        //         this.didRender(data.rendered)
-        //     }.bind(this))
-
-        // }
-
-
-
-        // console.log('h:',this.refs.editor.computeHeight('test\ntest'))
     },
 
     onWindowResize: function() {
@@ -171,7 +96,7 @@ module.exports = React.createClass({
     },
 
     componentDidUpdate: function(){
-        console.log('app:componentDidUpdate')
+        // console.log('app:componentDidUpdate')
         this.refs.viewer.refresh()
     },
 
@@ -250,6 +175,8 @@ module.exports = React.createClass({
                   </div>
         }
 
+        this.state.previewable =  this.state.previewable || this.props.previewable
+
         // var b = <div style={b}>
         //           <div className="button" onClick={this.doRender}>
         //                 <span>{this.state.renderCommandText}</span>
@@ -266,7 +193,9 @@ module.exports = React.createClass({
                 <div style={s2}>
                     {src}
                     {status}
-                    <CraftViewer ref='viewer'/>
+                    <CraftViewer
+                        ref='viewer'
+                        contents={this.state.previewable}/>
                 </div>
                 <div style={s1}>
                     <CraftEditor ref='editor'

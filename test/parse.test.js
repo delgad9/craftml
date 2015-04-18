@@ -48,6 +48,7 @@ describe('parse()', function() {
 
         return parse('<foo></foo><foo></foo>')
             .then(function(t) {
+                inspect(t)
                 t.should.containSubset([foo(), foo()])
             })
 
@@ -126,7 +127,7 @@ describe('parse()', function() {
     it.skip('craft(row("hello world")) can ignore white spaces', function() {
 
         var t = parse('<craft>\n\n<row>hello world</row>\n\n</craft>')
-            // inspect(t)      
+            // inspect(t)
 
     })
 
@@ -177,7 +178,7 @@ describe('parse()', function() {
 
             return parse('<craft><script type="text/openjscad">function main(){}</script></craft>')
                 .then(function(actual) {
-                    // inspect(actual)        
+                    // inspect(actual)
                     actual.children[0].type.should.be.equal('script')
                     actual.children[0].code.should.be.equal('function main(){}')
                 })
@@ -302,7 +303,7 @@ describe('parse()', function() {
         it('can load an installed module', function() {
             return parse('<craft><craft module="craft-box" name="foo"/></craft>')
                 .then(function(actual) {
-                    // inspect(actual)                    
+                    // inspect(actual)
                     actual.children[0].children[0].type.should.be.equal('script')
                     actual.children[0].children[0].code.should.contain('cube()')
                 })
@@ -318,7 +319,7 @@ describe('parse()', function() {
 
             return parse('<craft><craft module="sikuli/craft-pin" name="foo"/></craft>')
                 .then(function(actual) {
-                    // inspect(actual)                    
+                    // inspect(actual)
                     actual.children[0].children[0].type.should.be.equal('tag')
                     actual.children[0].children[0].name.should.be.equal('parameter')
                 })
@@ -346,7 +347,7 @@ describe('parse()', function() {
                     // inspect(actual)
                     actual.children[0].children[0].attribs.contents.length.should.be.equal(53850)
                 })
-        })     
+        })
 
         it('can load pin.stl from a relative url', function() {
 
@@ -361,7 +362,7 @@ describe('parse()', function() {
                     // inspect(actual)
                     actual.children[0].children[0].attribs.contents.length.should.be.equal(53850)
                 })
-        })  
+        })
 
         it('can load pin.stl from a relative url (index.html)', function() {
 
@@ -376,7 +377,7 @@ describe('parse()', function() {
                     // inspect(actual)
                     actual.children[0].children[0].attribs.contents.length.should.be.equal(53850)
                 })
-        })                       
+        })
 
         it('can load giraffe.stl (binary, 11948 polygons)', function() {
 
@@ -385,7 +386,7 @@ describe('parse()', function() {
                     // inspect(actual)
                     actual.children[0].children[0].attribs.contents.length.should.be.equal(597484)
                 })
-        })   
+        })
 
     })
 
