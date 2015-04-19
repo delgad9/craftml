@@ -1,0 +1,4 @@
+<craft>
+  <parameter name="height" default="10" type="int"/>
+  <cylinder height={{height}}></cylinder>
+</craft>

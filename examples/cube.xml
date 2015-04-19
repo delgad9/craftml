@@ -1,7 +1,15 @@
 <craft>
-    <script type="text/openjscad">
-        function main(){
-            return cube().scale([20,20,30])
-        }
-    </script>
+    <row>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube> 
+    </row>
 </craft>

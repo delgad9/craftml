@@ -37,8 +37,8 @@ describe('#craft', function() {
         it('can preview a cube', function() {
 
             return preview('<craft><cube></cube></craft>')
-                .then(function(solids) {
-                    _s(solids).csgs().should.have.length(1)                    
+                .then(function(previewable) {
+                    previewable.csgs.should.have.length(1)
                 })
                 // inspect(v)
         })
@@ -46,8 +46,8 @@ describe('#craft', function() {
         it('can preview two cubes', function() {
 
             return preview('<craft><cube></cube><cube></cube></craft>')
-                .then(function(solids) {
-                    _s(solids).csgs().should.have.length(2)
+                .then(function(previewable) {
+                    previewable.csgs.should.have.length(2)
                 })
 
         })
@@ -55,8 +55,8 @@ describe('#craft', function() {
         it('can preview a parameterized cube', function() {
 
             return preview('<craft><cube xsize="100"></cube></craft>')
-                .then(function(solids) {
-                    _s(solids).csgs().should.have.length(1)
+                .then(function(previewable) {
+                    previewable.csgs.should.have.length(1)
                 })
         })
 
@@ -71,16 +71,16 @@ describe('#craft', function() {
                     // inspect(v)
                     v.should.have.property('polygons').and.have.length(6)
                 })
-        })        
+        })
 
         it('can build a row of two cubes', function() {
 
             return build('<craft><row><cube></cube><cube></cube></row></craft>')
                 .then(function(v) {
-                    // inspect(v)
+                    inspect(v)                    
                     v.should.have.property('polygons').and.have.length(10)
                 })
-        })        
+        })
 
     })
 

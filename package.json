@@ -1,8 +1,8 @@
 {
   "name": "craftml",
-  "version": "0.3.3",
+  "version": "0.5.0",
   "description": "craftml",
-  "main": "index.js",
+  "main": "lib/craft.js",
   "scripts": {
     "test": "mocha"
   },
@@ -20,45 +20,29 @@
   "bugs": {
     "url": "https://github.com/sikuli/craftml/issues"
   },
-  "bin": {
-    "craft": "./bin/craft"
-  },
   "files": [
-    "lib",
-    "bin",
-    "viewer"
+    "lib"
   ],
-  "homepage": "https://github.com/sikuli/craftml",
+  "homepage": "http://craftml.io",
   "devDependencies": {
-    "brfs": "^1.4.0",
-    "browser-sync": "^2.0.0-rc6",
-    "browserify": "^9.0.3",
     "chai": "^1.10.0",
     "chai-subset": "^0.3.0",
     "eyes": "^0.1.8",
-    "gulp": "^3.8.11",
-    "gulp-rename": "^1.2.0",
-    "gulp-replace": "^0.5.3",
-    "gulp-util": "^3.0.4",
     "mocha": "^2.1.0",
     "nock": "^0.59.1",
     "sinon": "^1.12.2",
-    "sinon-chai": "^2.6.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watch-glob": "^0.1.3",
-    "watchify": "^2.6.2"
+    "sinon-chai": "^2.6.0"
   },
   "dependencies": {
     "bluebird": "^2.9.13",
-    "cheerio": "^0.18.0",
     "craft-scad": "sikuli/craft-scad",
     "event-emitter": "^0.3.3",
     "eyes": "^0.1.8",
     "get-parameter-names": "^0.2.0",
-    "glob": "^4.3.5",
+    "htmlparser2": "^3.8.2",
+    "jade": "^1.9.2",
     "lodash": "^3.5.0",
     "request": "^2.53.0",
-    "url": "^0.10.3",
     "with": "^4.0.1"
   }
 }
