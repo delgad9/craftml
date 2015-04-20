@@ -1,5 +1,6 @@
 <craft name="diagonal">
     <parameter name="spacing" type="float" default="0"/>
+    <parameter name="direction" type="string" default="right"/>
     <group>
         <content></content>
     </group>
@@ -18,9 +19,14 @@
                     y: ty, 
                     z: solid.layout.location.z
                 })
-
-                tx = tx + solid.layout.size.x + params.spacing
-                ty = ty + solid.layout.size.y + params.spacing
+        
+                tx = tx - solid.layout.size.x - params.spacing
+                if (params.direction == "left") {
+                    ty = ty + solid.layout.size.y + params.spacing
+                }
+                else {
+                    ty = ty - solid.layout.size.y - params.spacing
+                }
 
                 // place on x-y plane (z = 0)
                 solid.layout.location.z = 0
