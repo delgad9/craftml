@@ -34,7 +34,6 @@
             })
 
             scope.solids[0].fitToChildren()
-            console.log(scope.solids[0])
 
         }
 
