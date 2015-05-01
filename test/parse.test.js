@@ -48,7 +48,7 @@ describe('parse()', function() {
 
         return parse('<foo></foo><foo></foo>')
             .then(function(t) {
-                inspect(t)
+                // inspect(t)
                 t.should.containSubset([foo(), foo()])
             })
 

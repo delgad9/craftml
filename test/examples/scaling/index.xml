@@ -1,0 +1,10 @@
+<craft>
+    <row>
+        <scale factor="2"><cube></cube></scale>
+        <scale factor="3"><cube></cube></scale>
+        <scale factor="4"><cube></cube></scale>
+        <scale x="4"><cube></cube></scale>
+        <scale y="4"><cube></cube></scale>
+        <scale z="4"><cube></cube></scale>
+    </row>
+</craft>
