@@ -23,11 +23,6 @@
   "files": [
     "lib"
   ],
-  "browserify": {
-    "transform": [
-        ["stringify",[".xml"]]
-    ]
-  },
   "homepage": "http://craftml.io",
   "devDependencies": {
     "chai": "^1.10.0",
@@ -36,8 +31,7 @@
     "mocha": "^2.1.0",
     "nock": "^0.59.1",
     "sinon": "^1.12.2",
-    "sinon-chai": "^2.6.0",
-    "eyes": "^0.1.8"
+    "sinon-chai": "^2.6.0"
   },
   "dependencies": {
     "bluebird": "^2.9.13",

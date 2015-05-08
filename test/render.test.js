@@ -61,7 +61,7 @@ describe('render()', function() {
 
         return render(c)
             .then(function(r) {
-                // inspect(r)      
+                // inspect(r)
                 match(r, solid())
             })
     })
@@ -101,7 +101,7 @@ describe('render()', function() {
 
         return render(c)
             .then(function(r) {
-                // inspect(r)    
+                // inspect(r)
                 match(r, [solid()])
             })
 
@@ -209,6 +209,20 @@ describe('render()', function() {
                 })
             })
 
+    })
+
+    it('can resolve color attribute as string', function() {
+
+        var c = [
+                craft(a('name', 'foo'), unit()),
+                foo(a('color', 'red'))
+            ]
+            // inspect(c)
+        return render(c)
+            .then(function(r) {
+                // inspect(r)
+                r[0].should.have.property('color').eql('red')
+            })
     })
 
     describe('script', function() {
@@ -384,7 +398,7 @@ describe('render()', function() {
         it('can inject default parameter values', function() {
             var u = unit()
             var spy = sinon.spy()
-            
+
             u.on('render', spy)
 
             var c = [

@@ -1,3 +1,3 @@
 # craftml
 
-See documentation at [docs.craftml.org](http:/docs.craftml.org/)
+See documentation at [docs.craftml.io](http:/docs.craftml.io/)
