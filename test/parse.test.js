@@ -325,6 +325,43 @@ describe('parse()', function() {
                 })
         })
 
+        it('can load a module from gist', function() {
+
+            nock('https://gist.githubusercontent.com/')
+                .get('/doubleshow/fd30cddee15a72683a53/raw/index.xml')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/pin.xml');
+                })
+
+            return parse('<craft><craft module="@gist/doubleshow/fd30cddee15a72683a53" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].children[0].type.should.be.equal('tag')
+                    actual.children[0].children[0].name.should.be.equal('parameter')
+                })
+        })
+
+        it('can load a module using npm registry', function() {
+
+            nock('http://registry.npmjs.org/')
+                .get('/craft-chair/latest')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/npmjs.json')
+                })
+            nock('https://raw.githubusercontent.com/')
+                .get('/calebhsu/craft-chair/master/index.xml')
+                .reply(200, function(uri, requestBody) {
+                    return fs.createReadStream('test/fixtures/pin.xml');
+                })
+
+            return parse('<craft><craft module="craft-chair" name="foo"/></craft>')
+                .then(function(actual) {
+                    // inspect(actual)
+                    actual.children[0].children[0].type.should.be.equal('tag')
+                    actual.children[0].children[0].name.should.be.equal('parameter')
+                })
+        })
+
         it('can load pin.stl locally', function() {
 
             return parse('<craft><craft stl="test/fixtures/pin.stl" name="foo"/></craft>')
