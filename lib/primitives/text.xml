@@ -1,28 +1,28 @@
 <craft name="text">
     <parameter name="text" default="" type="string"/>
+    <scale factor="0.5">
     <script type="text/craftml">
-        function main(params) {
+        function main(params, scope) {
 
             var text = params.text
             var size = 10
 
             var l = vector_text(0, 0, text); // l contains a list of polylines to be drawn
             var o = [];
-            l.forEach(function(pl) { // pl = polyline (not closed)
-                o.push(rectangular_extrude(pl, {
-                    w: 2,
-                    h: 2
-                })); // extrude it to 3D
-            });
-
             var scaleFactor = 0.25 * (size / 10);
             var depthScaleFactor = 0.1;
 
-            // var r = union(o).scale([scaleFactor,scaleFactor,depthScaleFactor]);  
-            // speedup for now
-            var r = union(o).scale([scaleFactor, scaleFactor, depthScaleFactor]);
+            l.forEach(function(pl) { // pl = polyline (not closed)
+                var o = rectangular_extrude(pl, {
+                    w: 2,
+                    h: 2
+                }) // extrude it to 3D
 
-            return r
+                var s = new Solid(o)
+                s.color = 'gray'
+                scope.solids.push(s)
+            })
         }
     </script>
+    </scale>
 </craft>

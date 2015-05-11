@@ -1,0 +1,16 @@
+<craft>
+    <cube x="-15"></cube>
+    <cube x="30"></cube>
+    <cube y="-15" z="-15"></cube>
+    <cube y="30" z="30"></cube>
+    <group x="40">
+        <scale factor="3">
+            <cube></cube>
+        </scale>
+    </group>
+    <group x="-50">
+        <scale factor="3">
+            <cylinder></cylinder>
+        </scale>
+    </group>
+</craft>

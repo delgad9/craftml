@@ -37,7 +37,6 @@
     "bluebird": "^2.9.13",
     "craft-scad": "sikuli/craft-scad",
     "event-emitter": "^0.3.3",
-    "eyes": "^0.1.8",
     "get-parameter-names": "^0.2.0",
     "htmlparser2": "^3.8.2",
     "jade": "^1.9.2",

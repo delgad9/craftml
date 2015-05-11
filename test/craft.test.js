@@ -77,7 +77,7 @@ describe('#craft', function() {
 
             return build('<craft><row><cube></cube><cube></cube></row></craft>')
                 .then(function(v) {
-                    inspect(v)                    
+                    // inspect(v)                    
                     v.should.have.property('polygons').and.have.length(10)
                 })
         })

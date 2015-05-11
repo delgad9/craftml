@@ -2,7 +2,7 @@
     <parameter name="width" type="int" default="20"/>
     <parameter name="sides" type="int" default="50"/>
 
-    <script type="text/craftml">
+    <script>
         function main() {
             // handles fn
             if (params.sides > 100) { params.sides = 100; }

@@ -1,0 +1,23 @@
+<craft name="translate">
+    <parameter name="x" default="0" type="float"/>
+    <parameter name="y" default="0" type="float"/>
+    <parameter name="z" default="0" type="float"/>
+
+    <group>
+        <content></content>
+    </group>
+
+    <script>
+
+        function main(params, scope){
+            var grp = scope.solids[0]
+            var s = {
+                x: params.x,
+                y: params.y,
+                z: params.z
+            }
+            grp.translate(s)
+        }
+    </script>
+
+</craft>

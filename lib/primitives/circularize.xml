@@ -1,16 +1,17 @@
 <craft name="circularize">
     <parameter name="radius" type="int" default="30"/>
-    <!-- Note that parameter n must be equal to the number of objects 
-         within the tag in order to form a full circle. 
-         If parameter n < # objects, circle will appear to have n items
-            parameter n > # objects, will create semicircle. --> 
     <parameter name="n" type="int" default="10"/>
+
     <group>
         <content></content>
     </group>
     <script>
 
         function main(params, scope){
+            /* Note that parameter n must be equal to the number of objects 
+               within the tag in order to form a full circle. 
+                    If parameter n < # objects, circle will appear to have n items
+                       parameter n > # objects, will create semicircle. */
 
             var contentSolids = scope.solids[0].children
 

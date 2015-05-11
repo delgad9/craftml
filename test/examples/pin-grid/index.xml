@@ -1,0 +1,12 @@
+<craft>
+    <craft name="pin" src="../pin/index.xml"/>
+    <column spacing="5">
+        <repeat n="5">
+            <row spacing="5">
+                <repeat n="5">
+                    <pin></pin>
+                </repeat>
+            </row>
+        </repeat>
+    </column>
+</craft>
