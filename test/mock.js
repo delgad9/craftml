@@ -43,7 +43,7 @@ function make(name) {
 
         if (name === 'script' || name === 'factory' || name === 'unit') {
             el = new Element(name, 'script', {type:'text/craftml'})
-            el.code = main.toString()            
+            el.code = main.toString()
             delete el.children
 
         } else {
@@ -119,10 +119,10 @@ lib.unit = function(){
             return s
         }
 
-        
+
     var el = new Element('script', 'unit', {type:'text/craftml'})
     el.code = main.toString()
-    return el    
+    return el
 }
 
 // delete lib.text.children
@@ -186,7 +186,7 @@ lib.jscad = function(code) {
     }
 }
 
-var $$$ = require('craft-scad')
+var $$$ = require('../lib/scad')
 lib.cube = function() {
     var solid = new Solid()
     solid.name = 'cube'
