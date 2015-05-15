@@ -43,6 +43,39 @@ describe('#csg', function() {
 
     })
 
+    it('to', function() {
+        test(function(CSG){
+            return new CSG.cube().toCompactBinary()
+        })
+
+        test(function(CSG){
+            return new CSG.cube().toStlBinary()
+        })
+
+        test(function(CSG){
+            return new CSG.cube().toStlString()
+        })
+
+        test(function(CSG){
+            return new CSG.cube().toAMFString()
+        })
+
+        test(function(CSG){
+            return new CSG.cube().toPointCloud(1)
+        })
+    })
+
+    it('from', function() {
+        test(function(CSG){
+            return CSG.fromCompactBinary(new CSG.cube().toCompactBinary())
+        })
+
+        test(function(CSG){
+            return CSG.fromPolygons(new CSG.cube().polygons)
+        })
+
+    })
+
     it('transform', function() {
 
         test(function(CSG){
