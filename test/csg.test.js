@@ -6,8 +6,10 @@ var chai = require('chai'),
 
 
 var CSG2 = require('../lib/scad/csg'),
-CSG1 = require('craft-scad1').CSG
+CSG1 = require('craft-scad').CSG
 
+var CAG2 = require('../lib/scad/cag'),
+CAG1 = require('craft-scad').CAG
 
 function test(f){
     var c1 = f(CSG1)
@@ -15,6 +17,60 @@ function test(f){
     c1.toString().length.should.be.eql(c2.toString().length)
     c1.toString().slice(0,100).should.be.eql(c2.toString().slice(0,100))
 }
+
+function testCAG(f){
+    var c1 = f(CAG1)
+    var c2 = f(CAG2)
+    c1.toString().length.should.be.eql(c2.toString().length)
+    c1.toString().slice(0,100).should.be.eql(c2.toString().slice(0,100))
+}
+
+var $$$ = require('../lib/scad')
+
+describe('#openscad', function(){
+
+    it('rotate_extrude', function(){
+
+        var s = $$$.square({size: [1,1], center: true}).translate([4,0,0])
+
+        $$$.rotate_extrude({fn:4},s)
+
+    })
+
+})
+
+// to test for regressions while refactoring csg + scad code
+
+describe('#cag', function() {
+
+    it('shapes', function() {
+
+        testCAG(function(CAG){
+            return new CAG.rectangle()
+        })
+
+        testCAG(function(CAG){
+            return CAG.circle({center: [-2, -2], radius: 4, resolution: 20});
+        })
+
+        testCAG(function(CAG){
+            return CAG.rectangle({center: [5, -2], radius: [2, 3]});
+        })
+
+        testCAG(function(CAG){
+            return CAG.rectangle({corner1: [-10, 20], corner2: [15, -30]});
+        })
+
+        testCAG(function(CAG){
+            return CAG.roundedRectangle({center: [5, 7], radius: [4, 4], roundradius: 1, resolution: 24});
+        })
+
+        testCAG(function(CAG){
+            return CAG.roundedRectangle({corner1: [-2, 3], corner2: [4, -4], roundradius: 1, resolution: 24});
+        })
+
+    })
+})
 
 describe('#csg', function() {
 
