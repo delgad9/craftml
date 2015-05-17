@@ -5,8 +5,8 @@ var chai = require('chai'),
     _ = require('lodash')
 
 
-var CSG1 = require('../lib/scad/csg'),
-CSG2 = require('craft-scad1').CSG
+var CSG2 = require('../lib/scad/csg'),
+CSG1 = require('craft-scad1').CSG
 
 
 function test(f){
@@ -25,7 +25,6 @@ describe('#csg', function() {
         })
 
         test(function(CSG){
-            console.log(CSG)
             return new CSG.sphere()
         })
 
@@ -76,6 +75,19 @@ describe('#csg', function() {
 
         test(function(CSG){
             return CSG.fromObject(new CSG.cube())
+        })
+
+    })
+
+    it('ext', function() {
+        this.timeout(5000);
+
+        test(function(CSG){
+            return new CSG.cube().expandedShell(5, 10, true)
+        })
+
+        test(function(CSG){
+            return new CSG.cube().expandedShell(5, 10, false)
         })
 
     })
