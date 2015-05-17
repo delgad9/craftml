@@ -42,6 +42,28 @@ describe('#csg', function() {
 
     })
 
+    it('geometry', function(){
+
+        test(function(CSG){
+            return new CSG.Path2D([[10,10], [-10,10]])
+        })
+
+        test(function(CSG) {
+            return CSG.Path2D.arc({
+                center: [0, 0, 0],
+                radius: 10,
+                startangle: 0,
+                endangle: 180,
+                resolution: 16,
+            });
+        })
+
+        test(function(CSG) {
+            return new CSG.Path2D([[10,10], [-10,10], [-10,-10], [10,-10]], /* closed = */ true);
+        })
+
+    })
+
     it('to', function() {
         test(function(CSG){
             return new CSG.cube().toCompactBinary()
