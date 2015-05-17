@@ -74,6 +74,10 @@ describe('#csg', function() {
             return CSG.fromPolygons(new CSG.cube().polygons)
         })
 
+        test(function(CSG){
+            return CSG.fromObject(new CSG.cube())
+        })
+
     })
 
     it('transform', function() {
