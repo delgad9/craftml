@@ -42,6 +42,14 @@ describe('#csg', function() {
 
     })
 
+    it('lieFlat', function() {
+
+        test(function(CSG){
+            return new CSG.cube().translate([0,0,20]).lieFlat()
+        })
+
+    })
+
     it('geometry', function(){
 
         test(function(CSG){
