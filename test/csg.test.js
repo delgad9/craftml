@@ -6,10 +6,12 @@ var chai = require('chai'),
 
 
 var CSG2 = require('../lib/scad/csg'),
-CSG1 = require('craft-scad').CSG
+CSG1 = require('craft-scad').CSG,
+CSG = CSG2
 
 var CAG2 = require('../lib/scad/cag'),
 CAG1 = require('craft-scad').CAG
+
 
 function test(f){
     var c1 = f(CSG1)
@@ -29,11 +31,20 @@ var $$$ = require('../lib/scad')
 
 describe('#openscad', function(){
 
-    it('rotate_extrude', function(){
+    describe('rotate_extrude', function(){
 
-        var s = $$$.square({size: [1,1], center: true}).translate([4,0,0])
 
-        $$$.rotate_extrude({fn:4},s)
+        it('can handle sides touching the z-axis', function(){
+
+            var s = $$$.square({size: [1,1], center: false}).translate([0,0,0])
+            var csg = $$$.rotate_extrude({fn:4},s)
+
+            csg.polygons.forEach(function(p){
+                var isPlaneValid = !isNaN(p.plane.w)
+                assert.isTrue(isPlaneValid, 'has a valid plane')
+            })
+
+        })
 
     })
 
@@ -73,6 +84,12 @@ describe('#cag', function() {
 })
 
 describe('#csg', function() {
+
+    it('new', function(){
+
+        new CSG.cube().toFloat32Array()
+
+    })
 
     it('shapes', function() {
 
@@ -161,6 +178,16 @@ describe('#csg', function() {
 
         test(function(CSG){
             return CSG.fromObject(new CSG.cube())
+        })
+
+    })
+
+    it('#Polygon', function(){
+
+        test(function(CSG){
+            var p = CSG.cube().toPolygons()[0]
+            var v = p.plane.normal
+            return p.extrude(v)
         })
 
     })

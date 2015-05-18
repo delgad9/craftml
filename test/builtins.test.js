@@ -305,7 +305,7 @@ describe('builtins', function() {
                 .then(function(solids) {
 
                     _.forEach(solids, function(s) {
-                        inspect(s.layout.location)
+                        // inspect(s.layout.location)
                         s.layout.location.y.should.be.equal(-5)
                         s.layout.location.x.should.be.equal(0)
                     })
