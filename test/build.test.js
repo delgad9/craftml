@@ -45,4 +45,5 @@ describe('build stl', function() {
     it('shapes', test)
     it('scaling', test)
     it('positioning', test)
+    it('prism', test)
 })

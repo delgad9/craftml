@@ -4,7 +4,7 @@ var chai = require('chai'),
 
 chai.should()
 
-var loadPromise = require('../lib/primitives')
+var loadPromise = require('../lib/builtins')
 
 var mock = require('./mock')
 
