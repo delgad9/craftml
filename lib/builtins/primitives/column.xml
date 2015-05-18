@@ -1,0 +1,38 @@
+<craft name="column">
+    <parameter name="spacing" type="float" default="0"/>
+    <group>
+        <content></content>
+    </group>
+    <script type="text/craftml">
+
+        function main(params, scope){
+
+            var contentSolids = scope.solids[0].children
+
+            var ty = 0
+            contentSolids.reverse().forEach(function(solid){
+
+                solid.translateTo({
+                    x: solid.layout.location.x, // 2, // center along x
+                    y: ty,
+                    z: solid.layout.location.z //0   // place on x-y plane (z = 0)
+                })
+
+                ty = ty + solid.layout.size.y + params.spacing
+            })
+
+
+            // var xmin = _.min(contentSolids.map(function(c) {
+            //     return c.layout.location.x
+            // }))
+
+            // contentSolids.forEach(function(solid){
+            //     solid.translate({x: -xmin, y:0, z:0})
+            // })
+
+            scope.solids[0].fitToChildren()
+
+        }
+
+    </script>
+</craft>

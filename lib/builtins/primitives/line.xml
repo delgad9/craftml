@@ -1,0 +1,20 @@
+<craft name="line">
+    <parameter name="x1" default="0" type="int"/>
+    <parameter name="y1" default="0" type="int"/>
+    <parameter name="x2" default="1" type="int"/>
+    <parameter name="y2" default="1" type="int"/>
+    <parameter name="thickness" default="2" type="int"/>
+    <parameter name="height" default="1" type="int"/>
+    <script type="text/craftml">
+        function main(params){
+            var x1 = params.x1
+            var y1 = params.y1
+            var x2 = params.x2
+            var y2 = params.y2
+            var thickness = params.thickness
+            var path = new CSG.Path2D([ [x1,y1], [x2,y2] ], false)
+            var csg = path.rectangularExtrude(thickness, thickness, 16, false)            
+            return csg.scale([1,1,params.height])
+        }
+    </script>
+</craft>

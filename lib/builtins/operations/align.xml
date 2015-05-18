@@ -1,0 +1,32 @@
+<craft name="align">
+    <parameter name="x" default="null" type="percent"/>
+    <parameter name="y" default="null" type="percent"/>
+    <parameter name="z" default="null" type="percent"/>
+    <content></content>
+    <script type="text/craftml">
+
+        function main(params, scope) {
+
+            if (scope.solids.length === 0){
+                return
+            }
+
+            var first = scope.solids[0]
+
+            scope.solids.slice(1).forEach(function(solid) {
+
+                var newLoc = _.clone(solid.layout.location)
+
+                _.forEach(['x','y','z'], function(dim){
+                    var percent = params[dim]
+                    if (!isNaN(percent)) {
+                        newLoc[dim] = first.layout.location[dim] +
+                            (first.layout.size[dim] - solid.layout.size[dim]) * percent / 100
+                    }
+                })
+                solid.translateTo(newLoc)
+            })
+        }
+
+    </script>
+</craft>

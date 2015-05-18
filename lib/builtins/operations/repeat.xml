@@ -1,0 +1,25 @@
+<craft name="repeat">
+    <parameter name="n" type="int" default=""/>
+    <parameter name="in" default=""/>
+    <parameter name="each" type="string" default=""/>
+    <script type="text/craftml">
+            function main(params, scope){
+                var r = ''
+                if (params.n){
+                    for (var i=0;i<params.n;i++){
+                        r = r + '<content></content>'
+                    }
+                    return r
+                } else if (params.in && params.each){
+
+                    var name = params.each
+                    var vs = params.in
+                    scope.locals = {vs: vs}
+                    var r = _.map(vs, function(v,i){
+                        return '<content ' + name + '="{{ vs[' + i + '] }}"></content>'
+                    }).join(' ')
+                    return r
+                }
+            }
+    </script>
+</craft>

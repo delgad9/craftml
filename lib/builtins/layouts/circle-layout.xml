@@ -1,0 +1,40 @@
+<craft name="circle-layout">
+    <parameter name="radius" type="int" default="30"/>
+    <parameter name="n" type="int" default="10"/>
+
+    <group>
+        <content></content>
+    </group>
+    <script>
+
+        function main(params, scope){
+            /* Note that parameter n must be equal to the number of objects
+               within the tag in order to form a full circle.
+                    If parameter n < # objects, circle will appear to have n items
+                       parameter n > # objects, will create semicircle. */
+
+            var contentSolids = scope.solids[0].children
+
+            var tx = 0, ty = 0
+            var r = params.radius, theta = 0
+            var delta = 2 * Math.PI / params.n
+
+            contentSolids.forEach(function(solid){
+                tx = (r * Math.cos(theta)) + solid.layout.size.x
+                ty = (r * Math.sin(theta)) + solid.layout.size.y
+
+                solid.translateTo({
+                    x: tx,
+                    y: ty,
+                    z: solid.layout.location.z
+                })
+
+                theta = theta + delta
+            })
+
+            scope.solids[0].fitToChildren()
+
+        }
+
+    </script>
+</craft>

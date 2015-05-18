@@ -1,0 +1,30 @@
+<craft name="dome">
+    <parameter name="width" type="int" default="10"/>
+    <parameter name="sides" type="int" default="50"/>
+
+    <script>
+        function main() {
+            // handles fn
+            if (params.sides > 100) { params.sides = 100; }
+
+            return dome();
+
+            function dome() {
+                var s, diff;
+
+                // parts
+                s = sphere({
+                    r: params.width / 2,
+                    fn: params.sides
+                });
+
+                diff = cube({
+                    size: [params.width, params.width, params.width]
+                }).translate([-params.width / 2, -params.width / 2, -params.width]);
+
+                return difference(s, diff);
+            }
+        }
+    </script>
+
+</craft>
