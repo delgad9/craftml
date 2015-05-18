@@ -1,0 +1,41 @@
+<craft name="diagonal">
+    <parameter name="spacing" type="float" default="0"/>
+    <parameter name="direction" type="string" default="right"/>
+    <group>
+        <content></content>
+    </group>
+    <script>
+
+        function main(params, scope){
+
+            var contentSolids = scope.solids[0].children
+
+            var tx = 0
+            var ty = 0
+            contentSolids.forEach(function(solid){
+                
+                solid.translateTo({
+                    x: tx,
+                    y: ty, 
+                    z: solid.layout.location.z
+                })
+        
+                tx = tx - solid.layout.size.x - params.spacing
+                if (params.direction == "left") {
+                    ty = ty + solid.layout.size.y + params.spacing
+                }
+                else {
+                    ty = ty - solid.layout.size.y - params.spacing
+                }
+
+                // place on x-y plane (z = 0)
+                solid.layout.location.z = 0
+
+            })
+
+            scope.solids[0].fitToChildren()
+
+        }
+
+    </script>
+</craft>
