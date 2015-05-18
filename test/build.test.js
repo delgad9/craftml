@@ -24,27 +24,6 @@ function buildStlAsync(path) {
 
 describe('build stl', function() {
 
-    // remove skip manually to generte ground truth for new examples
-    it.skip('generate ground truth', function(done) {
-
-        glob('test/examples/*', function(err, directories) {
-
-            Promise.map(directories, function(dir){
-
-                return buildStlAsync(dir)
-                    .then(function(stl){
-                        var dest = dir + '/output.stl'
-                        console.log('writing to ', dest)
-                        return fs.writeFileAsync(dest, stl)
-                    })
-                })
-                .then(function(){
-                    done()
-                })
-        })
-
-    })
-
     function test(){
         var dir = 'test/examples/' + this.test.title
         var headOf = function(x) {

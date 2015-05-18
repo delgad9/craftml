@@ -33,7 +33,6 @@ describe('#openscad', function(){
 
     describe('rotate_extrude', function(){
 
-
         it('can handle sides touching the z-axis', function(){
 
             var s = $$$.square({size: [1,1], center: false}).translate([0,0,0])
@@ -45,6 +44,7 @@ describe('#openscad', function(){
             })
 
         })
+
 
     })
 
@@ -78,6 +78,15 @@ describe('#cag', function() {
 
         testCAG(function(CAG){
             return CAG.roundedRectangle({corner1: [-2, 3], corner2: [4, -4], roundradius: 1, resolution: 24});
+        })
+
+    })
+
+    it('operations', function(){
+
+        testCAG(function(CAG){
+            var s = CAG.circle({center: [-2, -2], radius: 4, resolution: 20});
+            return s.extrude()
         })
 
     })
