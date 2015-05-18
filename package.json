@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "bluebird": "^2.9.13",
-    "craft-scad": "sikuli/craft-scad",
     "errors": "^0.2.0",
     "event-emitter": "^0.3.3",
     "get-parameter-names": "^0.2.0",
