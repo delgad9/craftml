@@ -235,7 +235,7 @@ describe('render()', function() {
             // inspect(c)
         return render(c)
             .then(function(r) {
-                inspect(r)
+                // inspect(r)
                 // r[0].layout.should.containSubset({
                 //     location: {
                 //         x: 10,
