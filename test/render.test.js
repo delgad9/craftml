@@ -225,6 +225,27 @@ describe('render()', function() {
             })
     })
 
+
+    it('can resolve transform attribute', function() {
+
+        var c = [
+                craft(a('name', 'foo'), unit()),
+                foo(a('transform', 'scale(2,2,2)'))
+            ]
+            // inspect(c)
+        return render(c)
+            .then(function(r) {
+                inspect(r)
+                // r[0].layout.should.containSubset({
+                //     location: {
+                //         x: 10,
+                //         y: 15,
+                //         z: 20
+                //     }
+                // })
+            })
+    })
+
     describe('script', function() {
 
         it('can run main()', function() {

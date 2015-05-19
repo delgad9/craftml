@@ -20,17 +20,7 @@
 
                 tx = tx + solid.layout.size.x + params.spacing
             })
-
-            // var ymin = _.min(contentSolids.map(function(c) {
-            //     return c.layout.location.y
-            // }))
-
-            // contentSolids.forEach(function(solid){
-            //     solid.translate({x:0,y:-ymin,z:0})
-            // })
-
-            scope.solids[0].fitToChildren()
-
+            scope.solids[0].fitToChildren1()
         }
 
     </script>
