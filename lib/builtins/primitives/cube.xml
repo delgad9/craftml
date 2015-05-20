@@ -2,9 +2,16 @@
     <parameter name="xsize" default="10" type="int"/>
     <parameter name="ysize" default="10" type="int"/>
     <parameter name="zsize" default="10" type="int"/>
-    <script type="text/craftml">
-        function main(params){
-            return cube([params.xsize,params.ysize,params.zsize])
+    <parameter name="size" type="size"/>
+    <script>
+        function main(params){            
+            var size = params.size
+            if (size){
+                return cube([size.x, size.y, size.z])
+            } else {
+                // for backward compatibility
+                return cube([params.xsize, params.ysize, params.zsize])
+            }
         }
     </script>
 </craft>

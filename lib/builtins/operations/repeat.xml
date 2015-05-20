@@ -12,8 +12,10 @@
                     return r
                 } else if (params.in && params.each){
 
-                    var name = params.each
-                    var vs = params.in
+                    var name = params.each                    
+                    var vs = scope.parent.eval(params.in)
+                    //scope.parent.parameters[params.in]
+                    //console.log('vs', vs, params.in, scope.parent.parameters)
                     scope.locals = {vs: vs}
                     var r = _.map(vs, function(v,i){
                         return '<content ' + name + '="{{ vs[' + i + '] }}"></content>'

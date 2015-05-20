@@ -175,7 +175,7 @@ describe('builtins', function() {
                 builtins.cube,
                 builtins.repeat,
                 parameter(a('name', 'xs'), a('default', [1,2,3])),
-                tag('repeat', a('each', 'x'),a('in','{{xs}}'),
+                tag('repeat', a('each', 'x'),a('in','xs'),
                     tag('cube', a('xsize','{{x}}'))))
 
              //inspect(c)
@@ -191,7 +191,7 @@ describe('builtins', function() {
             var c = tag('craft',
                 builtins.cube,
                 builtins.repeat,
-                tag('repeat', a('each', 'x'),a('in','{{[1,2,3]}}'),
+                tag('repeat', a('each', 'x'),a('in','[1,2,3]'),
                     tag('cube', a('xsize','{{x}}'))))
 
             //inspect(c)
