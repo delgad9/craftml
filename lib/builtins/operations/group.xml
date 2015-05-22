@@ -3,10 +3,9 @@
     <script type="text/craftml">
         function main(params, scope) {
             var solids = scope.solids
-
             var grp = new Solid()
             grp.children = _.flatten(solids)
-            grp.fitToChildren1()
+            grp.fitToChildren()
             scope.solids = [grp]
         }
     </script>
