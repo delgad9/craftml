@@ -642,5 +642,118 @@ describe('render()', function() {
 
         })
 
+        it('can resolve string iterpolation "Hello {{foo}} and {{bar}}', function() {
+            var u = unit()
+            var spy = sinon.spy()
+
+            u.on('render', spy)
+
+            var c = [
+                parameter(a('name', 'foo'), a('default', 'xx'), a('type', 'string')),
+                parameter(a('name', 'bar'), a('default', 'yy'), a('type', 'string')),
+                craft(a('name', 'foo'),
+                    parameter(a('name', 'p1'), a('default', 2), a('type', 'string')),
+                    u),
+                foo(a('p1', 'Hello {{foo}} and {{bar}}'))
+            ]
+
+            // inspect(c)
+            return render(c)
+                .then(function() {
+                    spy.should.have.been.calledWith(u,
+                        sinon.match({
+                            parameters: {
+                                p1: 'Hello xx and yy'
+                            }
+                        }))
+                })
+
+
+        })
+
+        describe('type="size"', function(){
+
+            it('can resolve "{{s}} {{s}} {{s}}"', function() {
+                var u = unit()
+                var spy = sinon.spy()
+
+                u.on('render', spy)
+
+                var c = [
+                    parameter(a('name', 's'), a('default', '10'), a('type', 'int')),
+                    craft(a('name', 'foo'),
+                        parameter(a('name', 'p1'), a('default', '15 15 15'), a('type', 'size')),
+                        u),
+                    foo(a('p1', '{{s}} {{s}} {{s}}'))
+                ]
+
+                // inspect(c)
+                return render(c)
+                    .then(function() {
+                        spy.should.have.been.calledWith(u,
+                            sinon.match({
+                                parameters: {
+                                    p1: { x: 10, y: 10, z: 10 }
+                                }
+                            }))
+                    })
+            })
+
+            it('can resolve " {{s}} {{s}} {{s}}"', function() {
+                var u = unit()
+                var spy = sinon.spy()
+
+                u.on('render', spy)
+
+                var c = [
+                    parameter(a('name', 's'), a('default', '10'), a('type', 'int')),
+                    craft(a('name', 'foo'),
+                        parameter(a('name', 'p1'), a('default', '15 15 15'), a('type', 'size')),
+                        u),
+                    foo(a('p1', ' {{s}} {{s}} {{s}}'))
+                ]
+
+                // inspect(c)
+                return render(c)
+                    .then(function() {
+                        spy.should.have.been.calledWith(u,
+                            sinon.match({
+                                parameters: {
+                                    p1: { x: 10, y: 10, z: 10 }
+                                }
+                            }))
+                    })
+            })
+
+            it('can resolve from the default value', function() {
+                var u = unit()
+                var spy = sinon.spy()
+
+                u.on('render', spy)
+
+                var c = [
+                    parameter(a('name', 's'), a('default', '10'), a('type', 'int')),
+                    craft(a('name', 'foo'),
+                        parameter(a('name', 'p1'), a('default', '15 14 13'), a('type', 'size')),
+                        u),
+                    foo()
+                ]
+
+                // inspect(c)
+                return render(c)
+                    .then(function() {
+                        spy.should.have.been.calledWith(u,
+                            sinon.match({
+                                parameters: {
+                                    p1: { x: 15, y: 14, z: 13}
+                                }
+                            }))
+                    })
+
+
+            })
+
+        })
+
     })
 })
