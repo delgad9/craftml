@@ -1,7 +1,7 @@
 <craft name="sphere">
-    <parameter name="radius" default="5" type="float"/>    
-    <parameter name="resolution" default="36" type="int"/>    
-    <script type="text/craftml">
+    <parameter name="radius" default="5" type="float"/>
+    <parameter name="resolution" default="36" type="int"/>
+    <script>
         function main(params){
             return new CSG.sphere({radius: params.radius, resolution: params.resolution, center: [params.radius, params.radius, params.radius]})
         }

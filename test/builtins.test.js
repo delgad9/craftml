@@ -170,6 +170,23 @@ describe('builtins', function() {
                 })
         })
 
+        it('n=5x2 cubes', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.repeat,
+                tag('repeat', a('n', '5'),
+                    tag('repeat', a('n', 2),
+                        tag('cube'))))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                     //inspect(solids.length)
+
+                    solids.should.have.length(10)
+                })
+        })
+
         it('can iterate through [1,2,3]', function() {
             var c = tag('craft',
                 builtins.cube,

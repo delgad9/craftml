@@ -2,17 +2,18 @@
     <parameter name="n" type="int" default=""/>
     <parameter name="in" default=""/>
     <parameter name="each" type="string" default=""/>
-    <script type="text/craftml">
+    <script>
             function main(params, scope){
                 var r = ''
                 if (params.n){
-                    for (var i=0;i<params.n;i++){
-                        r = r + '<content></content>'
+
+                    if (params.n > 0){
+                        return '<content></content>'
                     }
-                    return r
+
                 } else if (params.in && params.each){
 
-                    var name = params.each                    
+                    var name = params.each
                     var vs = scope.parent.eval(params.in)
                     //scope.parent.parameters[params.in]
                     //console.log('vs', vs, params.in, scope.parent.parameters)
@@ -23,5 +24,23 @@
                     return r
                 }
             }
+    </script>
+    <script>
+        function main(params, scope){
+            if (params.n && params.n > 1){
+
+                // how many solids are there in the first copy
+                var N = scope.solids.length
+
+                for (var i=0; i< params.n-1; i++){
+
+                    // clone each of the first N solids
+                    for (var j=0; j< N; j++){
+                        var copy = scope.solids[j].clone()
+                        scope.solids.push(copy)
+                    }
+                }
+            }
+        }
     </script>
 </craft>

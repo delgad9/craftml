@@ -1,0 +1,13 @@
+<craft>
+
+    <column>
+        <repeat n="2">
+            <cube size="5 5 5"></cube>
+            <repeat n="2">
+                <cube/>
+            </repeat>
+            <cube size="8 8 8"></cube>
+        </repeat>
+    </column>
+
+</craft>
