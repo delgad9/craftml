@@ -28,6 +28,18 @@ describe('builtins', function() {
 
     describe('primitive shapes', function() {
 
+        it('circle', function(){
+            var c = tag('craft',
+                builtins.circle,
+                tag('circle'))
+
+            //inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    //solids[0].csg.polygons.should.have.length(6)
+                })
+        })
+
         it('cube 5x5x5', function() {
             var c = tag('craft',
                 builtins.cube,
