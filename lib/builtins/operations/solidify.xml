@@ -1,0 +1,23 @@
+<craft name="solidify">
+    <content></content>
+    <script>
+        function main(params, scope) {
+
+            console.log('solidify', scope.solids[0].children)
+
+            var slices = scope.solids[0].children
+
+            var csg = CSG.fromSlices({
+                numslices: slices.length,
+                callback: function(x, i) {
+                    var solid = scope.solids[0].children[i]
+                    solid.apply()
+                    return solid.csg.polygons[0]
+                }
+            })
+
+            var solid = new Solid(csg)
+            scope.solids = [solid]
+        }
+    </script>
+</craft>

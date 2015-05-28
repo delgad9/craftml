@@ -1,0 +1,9 @@
+<craft name="circle">
+    <parameter name="radius" default="5" type="float"/>
+    <parameter name="resolution" default="36" type="int"/>
+    <script>
+        function main(params){        
+            return new CAG.circle({radius: params.radius, resolution: params.resolution})
+        }
+    </script>
+</craft>
