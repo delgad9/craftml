@@ -94,12 +94,6 @@ describe('#cag', function() {
 
 describe('#csg', function() {
 
-    it('new', function(){
-
-        new CSG.cube().toFloat32Array()
-
-    })
-
     it('shapes', function() {
 
         test(function(CSG){

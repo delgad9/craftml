@@ -1,16 +1,25 @@
 <craft name="solidify">
     <content></content>
     <script>
+
+        function select(solids){
+            return _.flatten(_.map(solids, function(solid){
+                var selected = []
+                if (solid.csg && solid.csg.properties.type == 'lines'){
+                    selected.push(solid)
+                }
+                return selected.concat(select(solid.children))
+            }))
+        }
+
         function main(params, scope) {
 
-            console.log('solidify', scope.solids[0].children)
-
-            var slices = scope.solids[0].children
+            var slices = select(scope.solids)//[0].children
 
             var csg = CSG.fromSlices({
                 numslices: slices.length,
                 callback: function(x, i) {
-                    var solid = scope.solids[0].children[i]
+                    var solid = slices[i]
                     solid.apply()
                     return solid.csg.polygons[0]
                 }
