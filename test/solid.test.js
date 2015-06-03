@@ -147,6 +147,48 @@ describe('#Solid', function() {
             b.size.should.be.eql(new Size(20,10,10))
         })
 
+        it('rotateX(90)', function(){
+            s.rotateX(90)
+            s.getLocation().should.be.eql(new Location(0,0,0))
+            s.getSize().should.be.eql(new Size(10,10,10))
+        })
+
+        it('rotateZ(45)', function(){
+            s.rotateZ(45)
+
+            var loc = s.getLocation()
+            loc.should.have.property('x').to.be.closeTo(-2.07,0.01)
+            loc.should.have.property('y').to.be.closeTo(-2.07,0.01)
+            loc.should.have.property('z').to.be.eql(0)
+
+            var size = s.getSize()
+            size.should.have.property('x').to.be.closeTo(14.14,0.01)
+            size.should.have.property('y').to.be.closeTo(14.14,0.01)
+            size.should.have.property('z').to.be.eql(10)
+        })
+
+        it('rotateZ(45) rotateY(90)', function(){
+            s.rotateZ(45)
+            s.rotateY(90)
+
+            var loc = s.getLocation()
+            loc.should.have.property('x').to.be.closeTo(0,0.01)
+            loc.should.have.property('y').to.be.closeTo(-2.07,0.01)
+            loc.should.have.property('z').to.be.closeTo(-2.07,0.01)
+
+            var size = s.getSize()
+            size.should.have.property('x').to.be.eql(10)
+            size.should.have.property('y').to.be.closeTo(14.14,0.01)
+            size.should.have.property('z').to.be.closeTo(14.14,0.01)
+        })
+
+        it('rotateZ(90) w.r.t. [0,0,0]', function(){
+            s.rotateZ(90, [0,0,0])
+
+            var b = s.getBounds()
+            b.location.should.be.eql(new Location(-10,0,0))
+            b.size.should.be.eql(new Size(10,10,10))            
+        })
 
     })
 })
