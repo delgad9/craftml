@@ -11,12 +11,13 @@
 
             var tx = 0
             contentSolids.forEach(function(solid){
-
-                solid.translateTo({
-                    x: tx,
-                    y: solid.layout.location.y, // 2, // center along y
-                    z: solid.layout.location.z //    // place on x-y plane (z = 0)
-                })
+                var loc = new Location(tx, solid.layout.location.y, solid.layout.location.z)
+                solid.translateTo(loc)
+                // solid.translateTo({
+                //     x: tx,
+                //     y: solid.layout.location.y, // 2, // center along y
+                //     z: solid.layout.location.z //    // place on x-y plane (z = 0)
+                // })
 
                 tx = tx + solid.layout.size.x + params.spacing
             })
