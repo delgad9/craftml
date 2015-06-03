@@ -192,8 +192,67 @@ describe('#Solid', function() {
 
     })
 
+    describe.only('parent/children', function(){
 
-    describe.only('transformEval', function(){
+        var p, c, q
+
+        beforeEach(function(){
+            p = new Solid()
+            q = new Solid()
+            c = new Solid(cube)
+        })
+
+        it('can add children', function(){
+
+            p.setChildren([c])
+
+            var b = p.getBounds()
+            b.location.should.be.eql(new Location(0,0,0))
+            b.size.should.be.eql(new Size(10,10,10))
+
+        })
+
+        it('translating a parent also translates its children', function(){
+
+            p.setChildren([c])
+            p.translate(10,10,10)
+
+            p.apply()
+
+            var b = c.getBounds()
+            b.location.should.be.eql(new Location(10,10,10))
+        })
+
+        it('scaling a parent also scales its children', function(){
+
+            p.setChildren([c])
+            p.scale(4)
+
+            p.apply()
+
+            var b = c.getBounds()
+            b.size.should.be.eql(new Size(40,40,40))
+        })
+
+        it('multiple levels', function(){
+
+            p.setChildren([c])
+            p.scale(4)
+
+            q.setChildren([p])
+            q.scale(0.5)
+            q.translate(1,2,3)
+
+            q.apply()
+
+            var b = c.getBounds()
+            b.location.should.be.eql(new Location(1,2,3))
+            b.size.should.be.eql(new Size(20,20,20))
+        })
+
+    })
+
+    describe('transformEval', function(){
 
         var s, r
 
