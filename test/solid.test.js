@@ -27,6 +27,13 @@ describe('#Solid', function() {
             s = new Solid(cube)
         })
 
+        it('getBounds', function(){
+
+            s.getBounds().location.should.be.eql(new Location(0,0,0))
+            s.getBounds().size.should.be.eql(new Size(10,10,10))
+
+        })
+
         it('translate and apply', function(){
 
             s.translate(10,10,10)
@@ -93,10 +100,16 @@ describe('#Solid', function() {
 
         })
 
-        it('scale', function(){
+        it('scale (2,1,1)', function(){
             s.scale(2,1,1)
             s.getLocation().should.be.eql(new Location(0,0,0))
             s.getSize().should.be.eql(new Size(20,10,10))
+        })
+
+        it('scale (2)', function(){
+            s.scale(2)
+            s.getLocation().should.be.eql(new Location(0,0,0))
+            s.getSize().should.be.eql(new Size(20,20,20))
         })
 
         it('scale and apply', function(){
@@ -109,6 +122,29 @@ describe('#Solid', function() {
             var b = s.debug().getPolygonsBoundingBox()
             b.location.should.be.eql(new Location(0,0,0))
             b.size.should.be.eql(new Size(20,30,20))
+        })
+
+        it('scaleTo (20,20,30)', function(){
+            s.scaleTo(20,20,30)
+            s.getLocation().should.be.eql(new Location(0,0,0))
+            s.getSize().should.be.eql(new Size(20,20,30))
+        })
+
+        it('scaleTo (20)', function(){
+            s.scaleTo(20)
+            s.getLocation().should.be.eql(new Location(0,0,0))
+            s.getSize().should.be.eql(new Size(20,20,20))
+        })
+
+        it('translate, scale, apply', function(){
+            s.translate(-10,0,0)
+            s.scale(2,1,1)
+
+            s.apply()
+
+            var b = s.debug().getPolygonsBoundingBox()
+            b.location.should.be.eql(new Location(-10,0,0))
+            b.size.should.be.eql(new Size(20,10,10))
         })
 
 
