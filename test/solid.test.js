@@ -187,7 +187,98 @@ describe('#Solid', function() {
 
             var b = s.getBounds()
             b.location.should.be.eql(new Location(-10,0,0))
-            b.size.should.be.eql(new Size(10,10,10))            
+            b.size.should.be.eql(new Size(10,10,10))
+        })
+
+    })
+
+
+    describe.only('transformEval', function(){
+
+        var s, r
+
+        beforeEach(function(){
+            s = new Solid(cube)
+            r = new Solid(cube)
+        })
+
+        it('translate(10,0,0)', function(){
+
+            s.transformEval('translate(10,0,0)')
+
+            r.translate(10,0,0)
+
+            var b1 = s.getBounds()
+            var b2 = r.getBounds()
+            b1.location.should.be.eql(b2.location)
+            b1.size.should.be.eql(b2.size)
+        })
+
+        it('translate scale rotateX', function(){
+
+            s.transformEval('translate(10,0,0) scale(3) rotateX(45)')
+
+            r.translate(10,0,0)
+            r.scale(3)
+            r.rotateX(45)
+
+            var b1 = s.getBounds()
+            var b2 = r.getBounds()
+            b1.location.should.be.eql(b2.location)
+            b1.size.should.be.eql(b2.size)
+        })
+
+        it('translate(a,b,c) where a=1 b=2 c=3', function(){
+
+            s.transformEval('translate(a,b,c)', {a:1,b:2,c:3})
+
+            r.translate(1,2,3)
+
+            var b1 = s.getBounds()
+            var b2 = r.getBounds()
+            b1.location.should.be.eql(b2.location)
+            b1.size.should.be.eql(b2.size)
+        })
+
+        it('rotateX rotateY rotateZ', function(){
+
+            s.transformEval('rotateX(45) rotateY(60) rotateZ(30)')
+
+            r.rotateX(45)
+            r.rotateY(60)
+            r.rotateZ(30)
+
+            var b1 = s.getBounds()
+            var b2 = r.getBounds()
+            b1.location.should.be.eql(b2.location)
+            b1.size.should.be.eql(b2.size)
+        })
+
+        it('spaces in expression e.g., translate( 1 , 2 , 3) scale( 3 ) ', function(){
+
+            s.transformEval('translate( 1 , 2 , 3) scale( 3 ); ')
+
+            r.translate(1,2,3)
+            r.scale(3)
+
+            var b1 = s.getBounds()
+            var b2 = r.getBounds()
+            b1.location.should.be.eql(b2.location)
+            b1.size.should.be.eql(b2.size)
+        })
+
+        it('calculations in expression e.g., scale(s/2) s = 3 ', function(){
+
+            s.transformEval('scale(s/2) translate(s*2, s+5, s+6)', {s:4})
+
+            var k = 4
+            r.scale(k/2)
+            r.translate(k*2, k+5, k+6)
+
+            var b1 = s.getBounds()
+            var b2 = r.getBounds()
+            b1.location.should.be.eql(b2.location)
+            b1.size.should.be.eql(b2.size)
         })
 
     })
