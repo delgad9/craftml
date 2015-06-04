@@ -2,7 +2,8 @@ var lib = {}
 
 var _ = require('lodash')
 
-var Solid = require('../lib/solid')
+var Solid = require('../lib/solid'),
+    Size = require('../lib/size')
 
 function make(name) {
 
@@ -100,25 +101,15 @@ lib.tag = function() {
 }
 
 // lib.unit = _.partial(lib.tag, 'unit')
+// var Size = require('../lib/size')
+
 lib.unit = function(){
 
     function main() {
             var s = new Solid()
-            s.layout = {
-                size: {
-                    x: 1,
-                    y: 1,
-                    z: 1
-                },
-                location: {
-                    x: 0,
-                    y: 0,
-                    z: 0
-                }
-            }
+            s.layout.size = new Size(1,1,1)
             return s
         }
-
 
     var el = new Element('script', 'unit', {type:'text/craftml'})
     el.code = main.toString()

@@ -228,21 +228,19 @@ describe('render()', function() {
 
     it('can resolve transform attribute', function() {
 
+        var Location = require('../lib/location')
+        var Size = require('../lib/size')
+
         var c = [
                 craft(a('name', 'foo'), unit()),
-                foo(a('transform', 'scale(2,2,2)'))
+                foo(a('transform', 'scale(1,2,3)'))
             ]
             // inspect(c)
         return render(c)
             .then(function(r) {
-                // inspect(r)
-                // r[0].layout.should.containSubset({
-                //     location: {
-                //         x: 10,
-                //         y: 15,
-                //         z: 20
-                //     }
-                // })
+                // inspect(r[0])
+                r[0].getLocation().should.be.eql(new Location(0,0,0))
+                r[0].getSize().should.be.eql(new Size(1,2,3))
             })
     })
 

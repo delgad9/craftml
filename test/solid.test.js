@@ -42,7 +42,7 @@ describe('#Solid', function() {
 
             s.apply()
 
-            var b = s.debug().getPolygonsBoundingBox()
+            var b = s.debug().getPolygonsBounds()
             b.location.should.be.eql(new Location(20,20,20))
             b.size.should.be.eql(new Size(10,10,10))
 
@@ -76,7 +76,7 @@ describe('#Solid', function() {
 
             s.apply()
 
-            var b = s.debug().getPolygonsBoundingBox()
+            var b = s.debug().getPolygonsBounds()
             b.location.should.be.eql(new Location(10,10,10))
             b.size.should.be.eql(new Size(10,10,10))
         })
@@ -95,7 +95,7 @@ describe('#Solid', function() {
 
             s.apply()
 
-            var b = s.debug().getPolygonsBoundingBox()
+            var b = s.debug().getPolygonsBounds()
             b.location.should.be.eql(new Location(15,15,15))
             b.size.should.be.eql(new Size(10,10,10))
 
@@ -120,7 +120,7 @@ describe('#Solid', function() {
 
             s.apply()
 
-            var b = s.debug().getPolygonsBoundingBox()
+            var b = s.debug().getPolygonsBounds()
             b.location.should.be.eql(new Location(0,0,0))
             b.size.should.be.eql(new Size(20,30,20))
         })
@@ -143,7 +143,7 @@ describe('#Solid', function() {
 
             s.apply()
 
-            var b = s.debug().getPolygonsBoundingBox()
+            var b = s.debug().getPolygonsBounds()
             b.location.should.be.eql(new Location(-10,0,0))
             b.size.should.be.eql(new Size(20,10,10))
         })
@@ -193,7 +193,7 @@ describe('#Solid', function() {
 
     })
 
-    describe.only('parent/children', function(){
+    describe('parent/children', function(){
 
         var p, c, q
 
@@ -270,7 +270,7 @@ describe('#Solid', function() {
             p.rotateZ(90)
 
             p.apply()
-            
+
             var b = d.debug().getPolygonsBounds()
             b.size.should.be.eql(new Size(20,10,30))
         })
