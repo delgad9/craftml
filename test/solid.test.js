@@ -12,6 +12,7 @@ var Solid = require('../lib/solid'),
 describe('#Solid', function() {
 
     var cube = $$$.cube([10,10,10])
+    var brick = $$$.cube([10,20,30])
 
     it('construct default', function() {
 
@@ -200,6 +201,7 @@ describe('#Solid', function() {
             p = new Solid()
             q = new Solid()
             c = new Solid(cube)
+            d = new Solid(brick)
         })
 
         it('can add children', function(){
@@ -212,7 +214,17 @@ describe('#Solid', function() {
 
         })
 
-        it('translating a parent also translates its children', function(){
+        it('translating a solid does not immediately update the (local) location of its children', function(){
+
+            p.setChildren([c])
+            p.translate(10,10,10)
+
+            var b = c.getBounds()
+            b.location.should.be.eql(new Location(0,0,0))
+
+        })
+
+        it('translating a solid changes the location of its children after apply()', function(){
 
             p.setChildren([c])
             p.translate(10,10,10)
@@ -223,6 +235,7 @@ describe('#Solid', function() {
             b.location.should.be.eql(new Location(10,10,10))
         })
 
+
         it('scaling a parent also scales its children', function(){
 
             p.setChildren([c])
@@ -230,11 +243,12 @@ describe('#Solid', function() {
 
             p.apply()
 
-            var b = c.getBounds()
+            var b = c.debug().getPolygonsBounds()
+            b.location.should.be.eql(new Location(0,0,0))
             b.size.should.be.eql(new Size(40,40,40))
         })
 
-        it('multiple levels', function(){
+        it('scaling a solid scales its descendents', function(){
 
             p.setChildren([c])
             p.scale(4)
@@ -245,9 +259,20 @@ describe('#Solid', function() {
 
             q.apply()
 
-            var b = c.getBounds()
+            var b = c.debug().getPolygonsBounds()
             b.location.should.be.eql(new Location(1,2,3))
             b.size.should.be.eql(new Size(20,20,20))
+        })
+
+        it('rotating a solid rotates its child', function(){
+
+            p.setChildren([c, d])
+            p.rotateZ(90)
+
+            p.apply()
+            
+            var b = d.debug().getPolygonsBounds()
+            b.size.should.be.eql(new Size(20,10,30))
         })
 
     })
