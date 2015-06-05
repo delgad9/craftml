@@ -275,6 +275,112 @@ describe('#Solid', function() {
             b.size.should.be.eql(new Size(20,10,30))
         })
 
+        describe.only('three levels', function(){
+
+                var a, b1, b2, c1, c2
+                //    a
+                //   / \
+                //  b1 b2
+                //    / \
+                //   c1 c2
+
+                beforeEach(function(){
+                    a = new Solid(cube)
+                    b1 = new Solid(cube)
+                    b2 = new Solid(cube)
+                    c1 = new Solid(cube)
+                    c2 = new Solid(cube)
+
+                })
+
+                it('can convert to the coordinate system of an ancestor', function(){
+
+                    c1.scale(2)
+                    b2.setChildren([c1,c2])
+                    b2.translate(10,5,0)
+
+                    a.setChildren([b1,b2])
+                    a.scale(3)
+
+                    c1.convertCoordinateTo(a)
+                    c1.getBounds().location.should.be.eql(new Location(10,5,0))
+
+                    b2.apply()
+
+                    // c1's bounds should've already converted to a's coordinate
+                    // system, thus after "apply", the location should be the same
+                    c1.getBounds().location.should.be.eql(new Location(10,5,0))
+
+                })
+
+                it('can transform w.r.t. the coordinate of an ancestor', function(){
+
+
+                    c1.scale(2)
+                    b2.setChildren([c1,c2])
+                    b2.translate(10,5,0)
+                    b2.scale(3)
+
+                    a.setChildren([b1,b2])
+
+                    c1.getBounds().location.should.be.eql(new Location(0,0,0))
+
+                    c1.convertCoordinateTo(a)
+                    c1.getBounds().location.should.be.eql(new Location(10,5,0))
+
+                    c1.translate(2,0,0)
+                    c1.getBounds().location.should.be.eql(new Location(12,5,0))
+
+                    b2.apply()
+                    c1.getBounds().location.should.be.eql(new Location(12,5,0))
+                })
+
+                it('can convert and convert back to its parent', function(){
+
+                    c1.translate(1,0,0)
+                    c1.scale(2)
+
+                    b2.setChildren([c1,c2])
+                    b2.translate(10,5,0)
+                    b2.scale(3)
+
+                    a.setChildren([b1,b2])
+
+                    c1.getBounds().location.should.be.eql(new Location(1,0,0))
+
+                    c1.convertCoordinateTo(a)
+                    c1.getBounds().location.should.be.eql(new Location(13,5,0))
+
+                    c1.convertCoordinateTo(b2)
+                    c1.getBounds().location.should.be.eql(new Location(1,0,0))
+                })
+
+                it('can convert several times', function(){
+
+
+                    c1.translate(1,0,0)
+                    c1.scale(2)
+
+                    b2.setChildren([c1,c2])
+                    b2.translate(10,5,0)
+                    b2.scale(3)
+
+                    a.setChildren([b1,b2])
+
+                    c1.getBounds().location.should.be.eql(new Location(1,0,0))
+
+                    c1.convertCoordinateTo(a)
+                    c1.convertCoordinateTo(a)
+                    c1.convertCoordinateTo(b2)
+
+                    c1.convertCoordinateTo(a)
+                    c1.getBounds().location.should.be.eql(new Location(13,5,0))
+
+                })
+
+
+        })
+
     })
 
     describe('transformEval', function(){
