@@ -275,7 +275,7 @@ describe('#Solid', function() {
             b.size.should.be.eql(new Size(20,10,30))
         })
 
-        describe.only('three levels', function(){
+        describe('coordinate conversions', function(){
 
                 var a, b1, b2, c1, c2
                 //    a
@@ -313,7 +313,7 @@ describe('#Solid', function() {
 
                 })
 
-                it('can transform w.r.t. the coordinate of an ancestor', function(){
+                it('can translate/scale w.r.t. the coordinate of an ancestor', function(){
 
 
                     c1.scale(2)
@@ -329,10 +329,13 @@ describe('#Solid', function() {
                     c1.getBounds().location.should.be.eql(new Location(10,5,0))
 
                     c1.translate(2,0,0)
+                    c1.scale(0.5)
                     c1.getBounds().location.should.be.eql(new Location(12,5,0))
+                    c1.getBounds().size.should.be.eql(new Size(30,30,30))
 
                     b2.apply()
                     c1.getBounds().location.should.be.eql(new Location(12,5,0))
+                    c1.getBounds().size.should.be.eql(new Size(30,30,30))
                 })
 
                 it('can convert and convert back to its parent', function(){
