@@ -277,7 +277,7 @@ describe('#Solid', function() {
 
         describe('coordinate conversions', function(){
 
-                var a, b, c, d, b1, b2, c1, c2
+                var a, b, c, d, e, b1, b2, c1, c2
                 //    a
                 //   / \
                 //  b1 b2
@@ -289,112 +289,32 @@ describe('#Solid', function() {
                     b = new Solid()
                     c = new Solid(cube)
                     d = new Solid(cube)
-
-                    b1 = new Solid(cube)
-                    b2 = new Solid(cube)
-                    c1 = new Solid(cube)
-                    c2 = new Solid(cube)
-
+                    e = new Solid(cube)
                 })
-
-                // it('can convert to the coordinate system of an ancestor', function(){
-                //
-                //     c1.scale(2)
-                //     b2.setChildren([c1,c2])
-                //     b2.translate(10,5,0)
-                //
-                //     a.setChildren([b1,b2])
-                //     a.scale(3)
-                //
-                //     c1.convertCoordinateTo(a)
-                //     c1.getBounds().location.should.be.eql(new Location(10,5,0))
-                //
-                //     b2.apply()
-                //
-                //     // c1's bounds should've already converted to a's coordinate
-                //     // system, thus after "apply", the location should be the same
-                //     c1.getBounds().location.should.be.eql(new Location(10,5,0))
-                //
-                // })
-                //
-                // it('can translate/scale w.r.t. the coordinate of an ancestor', function(){
-                //
-                //
-                //     c1.scale(2)
-                //     b2.setChildren([c1,c2])
-                //     b2.translate(10,5,0)
-                //     b2.scale(3)
-                //
-                //     a.setChildren([b1,b2])
-                //
-                //     c1.getBounds().location.should.be.eql(new Location(0,0,0))
-                //
-                //     c1.convertCoordinateTo(a)
-                //     c1.getBounds().location.should.be.eql(new Location(10,5,0))
-                //
-                //     c1.translate(2,0,0)
-                //     c1.scale(0.5)
-                //     c1.getBounds().location.should.be.eql(new Location(12,5,0))
-                //     c1.getBounds().size.should.be.eql(new Size(30,30,30))
-                //
-                //     b2.apply()
-                //     c1.getBounds().location.should.be.eql(new Location(12,5,0))
-                //     c1.getBounds().size.should.be.eql(new Size(30,30,30))
-                // })
-                //
-                // it('can convert and convert back to its parent', function(){
-                //
-                //     c1.translate(1,0,0)
-                //     c1.scale(2)
-                //
-                //     b2.setChildren([c1,c2])
-                //     b2.translate(10,5,0)
-                //     b2.scale(3)
-                //
-                //     a.setChildren([b1,b2])
-                //
-                //     c1.getBounds().location.should.be.eql(new Location(1,0,0))
-                //
-                //     c1.convertCoordinateTo(a)
-                //     c1.getBounds().location.should.be.eql(new Location(13,5,0))
-                //
-                //     c1.convertCoordinateTo(b2)
-                //     c1.getBounds().location.should.be.eql(new Location(1,0,0))
-                // })
-                //
-                // it('can convert several times', function(){
-                //
-                //
-                //     c1.translate(1,0,0)
-                //     c1.scale(2)
-                //
-                //     b2.setChildren([c1,c2])
-                //     b2.translate(10,5,0)
-                //     b2.scale(3)
-                //
-                //     a.setChildren([b1,b2])
-                //
-                //     c1.getBounds().location.should.be.eql(new Location(1,0,0))
-                //
-                //     c1.convertCoordinateTo(a)
-                //     c1.convertCoordinateTo(a)
-                //     c1.convertCoordinateTo(b2)
-                //
-                //     c1.convertCoordinateTo(a)
-                //     c1.getBounds().location.should.be.eql(new Location(13,5,0))
-                //
-                // })
 
                 function logx(n, o){
                     console.log(n, ': x=', o.getBounds().location.x, 'sx=', o.getBounds().size.x)
                 }
 
                 function log(){
+                    console.log('--')
                     logx('a',a)
                     logx('b',b)
                     logx('c',c)
                 }
 
+                function _a(x,sx){
+                    a.getBounds().location.x.should.be.eql(x)
+                    a.getBounds().size.x.should.be.eql(sx)
+                }
+                function _b(x,sx){
+                    b.getBounds().location.x.should.be.eql(x)
+                    b.getBounds().size.x.should.be.eql(sx)
+                }
+                function _c(x,sx){
+                    c.getBounds().location.x.should.be.eql(x)
+                    c.getBounds().size.x.should.be.eql(sx)
+                }
 
                 it('can convert and convert back', function(){
 
@@ -406,7 +326,7 @@ describe('#Solid', function() {
                     // DCC  a: x=0   sx=30
                     // _CC  b: x=10  sx=20  => [a]
                     // _C   c: x=0   sx=10  => [b]
-                    log()
+                    // log()
                     c.getBounds().location.x.should.be.eql(0)
                     c.getBounds().size.x.should.be.eql(10)
 
@@ -414,17 +334,181 @@ describe('#Solid', function() {
                     // DCC  a: x=0   sx=30
                     // _CC  b: x=10  sx=20  => [a]
                     // _C   c: x=10  sx=20  => [a]
-                    log()
-                    c.getBounds().location.x.should.be.eql(10)
-                    c.getBounds().size.x.should.be.eql(20)
+                    // log()
+                    _a(0,30)
+                    _b(10,20)
+                    _c(10,20)
 
                     c.convertCoordinateTo(b)
                     // DCC  a: x=0   sx=30
                     // _CC  b: x=10  sx=20  => [a]
                     // _C   c: x=0   sx=10  => [b]
+                    // log()
+                    _a(0,30)
+                    _b(10,20)
+                    _c(0,10)
+
+                    c.convertCoordinateTo(c)    // should have no effect
+                    // DCC  a: x=0   sx=30
+                    // _CC  b: x=10  sx=20  => [a]
+                    // _C   c: x=0   sx=10  => [b]
+                    // log()
+                    _a(0,30)
+                    _b(10,20)
+                    _c(0,10)
+
+                    c.convertCoordinateTo(a)
+                    // DCC  a: x=0   sx=30
+                    // _CC  b: x=10  sx=20  => [a]
+                    // _C   c: x=10  sx=20  => [a]
+                    // log()
+                    _a(0,30)
+                    _b(10,20)
+                    _c(10,20)
+                })
+
+                it('can translate w.r.t. another coordinate system', function(){
+
+                    c.translate(10,0,0)
+                    b.setChildren([e, c])
+                    b.scale(2)
+                    b.translate(10,0,0)
+                    a.setChildren([d, b])
+
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=10  sx=10  => [b]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(10,10)
+
+                    c.convertCoordinateTo(a)
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=30  sx=20  => [a]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(30,20)
+
+                    c.translate(20,0,0)
+                    // DEE__CC  a: x=0   sx=70
+                    //  EE__CC  b: x=10  sx=60  => [a]
+                    //  E_C     c: x=50  sx=20  => [a]
+                    // log()
+                    _a(0,70)
+                    _b(10,60)
+                    _c(50,20)
+
+                    // DEE__CC  a: x=0   sx=70
+                    //  EE__CC  b: x=10  sx=60  => [a]
+                    //  E_C     c: x=20  sx=10  => [b]
+                    c.convertCoordinateTo(b)
+                    // log()
+                    _a(0,70)
+                    _b(10,60)
+                    _c(20,10)
+
+                })
+
+                it('can scale w.r.t. another coordinate system', function(){
+
+                    c.translate(10,0,0)
+                    b.setChildren([e, c])
+                    b.scale(2)
+                    b.translate(10,0,0)
+                    a.setChildren([d, b])
+
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=10  sx=10  => [b]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(10,10)
+
+                    c.convertCoordinateTo(a)
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=30  sx=20  => [a]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(30,20)
+
+                    c.scale(2,1,1)
+                    // DEECCCC  a: x=0   sx=70
+                    //  EECCCC  b: x=10  sx=60  => [a]
+                    //  ECC     c: x=30  sx=40  => [a]
+                    // log()
+                    _a(0,70)
+                    _b(10,60)
+                    _c(30,40)
+
+                    c.convertCoordinateTo(b)
+                    // DEECCCC  a: x=0   sx=70
+                    //  EECCCC  b: x=10  sx=60  => [a]
+                    //  ECC     c: x=10  sx=20  => [c]
+                    // log()
+                    _a(0,70)
+                    _b(10,60)
+                    _c(10,20)
+
+                })
+
+                it('can scale and translate w.r.t. another coordinate system', function(){
+
+                    c.translate(10,0,0)
+                    b.setChildren([e, c])
+                    b.scale(2)
+                    b.translate(10,0,0)
+                    a.setChildren([d, b])
+
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=10  sx=10  => [b]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(10,10)
+
+                    c.convertCoordinateTo(a)
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=30  sx=20  => [a]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(30,20)
+
+                    c.scale(2,1,1)
+                    // DEECCCC  a: x=0   sx=70
+                    //  EECCCC  b: x=10  sx=60  => [a]
+                    //  ECC     c: x=30  sx=40  => [a]
+                    // log()
+                    _a(0,70)
+                    _b(10,60)
+                    _c(30,40)
+
+                    c.translate(20,0,0)
+                    // DEE__CCCC  a: x=0   sx=90
+                    //  EE__CCCC  b: x=10  sx=80  => [a]
+                    //  E_CC      c: x=50  sx=40  => [a]
                     log()
-                    c.getBounds().location.x.should.be.eql(0)
-                    c.getBounds().size.x.should.be.eql(10)
+                    _a(0,90)
+                    _b(10,80)
+                    _c(50,40)
+
+                    c.convertCoordinateTo(b)
+                    // DEE__CCCC  a: x=0   sx=90
+                    //  EE__CCCC  b: x=10  sx=80  => [a]
+                    //  E_CC      c: x=20  sx=20  => [b]
+                    log()
+                    _a(0,90)
+                    _b(10,80)
+                    _c(20,20)
+                    
                 })
 
 
