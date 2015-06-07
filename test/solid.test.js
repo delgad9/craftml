@@ -193,6 +193,53 @@ describe('#Solid', function() {
 
     })
 
+    describe.only('box', function(){
+
+        var Box = require('../lib/box'),
+            Location = require('../lib/location'),
+            Size = require('../lib/size'),
+            Matrix4x4 = require('../lib/scad/geometry/Matrix4x4')
+
+
+        it('can create', function(){
+            var box = new Box()
+        })
+
+        it('can create with location and size', function(){
+            var box = new Box(new Location(10,20,30), new Size(1,2,3))
+            box.location.should.be.eql(new Location(10,20,30))
+            box.size.should.be.eql(new Size(1,2,3))
+        })
+
+        it('can transform', function(){
+            var box = new Box(new Location(0,0,0), new Size(10,10,10))
+            box.transform(Matrix4x4.translation([10,20,30]))
+            box.location.should.be.eql(new Location(10,20,30))
+            box.size.should.be.eql(new Size(10,10,10))
+
+            box.transform(Matrix4x4.scaling([2,3,4]))
+            box.location.should.be.eql(new Location(20,60,120))
+            box.size.should.be.eql(new Size(20,30,40))
+        })
+
+        it('can clone', function(){
+            var box = new Box(new Location(0,0,0), new Size(10,10,10))
+            var copy = box.clone()
+
+            copy.transform(Matrix4x4.translation([10,20,30]))
+
+            // the copy is transformed
+            copy.location.should.be.eql(new Location(10,20,30))
+            copy.size.should.be.eql(new Size(10,10,10))
+
+            // but the original box should remain the same
+            box.location.should.be.eql(new Location(0,0,0))
+            box.size.should.be.eql(new Size(10,10,10))
+
+        })
+
+    })
+
     describe('parent/children', function(){
 
         var p, c, q
@@ -278,12 +325,6 @@ describe('#Solid', function() {
         describe('coordinate conversions', function(){
 
                 var a, b, c, d, e, b1, b2, c1, c2
-                //    a
-                //   / \
-                //  b1 b2
-                //    / \
-                //   c1 c2
-
                 beforeEach(function(){
                     a = new Solid()
                     b = new Solid()
@@ -457,6 +498,60 @@ describe('#Solid', function() {
 
                 })
 
+                it('can rotate w.r.t. another coordinate system', function(){
+
+                    c.translate(10,0,0)
+                    b.setChildren([e, c])
+                    b.scale(2)
+                    b.translate(10,0,0)
+                    a.setChildren([d, b])
+
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=10  sx=10  => [b]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(10,10)
+
+                    c.convertCoordinateTo(a)
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=30  sx=20  => [a]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(30,20)
+
+                    c.scale(2,1,1)
+                    // DEECCCC  a: x=0   sx=70
+                    //  EECCCC  b: x=10  sx=60  => [a]
+                    //  ECC     c: x=30  sx=40  => [a]
+                    log()
+                    _a(0,70)
+                    _b(10,60)
+                    _c(30,40)
+
+                    c.rotateZ(90)
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=30  sx=20  => [a]
+                    log()
+                    // _a(0,70)
+                    // _b(10,60)
+                    // _c(30,40)
+                    //
+                    // c.convertCoordinateTo(b)
+                    // // DEECCCC  a: x=0   sx=70
+                    // //  EECCCC  b: x=10  sx=60  => [a]
+                    // //  ECC     c: x=10  sx=20  => [c]
+                    // // log()
+                    // _a(0,70)
+                    // _b(10,60)
+                    // _c(10,20)
+
+                })
+
                 it('can scale and translate w.r.t. another coordinate system', function(){
 
                     c.translate(10,0,0)
@@ -495,7 +590,7 @@ describe('#Solid', function() {
                     // DEE__CCCC  a: x=0   sx=90
                     //  EE__CCCC  b: x=10  sx=80  => [a]
                     //  E_CC      c: x=50  sx=40  => [a]
-                    log()
+                    // log()
                     _a(0,90)
                     _b(10,80)
                     _c(50,40)
@@ -504,11 +599,49 @@ describe('#Solid', function() {
                     // DEE__CCCC  a: x=0   sx=90
                     //  EE__CCCC  b: x=10  sx=80  => [a]
                     //  E_CC      c: x=20  sx=20  => [b]
-                    log()
+                    // log()
                     _a(0,90)
                     _b(10,80)
                     _c(20,20)
-                    
+
+                })
+
+                it('can produce correctly transformed csgs after apply', function(){
+
+                    c.translate(10,0,0)
+                    b.setChildren([e, c])
+                    b.scale(2)
+                    b.translate(10,0,0)
+                    a.setChildren([d, b])
+
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=10  sx=10  => [b]
+                    // log()
+
+                    c.convertCoordinateTo(a)
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=30  sx=20  => [a]
+                    // log()
+
+                    c.scale(2,1,1)
+                    // DEECCCC  a: x=0   sx=70
+                    //  EECCCC  b: x=10  sx=60  => [a]
+                    //  ECC     c: x=30  sx=40  => [a]
+                    // log()
+
+                    c.translate(20,0,0)
+                    // DEE__CCCC  a: x=0   sx=90
+                    //  EE__CCCC  b: x=10  sx=80  => [a]
+                    //  E_CC      c: x=50  sx=40  => [a]
+                    // log()
+
+                    a.apply()
+
+                    var p = c.debug().getPolygonsBounds()
+                    p.location.should.be.eql(new Location(50,0,0))
+                    p.size.should.be.eql(new Size(40,20,20))
                 })
 
 
