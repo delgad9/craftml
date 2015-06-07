@@ -193,7 +193,7 @@ describe('#Solid', function() {
 
     })
 
-    describe.only('box', function(){
+    describe('box', function(){
 
         var Box = require('../lib/box'),
             Location = require('../lib/location'),
@@ -527,7 +527,7 @@ describe('#Solid', function() {
                     // DEECCCC  a: x=0   sx=70
                     //  EECCCC  b: x=10  sx=60  => [a]
                     //  ECC     c: x=30  sx=40  => [a]
-                    log()
+                    // log()
                     _a(0,70)
                     _b(10,60)
                     _c(30,40)
@@ -537,9 +537,9 @@ describe('#Solid', function() {
                     //  EECC  b: x=10  sx=40  => [a]
                     //  EC    c: x=30  sx=20  => [a]
                     log()
-                    // _a(0,70)
-                    // _b(10,60)
-                    // _c(30,40)
+                    // _a(0,50)
+                    // _b(10,40)
+                    // _c(30,20)
                     //
                     // c.convertCoordinateTo(b)
                     // // DEECCCC  a: x=0   sx=70
