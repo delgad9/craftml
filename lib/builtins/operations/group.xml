@@ -1,12 +1,11 @@
 <craft name="group">
     <content></content>
-    <script type="text/craftml">
+    <script>
         function main(params, scope) {
             var solids = scope.solids
             var grp = new Solid()
-            grp.children = _.flatten(solids)
-            grp.fitToChildren()
-            scope.solids = [grp]
+            grp.setChildren(solids)
+            scope.solids = [grp]            
         }
     </script>
 </craft>

@@ -3,7 +3,7 @@
     <parameter name="y" default="null" type="percent"/>
     <parameter name="z" default="null" type="percent"/>
     <content></content>
-    <script type="text/craftml">
+    <script>
 
         function main(params, scope) {
 

@@ -3,24 +3,26 @@
     <group>
         <content></content>
     </group>
-    <script type="text/craftml">
+    <script>
 
         function main(params, scope){
 
             var contentSolids = scope.solids[0].children
-            var tz = 0
+            var grouped = false
+            if (scope.element.attribs['select']){
+                contentSolids = scope.select()
+                grouped = true
+            }
+            var tz = contentSolids[contentSolids.length-1].layout.location.z
             _.forEachRight(contentSolids, function(solid){
-                var newLoc = {
-                    x: solid.layout.location.x,
-                    y: solid.layout.location.y,
-                    z: tz
-                }
-                solid.translateTo(newLoc)
+                var x = solid.layout.location.x
+                var y = solid.layout.location.y
+                var z = tz
+                solid.translateTo(x,y,z,grouped)
                 tz = tz + solid.layout.size.z + params.spacing
             })
-
-            scope.solids[0].fitToChildren1()
+            scope.solids[0].fitToChildren()
+            // console.log('STACK', JSON.stringify(scope.solids[0].getBounds()))
         }
-
     </script>
 </craft>
