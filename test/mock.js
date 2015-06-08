@@ -3,7 +3,8 @@ var lib = {}
 var _ = require('lodash')
 
 var Solid = require('../lib/solid'),
-    Size = require('../lib/size')
+    Size = require('../lib/size'),
+    Location = require('../lib/location')
 
 function make(name) {
 
@@ -106,8 +107,7 @@ lib.tag = function() {
 lib.unit = function(){
 
     function main() {
-            var s = new Solid()
-            s.layout.size = new Size(1,1,1)
+            var s = new Solid(new Location(0,0,0), new Size(1,1,1))
             return s
         }
 
