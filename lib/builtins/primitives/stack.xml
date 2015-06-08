@@ -8,21 +8,56 @@
         function main(params, scope){
 
             var contentSolids = scope.solids[0].children
-            var grouped = false
-            if (scope.element.attribs['select']){
-                contentSolids = scope.select()
-                grouped = true
-            }
-            var tz = contentSolids[contentSolids.length-1].layout.location.z
-            _.forEachRight(contentSolids, function(solid){
-                var x = solid.layout.location.x
-                var y = solid.layout.location.y
-                var z = tz
-                solid.translateTo(x,y,z)//,grouped)
-                tz = tz + solid.layout.size.z + params.spacing
+            var g = scope.solids[0]
+            var selector = scope.element.attribs['at']
+
+            var tz
+            var n = contentSolids.length
+            _.forEachRight(contentSolids, function(solid, index){
+                
+
+                if (selector){
+                    var matches = solid.find(selector)
+                    var at
+                    if (matches.length > 0){
+                        var at = matches[0]
+                        at.convertCoordinateTo(g)
+
+                        if (index == n-1){
+                            tz = at.layout.location.z
+                        }
+
+                        var z = tz - at.layout.location.z
+
+                        solid.select(at).translate(0,0,z)
+                        tz = tz + at.layout.size.z + params.spacing
+                    } else {
+
+                        if (index == n-1){
+                            tz = solid.layout.location.z
+                        }
+
+                        var z = tz - solid.layout.location.z
+
+                        solid.translate(0,0,z)
+                        tz = tz + solid.layout.size.z + params.spacing
+                    }
+
+                } else {
+
+                    if (index == n-1){
+                        tz = solid.layout.location.z
+                    }
+
+                    var z = tz - solid.layout.location.z
+
+                    solid.translate(0,0,z)
+                    tz = tz + solid.layout.size.z + params.spacing
+                }
+
             })
-            scope.solids[0].fitToChildren()
-            // console.log('STACK', JSON.stringify(scope.solids[0].getBounds()))
+
+            g.fitToChildren()
         }
     </script>
 </craft>

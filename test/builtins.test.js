@@ -199,6 +199,27 @@ describe('builtins', function() {
 
     describe('align', function() {
 
+        it.only('align="x50 y50"', function() {
+            var c = tag('craft',
+                builtins.cube,
+                builtins.align,
+                builtins.group,
+                tag('group', a('align', 'x50 y50'),
+                    tag('cube'), tag('cube')))
+
+            // inspect(c)
+            return render(c)
+                .then(function(solids) {
+                    // inspect(r.length)
+
+                    _.forEach(solids, function(s) {
+                        // inspect(s.layout)
+                        s.layout.location.x.should.be.eql(-5)
+                    })
+                })
+
+        })
+
 
         it('x=0%', function() {
             var c = tag('craft',
