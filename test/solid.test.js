@@ -324,7 +324,7 @@ describe('#Solid', function() {
 
         describe('coordinate conversions', function(){
 
-                var a, b, c, d, e, b1, b2, c1, c2
+                var a, b, c, d, e
                 beforeEach(function(){
                     a = new Solid()
                     b = new Solid()
@@ -453,6 +453,50 @@ describe('#Solid', function() {
 
                 })
 
+                it('can translateTo w.r.t. another coordinate system', function(){
+
+                    c.translate(10,0,0)
+                    b.setChildren([e, c])
+                    b.scale(2)
+                    b.translate(10,0,0)
+                    a.setChildren([d, b])
+
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=10  sx=10  => [b]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(10,10)
+
+                    c.convertCoordinateTo(a)
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=30  sx=20  => [a]
+                    // log()
+                    _a(0,50)
+                    _b(10,40)
+                    _c(30,20)
+
+                    c.translateTo(50,0,0)
+                    // DEE__CC  a: x=0   sx=70
+                    //  EE__CC  b: x=10  sx=60  => [a]
+                    //  E_C     c: x=50  sx=20  => [a]
+                    _a(0,70)
+                    _b(10,60)
+                    _c(50,20)
+
+                    // DEE__CC  a: x=0   sx=70
+                    //  EE__CC  b: x=10  sx=60  => [a]
+                    //  E_C     c: x=20  sx=10  => [b]
+                    c.convertCoordinateTo(b)
+                    // log()
+                    _a(0,70)
+                    _b(10,60)
+                    _c(20,10)
+
+                })
+
                 it('can scale w.r.t. another coordinate system', function(){
 
                     c.translate(10,0,0)
@@ -536,19 +580,7 @@ describe('#Solid', function() {
                     // DEECC  a: x=0   sx=50
                     //  EECC  b: x=10  sx=40  => [a]
                     //  EC    c: x=30  sx=20  => [a]
-                    log()
-                    // _a(0,50)
-                    // _b(10,40)
-                    // _c(30,20)
-                    //
-                    // c.convertCoordinateTo(b)
-                    // // DEECCCC  a: x=0   sx=70
-                    // //  EECCCC  b: x=10  sx=60  => [a]
-                    // //  ECC     c: x=10  sx=20  => [c]
-                    // // log()
-                    // _a(0,70)
-                    // _b(10,60)
-                    // _c(10,20)
+                    // log()
 
                 })
 
@@ -644,6 +676,42 @@ describe('#Solid', function() {
                     p.size.should.be.eql(new Size(40,20,20))
                 })
 
+                it('translate w.r.t. a selected descendent', function(){
+
+
+                    c.translate(10,0,0)
+                    b.setChildren([e, c])
+                    b.scale(2)
+                    b.translate(10,0,0)
+                    a.setChildren([d, b])
+
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=10  sx=10  => [b]
+                    // log()
+
+                    c.convertCoordinateTo(a)
+                    // DEECC  a: x=0   sx=50
+                    //  EECC  b: x=10  sx=40  => [a]
+                    //  EC    c: x=30  sx=20  => [a]
+                    // log()
+
+                    b.select(c).translate(20,0,0)
+                    // D__EECC  a: x=0   sx=70
+                    //    EECC  b: x=30  sx=40  => [a]
+                    //    EC    c: x=50  sx=20  => [a]
+                    // log()
+                    _a(0,70)
+                    _b(30,40)
+                    _c(50,20)
+
+                    a.apply()
+                    // log()
+                    _a(0,70)
+                    _b(30,40)
+                    _c(50,20)
+
+                })
 
         })
 
