@@ -186,6 +186,8 @@ describe('#Solid', function() {
         it('rotateZ(90) w.r.t. [0,0,0]', function(){
             s.rotateZ(90, [0,0,0])
 
+
+
             var b = s.getBounds()
             b.location.should.be.eql(new Location(-10,0,0))
             b.size.should.be.eql(new Size(10,10,10))
@@ -357,7 +359,7 @@ describe('#Solid', function() {
                     c.getBounds().size.x.should.be.eql(sx)
                 }
 
-                it('can convert and convert back', function(){
+                it('convert to another coordinate system and convert back', function(){
 
                     b.setChildren([c])
                     b.scale(2)
@@ -408,7 +410,7 @@ describe('#Solid', function() {
                     _c(10,20)
                 })
 
-                it('can translate w.r.t. another coordinate system', function(){
+                it('translate w.r.t. another coordinate system', function(){
 
                     c.translate(10,0,0)
                     b.setChildren([e, c])
@@ -453,7 +455,7 @@ describe('#Solid', function() {
 
                 })
 
-                it('can translateTo w.r.t. another coordinate system', function(){
+                it('translateTo w.r.t. another coordinate system', function(){
 
                     c.translate(10,0,0)
                     b.setChildren([e, c])
@@ -497,7 +499,7 @@ describe('#Solid', function() {
 
                 })
 
-                it('can scale w.r.t. another coordinate system', function(){
+                it('scale w.r.t. another coordinate system', function(){
 
                     c.translate(10,0,0)
                     b.setChildren([e, c])
@@ -542,7 +544,7 @@ describe('#Solid', function() {
 
                 })
 
-                it('can rotate w.r.t. another coordinate system', function(){
+                it('rotate w.r.t. another coordinate system', function(){
 
                     c.translate(10,0,0)
                     b.setChildren([e, c])
@@ -567,24 +569,28 @@ describe('#Solid', function() {
                     _b(10,40)
                     _c(30,20)
 
-                    c.scale(2,1,1)
-                    // DEECCCC  a: x=0   sx=70
-                    //  EECCCC  b: x=10  sx=60  => [a]
-                    //  ECC     c: x=30  sx=40  => [a]
+                    c.scale(3,1,1)
+                    // DEECCCCCC  a: x=0   sx=90
+                    //  EECCCCCC  b: x=10  sx=80  => [a]
+                    //  ECCC      c: x=30  sx=60  => [a]
+                    // log()
+                    _a(0,90)
+                    _b(10,80)
+                    _c(30,60)
+
+                    c.rotateZ(90)
+                    // DEE__CC  a: x=0   sx=70
+                    //  EE__CC  b: x=10  sx=60  => [a]
+                    //  E_C     c: x=50  sx=20  => [a]
+
                     // log()
                     _a(0,70)
                     _b(10,60)
-                    _c(30,40)
-
-                    c.rotateZ(90)
-                    // DEECC  a: x=0   sx=50
-                    //  EECC  b: x=10  sx=40  => [a]
-                    //  EC    c: x=30  sx=20  => [a]
-                    // log()
+                    _c(50,20)
 
                 })
 
-                it('can scale and translate w.r.t. another coordinate system', function(){
+                it('scale and translate w.r.t. another coordinate system', function(){
 
                     c.translate(10,0,0)
                     b.setChildren([e, c])
@@ -638,7 +644,7 @@ describe('#Solid', function() {
 
                 })
 
-                it('can produce correctly transformed csgs after apply', function(){
+                it('transform w.r.t. another coordinate system and apply', function(){
 
                     c.translate(10,0,0)
                     b.setChildren([e, c])
