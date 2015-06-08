@@ -47,4 +47,5 @@ describe('build stl', function() {
     it('positioning', test)
     it('prism', test)
     it('repeat', test)
+    it('stackat', test)
 })
