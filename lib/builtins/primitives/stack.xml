@@ -18,7 +18,7 @@
                 var x = solid.layout.location.x
                 var y = solid.layout.location.y
                 var z = tz
-                solid.translateTo(x,y,z,grouped)
+                solid.translateTo(x,y,z)//,grouped)
                 tz = tz + solid.layout.size.z + params.spacing
             })
             scope.solids[0].fitToChildren()
