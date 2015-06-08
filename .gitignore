@@ -1,5 +1,4 @@
 node_modules
-*.stl
 *.log
 build
 .DS_Store
