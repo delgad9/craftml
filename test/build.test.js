@@ -48,4 +48,5 @@ describe('build stl', function() {
     it('prism', test)
     it('repeat', test)
     it('stackat', test)
+    it('cut', test)
 })

@@ -13,6 +13,7 @@ chai.use(sinonChai);
 
 var render = require('../lib/render'),
     Scope = require('../lib/scope'),
+    Location = require('../lib/location'),
     render_script = require('../lib/render/script')
 
 var mock = require('./mock')
@@ -179,13 +180,7 @@ describe('render()', function() {
         return render(c)
             .then(function(r) {
                 // inspect(r)
-                r[0].layout.should.containSubset({
-                    location: {
-                        x: 10,
-                        y: 15,
-                        z: 20
-                    }
-                })
+                r[0].layout.location.should.be.eql(new Location(10,15,20))
             })
     })
 
@@ -200,13 +195,7 @@ describe('render()', function() {
             // inspect(c)
         return render(c)
             .then(function(r) {
-                // inspect(r)
-                r[0].layout.should.containSubset({
-                    location: {
-                        x: 10,
-                        y: 15
-                    }
-                })
+                r[0].layout.location.should.be.eql(new Location(10,15,0))
             })
 
     })
