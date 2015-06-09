@@ -186,8 +186,6 @@ describe('#Solid', function() {
         it('rotateZ(90) w.r.t. [0,0,0]', function(){
             s.rotateZ(90, [0,0,0])
 
-
-
             var b = s.getBounds()
             b.location.should.be.eql(new Location(-10,0,0))
             b.size.should.be.eql(new Size(10,10,10))
