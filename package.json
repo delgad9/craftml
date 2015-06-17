@@ -41,7 +41,7 @@
     "errors": "^0.2.0",
     "event-emitter": "^0.3.3",
     "get-parameter-names": "^0.2.0",
-    "htmlparser2": "^3.8.2",
+    "htmlparser2": "sikuli/htmlparser2",
     "jade": "^1.9.2",
     "lodash": "^3.5.0",
     "request": "^2.53.0",
