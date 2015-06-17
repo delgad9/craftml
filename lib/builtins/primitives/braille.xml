@@ -39,7 +39,7 @@
 
                         }else{
 
-                            ml += '<space xsize="1" ysize="1" zsize="1"></space>'
+                            ml += '<space xsize="1" ysize="1" zsize="0.5"></space>'
                         }
 
                     }

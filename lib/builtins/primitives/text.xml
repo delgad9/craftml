@@ -15,7 +15,7 @@
                 l.forEach(function(pl) { // pl = polyline (not closed)
                     var o = rectangular_extrude(pl, {
                         w: 2,
-                        h: 2
+                        h: 1
                     }) // extrude it to 3D
 
                     var s = new Solid(o)
