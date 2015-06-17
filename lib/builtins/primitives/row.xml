@@ -1,6 +1,7 @@
 <craft name="row">
     <parameter name="spacing" type="float" default="0"/>
-    <group align='~{{spacing}}~> ~|~ ~|~'>
+    <parameter name="at" type="string" default=""/>
+    <group align='~{{spacing}}~> ~|~ ~|~' at="{{at}}">
         <content></content>
     </group>
 </craft>

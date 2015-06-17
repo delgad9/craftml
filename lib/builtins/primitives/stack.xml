@@ -1,63 +1,7 @@
 <craft name="stack">
     <parameter name="spacing" type="float" default="0"/>
-    <group>
+    <parameter name="at" type="string" default=""/>
+    <group align='~|~ ~|~ <~{{spacing}}~' at="{{at}}">
         <content></content>
     </group>
-    <script>
-
-        function main(params, scope){
-
-            var contentSolids = scope.solids[0].children
-            var g = scope.solids[0]
-            var selector = scope.element.attribs['at']
-
-            var tz
-            var n = contentSolids.length
-            _.forEachRight(contentSolids, function(solid, index){
-                
-
-                if (selector){
-                    var matches = solid.find(selector)
-                    var at
-                    if (matches.length > 0){
-                        var at = matches[0]
-                        at.convertCoordinateTo(g)
-
-                        if (index == n-1){
-                            tz = at.layout.location.z
-                        }
-
-                        var z = tz - at.layout.location.z
-
-                        solid.select(at).translate(0,0,z)
-                        tz = tz + at.layout.size.z + params.spacing
-                    } else {
-
-                        if (index == n-1){
-                            tz = solid.layout.location.z
-                        }
-
-                        var z = tz - solid.layout.location.z
-
-                        solid.translate(0,0,z)
-                        tz = tz + solid.layout.size.z + params.spacing
-                    }
-
-                } else {
-
-                    if (index == n-1){
-                        tz = solid.layout.location.z
-                    }
-
-                    var z = tz - solid.layout.location.z
-
-                    solid.translate(0,0,z)
-                    tz = tz + solid.layout.size.z + params.spacing
-                }
-
-            })
-
-            g.fitToChildren()
-        }
-    </script>
 </craft>
