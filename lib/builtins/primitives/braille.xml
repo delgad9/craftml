@@ -11,23 +11,22 @@
                     } else {
                         c = new CSG.sphere({radius: 0.5, resolution: 10, center:[0.5,0.5,0.5]})
                         c = c.subtract(cube([1,1,0.5]))
-                        //c = c.union(cube([1,1,0.5]))
                         scope.parent.parent.cache = c
                     }
                     return c
                 }
             </script>
         </craft>
-        <script type="text/craftml">
+        <script>
 
              function letter(bitmap) {
 
                  var ml = ''
 
-                 ml += '<column spacing="0.5">'
+                 ml += '<col spacing="1">'
                  for (var i = 0; i < 3; i++){
 
-                    ml += '<row spacing="0.5">'
+                    ml += '<row spacing="1">'
 
                     for (var j = 0; j < 2; j++){
 
@@ -48,7 +47,7 @@
                     ml += '</row>'
 
                  }
-                 ml += '</column>'
+                 ml += '</col>'
 
                  return ml
              }
@@ -516,10 +515,10 @@
 
     </craft>
 
-    <craft name="text">
+    <craft name="text1">
         <parameter name="text" default="" type="string"/>
 
-        <script type="text/craftml">
+        <script>
 
             function main(params) {
 
@@ -542,14 +541,37 @@
         </script>
         <script>
             function main(params, scope){
-                _s(scope.solids).apply()
-                var csg = _s(scope.solids).union()
-                var solid = new Solid(csg)
+                var solid = new Solid()
+                solid.setChildren(scope.solids)
+                solid.color = 'white'
+                solid.apply()
                 scope.solids = [solid]
             }
         </script>
     </craft>
 
+    <script>
+
+        // hack to temporarily override <text>
+        // todo: think of a better solution
+        function main(params, scope){
+            scope.tmp = {
+                text: scope.parent.crafts.text,
+                char: scope.parent.crafts.char
+            }
+
+            scope.parent.crafts.text = scope.crafts.text1
+            scope.parent.crafts.char = scope.crafts.char
+        }
+    </script>
+
     <content></content>
+
+    <script>
+        function main(params, scope){
+            scope.parent.crafts.text = scope.tmp.text
+            scope.parent.crafts.char = scope.tmp.char
+        }
+    </script>
 
 </craft>

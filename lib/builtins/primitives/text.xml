@@ -1,6 +1,6 @@
 <craft name="text">
     <parameter name="text" default="" type="string"/>
-    <group transform="scale(0.5)">
+    <group transform="scale(0.3,0.3,0.5) mirrorY()">
         <script>
             function main(params, scope) {
 
