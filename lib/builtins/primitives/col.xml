@@ -1,7 +1,7 @@
 <craft name="col">
     <parameter name="spacing" type="float" default="0"/>
     <parameter name="at" type="string" default=""/>
-    <group align='~|~ ~{{spacing}}~> ~|~' at="{{at}}">
+    <group align='~|~ ~{{spacing}}~> |~~' at="{{at}}">
         <content></content>
     </group>
 </craft>
