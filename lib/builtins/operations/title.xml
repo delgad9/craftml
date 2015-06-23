@@ -1,0 +1,12 @@
+<craft name="title">
+    <script>
+        function main(params, scope) {
+            var c, title
+            if (c = scope.element.children[0]){
+                if (title = c.attribs['text']){
+                    scope.info['title'] = title
+                }
+            }
+        }
+    </script>
+</craft>
