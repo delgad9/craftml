@@ -38,7 +38,7 @@ describe('#craft', function() {
 
             return preview('<craft><cube></cube></craft>')
                 .then(function(previewable) {
-                    previewable.csgs.should.have.length(1)
+                    previewable.root.children.should.have.length(1)
                 })
                 // inspect(v)
         })
@@ -47,7 +47,7 @@ describe('#craft', function() {
 
             return preview('<craft><cube></cube><cube></cube></craft>')
                 .then(function(previewable) {
-                    previewable.csgs.should.have.length(2)
+                    previewable.root.children.should.have.length(2)
                 })
 
         })
@@ -56,7 +56,7 @@ describe('#craft', function() {
 
             return preview('<craft><cube xsize="100"></cube></craft>')
                 .then(function(previewable) {
-                    previewable.csgs.should.have.length(1)
+                    previewable.root.children.should.have.length(1)
                 })
         })
 
@@ -77,7 +77,7 @@ describe('#craft', function() {
 
             return build('<craft><row><cube></cube><cube></cube></row></craft>')
                 .then(function(v) {
-                    // inspect(v)                    
+                    // inspect(v)
                     v.should.have.property('polygons').and.have.length(10)
                 })
         })

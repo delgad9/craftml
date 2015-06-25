@@ -1,4 +1,4 @@
-solid csg.js
+solid craftml
 facet normal 0 0 -1
 outer loop
 vertex 15.727406610312546 -5.929447639179834 30
@@ -2085,4 +2085,4 @@ vertex 12.82962913144534 -9.294095225512603 0
 vertex 13 -8 0
 endloop
 endfacet
-endsolid csg.js
+endsolid craftml

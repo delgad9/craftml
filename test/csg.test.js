@@ -157,9 +157,9 @@ describe('#csg', function() {
             return new CSG.cube().toStlBinary()
         })
 
-        test(function(CSG){
-            return new CSG.cube().toStlString()
-        })
+        // test(function(CSG){
+        //     return new CSG.cube().toStlString()
+        // })
 
         test(function(CSG){
             return new CSG.cube().toAMFString()
@@ -195,18 +195,18 @@ describe('#csg', function() {
 
     })
 
-    it('ext', function() {
-        this.timeout(5000);
-
-        test(function(CSG){
-            return new CSG.cube().expandedShell(5, 10, true)
-        })
-
-        test(function(CSG){
-            return new CSG.cube().expandedShell(5, 10, false)
-        })
-
-    })
+    // it('ext', function() {
+    //     this.timeout(5000);
+    //
+    //     test(function(CSG){
+    //         return new CSG.cube().expandedShell(5, 10, true)
+    //     })
+    //
+    //     test(function(CSG){
+    //         return new CSG.cube().expandedShell(5, 10, false)
+    //     })
+    //
+    // })
 
     it('transform', function() {
 

@@ -3,9 +3,6 @@
     <script>
         function main(params, scope) {
             var grp = Solid.fromGroup(scope.solids)
-            // assign the info object of the current scope to the new
-            // group solid
-            grp.info = scope.info
             scope.solids = [grp]
         }
     </script>

@@ -130,10 +130,6 @@ describe('render()', function() {
 
     it('can resolve <content>', function() {
         var u = unit()
-        var spy = sinon.spy()
-
-        u.on('render', spy)
-
         var c = [
                 craft(a('name', 'foo'),
                     content()),
@@ -143,18 +139,13 @@ describe('render()', function() {
 
         return render(c)
             .then(function(r) {
-                //inspect(r)
-                spy.should.have.been.calledTwice
+                // inspect(r)
+                r.length.should.be.eql(2)
             })
-
     })
 
     it('can resolve <content> multiple times', function() {
         var u = unit()
-        var spy = sinon.spy()
-
-        u.on('render', spy)
-
         var c = [
                 craft(a('name', 'foo'),
                     content(), content()),
@@ -165,7 +156,7 @@ describe('render()', function() {
         return render(c)
             .then(function(r) {
                 // inspect(r)
-                spy.should.have.been.calledTwice
+                r.length.should.be.eql(2)
             })
 
     })
@@ -387,10 +378,7 @@ describe('render()', function() {
     describe('parameters', function() {
 
         it('can inject default parameter values', function() {
-            var u = unit()
-            var spy = sinon.spy()
-
-            u.on('render', spy)
+            var u = script('function main(params){ return params;}')
 
             var c = [
                 parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
@@ -400,23 +388,13 @@ describe('render()', function() {
 
             // inspect(c)
             return render(c)
-                .then(function() {
-                    spy.should.have.been.calledWith(u,
-                        sinon.match({
-                            parameters: {
-                                p1: 2,
-                                p2: '5'
-                            }
-                        }))
+                .then(function(r) {
+                    r[0].should.be.eql({p1:2, p2:'5'})
                 })
-
         })
 
         it('can override default parameter values', function() {
-            var u = unit()
-            var spy = sinon.spy()
-
-            u.on('render', spy)
+            var u = script('function main(params){ return params;}')
 
             var c = [
                 parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
@@ -429,23 +407,13 @@ describe('render()', function() {
             scope.parameters.p1 = 5
 
             return render(c, scope)
-                .then(function() {
-                    spy.should.have.been.calledWith(u,
-                        sinon.match({
-                            parameters: {
-                                p1: 5,
-                                p2: 5
-                            }
-                        }))
+                .then(function(r) {
+                    r[0].should.be.eql({p1:5, p2:5})
                 })
-
         })
 
         it('can inject tag attribues as parameters to an inner craft', function() {
-            var u = unit()
-            var spy = sinon.spy()
-
-            u.on('render', spy)
+            var u = script('function main(params){ return params;}')
 
             var c = [
                 craft(a('name', 'foo'),
@@ -457,22 +425,14 @@ describe('render()', function() {
             // inspect(c)
 
             return render(c)
-                .then(function() {
-                    spy.should.have.been.calledWith(u,
-                        sinon.match({
-                            parameters: {
-                                p1: 5
-                            }
-                        }))
+                .then(function(r) {
+                    r[0].should.be.eql({p1:5})
                 })
         })
 
 
         it('can inject a string attribue, automatically cast as int, to an inner craft', function() {
-            var u = unit()
-            var spy = sinon.spy()
-
-            u.on('render', spy)
+            var u = script('function main(params){ return params;}')
 
             var c = [
                 craft(a('name', 'foo'),
@@ -483,24 +443,14 @@ describe('render()', function() {
 
             // inspect(c)
 
-
             return render(c)
-                .then(function() {
-                    spy.should.have.been.calledWith(u,
-                        sinon.match({
-                            parameters: {
-                                p1: 5
-                            }
-                        }))
+                .then(function(r) {
+                    r[0].should.be.eql({p1:5})
                 })
         })
 
         it('can inject default parameter values to an inner craft', function() {
-            var u = unit()
-            var spy = sinon.spy()
-
-            u.on('render', spy)
-
+            var u = script('function main(params){ return params;}')
             var c = [
                 craft(a('name', 'foo'),
                     parameter(a('name', 'p1'), a('default', 2), a('type', 'int')),
@@ -512,23 +462,14 @@ describe('render()', function() {
             // inspect(c)
 
             return render(c)
-                .then(function() {
-                    spy.should.have.been.calledWith(u,
-                        sinon.match({
-                            parameters: {
-                                p1: 2,
-                                p2: 10
-                            }
-                        }))
+                .then(function(r) {
+                    r[0].should.be.eql({p1:2,p2:10})
                 })
         })
 
 
         it('can resolve {{param}} from default parameter values', function() {
-            var u = unit()
-            var spy = sinon.spy()
-
-            u.on('render', spy)
+            var u = script('function main(params){ return params;}')
 
             var c = [
                 parameter(a('name', 'q1'), a('default', 10), a('type', 'int')),
@@ -541,21 +482,13 @@ describe('render()', function() {
             // inspect(c)
 
             return render(c)
-                .then(function() {
-                    spy.should.have.been.calledWith(u,
-                        sinon.match({
-                            parameters: {
-                                p1: 10
-                            }
-                        }))
+                .then(function(r) {
+                    r[0].should.be.eql({p1:10})
                 })
         })
 
         it('can resolve {{param}} from supplied parameter values', function() {
-            var u = unit()
-            var spy = sinon.spy()
-
-            u.on('render', spy)
+            var u = script('function main(params){ return params;}')
 
             var c = [
                 parameter(a('name', 'q1'), a('default', 10), a('type', 'int')),
@@ -573,22 +506,13 @@ describe('render()', function() {
             }
 
             return render(c, scope)
-                .then(function() {
-                    spy.should.have.been.calledWith(u,
-                        sinon.match({
-                            parameters: {
-                                p1: 20
-                            }
-                        }))
+                .then(function(r) {
+                    r[0].should.be.eql({p1:20})
                 })
         })
 
         it('can resolve expressions e.g., {{q1+q2}} in attributes', function() {
-            var u = unit()
-            var spy = sinon.spy()
-
-            u.on('render', spy)
-
+            var u = script('function main(params){ return params;}')
             var c = [
                 parameter(a('name', 'q1'), a('default', 10), a('type', 'int')),
                 parameter(a('name', 'q2'), a('default', 15), a('type', 'int')),
@@ -600,24 +524,15 @@ describe('render()', function() {
 
             // inspect(c)
             return render(c)
-                .then(function() {
-                    spy.should.have.been.calledWith(u,
-                        sinon.match({
-                            parameters: {
-                                p1: 25
-                            }
-                        }))
+                .then(function(r) {
+                    r[0].should.be.eql({p1:25})
                 })
 
 
         })
 
         it('can resolve string iterpolation "Hello {{foo}} and {{bar}}', function() {
-            var u = unit()
-            var spy = sinon.spy()
-
-            u.on('render', spy)
-
+            var u = script('function main(params){ return params;}')
             var c = [
                 parameter(a('name', 'foo'), a('default', 'xx'), a('type', 'string')),
                 parameter(a('name', 'bar'), a('default', 'yy'), a('type', 'string')),
@@ -629,13 +544,8 @@ describe('render()', function() {
 
             // inspect(c)
             return render(c)
-                .then(function() {
-                    spy.should.have.been.calledWith(u,
-                        sinon.match({
-                            parameters: {
-                                p1: 'Hello xx and yy'
-                            }
-                        }))
+                .then(function(r) {
+                    r[0].should.be.eql({p1:'Hello xx and yy'})
                 })
 
 
@@ -644,10 +554,7 @@ describe('render()', function() {
         describe('type="size"', function(){
 
             it('can resolve "{{s}} {{s}} {{s}}"', function() {
-                var u = unit()
-                var spy = sinon.spy()
-
-                u.on('render', spy)
+                var u = script('function main(params){ return params;}')
 
                 var c = [
                     parameter(a('name', 's'), a('default', '10'), a('type', 'int')),
@@ -659,47 +566,13 @@ describe('render()', function() {
 
                 // inspect(c)
                 return render(c)
-                    .then(function() {
-                        spy.should.have.been.calledWith(u,
-                            sinon.match({
-                                parameters: {
-                                    p1: { x: 10, y: 10, z: 10 }
-                                }
-                            }))
-                    })
-            })
-
-            it('can resolve " {{s}} {{s}} {{s}}"', function() {
-                var u = unit()
-                var spy = sinon.spy()
-
-                u.on('render', spy)
-
-                var c = [
-                    parameter(a('name', 's'), a('default', '10'), a('type', 'int')),
-                    craft(a('name', 'foo'),
-                        parameter(a('name', 'p1'), a('default', '15 15 15'), a('type', 'size')),
-                        u),
-                    foo(a('p1', ' {{s}} {{s}} {{s}}'))
-                ]
-
-                // inspect(c)
-                return render(c)
-                    .then(function() {
-                        spy.should.have.been.calledWith(u,
-                            sinon.match({
-                                parameters: {
-                                    p1: { x: 10, y: 10, z: 10 }
-                                }
-                            }))
+                    .then(function(r) {
+                        r[0].should.be.eql({p1: { x: 10, y: 10, z: 10 }})
                     })
             })
 
             it('can resolve from the default value', function() {
-                var u = unit()
-                var spy = sinon.spy()
-
-                u.on('render', spy)
+                var u = script('function main(params){ return params;}')
 
                 var c = [
                     parameter(a('name', 's'), a('default', '10'), a('type', 'int')),
@@ -711,15 +584,9 @@ describe('render()', function() {
 
                 // inspect(c)
                 return render(c)
-                    .then(function() {
-                        spy.should.have.been.calledWith(u,
-                            sinon.match({
-                                parameters: {
-                                    p1: { x: 15, y: 14, z: 13}
-                                }
-                            }))
+                    .then(function(r) {
+                        r[0].should.be.eql({p1: { x: 15, y: 14, z: 13}})
                     })
-
 
             })
 

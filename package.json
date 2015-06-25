@@ -38,12 +38,13 @@
   },
   "dependencies": {
     "bluebird": "^2.9.13",
+    "css-select": "^1.1.0",
     "errors": "^0.2.0",
     "event-emitter": "^0.3.3",
     "get-parameter-names": "^0.2.0",
     "htmlparser2": "sikuli/htmlparser2",
     "jade": "^1.9.2",
-    "lodash": "^3.5.0",
+    "lodash": "^3.9.3",
     "request": "^2.53.0",
     "with": "^4.0.1"
   }

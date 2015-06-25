@@ -89,7 +89,7 @@ describe('builtins', function() {
         })
     })
 
-    describe('lineup', function() {
+    describe.skip('lineup', function() {
 
         it('axis=x', function() {
             var c = tag('craft',
@@ -197,7 +197,7 @@ describe('builtins', function() {
         })
     })
 
-    describe('align', function() {
+    describe.skip('align', function() {
 
         it('align="x50 y50"', function() {
             var c = tag('craft',
