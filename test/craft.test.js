@@ -25,7 +25,7 @@ var Solid = require('../lib/solid')
 var craft = require('../lib/craft'),
     build = craft.build,
     preview = craft.preview,
-    _s = require('../lib/solids')
+    _s = require('../lib/solids'),
 
     _loadPrimitives = craft._test._loadPrimitives,
     _apply = craft._test._applyTransformation

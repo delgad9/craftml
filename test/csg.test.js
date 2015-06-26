@@ -2,8 +2,10 @@ var chai = require('chai'),
     chaiSubset = require('chai-subset'),
     assert = require('chai').assert,
     inspect = require('eyes').inspector(),
-    _ = require('lodash')
+    _ = require('lodash'),
+    expect = require('chai').expect
 
+chai.should()
 
 var CSG2 = require('../lib/scad/csg'),
 CSG1 = require('craft-scad').CSG,
@@ -16,14 +18,17 @@ CAG1 = require('craft-scad').CAG
 function test(f){
     var c1 = f(CSG1)
     var c2 = f(CSG2)
-    c1.toString().length.should.be.eql(c2.toString().length)
+    var n1 = c1.toString().length
+    var n2 = c2.toString().length
+    // n1.should.be.eql(n2)
+    expect(n1).to.be.eql(n2)
     c1.toString().slice(0,100).should.be.eql(c2.toString().slice(0,100))
 }
 
 function testCAG(f){
     var c1 = f(CAG1)
     var c2 = f(CAG2)
-    c1.toString().length.should.be.eql(c2.toString().length)
+    c1.toString().should.have.length(c2.toString().length)
     c1.toString().slice(0,100).should.be.eql(c2.toString().slice(0,100))
 }
 

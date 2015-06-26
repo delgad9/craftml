@@ -34,7 +34,7 @@ describe('build stl', function() {
                 fs.readFileAsync(dir + '/output.stl', 'utf8')
             ])
             .spread(function(stl, expected) {
-                stl.length.should.be.equal(expected.length)
+                stl.should.have.length(expected.length)
                 headOf(stl).should.be.equal(headOf(expected))
             })
     }

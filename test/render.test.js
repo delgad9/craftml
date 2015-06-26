@@ -6,7 +6,8 @@ var chai = require('chai'),
     nock = require('nock'),
     fs = require('fs'),
     inspect = require('eyes').inspector(),
-    _ = require('lodash')
+    _ = require('lodash'),
+    expect = require('chai').expect
 
 chai.should()
 chai.use(sinonChai);
@@ -140,7 +141,7 @@ describe('render()', function() {
         return render(c)
             .then(function(r) {
                 // inspect(r)
-                r.length.should.be.eql(2)
+                r.should.have.length(2)
             })
     })
 
@@ -156,7 +157,7 @@ describe('render()', function() {
         return render(c)
             .then(function(r) {
                 // inspect(r)
-                r.length.should.be.eql(2)
+                r.should.have.length(2)
             })
 
     })
@@ -233,7 +234,7 @@ describe('render()', function() {
             return render(c)
                 .then(function(r) {
                     // inspect(r)
-                    r.should.be.equal(1)
+                    expect(r).to.be.eql(1)
                 })
         })
 
@@ -245,7 +246,7 @@ describe('render()', function() {
             return render(c)
                 .then(function(r) {
                     // inspect(r)
-                    r.should.be.eql([1, 2])
+                    expect(r).to.be.eql([1, 2])
                 })
         })
 
@@ -259,7 +260,7 @@ describe('render()', function() {
             return render(c)
                 .then(function(r) {
                     // inspect(r)
-                    r[0].p1.should.be.equal(2)
+                    expect(r[0].p1).to.be.equal(2)
                 })
         })
 
@@ -328,7 +329,7 @@ describe('render()', function() {
             return render(c)
                 .then(function(r) {
                     // inspect(r)
-                    r.should.be.equal(101)
+                    expect(r).to.be.equal(101)
                     done()
                 })
         })
@@ -347,7 +348,7 @@ describe('render()', function() {
                     // inspect(r)
                     // should return a cube with six faces
                     r.should.have.property('csg')
-                    r.csg.polygons.length.should.be.equal(6)
+                    r.csg.polygons.should.have.length(6)
                 })
 
         })
@@ -365,9 +366,9 @@ describe('render()', function() {
 
                     r.should.have.length(2)
 
-                    r[0].csg.getBounds()[1].x.should.be.equal(1)
+                    expect(r[0].csg.getBounds()[1].x).to.be.equal(1)
 
-                    r[1].csg.getBounds()[1].x.should.be.equal(2)
+                    expect(r[1].csg.getBounds()[1].x).to.be.equal(2)
 
                 })
 

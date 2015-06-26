@@ -79,7 +79,7 @@ var Element = require('../lib/element')
 lib.tag = function() {
 
     var args = Array.prototype.slice.call(arguments)
-    name = args[0]
+    var name = args[0]
 
     var el = new Element('tag', name, {})
 

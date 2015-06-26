@@ -4,7 +4,7 @@
   "description": "craftml",
   "main": "lib/craft.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --require babelhook"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   ],
   "homepage": "http://craftml.io",
   "devDependencies": {
+    "babel": "^5.6.11",
     "chai": "^1.10.0",
     "chai-subset": "^0.3.0",
     "eyes": "^0.1.8",
