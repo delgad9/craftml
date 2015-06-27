@@ -14,7 +14,9 @@
                 } else if (params.in && params.each){
 
                     var name = params.each
-                    var vs = scope.parent.eval(params.in)
+                    console.log(params.in, typeof params.in)
+                    var vs = scope.parent.resolve('{{'+params.in+'}}')
+                    console.log('vs', vs, typeof vs)
                     //scope.parent.parameters[params.in]
                     //console.log('vs', vs, params.in, scope.parent.parameters)
                     scope.locals = {vs: vs}
