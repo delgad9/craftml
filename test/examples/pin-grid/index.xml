@@ -1,6 +1,6 @@
 <craft>
     <craft name="pin" src="../pin/index.xml"/>
-    <column spacing="5">
+    <col spacing="5">
         <repeat n="5">
             <row spacing="5">
                 <repeat n="5">
@@ -8,5 +8,5 @@
                 </repeat>
             </row>
         </repeat>
-    </column>
+    </col>
 </craft>

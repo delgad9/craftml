@@ -793,7 +793,7 @@ describe('#Solid', function() {
                 //  EC    c: x=30  sx=20  => [a]
                 // log()
 
-                b.select(c).translate(20,0,0)
+                b.transformAt(c).translate(20,0,0)
                 // D__EECC  a: x=0   sx=70
                 //    EECC  b: x=30  sx=40  => [a]
                 //    EC    c: x=50  sx=20  => [a]

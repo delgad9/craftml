@@ -2,6 +2,23 @@ var gulp = require('gulp'),
     mocha = require('gulp-mocha'),
     through2 = require('through2')
 
+//gulpfile.js
+var babel = require("gulp-babel")
+gulp.task("babel", ["others"], function () {
+  return gulp.src(["./lib/**/*.js"])
+    .pipe(babel({ignore:'fixTJunctions.js'}))
+    .pipe(gulp.dest("dist"))
+})
+
+gulp.task("others", function () {
+    return gulp.src(["./lib/**/*.xml","./lib/**/*.json"])
+      .pipe(gulp.dest("dist"))
+})
+
+gulp.task("watch", function(){
+    gulp.watch('lib/**/*.js', ['default'])
+})
+
 gulp.task('test:examples', function() {
     return gulp.src('test/build.test.js', {
             read: false
@@ -10,10 +27,8 @@ gulp.task('test:examples', function() {
         .pipe(mocha());
 });
 
-
 var Promise = require('bluebird'),
-    fs = Promise.promisifyAll(require('fs')),
-    craft = require('./lib/craft')
+    fs = Promise.promisifyAll(require('fs'))
 
 function buildStlAsync(path) {
     var src = path + '/index.xml'
@@ -29,7 +44,10 @@ function buildStlAsync(path) {
         })
 }
 
-gulp.task('test:examples:build', function() {
+gulp.task('test:examples:build', ['babel'], function() {
+
+            var  craft = require('./dist/craft')
+
             return gulp.src('test/examples/*', {
                     read: false
                 })
