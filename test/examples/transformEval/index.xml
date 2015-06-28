@@ -1,0 +1,22 @@
+<craft>
+
+    <parameter name="s" type="int" default="2"/>
+    <parameter name="p" type="int" default="20"/>
+
+    <craft name="t">
+        <stack>
+            <cube></cube>
+            <cube size="5 5 2"></cube>
+        </stack>
+    </craft>
+
+    <t transform="
+            scale({{s}} {{s/2}} {{s*2}})
+            translate({{p}} -10 0)
+            rotateX(90)
+            rotateZ(45 0 0 0)
+            mirrorX(5)
+            mirrorY()
+            "></t>
+
+</craft>

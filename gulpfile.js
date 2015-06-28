@@ -19,14 +19,13 @@ gulp.task("watch", function(){
     gulp.watch('lib/**/*.js', ['default'])
 })
 
-
-var babel = require('babel/register');
+var babelregister = require('babel/register');
 gulp.task('test:examples', function() {
     return gulp.src('test/build.test.js', {
             read: false
         })
         // gulp-mocha needs filepaths so you can't have any plugins before it
-        .pipe(mocha({compilers: {js: babel}}))
+        .pipe(mocha({compilers: {js: babelregister}}))
 });
 
 var Promise = require('bluebird'),

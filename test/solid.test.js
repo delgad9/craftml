@@ -185,7 +185,7 @@ describe('#Solid', function() {
         })
 
         it('rotateZ(90) w.r.t. [0,0,0]', function(){
-            s.rotateZ(90, [0,0,0])
+            s.rotateZ(90, 0, 0, 0)
 
             var b = s.getBounds()
             b.location.should.be.eql(new Location(-10,0,0))
@@ -362,17 +362,17 @@ describe('#Solid', function() {
             b1.size.should.be.eql(b2.size)
         })
 
-        it('translate(a,b,c) where a=1 b=2 c=3', function(){
-
-            s.transformEval('translate(a,b,c)', {a:1,b:2,c:3})
-
-            r.translate(1,2,3)
-
-            var b1 = s.getBounds()
-            var b2 = r.getBounds()
-            b1.location.should.be.eql(b2.location)
-            b1.size.should.be.eql(b2.size)
-        })
+        // it('translate(a,b,c) where a=1 b=2 c=3', function(){
+        //
+        //     s.transformEval('translate(a,b,c)', {a:1,b:2,c:3})
+        //
+        //     r.translate(1,2,3)
+        //
+        //     var b1 = s.getBounds()
+        //     var b2 = r.getBounds()
+        //     b1.location.should.be.eql(b2.location)
+        //     b1.size.should.be.eql(b2.size)
+        // })
 
         it('rotateX rotateY rotateZ', function(){
 
@@ -381,6 +381,43 @@ describe('#Solid', function() {
             r.rotateX(45)
             r.rotateY(60)
             r.rotateZ(30)
+
+            var b1 = s.getBounds()
+            var b2 = r.getBounds()
+            b1.location.should.be.eql(b2.location)
+            b1.size.should.be.eql(b2.size)
+        })
+
+        it('rotateX w.r.t. (0 0 0)', function(){
+
+            s.transformEval('rotateX(45 0 0 0)')
+
+            r.rotateX(45, 0, 0, 0)
+
+            var b1 = s.getBounds()
+            var b2 = r.getBounds()
+            b1.location.should.be.eql(b2.location)
+            b1.size.should.be.eql(b2.size)
+        })
+
+        it('rotateX w.r.t. (5 5 5)', function(){
+
+            s.transformEval('rotateX(45 5 5 5)')
+
+            r.rotateX(45, 5, 5, 5)
+
+            var b1 = s.getBounds()
+            var b2 = r.getBounds()
+            b1.location.should.be.eql(b2.location)
+            b1.size.should.be.eql(b2.size)
+        })
+
+        it('mirrorX ', function(){
+
+            s.transformEval('translate(10 0 0) mirrorX()')
+
+            r.translate(10,0,0)
+            r.mirrorX()
 
             var b1 = s.getBounds()
             var b2 = r.getBounds()
@@ -401,19 +438,33 @@ describe('#Solid', function() {
             b1.size.should.be.eql(b2.size)
         })
 
-        it('calculations in expression e.g., scale(s/2) s = 3 ', function(){
+        it('commas are optional e.g., translate( 1  2  3) scale( 3 2 1 )', function(){
 
-            s.transformEval('scale(s/2) translate(s*2, s+5, s+6)', {s:4})
+            s.transformEval('translate( 1  2  3) scale( 3 2 1 ); ')
 
-            var k = 4
-            r.scale(k/2)
-            r.translate(k*2, k+5, k+6)
+            r.translate(1,2,3)
+            r.scale(3,2,1)
 
             var b1 = s.getBounds()
             var b2 = r.getBounds()
             b1.location.should.be.eql(b2.location)
             b1.size.should.be.eql(b2.size)
         })
+
+        // it.skip('calculations in expression e.g., scale(s/2) s = 3 ', function(){
+        //     // not allow expressions
+        //
+        //     s.transformEval('scale(s/2) translate(s*2, s+5, s+6)', {s:4})
+        //
+        //     var k = 4
+        //     r.scale(k/2)
+        //     r.translate(k*2, k+5, k+6)
+        //
+        //     var b1 = s.getBounds()
+        //     var b2 = r.getBounds()
+        //     b1.location.should.be.eql(b2.location)
+        //     b1.size.should.be.eql(b2.size)
+        // })
 
     })
 
