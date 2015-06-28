@@ -19,18 +19,21 @@ gulp.task("watch", function(){
     gulp.watch('lib/**/*.js', ['default'])
 })
 
+
+var babel = require('babel/register');
 gulp.task('test:examples', function() {
     return gulp.src('test/build.test.js', {
             read: false
         })
         // gulp-mocha needs filepaths so you can't have any plugins before it
-        .pipe(mocha());
+        .pipe(mocha({compilers: {js: babel}}))
 });
 
 var Promise = require('bluebird'),
     fs = Promise.promisifyAll(require('fs'))
 
 function buildStlAsync(path) {
+    var  craft = require('./dist/craft')
     var src = path + '/index.xml'
     return fs.readFileAsync(src, 'utf8')
         .then(function(code) {
@@ -46,7 +49,7 @@ function buildStlAsync(path) {
 
 gulp.task('test:examples:build', ['babel'], function() {
 
-            var  craft = require('./dist/craft')
+
 
             return gulp.src('test/examples/*', {
                     read: false

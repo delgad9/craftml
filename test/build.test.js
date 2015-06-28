@@ -49,4 +49,7 @@ describe('build stl', function() {
     it('repeat', test)
     it('stackat', test)
     it('cut', test)
+    it('content', test)
+    it('barbell', test)
+    it('distribute', test)
 })
