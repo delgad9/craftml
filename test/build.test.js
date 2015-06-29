@@ -53,4 +53,5 @@ describe('build stl', function() {
     it('barbell', test)
     it('distribute', test)
     it('transformEval', test)
+    it('pyramid', test)
 })

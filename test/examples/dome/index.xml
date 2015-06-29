@@ -1,7 +1,0 @@
-<craft>
-    <row>
-        <dome></dome>
-        <dome width="50"></dome>
-        <dome sides="30"></dome>
-    </row>
-</craft>

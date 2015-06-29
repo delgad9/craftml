@@ -133,7 +133,6 @@ describe('builtins', function() {
         it('n=5 cubes', function() {
             var c = tag('craft',
                 builtins.cube,
-                builtins.repeat,
                 tag('repeat', a('n', '5'),
                     tag('cube')))
 
@@ -149,7 +148,6 @@ describe('builtins', function() {
         it('n=5x2 cubes', function() {
             var c = tag('craft',
                 builtins.cube,
-                builtins.repeat,
                 tag('repeat', a('n', '5'),
                     tag('repeat', a('n', 2),
                         tag('cube'))))
@@ -166,7 +164,6 @@ describe('builtins', function() {
         it('can iterate through [1,2,3]', function() {
             var c = tag('craft',
                 builtins.cube,
-                builtins.repeat,
                 parameter(a('name', 'xs'), a('default', [1,2,3])),
                 tag('repeat', a('each', 'x'),a('in','xs'),
                     tag('cube', a('xsize','{{x}}'))))
@@ -183,7 +180,6 @@ describe('builtins', function() {
         it('can iterate through an inline array in attribute', function() {
             var c = tag('craft',
                 builtins.cube,
-                builtins.repeat,
                 tag('repeat', a('each', 'x'),a('in','[1,2,3]'),
                     tag('cube', a('xsize','{{x}}'))))
 
