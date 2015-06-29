@@ -6,6 +6,7 @@
             <script>
                 function main(params, scope){
                     //console.log(scope.parent.parent.cache)
+                    var c
                     if (scope.parent.parent.cache){
                         c = scope.parent.parent.cache
                     } else {
