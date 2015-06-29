@@ -1,0 +1,55 @@
+<craft>
+    <parameter name="numLevels" default="4" type="int"/>
+
+    <craft name="fractal">
+        <parameter name="level" default="1" type="int"/>
+        <parameter name="s" default="40" type="int"/>
+        <part name="h">
+            <parameter name="length" default="40" type="int"/>
+            <row>
+                <cube size="1 {{length}} 1"></cube>
+                <cube size="{{length}} 1 1"></cube>
+                <cube size="1 {{length}} 1"></cube>
+            </row>
+        </part>
+        <part name="arrange">
+            <content></content>
+            <script>
+            function main(params, scope){
+                var s = params.s
+                var dx = s
+                var dy = s
+
+                if (scope.solids.length===4){
+                    scope.solids[0].centerAt({x:0,y:0,z:0})
+                    scope.solids[1].centerAt({x:0,y:dy,z:0})
+                    scope.solids[2].centerAt({x:dx,y:0,z:0})
+                    scope.solids[3].centerAt({x:dx,y:dy,z:0})
+                }
+            }
+            </script>
+        </part>
+        <part name="children">
+            <group layout="centerXY() alignZ(0%)">
+                <h length="{{s}}"></h>
+                <group>
+                    <arrange>
+                        <repeat n='4'>
+                            <fractal level='{{level-1}}' s='{{s/2}}'></fractal>
+                        </repeat>
+                    </arrange>
+                </group>
+            </group>
+        </part>
+        <script>
+            function main(params, scope){
+                if (params.level > 0){
+                    return "<children></children>"
+                }
+            }
+        </script>
+    </craft>
+
+    <fractal level="{{numLevels}}" color="green"></fractal>
+
+</craft>

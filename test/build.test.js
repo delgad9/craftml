@@ -54,4 +54,5 @@ describe('build stl', function() {
     it('distribute', test)
     it('transformEval', test)
     it('pyramid', test)
+    it('h-tree', test)
 })
