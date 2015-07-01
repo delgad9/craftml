@@ -1,6 +1,5 @@
 <craft name="circle">
-    <parameter name="radius" default="5" type="float"/>
-    <parameter name="r" default="5" type="float"/>
+    <parameter name="radius" alias="r" default="5" type="float"/>
     <parameter name="cx" default="5" type="float"/>
     <parameter name="cy" default="5" type="float"/>
     <parameter name="resolution" default="36" type="int"/>

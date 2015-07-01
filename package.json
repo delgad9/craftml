@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "bluebird": "^2.9.13",
+    "css": "^2.2.1",
     "css-select": "^1.1.0",
     "errors": "^0.2.0",
     "event-emitter": "^0.3.3",

@@ -552,27 +552,14 @@
     </craft>
 
     <script>
-
-        // hack to temporarily override <text>
-        // todo: think of a better solution
         function main(params, scope){
-            scope.tmp = {
-                text: scope.parent.crafts.text,
-                char: scope.parent.crafts.char
-            }
-
-            scope.parent.crafts.text = scope.crafts.text1
-            scope.parent.crafts.char = scope.crafts.char
+            var text = scope.element.children[0].attribs['text']
+            params.text = text
         }
     </script>
 
-    <content></content>
-
-    <script>
-        function main(params, scope){
-            scope.parent.crafts.text = scope.tmp.text
-            scope.parent.crafts.char = scope.tmp.char
-        }
-    </script>
+    <g>
+        <text1 text="{{text}}"></text1>
+    </g>
 
 </craft>
