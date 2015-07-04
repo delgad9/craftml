@@ -39,6 +39,7 @@
     "through2": "^0.6.5"
   },
   "dependencies": {
+    "CSSselect": "^0.7.0",
     "bluebird": "^2.9.13",
     "css": "^2.2.1",
     "css-select": "^1.1.0",
