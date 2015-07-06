@@ -1,6 +1,7 @@
 * {
     font-family: inherit;
     color: inherit;
+    font-size: 10;
 }
 
 :root > g {
@@ -10,6 +11,11 @@
 div, h1, h2, h3, h4, h5 {
     display: block;
     text-align: left;
+    color: black;
+}
+
+dot {
+    color: black;
 }
 
 h1 {

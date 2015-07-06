@@ -544,7 +544,6 @@
             function main(params, scope){
                 var solid = new Solid()
                 solid.setChildren(scope.solids)
-                solid.color = 'white'
                 solid.apply()
                 scope.solids = [solid]
             }
@@ -553,7 +552,7 @@
 
     <script>
         function main(params, scope){
-            var text = scope.element.children[0].attribs['text']
+            var text = scope.element.children[0].data//['text']
             params.text = text
         }
     </script>
