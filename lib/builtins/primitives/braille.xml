@@ -519,6 +519,7 @@
     <craft name="text1">
         <parameter name="text" default="" type="string"/>
 
+        <g>
         <script>
 
             function main(params) {
@@ -540,12 +541,13 @@
             }
 
         </script>
+        </g>
         <script>
             function main(params, scope){
-                var solid = new Solid()
-                solid.setChildren(scope.solids)
-                solid.apply()
-                scope.solids = [solid]
+                // var solid = new Solid()
+                // solid.setChildren(scope.solids)
+                // // solid.apply()
+                // scope.solids = [solid]
             }
         </script>
     </craft>
