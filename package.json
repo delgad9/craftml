@@ -39,14 +39,10 @@
     "through2": "^0.6.5"
   },
   "dependencies": {
-    "CSSselect": "^0.7.0",
     "bluebird": "^2.9.13",
-    "cacheman": "^1.1.0",
-    "cacheman-memory": "^0.1.2",
     "css": "^2.2.1",
     "css-select": "^1.1.0",
     "errors": "^0.2.0",
-    "event-emitter": "^0.3.3",
     "get-parameter-names": "^0.2.0",
     "htmlparser2": "sikuli/htmlparser2",
     "jade": "^1.9.2",
