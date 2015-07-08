@@ -2,6 +2,8 @@
     font-family: inherit;
     color: inherit;
     font-size: 10;
+    box-style: solid;
+    box-color: yellow;
 }
 
 :root > g {
