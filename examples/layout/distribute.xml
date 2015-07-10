@@ -1,0 +1,12 @@
+<craft>
+
+    <g layout="distributeX() distributeY()">
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube transform="translate(100,50,0)"></cube>
+    </g>
+
+</craft>
