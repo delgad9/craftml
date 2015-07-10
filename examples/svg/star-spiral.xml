@@ -1,0 +1,46 @@
+<craft>
+
+    <craft name="spiral">
+        <content></content>
+        <script>
+        function main(params, scope){
+            var r = 0
+            scope.solids.forEach(function(solid){
+                solid.rotate('z', r)
+                r = r + 10
+            })
+        }
+        </script>
+    </craft>
+
+    <craft name="star">
+        <g transform="scale(0.5)">
+        <path  d="
+        M 179.000 199.000
+        L 199.000 213.641
+        L 196.321 189.000
+        L 219.000 179.000
+        L 196.321 169.000
+        L 199.000 144.359
+        L 179.000 159.000
+        L 159.000 144.359
+        L 161.679 169.000
+        L 139.000 179.000
+        L 161.679 189.000
+        L 159.000 213.641
+        z
+        "></path>
+        </g>
+    </craft>
+
+    <solidify>
+        <stack spacing="5">
+            <spiral>
+                <repeat n="10">
+                    <star></star>
+                </repeat>
+            </spiral>
+        </stack>
+    </solidify>
+
+</craft>
