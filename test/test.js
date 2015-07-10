@@ -29,6 +29,11 @@ var headOf = function(x) {
     return x.slice(0, 100)
 }
 
+
+function closeTo(a,b){
+    return Math.abs(a-b)<0.0001
+}
+
 // language chain method
 Assertion.addMethod('size', function (x,y,z) {
   var name = "solid[name=" + this._obj.name + "]"
@@ -39,7 +44,7 @@ Assertion.addMethod('size', function (x,y,z) {
 
   // second, our type check
   this.assert(
-      s.x == x && s.y == y && s.z == z
+      closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
     , "expected " + name + "'s size to be #{exp} but got #{act}"
     , "expected " + name + "'s size not be #{act}"
     , {x:x, y:y, z:z}        // expected
@@ -56,7 +61,7 @@ Assertion.addMethod('location', function (x,y,z) {
 
   // second, our type check
   this.assert(
-      s.x == x && s.y == y && s.z == z
+      closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
     , "expected " + name + "'s location to be #{exp} but got #{act}"
     , "expected " + name + "'s location not be #{act}"
     , {x:x, y:y, z:z}        // expected

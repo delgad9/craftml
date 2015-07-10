@@ -1,0 +1,24 @@
+<craft>
+    <g>
+        <cube size="50 10 10" t="centerAt(0 0 0)"></cube>
+        <script>
+            function main(params, scope){
+                var c = scope.solids[0]
+                expect(c).to.have.size(50,10,10)
+                expect(c).to.have.location(-25,-5,-5)
+            }
+        </script>
+    </g>
+
+    <g>
+        <cube size="50 10 10" t="centerAt(10 10 10)"></cube>
+        <script>
+            function main(params, scope){
+                var c = scope.solids[0]
+                expect(c).to.have.size(50,10,10)
+                expect(c).to.have.location(-15,5,5)
+            }
+        </script>
+    </g>
+
+</craft>

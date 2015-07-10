@@ -1,0 +1,254 @@
+solid craftml
+facet normal -1 0 0
+outer loop
+vertex 100 -10 0
+vertex 100 -10 10
+vertex 100 0 10
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 100 -10 0
+vertex 100 0 10
+vertex 100 0 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 110 0 10
+vertex 110 -10 10
+vertex 110 -10 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 110 0 10
+vertex 110 -10 0
+vertex 110 0 0
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 100 0 10
+vertex 110 0 10
+vertex 110 0 0
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 100 0 10
+vertex 110 0 0
+vertex 100 0 0
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 110 -10 0
+vertex 110 -10 10
+vertex 100 -10 10
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 110 -10 0
+vertex 100 -10 10
+vertex 100 -10 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 110 0 0
+vertex 110 -10 0
+vertex 100 -10 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 110 0 0
+vertex 100 -10 0
+vertex 100 0 0
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 100 -10 10
+vertex 110 -10 10
+vertex 110 0 10
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 100 -10 10
+vertex 110 0 10
+vertex 100 0 10
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 0 -110 0
+vertex 0 -110 10
+vertex 0 -100 10
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 0 -110 0
+vertex 0 -100 10
+vertex 0 -100 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 10 -100 10
+vertex 10 -110 10
+vertex 10 -110 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 10 -100 10
+vertex 10 -110 0
+vertex 10 -100 0
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 0 -100 10
+vertex 10 -100 10
+vertex 10 -100 0
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 0 -100 10
+vertex 10 -100 0
+vertex 0 -100 0
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 10 -110 0
+vertex 10 -110 10
+vertex 0 -110 10
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 10 -110 0
+vertex 0 -110 10
+vertex 0 -110 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 10 -100 0
+vertex 10 -110 0
+vertex 0 -110 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 10 -100 0
+vertex 0 -110 0
+vertex 0 -100 0
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 0 -110 10
+vertex 10 -110 10
+vertex 10 -100 10
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 0 -110 10
+vertex 10 -100 10
+vertex 0 -100 10
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 0 -10 100
+vertex 0 -10 110
+vertex 0 0 110
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 0 -10 100
+vertex 0 0 110
+vertex 0 0 100
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 10 0 110
+vertex 10 -10 110
+vertex 10 -10 100
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 10 0 110
+vertex 10 -10 100
+vertex 10 0 100
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 0 0 110
+vertex 10 0 110
+vertex 10 0 100
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 0 0 110
+vertex 10 0 100
+vertex 0 0 100
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 10 -10 100
+vertex 10 -10 110
+vertex 0 -10 110
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 10 -10 100
+vertex 0 -10 110
+vertex 0 -10 100
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 10 0 100
+vertex 10 -10 100
+vertex 0 -10 100
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 10 0 100
+vertex 0 -10 100
+vertex 0 0 100
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 0 -10 110
+vertex 10 -10 110
+vertex 10 0 110
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 0 -10 110
+vertex 10 0 110
+vertex 0 0 110
+endloop
+endfacet
+endsolid craftml
