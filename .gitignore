@@ -2,4 +2,8 @@ node_modules
 *.log
 build
 .DS_Store
-output.test.stl
+test/output
+test/examples
+test/examples.test.js
+fonts
+dist

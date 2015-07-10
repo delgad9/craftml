@@ -237,20 +237,6 @@ vertex 22.5 -25 5
 vertex 17.5 -25 5
 endloop
 endfacet
-facet normal 0 -1 0
-outer loop
-vertex 30 -45 0
-vertex 30 -45 20
-vertex 10 -45 20
-endloop
-endfacet
-facet normal 0 -1 0
-outer loop
-vertex 30 -45 0
-vertex 10 -45 20
-vertex 10 -45 0
-endloop
-endfacet
 facet normal 0 0 -1
 outer loop
 vertex 30 -25 0
@@ -277,6 +263,188 @@ outer loop
 vertex 10 -45 20
 vertex 30 -25 20
 vertex 10 -25 20
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 10 -65 0
+vertex 10 -65 30
+vertex 10 -45 30
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 10 -65 0
+vertex 10 -45 30
+vertex 10 -45 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 30 -45 30
+vertex 30 -65 30
+vertex 30 -65 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 30 -45 30
+vertex 30 -65 0
+vertex 30 -45 0
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 10 -45 30
+vertex 30 -45 30
+vertex 30 -45 20
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 10 -45 30
+vertex 30 -45 20
+vertex 10 -45 20
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 15 -65 30
+vertex 10 -65 30
+vertex 10 -65 0
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 15 -65 30
+vertex 10 -65 0
+vertex 15 -65 0
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 30 -65 0
+vertex 30 -65 30
+vertex 25 -65 30
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 30 -65 0
+vertex 25 -65 30
+vertex 25 -65 0
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 25 -65 30
+vertex 15 -65 30
+vertex 15 -65 10
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 25 -65 30
+vertex 15 -65 10
+vertex 25 -65 10
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 30 -45 0
+vertex 30 -65 0
+vertex 10 -65 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 30 -45 0
+vertex 10 -65 0
+vertex 10 -45 0
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 10 -65 30
+vertex 30 -65 30
+vertex 30 -45 30
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 10 -65 30
+vertex 30 -45 30
+vertex 10 -45 30
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 15 -75 0
+vertex 15 -75 10
+vertex 15 -65 10
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 15 -75 0
+vertex 15 -65 10
+vertex 15 -65 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 25 -65 10
+vertex 25 -75 10
+vertex 25 -75 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 25 -65 10
+vertex 25 -75 0
+vertex 25 -65 0
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 25 -75 0
+vertex 25 -75 10
+vertex 15 -75 10
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 25 -75 0
+vertex 15 -75 10
+vertex 15 -75 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 25 -65 0
+vertex 25 -75 0
+vertex 15 -75 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 25 -65 0
+vertex 15 -75 0
+vertex 15 -65 0
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 15 -75 10
+vertex 25 -75 10
+vertex 25 -65 10
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 15 -75 10
+vertex 25 -65 10
+vertex 15 -65 10
 endloop
 endfacet
 endsolid craftml
