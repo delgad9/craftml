@@ -1,0 +1,10 @@
+<craft>
+    <cube transform="cropX(1 2) cropY(1 2) cropZ(1 2)"></cube>
+    <script>
+        function main(params, scope){
+            expect(scope.solids).to.have.length(1)
+            expect(scope.solids[0]).to.have.size(7,7,7)
+            expect(scope.solids[0]).to.have.location(1,1,1)
+        }
+    </script>
+</craft>

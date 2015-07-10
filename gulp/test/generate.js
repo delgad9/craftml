@@ -17,7 +17,7 @@ function indent(input, n){
 }
 
 function describe(title, body){
-    return 'describe("' + title + '", function(){' +
+    return 'describe("' + title + '", function(){ this.timeout(10000)\n' +
 
         body
 
