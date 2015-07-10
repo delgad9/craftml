@@ -40,7 +40,8 @@
     "sinon": "^1.12.2",
     "sinon-chai": "^2.6.0",
     "stl2image": "0.0.1",
-    "through2": "^2.0.0"
+    "through2": "^2.0.0",
+    "yargs": "^3.15.0"
   },
   "dependencies": {
     "bluebird": "^2.9.13",
