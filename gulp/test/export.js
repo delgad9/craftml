@@ -42,6 +42,15 @@ function exportStlToImages(src){
         }
     })
 
+    cameras.push({
+        name: 'far',
+        location: {
+            x: 10,
+            y: 10,
+            z: 200
+        }
+    })
+
     _.forEach(cameras, function(camera){
 
         var extras = {}

@@ -1,3 +1,10 @@
 <craft>
     <dome></dome>
+    <script>
+        function main(params, scope){
+            expect(scope.solids).to.have.length(1)
+            // expect(scope.solids[0]).to.have.size(10,10,10)
+            expect(scope.solids[0]).to.have.location(0,0,0)
+        }
+    </script>
 </craft>

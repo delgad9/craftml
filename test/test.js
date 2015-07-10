@@ -3,7 +3,8 @@ var craft = require('../lib/craft'),
     path = require('path')
 
 var chai = require('chai'),
-    expect = require('chai').expect
+    expect = chai.expect,
+    Assertion = chai.Assertion
 
 var Promise = require('bluebird'),
     fs = Promise.promisifyAll(require('fs')),
@@ -27,6 +28,41 @@ function buildStlAsync(path) {
 var headOf = function(x) {
     return x.slice(0, 100)
 }
+
+// language chain method
+Assertion.addMethod('size', function (x,y,z) {
+  var name = "solid[name=" + this._obj.name + "]"
+  var s = this._obj.layout.size;
+
+  // first, our instanceof check, shortcut
+  // new Assertion(this._obj).to.be.eql(3)
+
+  // second, our type check
+  this.assert(
+      s.x == x && s.y == y && s.z == z
+    , "expected " + name + "'s size to be #{exp} but got #{act}"
+    , "expected " + name + "'s size not be #{act}"
+    , {x:x, y:y, z:z}        // expected
+    , s   // actual
+  );
+})
+
+Assertion.addMethod('location', function (x,y,z) {
+  var name = "solid[name=" + this._obj.name + "]"
+  var s = this._obj.layout.location;
+
+  // first, our instanceof check, shortcut
+  // new Assertion(this._obj).to.be.eql(3)
+
+  // second, our type check
+  this.assert(
+      s.x == x && s.y == y && s.z == z
+    , "expected " + name + "'s location to be #{exp} but got #{act}"
+    , "expected " + name + "'s location not be #{act}"
+    , {x:x, y:y, z:z}        // expected
+    , s   // actual
+  );
+})
 
 var mkdirp = require('mkdirp')
 module.exports = function(src){
