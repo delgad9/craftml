@@ -1,0 +1,31 @@
+<craft name="flower">
+    <craft name="petal" src="heart.xml"/>
+    <craft name="sun-layout" src="sun-layout.xml"/>
+
+    <row spacing="3">
+        <g>
+            <sun-layout radius="6" color="olive">
+                <repeat n="4">
+                    <petal transform="scale(0.5,0.5,1)"></petal>
+                </repeat>
+            </sun-layout>
+        </g>
+
+        <g>
+            <sun-layout radius="6" color="crimson">
+                <repeat n="5">
+                    <petal transform="scale(0.5,0.5,1)"></petal>
+                </repeat>
+            </sun-layout>
+        </g>
+
+        <g>
+            <sun-layout radius="6.25" color="orange">
+                <repeat n="8">
+                    <petal transform="scale(0.25,0.5,1)"></petal>
+                </repeat>
+            </sun-layout>
+        </g>
+    </row>
+
+</craft>

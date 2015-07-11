@@ -55,6 +55,20 @@ vertex 0 -10 10
 vertex 0 -10 0
 endloop
 endfacet
+facet normal 0 0 -1
+outer loop
+vertex 10 0 0
+vertex 10 -10 0
+vertex 0 -10 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 10 0 0
+vertex 0 -10 0
+vertex 0 0 0
+endloop
+endfacet
 facet normal 0 0 1
 outer loop
 vertex 0 -10 10
@@ -67,132 +81,6 @@ outer loop
 vertex 0 -10 10
 vertex 10 0 10
 vertex 0 0 10
-endloop
-endfacet
-facet normal -1 0 0
-outer loop
-vertex 0 -6.123233995736766e-16 -10
-vertex 0 -10 -10
-vertex 0 -10 6.123233995736766e-16
-endloop
-endfacet
-facet normal -1 0 0
-outer loop
-vertex 0 -6.123233995736766e-16 -10
-vertex 0 -10 6.123233995736766e-16
-vertex 0 0 0
-endloop
-endfacet
-facet normal 1 0 0
-outer loop
-vertex 10 -10 6.123233995736766e-16
-vertex 10 -10 -10
-vertex 10 -6.123233995736766e-16 -10
-endloop
-endfacet
-facet normal 1 0 0
-outer loop
-vertex 10 -10 6.123233995736766e-16
-vertex 10 -6.123233995736766e-16 -10
-vertex 10 0 0
-endloop
-endfacet
-facet normal 0 0 -1
-outer loop
-vertex 10 -6.123233995736766e-16 -10
-vertex 10 -10 -10
-vertex 0 -10 -10
-endloop
-endfacet
-facet normal 0 0 -1
-outer loop
-vertex 10 -6.123233995736766e-16 -10
-vertex 0 -10 -10
-vertex 0 -6.123233995736766e-16 -10
-endloop
-endfacet
-facet normal 0 -1 0
-outer loop
-vertex 0 -10 -10
-vertex 10 -10 -10
-vertex 10 -10 6.123233995736766e-16
-endloop
-endfacet
-facet normal 0 -1 0
-outer loop
-vertex 0 -10 -10
-vertex 10 -10 6.123233995736766e-16
-vertex 0 -10 6.123233995736766e-16
-endloop
-endfacet
-facet normal -1 0 0
-outer loop
-vertex 0 10 -1.2246467991473533e-15
-vertex 0 9.999999999999998 -10.000000000000002
-vertex 0 -1.2246467991473533e-15 -10
-endloop
-endfacet
-facet normal -1 0 0
-outer loop
-vertex 0 10 -1.2246467991473533e-15
-vertex 0 -1.2246467991473533e-15 -10
-vertex 0 0 0
-endloop
-endfacet
-facet normal 1 0 0
-outer loop
-vertex 10 -1.2246467991473533e-15 -10
-vertex 10 9.999999999999998 -10.000000000000002
-vertex 10 10 -1.2246467991473533e-15
-endloop
-endfacet
-facet normal 1 0 0
-outer loop
-vertex 10 -1.2246467991473533e-15 -10
-vertex 10 10 -1.2246467991473533e-15
-vertex 10 0 0
-endloop
-endfacet
-facet normal 0 1 0
-outer loop
-vertex 10 10 -1.2246467991473533e-15
-vertex 10 9.999999999999998 -10.000000000000002
-vertex 0 9.999999999999998 -10.000000000000002
-endloop
-endfacet
-facet normal 0 1 0
-outer loop
-vertex 10 10 -1.2246467991473533e-15
-vertex 0 9.999999999999998 -10.000000000000002
-vertex 0 10 -1.2246467991473533e-15
-endloop
-endfacet
-facet normal 0 1.2246467991473532e-16 1
-outer loop
-vertex 10 0 0
-vertex 10 10 -1.2246467991473533e-15
-vertex 0 10 -1.2246467991473533e-15
-endloop
-endfacet
-facet normal 0 1.2246467991473532e-16 1
-outer loop
-vertex 10 0 0
-vertex 0 10 -1.2246467991473533e-15
-vertex 0 0 0
-endloop
-endfacet
-facet normal 0 0 -1
-outer loop
-vertex 0 9.999999999999998 -10.000000000000002
-vertex 10 9.999999999999998 -10.000000000000002
-vertex 10 -1.2246467991473533e-15 -10
-endloop
-endfacet
-facet normal 0 0 -1
-outer loop
-vertex 0 9.999999999999998 -10.000000000000002
-vertex 10 -1.2246467991473533e-15 -10
-vertex 0 -1.2246467991473533e-15 -10
 endloop
 endfacet
 endsolid craftml

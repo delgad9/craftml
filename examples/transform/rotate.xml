@@ -6,7 +6,7 @@
             function main(params, scope){
                 var c = scope.solids[0]
                 expect(c).to.have.size(50,10,10)
-                expect(c).to.have.location(0,0,0)
+                expect(c).to.have.center(25,5,5)
             }
         </script>
     </g>
@@ -17,7 +17,7 @@
             function main(params, scope){
                 var c = scope.solids[0]
                 expect(c).to.have.size(10,50,10)
-                expect(c).to.have.location(-10,0,0)
+                expect(c).to.have.center(25,5,5)
             }
         </script>
     </g>
@@ -28,7 +28,7 @@
             function main(params, scope){
                 var c = scope.solids[0]
                 expect(c).to.have.size(10,10,50)
-                expect(c).to.have.location(0,0,-50)
+                expect(c).to.have.center(25,5,5)
             }
         </script>
     </g>
@@ -39,7 +39,7 @@
             function main(params, scope){
                 var c = scope.solids[0]
                 expect(c).to.have.size(50,10,10)
-                expect(c).to.have.location(0,0,-10)
+                expect(c).to.have.center(25,5,5)
             }
         </script>
     </g>
