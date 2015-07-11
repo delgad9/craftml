@@ -1,0 +1,12 @@
+<craft>
+    <row>
+        <repeat n="5">
+            <group layout="centerXYZ()" cut=".hole">
+                <cube transform="scale(2,2,2)"/>
+                <cube transform="scale(1,1,4)" class="hole"/>
+                <cube transform="scale(1,4,1)" class="hole"/>
+                <cube transform="scale(4,1,1)" class="hole"/>
+            </group>
+        </repeat>
+    </row>
+</craft>

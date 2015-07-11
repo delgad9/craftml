@@ -1,0 +1,10 @@
+<craft>
+    <parameter name="radius" default="20" type="int"/>
+    <parameter name="thickness" default="5" type="int"/>
+    <script>
+        function main(params){
+            var c = circle({r: params.thickness/2, fn: 30, center: true})
+            return rotate_extrude(c.translate([params.radius - params.thickness/2,0,0]))
+        }
+    </script>
+</craft>

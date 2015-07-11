@@ -1,0 +1,35 @@
+<craft name="comb">
+    <parameter name="width" type="int" default="8"/>
+    <parameter name="length" type="int" default="30"/>
+
+    <g color="peru" layout="lineupX()">
+
+        <g layout="lineupX({{-length/20}})">
+
+            <!-- Rounded Spine -->
+            <cylinder radius="{{length / 2}}" height="2" t="
+                scale(0.1,1,1)
+            "></cylinder>
+
+            <!-- Spine -->
+            <cube size="4 {{length}} 2"></cube>
+
+        </g>
+
+        <!-- Teeth -->
+        <g layout="centerY()">
+            <col spacing="{{length - 4}}" t="translate(4,0,0)">
+                <repeat n="2">
+                    <cube size="{{width}} 2 2"></cube>
+                </repeat>
+            </col>
+
+            <col spacing="0.5" t="translate(4,0,0)">
+                <repeat n="{{length - 5}}">
+                    <cube size="{{width}} 0.5 2"></cube>
+                </repeat>
+            </col>
+        </g>
+    </g>
+
+</craft>

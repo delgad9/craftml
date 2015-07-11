@@ -1,0 +1,38 @@
+<craft name="grow">
+    <parameter name="factor" type="float" default="1.2"/>
+    <parameter name="xfactor" type="float" default="1"/>
+    <parameter name="yfactor" type="float" default="1"/>
+    <parameter name="zfactor" type="float" default="1"/>
+    <content>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+    </content>
+    <script>
+        function main(params, scope){
+            var n = scope.solids.length
+
+            var size = 1; var xsize = 1
+            var ysize = 1; var zsize = 1
+
+           for (var i = 0; i < n; i++) {
+                var solid = scope.solids[i]
+
+                if (params.factor !== 1.2) {
+                    solid.scale(size)
+                    size = size * params.factor
+                }
+
+                else {
+                    solid.scale(xsize,ysize,zsize)
+
+                    xsize = xsize * params.xfactor
+                    ysize = ysize * params.yfactor
+                    zsize = zsize * params.zfactor
+                }
+            }
+        }
+    </script>
+</craft>

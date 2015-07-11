@@ -1,366 +1,310 @@
 solid craftml
 facet normal 0 1 0
 outer loop
-vertex 0 0 40
-vertex 20 0 40
-vertex 20 0 0
+vertex -5 10 25
+vertex 15 10 25
+vertex 15 10 -15
 endloop
 endfacet
 facet normal 0 1 0
 outer loop
-vertex 0 0 40
-vertex 20 0 0
-vertex 0 0 0
+vertex -5 10 25
+vertex 15 10 -15
+vertex -5 10 -15
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 20 -30 0
-vertex 20 -30 40
-vertex 10 -30 40
+vertex 5 -20 25
+vertex -5 -20 25
+vertex -5 -20 -15
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 20 -30 0
-vertex 10 -30 40
-vertex 10 -30 0
+vertex 5 -20 25
+vertex -5 -20 -15
+vertex 5 -20 -15
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 0 -30 30
-vertex 0 -30 0
-vertex 10 -30 0
+vertex 15 -20 -15
+vertex 15 -20 5
+vertex 5 -20 5
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 0 -30 30
-vertex 10 -30 0
-vertex 10 -30 30
+vertex 15 -20 -15
+vertex 5 -20 5
+vertex 5 -20 -15
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 20 0 0
-vertex 20 -30 0
-vertex 0 -30 0
+vertex 15 10 -15
+vertex 15 -20 -15
+vertex -5 -20 -15
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 20 0 0
-vertex 0 -30 0
-vertex 0 0 0
+vertex 15 10 -15
+vertex -5 -20 -15
+vertex -5 10 -15
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 0 -30 40
-vertex 20 -30 40
-vertex 20 0 40
+vertex -5 -20 25
+vertex 15 -20 25
+vertex 15 10 25
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 0 -30 40
-vertex 20 0 40
-vertex 0 0 40
+vertex -5 -20 25
+vertex 15 10 25
+vertex -5 10 25
 endloop
 endfacet
 facet normal 1 0 0
 outer loop
-vertex 40 0 40
-vertex 40 -30 40
-vertex 40 -30 0
+vertex 25 10 25
+vertex 25 -20 25
+vertex 25 -20 -15
 endloop
 endfacet
 facet normal 1 0 0
 outer loop
-vertex 40 0 40
-vertex 40 -30 0
-vertex 40 0 0
+vertex 25 10 25
+vertex 25 -20 -15
+vertex 25 10 -15
 endloop
 endfacet
 facet normal 0 1 0
 outer loop
-vertex 20 0 40
-vertex 40 0 40
-vertex 40 0 0
+vertex 15 10 25
+vertex 25 10 25
+vertex 25 10 -15
 endloop
 endfacet
 facet normal 0 1 0
 outer loop
-vertex 20 0 40
-vertex 40 0 0
-vertex 20 0 0
+vertex 15 10 25
+vertex 25 10 -15
+vertex 15 10 -15
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 40 -30 0
-vertex 40 -30 20
-vertex 20 -30 20
+vertex 25 -20 -15
+vertex 25 -20 5
+vertex 15 -20 5
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 40 -30 0
-vertex 20 -30 20
-vertex 20 -30 0
+vertex 25 -20 -15
+vertex 15 -20 5
+vertex 15 -20 -15
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 40 0 0
-vertex 40 -30 0
-vertex 20 -30 0
+vertex 25 10 -15
+vertex 25 -20 -15
+vertex 15 -20 -15
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 40 0 0
-vertex 20 -30 0
-vertex 20 0 0
+vertex 25 10 -15
+vertex 15 -20 -15
+vertex 15 10 -15
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 20 -30 40
-vertex 40 -30 40
-vertex 40 0 40
+vertex 15 -20 25
+vertex 25 -20 25
+vertex 25 10 25
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 20 -30 40
-vertex 40 0 40
-vertex 20 0 40
+vertex 15 -20 25
+vertex 25 10 25
+vertex 15 10 25
 endloop
 endfacet
 facet normal -1 0 0
 outer loop
-vertex -20 -30 0
-vertex -20 -30 40
-vertex -20 0 40
+vertex -15 -20 -15
+vertex -15 -20 25
+vertex -15 10 25
 endloop
 endfacet
 facet normal -1 0 0
 outer loop
-vertex -20 -30 0
-vertex -20 0 40
-vertex -20 0 0
+vertex -15 -20 -15
+vertex -15 10 25
+vertex -15 10 -15
 endloop
 endfacet
 facet normal 0 1 0
 outer loop
-vertex -20 0 40
-vertex 0 0 40
-vertex 0 0 0
+vertex -15 10 25
+vertex -5 10 25
+vertex -5 10 -15
 endloop
 endfacet
 facet normal 0 1 0
 outer loop
-vertex -20 0 40
-vertex 0 0 0
-vertex -20 0 0
+vertex -15 10 25
+vertex -5 10 -15
+vertex -15 10 -15
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 0 -30 0
-vertex 0 -30 40
-vertex -20 -30 40
+vertex -5 -20 25
+vertex -15 -20 25
+vertex -15 -20 -15
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 0 -30 0
-vertex -20 -30 40
-vertex -20 -30 0
+vertex -5 -20 25
+vertex -15 -20 -15
+vertex -5 -20 -15
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 0 0 0
-vertex 0 -30 0
-vertex -20 -30 0
+vertex -5 -20 -15
+vertex -15 -20 -15
+vertex -15 10 -15
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 0 0 0
-vertex -20 -30 0
-vertex -20 0 0
+vertex -5 -20 -15
+vertex -15 10 -15
+vertex -5 10 -15
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex -20 -30 40
-vertex 0 -30 40
-vertex 0 0 40
+vertex -15 -20 25
+vertex -5 -20 25
+vertex -5 10 25
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex -20 -30 40
-vertex 0 0 40
-vertex -20 0 40
+vertex -15 -20 25
+vertex -5 10 25
+vertex -15 10 25
 endloop
 endfacet
 facet normal -1 0 0
 outer loop
-vertex 0 -60 30
-vertex 0 -60 60
-vertex 0 -30 60
+vertex 5 -25 5
+vertex 5 -25 25
+vertex 5 -20 25
 endloop
 endfacet
 facet normal -1 0 0
 outer loop
-vertex 0 -60 30
-vertex 0 -30 60
-vertex 0 -30 30
+vertex 5 -25 5
+vertex 5 -20 25
+vertex 5 -20 5
 endloop
 endfacet
 facet normal 1 0 0
 outer loop
-vertex 10 -30 60
-vertex 10 -60 60
-vertex 10 -60 30
+vertex 25 -20 25
+vertex 25 -25 25
+vertex 25 -25 5
 endloop
 endfacet
 facet normal 1 0 0
 outer loop
-vertex 10 -30 60
-vertex 10 -60 30
-vertex 10 -30 30
-endloop
-endfacet
-facet normal 0 1 0
-outer loop
-vertex 0 -30 60
-vertex 10 -30 60
-vertex 10 -30 40
-endloop
-endfacet
-facet normal 0 1 0
-outer loop
-vertex 0 -30 60
-vertex 10 -30 40
-vertex 0 -30 40
+vertex 25 -20 25
+vertex 25 -25 5
+vertex 25 -20 5
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 10 -60 30
-vertex 10 -60 60
-vertex 0 -60 60
+vertex 25 -25 5
+vertex 25 -25 25
+vertex 5 -25 25
 endloop
 endfacet
 facet normal 0 -1 0
 outer loop
-vertex 10 -60 30
-vertex 0 -60 60
-vertex 0 -60 30
+vertex 25 -25 5
+vertex 5 -25 25
+vertex 5 -25 5
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 10 -30 30
-vertex 10 -60 30
-vertex 0 -60 30
+vertex 25 -20 5
+vertex 25 -25 5
+vertex 15 -25 5
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 10 -30 30
-vertex 0 -60 30
-vertex 0 -30 30
-endloop
-endfacet
-facet normal 0 0 1
-outer loop
-vertex 0 -60 60
-vertex 10 -60 60
-vertex 10 -30 60
-endloop
-endfacet
-facet normal 0 0 1
-outer loop
-vertex 0 -60 60
-vertex 10 -30 60
-vertex 0 -30 60
-endloop
-endfacet
-facet normal -1 0 0
-outer loop
-vertex 20 -40 20
-vertex 20 -40 40
-vertex 20 -30 40
-endloop
-endfacet
-facet normal -1 0 0
-outer loop
-vertex 20 -40 20
-vertex 20 -30 40
-vertex 20 -30 20
-endloop
-endfacet
-facet normal 1 0 0
-outer loop
-vertex 40 -30 40
-vertex 40 -40 40
-vertex 40 -40 20
-endloop
-endfacet
-facet normal 1 0 0
-outer loop
-vertex 40 -30 40
-vertex 40 -40 20
-vertex 40 -30 20
-endloop
-endfacet
-facet normal 0 -1 0
-outer loop
-vertex 40 -40 20
-vertex 40 -40 40
-vertex 20 -40 40
-endloop
-endfacet
-facet normal 0 -1 0
-outer loop
-vertex 40 -40 20
-vertex 20 -40 40
-vertex 20 -40 20
+vertex 25 -20 5
+vertex 15 -25 5
+vertex 15 -20 5
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 40 -30 20
-vertex 40 -40 20
-vertex 20 -40 20
+vertex 15 -25 5
+vertex 5 -25 5
+vertex 5 -20 5
 endloop
 endfacet
 facet normal 0 0 -1
 outer loop
-vertex 40 -30 20
-vertex 20 -40 20
-vertex 20 -30 20
+vertex 15 -25 5
+vertex 5 -20 5
+vertex 15 -20 5
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 20 -40 40
-vertex 40 -40 40
-vertex 40 -30 40
+vertex 15 -25 25
+vertex 25 -25 25
+vertex 25 -20 25
 endloop
 endfacet
 facet normal 0 0 1
 outer loop
-vertex 20 -40 40
-vertex 40 -30 40
-vertex 20 -30 40
+vertex 15 -25 25
+vertex 25 -20 25
+vertex 15 -20 25
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 5 -25 25
+vertex 15 -25 25
+vertex 15 -20 25
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 5 -25 25
+vertex 15 -20 25
+vertex 5 -20 25
 endloop
 endfacet
 endsolid craftml

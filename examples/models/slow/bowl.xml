@@ -1,0 +1,19 @@
+<craft name="bowl">
+    <parameter name="width" type="int" default="30"/>
+
+    <stack l="alignZ(0%)" color="silver">
+        <content></content>
+
+        <g l="centerXY() alignZ(100%)" cut=".scoop">
+            <stack spacing="-4">
+                <dome width="{{width}}" t="rotateX(180)"/>
+                <cylinder radius="{{width / 4}}" height="4"/>
+            </stack>
+            <dome width="{{width-2}}" t="rotateX(180)" class="scoop"/>
+        </g>
+
+        <cube size="5 5 1" class="inside"></cube>
+
+    </stack>
+
+</craft>

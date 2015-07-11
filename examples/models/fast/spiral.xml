@@ -1,0 +1,19 @@
+<craft name="spiral">
+    <parameter name="length" type="int" default="20"/>
+    <parameter name="width" type="int" default="5"/>
+    <parameter name="thickness" type="int" default="1"/>
+    <parameter name="levels" type="int" default="2"/>
+
+    <craft name="sun-layout" src="sun-layout.xml"/>
+
+    <stack spacing="0">
+        <repeat n="{{levels}}">
+            <sun-layout>
+                <repeat n="20">
+                    <cube size="{{width}} {{length}} {{thickness}}"></cube>
+                </repeat>
+            </sun-layout>
+        </repeat>
+    </stack>
+
+</craft>

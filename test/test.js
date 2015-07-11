@@ -11,12 +11,11 @@ var Promise = require('bluebird'),
     glob = require('glob'),
     mkdirp = require('mkdirp')
 
-function buildStlAsync(path) {
-    var src = path
+function buildStlAsync(src) {
     return fs.readFileAsync(src, 'utf8')
         .then(function(code) {
             var options = {
-                basePath: path
+                basePath: path.dirname(src)
             }
             return craft.build(code, options)
         })
@@ -51,6 +50,30 @@ Assertion.addMethod('size', function (x,y,z) {
     , s   // actual
   );
 })
+
+// language chain method
+Assertion.addMethod('center', function (x,y,z) {
+  var name = "solid[name=" + this._obj.name + "]"
+  var l = this._obj.layout;
+  var s = {
+      x: l.location.x + l.size.x/2,
+      y: l.location.y + l.size.y/2,
+      z: l.location.z + l.size.z/2
+  }
+
+  // first, our instanceof check, shortcut
+  // new Assertion(this._obj).to.be.eql(3)
+
+  // second, our type check
+  this.assert(
+      closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
+    , "expected " + name + " is centered at #{exp} but got #{act}"
+    , "expected " + name + "'s center is not at #{act}"
+    , {x:x, y:y, z:z}        // expected
+    , s   // actual
+  );
+})
+
 
 Assertion.addMethod('location', function (x,y,z) {
   var name = "solid[name=" + this._obj.name + "]"

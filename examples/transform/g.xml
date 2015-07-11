@@ -46,8 +46,8 @@
                     // the size of g#inside should be the size of the spaces
                     // collectively occupied by the three cubes, scaled by 2
                     expect(c).to.have.size(100,20,20)
-                    // the x location is scaled
-                    expect(c).to.have.location(-40,0,0)
+                    // the center remains fixed
+                    expect(c).to.have.center(5,5,5)
                 }
             </script>
         </g>
@@ -58,7 +58,7 @@
                 // the size of g#outside should be as big as g#inside
                 expect(c).to.have.size(100,20,20)
                 // but it location is moved by 5 along x and 50 along z
-                expect(c).to.have.location(-35,0,50)
+                expect(c).to.have.center(10,5,55)
             }
         </script>
 

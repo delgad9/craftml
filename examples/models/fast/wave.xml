@@ -1,0 +1,11 @@
+<craft name="wave">
+    <parameter name="height" type="int" default="5"/>
+
+    <g color="steelblue">
+        <row spacing="-8" layout="alignY(110%)" cut=".sides">
+            <cylinder radius="10" height="{{height}}" class="sides"/>
+            <cube size="15 10 {{height}}"/>
+            <cylinder radius="10" height="{{height}}" class="sides"/>
+        </row>
+    </g>
+</craft>

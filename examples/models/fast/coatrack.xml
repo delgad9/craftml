@@ -1,0 +1,25 @@
+<craft name="coatrack">
+    <parameter name="length" type="int" default="60"/>
+    <parameter name="width" type="int" default="15"/>
+    <parameter name="pegs" type="int" default="3"/>
+
+    <craft name="peg">
+        <stack spacing="-0.5">
+            <sphere radius="2" color="white"></sphere>
+            <cylinder radius="1" height="5" color="black"></cylinder>
+        </stack>
+    </craft>
+
+    <stack>
+        <!-- Pegs -->
+        <row spacing="{{(length - 20) / pegs}}">
+            <repeat n="{{pegs}}">
+                <peg></peg>
+            </repeat>
+        </row>
+
+        <!-- Base -->
+        <cube size="{{length}} {{width}} 5" color="brown"></cube>
+    </stack>
+
+</craft>

@@ -1,0 +1,16 @@
+<craft name="chain">
+    <parameter name="spacing" type="int" default="-5"/>
+    <parameter name="n" type="int" default="4"/>
+
+    <craft name="ring" src="ring.xml"/>
+    <craft name="alternate-layout" src="alternate-layout.xml"/>
+
+    <row spacing="{{spacing}}" layout="centerZ()">
+        <alternate-layout>
+            <repeat n="{{n}}">
+                <ring radius="5" thickness="2" transform="
+                     scale(1,0.5,1)"></ring>
+            </repeat>
+        </alternate-layout>
+    </row>
+</craft>

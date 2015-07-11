@@ -1,0 +1,47 @@
+<craft name="kaleidoscope">
+    <craft name="petal" src="heart.xml"/>
+    <craft name="sun-layout" src="sun-layout.xml"/>
+
+    <g layout="centerXYZ()">
+        <g color="olive">
+            <sun-layout radius="4">
+                <repeat n="4">
+                    <petal t="scale(0.25,0.25,1)"></petal>
+                </repeat>
+            </sun-layout>
+        </g>
+
+        <g  color="crimson">
+            <sun-layout radius="10">
+                <repeat n="10">
+                    <prism length="5" width="5" t="rotateX(90)"/>
+                </repeat>
+            </sun-layout>
+        </g>
+
+        <g  color="orange">
+            <sun-layout radius="20">
+                <repeat n="15">
+                    <petal transform="scale(0.2,0.5,1)"></petal>
+                </repeat>
+            </sun-layout>
+        </g>
+
+        <g t="rotateZ(12)" color="orchid">
+            <sun-layout radius="26">
+                <repeat n="15">
+                    <cylinder radius="1" height="5"/>
+                </repeat>
+            </sun-layout>
+        </g>
+
+        <g color="teal">
+            <sun-layout radius="30">
+                <repeat n="15">
+                    <petal t="scale(1,0.2,1)"></petal>
+                </repeat>
+            </sun-layout>
+        </g>
+    </g>
+
+</craft>
