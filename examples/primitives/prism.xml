@@ -1,9 +1,9 @@
 <craft>
-    <dome></dome>
+    <prism></prism>
     <script>
         function main(params, scope){
             expect(scope.solids).to.have.length(1)
-            expect(scope.solids[0]).to.have.size(10,9.9802,5)
+            expect(scope.solids[0]).to.have.size(10,10,5)
             expect(scope.solids[0]).to.have.location(0,0,0)
         }
     </script>

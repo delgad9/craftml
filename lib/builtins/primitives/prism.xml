@@ -2,7 +2,7 @@
     <parameter name="width" type="int" default="10"/>
     <parameter name="length" type="int" default="10"/>
     <parameter name="sides" type="int" default="3"/>
-    <script>
+    <script type="text/openjscad">
 
         function main() {
             // handles fn

@@ -1,8 +1,8 @@
 <craft name="cylinder">
     <parameter name="radius" default="5" type="float"/>
-    <parameter name="height" default="10" type="float"/>   
+    <parameter name="height" default="10" type="float"/>
     <parameter name="resolution" default="24" type="int"/>
-    <script type="text/craftml">
+    <script type="text/openjscad">
         function main(params) {
             return new CSG.cylinder({
                 radius: params.radius,

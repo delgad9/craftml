@@ -3,7 +3,7 @@
     <parameter name="cx" default="5" type="float"/>
     <parameter name="cy" default="5" type="float"/>
     <parameter name="resolution" default="36" type="int"/>
-    <script>
+    <script type="text/openjscad">
         function main(params){
             return new CAG.circle({radius: params.r, resolution: params.resolution})
                     .translate([params.cx, params.cy])

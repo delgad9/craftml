@@ -125,21 +125,23 @@ module.exports = function(src){
         ])
         .spread(function(stl, expected) {
 
-            // console.log('writing to ', dest)
-            fs.writeFileAsync(dest, stl)
+            if (stl.length > 31){
 
-            // if oracle doesn't exist (new)
-            if (expected == 'new'){
-                // write it to the oracle folder pending manual verification
-                oracle = oracle.replace('.stl', '.new.stl')
-                fs.writeFileAsync(oracle, stl)
+                fs.writeFileAsync(dest, stl)
 
-                // after manually verified, rename "foo.new.stl" to "foo.stl"
+                // if oracle doesn't exist (new)
+                if (expected == 'new'){
+                    // write it to the oracle folder pending manual verification
+                    oracle = oracle.replace('.stl', '.new.stl')
+                    fs.writeFileAsync(oracle, stl)
+
+                    // after manually verified, rename "foo.new.stl" to "foo.stl"
+                }
+
+                var n1 = stl.length
+                var n2 = expected.length
+                expect(n1).to.be.equal(n2)
+                expect(headOf(stl)).to.be.equal(headOf(expected))
             }
-
-            var n1 = stl.length
-            var n2 = expected.length
-            expect(n1).to.be.equal(n2)
-            expect(headOf(stl)).to.be.equal(headOf(expected))
         })
 }
