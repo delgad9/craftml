@@ -1,7 +1,7 @@
 <craft name="rectangle">
     <parameter name="width" default="5" type="float"/>
     <parameter name="height" default="5" type="int"/>
-    <script>
+    <script type="text/openjscad">
         function main(params){
             return new CAG.rectangle({radius: [params.width, params.height]})
         }
