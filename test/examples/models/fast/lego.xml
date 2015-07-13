@@ -1,0 +1,83 @@
+<craft name="lego-brick">
+
+    <parameter name="rows" type="int" default="2"/>
+    <parameter name="cols" type="int" default="4"/>
+
+    <script>
+        function main(params){
+            params.xsize = params.cols * 8
+            params.ysize = params.rows * 8
+        }
+    </script>
+
+    <craft name="repeat-grid" src="grid-repeat.xml"/>
+
+    <craft name="stud">
+        <parameter name="radius" type="int" default="2.425"/>
+        <cylinder height="1.8" radius="{{radius}}"/>
+    </craft>
+
+    <craft name="post">
+        <parameter name="thickness" type="int" default="0.85"/>
+        <parameter name="radius" type="int" default="3.25"/>
+        <group layout="centerXY() alignZ(0%)" cut=".hole">
+            <cylinder height="4" radius="{{radius}}"/>
+            <cylinder height="3.5" radius="{{radius - thickness}}" class="hole"/>
+        </group>
+    </craft>
+
+    <part name="studs">
+        <repeat-grid rows="{{rows}}" cols="{{cols}}"
+            colSpacing="{{8 - 2.425*2}}"
+            rowSpacing="{{8 - 2.425*2}}"
+            transform="translate(2.425,0.5,0)">
+                <stud></stud>
+        </repeat-grid>
+    </part>
+
+    <part name="spines">
+        <parameter name="size" type="size"/>
+        <repeat-grid rows="{{rows}}" cols="2"
+            colSpacing="{{xsize-3}}"
+            rowSpacing="{{8 - 1}}" color="black">
+            <cube size="1 1 5"></cube>
+        </repeat-grid>
+        <repeat-grid rows="2" cols="{{cols}}"
+            rowSpacing="{{ysize-3}}"
+            colSpacing="{{8-1}}" color="black">
+            <cube size="1 1 5"></cube>
+        </repeat-grid>
+    </part>
+
+    <part name="posts">
+        <repeat-grid rows="{{rows-1}}" cols="{{cols-1}}"
+            colSpacing="{{8-3.25*2}}"
+            rowSpacing="{{8-3.25*2}}" >
+            <post></post>
+        </repeat-grid>
+    </part>
+
+    <part name="walls">
+        <col spacing="{{ysize - 2}}">
+            <repeat n="2">
+                <cube size="{{xsize}} 1 5"></cube>
+            </repeat>
+        </col>
+        <row spacing="{{xsize - 2}}">
+            <repeat n="2">
+                <cube size="1 {{ysize}} 5"></cube>
+            </repeat>
+        </row>
+    </part>
+
+    <stack>
+        <studs></studs>
+        <cube class="topsurface" size="{{xsize}} {{ysize}} 2"/>
+        <group layout="centerXY()">
+            <walls></walls>
+            <spines></spines>
+            <posts></posts>
+        </group>
+    </stack>
+
+</craft>

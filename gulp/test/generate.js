@@ -67,16 +67,16 @@ function generate(p){
 
 gulp.task('test:generate', function () {
 
-    // glob all the xml files in examples
+    // glob all the xml files in test/examples
 
-    var root = 'examples'
+    var root = 'test/examples'
 
-    var requires = 'var test = require("./test")\n'
+    var requires = 'var test = require("./lib")\n'
 
     var tests = generate(root)
 
     var all = requires + '\n\n' + tests
-    // console.log(all)
+    console.log(all)
 
     fs.writeFile('test/examples.test.js', all)
 

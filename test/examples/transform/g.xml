@@ -1,0 +1,67 @@
+<craft>
+
+    <g id="outside" t="translate(5 0 0)">
+        <g id="inside">
+            <cube id="foo" t="translate(-20 0 0)"></cube>
+            <cube t="translate(0 0 0)"></cube>
+            <cube t="translate(20 0 0)"></cube>
+        </g>
+
+        <script>
+            function main(params, scope){
+                var c = scope.solids[0]
+                // the size of g#inside should be the size of the box containing
+                // all of its children
+                expect(c).to.have.size(50,10,10)
+                expect(c).to.have.location(-20,0,0)
+
+                // the location of the cube#foo should stay the same
+                var foo = scope.solids[0].children[0]
+                expect(foo).to.have.location(-20,0,0)
+            }
+        </script>
+    </g>
+
+    <script>
+        function main(params, scope){
+            var c = scope.solids[0]
+            // the size of g#outside should be as big as g#inside
+            expect(c).to.have.size(50,10,10)
+            // but it location is moved by 5 along x
+            expect(c).to.have.location(-15,0,0)
+        }
+    </script>
+
+    <g>
+        <g id="outside" t="translate(5 0 50)">
+            <g id="inside" t="scale(2)">
+                <cube t="translate(-20 0 0)"></cube>
+                <cube t="translate(0 0 0)"></cube>
+                <cube t="translate(20 0 0)"></cube>
+            </g>
+
+            <script>
+                function main(params, scope){
+                    var c = scope.solids[0]
+                    // the size of g#inside should be the size of the spaces
+                    // collectively occupied by the three cubes, scaled by 2
+                    expect(c).to.have.size(100,20,20)
+                    // the center remains fixed
+                    expect(c).to.have.center(5,5,5)
+                }
+            </script>
+        </g>
+
+        <script>
+            function main(params, scope){
+                var c = scope.solids[0]
+                // the size of g#outside should be as big as g#inside
+                expect(c).to.have.size(100,20,20)
+                // but it location is moved by 5 along x and 50 along z
+                expect(c).to.have.center(10,5,55)
+            }
+        </script>
+
+    </g>
+
+</craft>

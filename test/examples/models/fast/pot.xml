@@ -1,0 +1,32 @@
+<craft name="container">
+    <parameter name="baseRadius" type="int" default="12"/>
+    <parameter name="topRadius" type="int" default="20"/>
+    <parameter name="height" type="int" default="35"/>
+    <parameter name="thickness" type="int" default="2"/>
+    <parameter name="sides" type="int" default="40"/>
+
+    <part name="base">
+        <parameter name="baseRadius" type="int" default="12"/>
+        <parameter name="topRadius" type="int" default="20"/>
+
+        <col>
+            <solidify>
+                <stack spacing="{{height}}">
+                    <circle radius="{{topRadius}}" resolution="{{sides}}"></circle>
+                    <circle radius="{{baseRadius}}" resolution="{{sides}}"></circle>
+                </stack>
+            </solidify>
+        </col>
+    </part>
+
+    <group color="coral">
+        <stack spacing="{{-height + 2}}" cut=".hole">
+            <base
+                baseRadius="{{baseRadius - thickness}}"
+                topRadius="{{topRadius - thickness}}"
+                class="hole"
+            ></base>
+            <base></base>
+        </stack>
+    </group>
+</craft>

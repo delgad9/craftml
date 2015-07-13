@@ -1,9 +1,0 @@
-<craft>
-    <row>
-        <prism></prism>
-        <prism sides="5"></prism>
-        <prism sides="8"></prism>
-        <prism width="20"></prism>
-        <prism length="20"></prism>
-    </row>
-</craft>

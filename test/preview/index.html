@@ -1,0 +1,58 @@
+<head>
+    <style>
+        #craftml{
+            height:100%;
+            width:100%;
+        }
+        body {
+            padding:0px;margin:0px;
+        }
+    </style>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="">
+        <style>
+        div .craft-ace {
+            width: 500px;
+        }
+        </style>
+        <div class="row">
+            <div class="col-md-2">
+                <ul id="list">
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div id="craftml"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/craftml-preview.js"></script>
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/Long.min.js"></script>
+    <script src="js/ByteBufferAB.min.js"></script>
+    <script src="js/ProtoBuf.min.js"></script>
+
+    <script src="js/craftml-protobuf.js"></script>
+    <script src="js/craftml-loader.js"></script>
+    <script>
+
+    var element = $('#craftml')[0]
+    var preview = new craftml.Preview(element)
+    preview.setCameraPosition(0, -2.5, 3)
+    preview.render()
+
+    var o = window.location.hash.match(/#(.*)/)[1]
+    load(o, function(err, solid){
+
+        console.log('loaded', solid)
+        preview.initScene(solid.layout)
+        preview.add(solid)
+        preview.render()
+    })
+    
+    </script>
+</body>

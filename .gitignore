@@ -2,8 +2,7 @@ node_modules
 *.log
 build
 .DS_Store
-test/output
-test/examples
-test/examples.test.js
+*.new.*
+test/preview/js/craftml-preview.js
 fonts
 dist

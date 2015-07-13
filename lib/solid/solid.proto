@@ -1,0 +1,87 @@
+package Craftml;
+
+// Solid
+message Solid {
+    required string type = 1;
+    required Box layout = 2;
+    required Matrix m = 3;
+    repeated Polygon polygons = 4;
+
+    message KeyValuePair {
+        repeated string keyValue = 1;
+    }
+
+    optional Buffer buffer = 5;
+    repeated KeyValuePair style = 6;
+    repeated Solid children = 7;
+}
+
+message Buffer {
+    repeated float vertices = 1;
+    repeated float normals = 2;
+}
+
+message Polygon {
+    repeated Vertex vertices = 1;
+    Vertex normal = 2;
+}
+
+// Polygon Vertex
+message Vertex {
+    required float x = 1;
+    required float y = 2;
+    required float z = 3;
+}
+
+// matrix
+message Matrix {
+    repeated float elements = 1;
+}
+
+// Box
+message Box {
+
+    message Point3D {
+        required float x = 1;
+        required float y = 2;
+        required float z = 3;
+    }
+
+    required Point3D location = 1;
+    required Point3D size = 2;
+}
+
+// Properties
+message Properties {
+}
+
+// CSG
+message CSG {
+    repeated Polygon polygons = 1;
+    required Properties properties = 2;
+    required bool isCanonicalized = 3;
+    required bool isRetesselated = 4;
+    repeated Vector3D cachedBoundingBox = 5;
+}
+
+// Plane
+message Plane {
+    required Vector3D normal=1;
+    required float w = 2;
+}
+
+// Vector3D
+message Vector3D {
+    required float _x = 1;
+    required float _y = 2;
+    required float _z = 3;
+}
+
+// Polygon
+message Polygon1 {
+    repeated Vertex vertices = 1;
+    optional Polygon shared = 2;
+    optional string color = 3;
+    optional Plane plane = 4;
+    repeated Vector3D cachedBoundingBox = 5;
+}

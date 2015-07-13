@@ -1,4 +1,0 @@
-<craft>
-    <craft name="cube" module="box"/>    
-    <cube></cube>
-</craft>

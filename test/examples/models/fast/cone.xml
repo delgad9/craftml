@@ -1,0 +1,18 @@
+<craft name="cone">
+    <parameter name="radius" type="int" default="5"/>
+    <parameter name="height" type="int" default="10"/>
+    <script type="text/openjscad">
+        //Cone
+        function main(params) {
+            var topRadius=0
+            var baseRadius=params.radius
+            var height=params.height
+            return cylinder({
+                start: [0,0,0],
+                end: [0,0,height],
+                r1:baseRadius,
+                r2: topRadius,
+                fn: 30})
+       }
+    </script>
+</craft>

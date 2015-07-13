@@ -1,0 +1,60 @@
+<craft>
+    <parameter name="numLevels" default="3" type="int"/>
+
+    <craft name="fractal">
+        <parameter name="level" default="1" type="int"/>
+        <parameter name="s" default="1" type="int"/>
+        <part name="triangle">
+            <script>
+                function main(){
+                    var h = 5 * Math.tan(Math.PI/3)
+                    return cylinder({start: [0,0,0],
+                        end: [0,0,h],
+                        r1: 5,
+                        r2: 0,
+                        fn: 3}).rotateZ(30);
+                }
+            </script>
+        </part>
+        <part name="arrange">
+            <content></content>
+            <script>
+            function main(params, scope){
+                var r = 5 * params.s * 0.8
+                // 0.8 gives some space for pieces to overlap
+
+                var dx = r * Math.cos(Math.PI/6)
+                var dy = 2 * r * Math.cos(Math.PI/6) * Math.sin(Math.PI/3)
+                var dz = r * Math.tan(Math.PI/3) - 0
+                if (scope.solids.length===4){
+                    scope.solids[0].translate(0,0,0)
+                    scope.solids[1].translate(dx,-dy,0)
+                    scope.solids[2].translate(dx*2,0,0)
+                    scope.solids[3].translate(dx,-r/2,dz)
+                }
+            }
+            </script>
+        </part>
+        <part name="children">
+            <group>
+                <arrange>
+                    <repeat n='4'>
+                        <fractal level='{{level-1}}' s='{{s*2}}'></fractal>
+                    </repeat>
+                </arrange>
+            </group>
+        </part>
+        <script>
+            function main(params, scope){
+                if (params.level > 0){
+                    return "<children></children>"
+                } else if (params.level == 0){
+                    return "<triangle></triangle>"
+                }
+            }
+        </script>
+    </craft>
+
+    <fractal level="{{numLevels}}" color="purple"></fractal>
+
+</craft>

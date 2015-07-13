@@ -1,0 +1,36 @@
+<craft>
+    <g>
+        <cube size="20 10 10" t="fit(10 10 10)"></cube>
+        <script>
+            function main(params, scope){
+                var c = scope.solids[0]
+                expect(c).to.have.size(10,5,5)
+                expect(c).to.have.center(10,5,5)
+            }
+        </script>
+    </g>
+
+    <g>
+        <cube size="10 20 10" t="fit(20 20 20)"></cube>
+        <script>
+            function main(params, scope){
+                var c = scope.solids[0]
+                expect(c).to.have.size(10,20,10)
+                expect(c).to.have.center(5,10,5)
+            }
+        </script>
+    </g>
+
+    <g>
+        <cube size="10 20 10" t="fit(40 40 40)"></cube>
+        <script>
+            function main(params, scope){
+                var c = scope.solids[0]
+                expect(c).to.have.size(20,40,20)
+                expect(c).to.have.center(5,10,5)
+            }
+        </script>
+    </g>
+
+
+</craft>

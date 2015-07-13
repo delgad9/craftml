@@ -1,0 +1,34 @@
+<craft>
+
+    <g t="translateTo(10 20 30)">
+
+        <g>
+            <cube t="translate(10 20 30)"></cube>
+            <script>
+                function main(params, scope){
+                    var c = scope.solids[0]
+                    expect(c).to.have.location(10,20,30)
+                }
+            </script>
+        </g>
+
+        <g>
+            <cube t="translate(-10 -20 -30)"></cube>
+            <script>
+                function main(params, scope){
+                    var c = scope.solids[0]
+                    expect(c).to.have.location(-10,-20,-30)
+                }
+            </script>
+        </g>
+
+    </g>
+
+    <script>
+        function main(params, scope){
+            var c = scope.solids[0]
+            expect(c).to.have.location(10,20,30)
+        }
+    </script>
+
+</craft>

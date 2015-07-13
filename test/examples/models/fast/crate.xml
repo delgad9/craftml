@@ -1,0 +1,39 @@
+<craft name="crate">
+    <parameter name="width" type="int" default="30"/>
+    <parameter name="depth" type="int" default="30"/>
+    <parameter name="height" type="int" default="30"/>
+    <parameter name="xBars" type="int" default="3"/>
+    <parameter name="yBars" type="int" default="3"/>
+    <parameter name="xCBars" type="int" default="0"/>
+    <parameter name="yCBars" type="int" default="0"/>
+
+    <craft name="window" src="window.xml"/>
+
+    <g layout="centerXY()" color="peru">
+        <stack at=".base">
+            <content></content>
+            <cube size="{{width}} {{depth}} 2" class="base"/>
+        </stack>
+
+        <g layout="centerXYZ()" transform="translate(0,0,2)">
+            <row spacing="{{width - 4}}">
+                <repeat n="2">
+                    <window width="{{depth}}" height="{{height}}"
+                        bars="{{yBars}}" crossbars="{{yCBars}}"
+                        transform="rotateZ(90)" color="peru"
+                    />
+                </repeat>
+            </row>
+
+            <col spacing="{{depth - 4}}">
+                <repeat n="2">
+                    <window width="{{width}}" height="{{height}}"
+                        bars="{{xBars}}" crossbars="{{xCBars}}"
+                        color="peru"
+                    />
+                </repeat>
+            </col>
+        </g>
+    </g>
+
+</craft>

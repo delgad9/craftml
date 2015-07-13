@@ -1,8 +1,0 @@
-<craft>
-  <craft name="head" src="head.xml"/>
-  <craft name="body" src="body.xml"/>
-  <stack>
-        <head></head>
-        <body height="30"></body>    
-  </stack>
-</craft>

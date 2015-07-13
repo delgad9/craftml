@@ -1,0 +1,8 @@
+<craft>
+    <script>
+        function main(params, scope){
+            expect(Solid).to.exist
+            expect(typeof cube).to.be.eql('undefined')
+        }
+    </script>
+</craft>

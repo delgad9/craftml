@@ -1,8 +1,0 @@
-<craft>
-    <craft name="pin" src="../pin/index.xml"/>
-    <row>
-    <repeat n="5">
-        <pin></pin>
-    </repeat>
-    </row>
-</craft>

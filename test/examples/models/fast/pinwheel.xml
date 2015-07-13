@@ -1,0 +1,26 @@
+<craft name="pinwheel">
+    
+
+    <craft name="curl">
+        <col layout="alignX(0%) lineupY(-5)">
+            <cube size="10 10 5"></cube>
+            <prism width="14.14" length="5" transform="
+                rotateX(-90)
+                rotateZ(45)
+            "></prism>
+        </col>
+    </craft>
+
+    <g layout="centerXYZ()">
+        <g>
+            <repeat n="4">
+                <curl transform="translate(2.5,0,0)"/>
+                <curl transform="rotateZ(90) translate(-5,-12.5,0)"/>
+                <curl transform="rotateZ(180) translate(7.5,-20,0)"/>
+                <curl transform="rotateZ(270) translate(15,-7.5,0)"/>
+            </repeat>
+        </g>
+        <cylinder radius="1" height="6" color="white"></cylinder>
+    </g>
+
+</craft>

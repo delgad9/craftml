@@ -1,0 +1,11 @@
+<craft name="cloud">
+    <parameter name="scaleL" type="int" default="1.2"/>
+    <parameter name="scaleR" type="int" default="1"/>
+
+    <row spacing="-5" layout="alignY(90%)" transform="scale(1 1 0.5)" color="lightgray">
+        <dome transform="scale({{scaleL}},{{scaleL}},1)"></dome>
+        <dome width="15"></dome>
+        <dome transform="scale({{scaleR}},{{scaleR}},1)"></dome>
+    </row>
+
+</craft>

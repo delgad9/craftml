@@ -1,8 +1,0 @@
-<craft>
-    <parameter name="height" default="5" type="int"/>
-    <parameter name="headRadius" default="2" type="int"/>
-    <stack>
-        <cylinder height="1" radius="{{headRadius}}"/>
-        <cylinder height="{{height}}" radius="1"/>
-    </stack>
-</craft>
