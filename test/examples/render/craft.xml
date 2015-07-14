@@ -1,0 +1,26 @@
+<craft>
+    <craft name="foo">
+        <g></g>
+        <g></g>
+    </craft>
+    <craft name="bar">
+        <g></g>
+    </craft>
+    <script>
+        function main(params, scope){
+            expect(this.children[0].type).to.be.eql('define')
+            expect(this.children[1].type).to.be.eql('define')
+        }
+    </script>
+    <foo></foo>
+    <bar></bar>
+    <script>
+        function main(params, scope){
+            expect(this.children[3].type).to.be.eql('merge')
+            expect(this.children[3].children).to.have.length(2)
+
+            expect(this.children[4].type).to.be.eql('merge')
+            expect(this.children[4].children).to.have.length(1)
+        }
+    </script>
+</craft>

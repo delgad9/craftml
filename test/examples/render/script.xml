@@ -1,0 +1,17 @@
+<craft>
+    <script>
+        function main(params){
+        }
+    </script>
+    <script type="text/openjscad">
+        function main(params){
+            return cube()
+        }
+    </script>
+    <script>
+        function main(params){            
+            expect(this.children).to.have.length(2)
+            expect(this.children[1].children[0].type).to.be.equal('csg')
+        }
+    </script>
+</craft>
