@@ -18,7 +18,8 @@ function buildAsync(src) {
             var options = {
                 basePath: path.dirname(src)
             }
-            return Promise.join(craft.build(code, options), craft.preview1(code, options))
+        //    return Promise.join(craft.build(code, options), craft.preview1(code, options))
+            return Promise.join(craft.preview1(code, options))
         })
 }
 
@@ -76,19 +77,26 @@ module.exports = function(src){
         d3d: './test/output/' + name + '.d3d'
     }
 
+
+    function doChecks(ret, stlE, d3dE) {
+
+        // built stl
+        var stlA = ret[0].toStlString()
+
+        // previewable d3d
+        var d3dA = ret[1].save()
+
+        check(stlA, stlE, expectedFixtures.stl)
+        check(d3dA, d3dE, expectedFixtures.d3d)
+    }
+
+
     return Promise.all([buildAsync(src),
             fs.readFileAsync(expectedFixtures.stl, 'utf8').catch(function(){return null}),
             fs.readFileAsync(expectedFixtures.d3d, 'utf8').catch(function(){return null})
         ])
-        .spread(function(ret, stlE, d3dE) {
 
-            // built stl
-            var stlA = ret[0].toStlString()
+        .spread(function(){})
 
-            // previewable d3d
-            var d3dA = ret[1].save()
 
-            check(stlA, stlE, expectedFixtures.stl)
-            check(d3dA, d3dE, expectedFixtures.d3d)
-        })
 }

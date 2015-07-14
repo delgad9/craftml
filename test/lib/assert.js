@@ -67,3 +67,17 @@ Assertion.addMethod('location', function (x,y,z) {
     , s   // actual
   );
 })
+
+// language chain method
+Assertion.addMethod('style', function (key, value) {
+  var name = "solid[name=" + this._obj.name + "]"
+  var v = this._obj.style[key];
+
+  this.assert(
+      v === value
+    , "expected " + name + "'s style to be #{exp} but got #{act}"
+    , "expected " + name + "'s style not to be #{act}"
+    , key + '=' + value  // expected
+    , key + '=' + v  // actual
+  );
+})
