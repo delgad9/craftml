@@ -1,0 +1,21 @@
+<craft>
+    <g>
+        <g></g>
+        <g></g>
+        <g></g>
+    </g>
+    <g>
+    </g>
+    <script>
+        function main(params){
+            expect(this.children).to.have.length(2)
+
+            expect(this.children[0].type).to.be.equal('group')
+            expect(this.children[0].children).to.have.length(3)
+            expect(this.children[0].children[0].type).to.be.equal('group')
+
+            expect(this.children[1].type).to.be.equal('group')
+            expect(this.children[1].children).to.have.length(0)
+        }
+    </script>
+</craft>

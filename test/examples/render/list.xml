@@ -1,0 +1,26 @@
+<craft>
+    <g></g>
+    <script>
+        function main(params){
+            expect(this.children).to.have.length(1)
+        }
+    </script>
+    <g></g>
+    <script>
+        function main(params){
+            expect(this.children).to.have.length(3)
+        }
+    </script>
+    <g></g>
+    <script>
+        function main(params){
+            expect(this.children).to.have.length(5)
+        }
+    </script>
+    <g></g>
+    <script>
+        function main(params){
+            expect(this.children).to.have.length(7)
+        }
+    </script>
+</craft>

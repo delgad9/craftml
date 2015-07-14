@@ -2,7 +2,9 @@
     <content></content>
     <script>
         function main(params, scope) {
-            var grp = Solid.fromGroup(scope.solids)            
+            var grp = Solid.fromGroup(scope.solids)
+            solid.element = 'group'
+            solid.type = 'group'
             scope.solids = [grp]
         }
     </script>
