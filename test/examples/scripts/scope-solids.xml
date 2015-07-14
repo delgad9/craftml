@@ -1,0 +1,35 @@
+<craft>
+    <craft name="c1"></craft>
+    <craft name="c2"></craft>
+
+    <g>
+        <script type="text/openjscad">
+            function main(params){
+                return cube()
+            }
+        </script>
+        <g>
+        </g>
+        <script>
+            function main(params, scope){
+                expect(scope.solids).to.have.length(2)
+                expect(scope.solids[0].type).to.be.eql('csg')
+                expect(scope.solids[1].type).to.be.eql('group')
+            }
+        </script>
+        <g>
+        </g>
+        <script>
+            function main(params, scope){
+                expect(scope.solids).to.have.length(3)
+                expect(scope.solids[2].type).to.be.eql('group')
+            }
+        </script>
+    </g>
+    <script>
+        function main(params, scope){
+            expect(scope.solids).to.have.length(1)
+            expect(scope.solids[0].type).to.be.eql('group')          
+        }
+    </script>
+</craft>
