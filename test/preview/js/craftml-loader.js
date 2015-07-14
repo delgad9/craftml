@@ -2,12 +2,17 @@ var ProtoBuf = dcodeIO.ProtoBuf;
 var builder = ProtoBuf.loadJson(proto)
 var SolidProto = builder.build("Craftml").Solid
 
-function load(url, cb){
+function load(title, cb){
+
+    // title === 'examples primitives cube.xml'
+
+    var name = title.split(' ').slice(1).join('/') + '.new'
+    // name === 'primitives/cube.xml.new'
 
     var xhr = ProtoBuf.Util.XHR();
     xhr.open(
         /* method */ "GET",
-        /* file */ "examples/" + o + ".xml.bin",
+        /* file */ "../output/" + name + '.d3d',
         /* async */ true
     );
     xhr.responseType = "arraybuffer";

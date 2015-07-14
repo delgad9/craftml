@@ -59,7 +59,6 @@ function check(actual, expected, dest){
 
         mkdirp.sync(path.dirname(destNew))
         fs.writeFileAsync(destNew, actual)
-
         console.log('[new] ', destNew)
     }
 }
@@ -87,9 +86,9 @@ module.exports = function(src){
             var stlA = ret[0].toStlString()
 
             // previewable d3d
-            var d3dA = ret[1]
+            var d3dA = ret[1].save()
 
             check(stlA, stlE, expectedFixtures.stl)
-            // check(d3dA, d3dE, expectedFixtures.d3d)
+            check(d3dA, d3dE, expectedFixtures.d3d)
         })
 }

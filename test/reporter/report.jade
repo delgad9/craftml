@@ -1,0 +1,73 @@
+head
+    link(href="css/bootstrap.min.css" rel="stylesheet")
+body
+    style.
+        .model{
+            width: 100%;
+            height: 250px;
+        }
+        
+        .sidebar{
+            font-size: 80%;
+        }
+        
+    div.row
+        div.col-md-1.sidebar
+            each page in pages
+                a(id="page#{page.index}", href="#page#{page.index}", onClick="select(this)")= page.index
+                    ul
+                        each item in page.items
+                            li(title=item.title)= item.name
+        
+        div.col-md-11
+            div
+                each i in [0,1,2,3,4,5,6,7,8,9,10,11]
+                    div.col-md-3.cell(id="cell#{i}")
+                        div.title title
+                        div.model
+    
+    script(src="js/craftml-preview.js")
+    script(src="js/jquery.min.js")
+
+    script(src="js/Long.min.js")
+    script(src="js/ByteBufferAB.min.js")
+    script(src="js/ProtoBuf.min.js")
+
+    script(src="js/craftml-protobuf.js")
+    script(src="js/craftml-loader.js")
+    script.
+        
+        
+        var previews = []
+        initPreview()
+        select($('#page0')[0])
+        
+        function select(element){
+            
+            $(element).find('li').each(function(i){
+                
+                var title = $(this).attr('title')
+                                
+                var cell = $('#cell' + i)[0]
+                $(cell).find('.title').html(title)
+                
+                var o = title
+                console.log('title', title)
+                                
+                var preview = previews[i]
+                load(o, function(err, solid){              
+                    preview.initScene(solid.layout)
+                    preview.add(solid)
+                    preview.render()
+                })
+            })
+        }
+        
+        function initPreview(){
+            $('.cell .model').each(function(i){
+                var preview = new craftml.Preview(this)
+                preview.setCameraPosition(0, -2.5, 3)    
+                preview.render()
+                previews.push(preview)
+            })    
+        }

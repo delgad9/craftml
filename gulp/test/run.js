@@ -15,5 +15,16 @@ gulp.task('test', function() {
         }))
 })
 
+gulp.task('test:viz', function() {
+    return gulp.src('test/examples.test.js', {
+            read: false
+        })
+        // gulp-mocha needs filepaths so you can't have any plugins before it
+        .pipe(mocha({
+            compilers: {js: babelregister},
+            grep: argv.g,
+            reporter: require('../../test/reporter')
+        }))
+})
 
 gulp.task('test:run', ['test:generate', 'test'])
