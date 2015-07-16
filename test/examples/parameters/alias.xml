@@ -6,14 +6,12 @@
         <parameter name="three" alias="trois" type="int" default="1"/>
 
         <script>
-            function main(params, scope){
-                expect(params).to.have.property('one').and.eql(1)
-                expect(params).to.have.property('un').and.eql(1)
-                expect(params).to.have.property('two').and.eql(2)
-                expect(params).to.have.property('deux').and.eql(2)
-                expect(params).to.have.property('three').and.eql(3)
-                expect(params).to.have.property('trois').and.eql(3)
-            }
+            expect(params).to.have.property('one').and.eql(1)
+            expect(params).to.have.property('un').and.eql(1)
+            expect(params).to.have.property('two').and.eql(2)
+            expect(params).to.have.property('deux').and.eql(2)
+            expect(params).to.have.property('three').and.eql(3)
+            expect(params).to.have.property('trois').and.eql(3)
         </script>
     </craft>
 

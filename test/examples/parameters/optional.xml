@@ -6,11 +6,9 @@
         <parameter name="three" type="int"/>
 
         <script>
-            function main(params, scope){
-                expect(params).to.have.property('one').and.eql(1)
-                expect(params).to.not.have.property('two')
-                expect(params).to.have.property('three').and.eql(3)
-            }
+            expect(params).to.have.property('one').and.eql(1)
+            expect(params).to.not.have.property('two')
+            expect(params).to.have.property('three').and.eql(3)
         </script>
     </craft>
 

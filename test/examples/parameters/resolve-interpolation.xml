@@ -5,11 +5,9 @@
     <craft name="foo">
         <parameter name="p" type="int" default="1"/>
         <parameter name="q" type="int" default="1"/>
-        <script>
-            function main(params, scope){
-                expect(params).to.have.property('p').and.eql(7)
-                expect(params).to.have.property('q').and.eql(2)
-            }
+        <script>            
+            expect(params).to.have.property('p').and.eql(7)
+            expect(params).to.have.property('q').and.eql(2)
         </script>
     </craft>
 
