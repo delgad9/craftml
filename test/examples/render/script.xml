@@ -9,9 +9,9 @@
         }
     </script>
     <script>
-        function main(params){            
-            expect(this.children).to.have.length(2)
-            expect(this.children[1].children[0].type).to.be.equal('csg')
+        function main(params){
+            expect(this).to.have.children(['script','script'])
+            expect(this).to.have.solid('csg').at('1.0')
         }
     </script>
 </craft>

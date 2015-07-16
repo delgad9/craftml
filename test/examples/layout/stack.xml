@@ -7,6 +7,7 @@
 
     <script>
         function main(params, scope){
+            //this.pp()
             expect(scope.solids).to.have.length(1)
             expect(scope.solids[0]).to.have.size(10,10,30)
             expect(scope.solids[0]).to.have.location(0,0,0)

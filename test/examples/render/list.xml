@@ -2,25 +2,25 @@
     <g></g>
     <script>
         function main(params){
-            expect(this.children).to.have.length(1)
+            expect(this).to.have.children(['g'])
         }
     </script>
     <g></g>
     <script>
         function main(params){
-            expect(this.children).to.have.length(3)
+            expect(this).to.have.children(['g','script','g'])
         }
     </script>
     <g></g>
     <script>
         function main(params){
-            expect(this.children).to.have.length(5)
+            expect(this).to.have.children(['g','script','g','script','g'])
         }
     </script>
     <g></g>
     <script>
         function main(params){
-            expect(this.children).to.have.length(7)
+            expect(this).to.have.children(['g','script','g','script','g','script','g'])
         }
     </script>
 </craft>

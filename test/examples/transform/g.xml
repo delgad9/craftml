@@ -16,7 +16,8 @@
                 expect(c).to.have.location(-20,0,0)
 
                 // the location of the cube#foo should stay the same
-                var foo = scope.solids[0].children[0]
+                var foo = this.children[0].children[0]
+                foo.pp()
                 expect(foo).to.have.location(-20,0,0)
             }
         </script>

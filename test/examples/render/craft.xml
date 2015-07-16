@@ -8,19 +8,23 @@
     </craft>
     <script>
         function main(params, scope){
-            expect(this.children[0].type).to.be.eql('define')
-            expect(this.children[1].type).to.be.eql('define')
+            expect(this).to.have.solid('craft').at('0').that.have.role('define')
+            expect(this).to.have.solid('craft').at('1').that.have.role('define')
         }
     </script>
     <foo></foo>
     <bar></bar>
     <script>
         function main(params, scope){
-            expect(this.children[3].type).to.be.eql('merge')
-            expect(this.children[3].children).to.have.length(2)
+            // this.pp()
 
-            expect(this.children[4].type).to.be.eql('merge')
-            expect(this.children[4].children).to.have.length(1)
+            expect(this).to.have.solid('script').at('2')
+
+            expect(this).to.have.solid('foo').at('3')
+                .that.have.children(['g','g'])
+
+            expect(this).to.have.solid('bar').at('4')
+                .that.have.children(['g'])
         }
     </script>
 </craft>
