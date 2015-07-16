@@ -74,6 +74,23 @@ Assertion.addMethod('center', function (x,y,z) {
 
 chai.use(function (_chai, utils) {
 
+    Assertion.addMethod('name', function (expected) {
+      var name = getName(this._obj)
+      var actual = this._obj.element.name;
+
+      // first, our instanceof check, shortcut
+      // new Assertion(this._obj).to.be.eql(3)
+
+      // second, our type check
+      this.assert(
+          expected == actual
+        , "expected " + name + "'s name to be #{exp} but got #{act}"
+        , "expected " + name + "'s name not be #{act}"
+        , expected   // expected
+        , actual   // actual
+      );
+    })
+
     Assertion.addChainableMethod('at', function (path) {
       var name = getName(this._obj)
       //var s = this._obj.layout.location;

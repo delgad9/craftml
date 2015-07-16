@@ -1,0 +1,13 @@
+<craft>
+
+    <script>
+        // this.pp()
+
+        expect(this).to.have.name('script')
+        expect(this).to.have.children([])
+
+        expect(this.parent).to.be.ok.and.have.role('group')
+        expect(this.parent).to.have.children(['script'])
+    </script>
+
+</craft>

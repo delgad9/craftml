@@ -1,13 +1,5 @@
 <craft>
     <script type="text/openjscad">
-        function main(params, scope){
-            expect(cube).to.exist
-            return cube()
-        }
-    </script>
-    <script>
-        function main(params, scope){
-            expect(scope.solids).to.have.length(1)
-        }
-    </script>
+        expect(cube).to.exist
+    </script>    
 </craft>

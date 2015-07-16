@@ -1,9 +1,7 @@
 <craft>
     <script>
-        var _ = require('lodash')
-        function main(params, scope){
-            expect(_).to.exist
-            expect(_).to.have.property('map')
-        }
+        var _ = require('lodash')        
+        expect(_).to.exist
+        expect(_).to.have.property('map')
     </script>
 </craft>

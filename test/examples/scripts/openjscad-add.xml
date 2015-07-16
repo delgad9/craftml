@@ -1,0 +1,18 @@
+<craft>
+    <script type="text/openjscad">
+
+        expect(this).to.have.children([])
+
+        this.add(cube())
+
+        expect(this).to.have.children(['csg'])
+
+    </script>
+    <script>
+
+        expect(this).to.have.children([])
+
+        expect(this.parent).to.have.children(['script','script'])
+
+    </script>
+</craft>
