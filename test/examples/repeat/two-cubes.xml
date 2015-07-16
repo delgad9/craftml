@@ -1,0 +1,10 @@
+<craft>
+    <repeat n="2">
+        <cube></cube>
+    </repeat>
+    <script>
+
+        this.parent.pp()
+
+    </script>
+</craft>

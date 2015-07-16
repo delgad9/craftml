@@ -23,7 +23,7 @@ module.exports = function(titles){
         // console.log(ch)
     })
 
-    // console.log(JSON.stringify(pages,null,' '))
+    console.log(JSON.stringify(pages,null,' '))
 
     var html = jade.renderFile(__dirname + '/report.jade', {pages: pages})
     return html

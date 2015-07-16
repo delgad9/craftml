@@ -1,7 +1,9 @@
 <craft name="row">
     <parameter name="spacing" type="float" default="0"/>
-    <parameter name="at" type="string" default=""/>
-    <g layout='lineupX({{spacing}}) centerY() alignZ(0%)' at="{{at}}">
+    <g layout='lineupX({{spacing}}) centerY() alignZ(0%)'>
         <content></content>
+        <script>
+            this.parent.pp()
+        </script>
     </g>
 </craft>

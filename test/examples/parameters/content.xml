@@ -1,0 +1,36 @@
+<craft>
+
+    <parameter name="one" type="int" default="1"/>
+
+    <craft name="foo">
+
+        <parameter name="two" type="int" default="2"/>
+
+        <g>
+            <content></content>
+            <script>
+                expect(params).to.not.have.property('one')
+                expect(params).to.have.property('two').and.eql(2)
+            </script>
+        </g>
+
+        <script>
+            expect(params).to.not.have.property('one')
+            expect(params).to.have.property('two').and.eql(2)
+        </script>
+
+    </craft>
+
+    <foo>
+        <script>
+            expect(params).to.have.property('one').and.eql(1)
+            expect(params).to.not.have.property('two')
+        </script>
+        <foo>
+            <script>
+                expect(params).to.have.property('one').and.eql(1)
+            </script>
+        </foo>
+    </foo>
+
+</craft>

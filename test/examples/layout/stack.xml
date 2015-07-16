@@ -5,7 +5,8 @@
         <cube></cube>
     </stack>
 
-    <script>        
+    <script>
+        this.prev.pp()
         expect(this.prev).to.have.size(10,10,30).and.location(0,0,0)
     </script>
 
