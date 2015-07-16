@@ -12,9 +12,8 @@
         expect(this.parent).to.have.solid('craft').at([0]).that.have.role('define')
         expect(this.parent).to.have.solid('foo').at([1]).that.have.role('group')
 
-        expect(this.parent).to.have.solid('g').at([1,0])
-        expect(this.parent).to.have.solid('content').at([1,1])
-        expect(this.parent).to.have.solid('script').at([1,1,0])
-        expect(this.parent).to.have.solid('csg').at([1,1,0,0])
+        expect(this.parent).to.have.solid('g').at([1,0])    
+        expect(this.parent).to.have.solid('script').at([1,1])
+        expect(this.parent).to.have.solid('csg').at([1,1,0])
     </script>
 </craft>

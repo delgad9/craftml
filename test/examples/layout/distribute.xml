@@ -10,11 +10,8 @@
     </g>
 
     <script>
-        function main(params, scope){
-            expect(scope.solids).to.have.length(1)
-            expect(scope.solids[0]).to.have.size(110,60,10)
-            expect(scope.solids[0]).to.have.location(0,0,0)
-        }
+        this.prev.pp()
+        expect(this.prev).to.have.size(110,60,10).and.location(0,0,0)
     </script>
 
 </craft>
