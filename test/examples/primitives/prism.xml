@@ -1,10 +1,7 @@
 <craft>
     <prism></prism>
     <script>
-        function main(params, scope){
-            expect(scope.solids).to.have.length(1)
-            expect(scope.solids[0]).to.have.size(10,10,5)
-            expect(scope.solids[0]).to.have.location(0,0,0)
-        }
+        expect(this.parent).to.have.solid('prism').at('0').that.have
+            .size(10,10,5).and.location(0,0,0)
     </script>
 </craft>

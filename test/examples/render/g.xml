@@ -7,17 +7,13 @@
     <g>
     </g>
     <script>
-        function main(params){
-            expect(this.children).to.have.length(2)
+        expect(this.parent).to.have.solid('g').at([0]).that.have.role('group')
+        expect(this.parent).to.have.solid('g').at([0,0]).that.have.role('group')
+        expect(this.parent).to.have.solid('g').at([0,1]).that.have.role('group')
+        expect(this.parent).to.have.solid('g').at([0,2]).that.have.role('group')
+        expect(this.parent).to.not.have.solid.at([0,3])
 
-            expect(this).to.have.solid('g').at('0').that.have.role('group')
-            expect(this).to.have.solid('g').at('0.0').that.have.role('group')
-            expect(this).to.have.solid('g').at('0.1').that.have.role('group')
-            expect(this).to.have.solid('g').at('0.2').that.have.role('group')
-            expect(this).to.not.have.solid.at('0.3')
-
-            expect(this).to.have.solid('g').at('0.1').that.have.role('group')
-            expect(this).to.not.have.solid.at('0.1.0')
-        }
+        expect(this.parent).to.have.solid('g').at([0,1]).that.have.role('group')
+        expect(this.parent).to.not.have.solid.at([0,1,0])
     </script>
 </craft>

@@ -97,14 +97,15 @@ chai.use(function (_chai, utils) {
 
       var solid = this._obj
 
-      // path === '0.0'
+      // path === [0,0]
 
-      var deepPropertyPath = _.map(path.split('.'), function (p){
+      var deepPropertyPath = _.map(path, function (p){
           // p === 0
           return 'children[' + p + ']'
       }).join('.')
 
       // deepPropertyPath === children[0].children[0]
+    //   console.log(deepPropertyPath)
 
       if (utils.flag(this, 'negate')){
           new Assertion(this._obj).to.not.have.deep.property(deepPropertyPath)

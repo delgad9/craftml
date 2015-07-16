@@ -1,13 +1,7 @@
 <craft>
     <cube></cube>
     <script>
-        function main(params, scope){
-            expect(scope.solids).to.have.length(1)
-            expect(scope.solids[0]).to.have.size(10,10,10)
-            expect(scope.solids[0]).to.have.location(0,0,0)
-            this.pp()
-
-            expect(this.children[0]).to.have.size(10,10,10)
-        }
+        expect(this.parent).to.have.solid('cube').at('0').that.have
+            .size(10,10,10).and.location(0,0,0)
     </script>
 </craft>

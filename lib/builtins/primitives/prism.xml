@@ -3,26 +3,23 @@
     <parameter name="length" type="int" default="10"/>
     <parameter name="sides" type="int" default="3"/>
     <script type="text/openjscad">
+        // handles fn
+        if (params.sides > 100) { params.sides = 100; }
 
-        function main() {
-            // handles fn
-            if (params.sides > 100) { params.sides = 100; }
+        var c, diff;
 
-            var c, diff;
+        // parts
+        c = cylinder({
+            r: params.width / 2,
+            h: params.length,
+            fn: params.sides + 1
+        }).rotateY(90);
 
-            // parts
-            c = cylinder({
-                r: params.width / 2,
-                h: params.length,
-                fn: params.sides + 1
-            }).rotateY(90);
+        diff = cube({
+            size: [params.length, params.width, params.width]
+        }).translate([0, -params.width / 2, -params.width]);
 
-            diff = cube({
-                size: [params.length, params.width, params.width]
-            }).translate([0, -params.width / 2, -params.width]);
-
-            return difference(c, diff).rotateZ(90);
-        }
-
+        var obj = difference(c, diff).rotateZ(90);
+        this.add(obj)
     </script>
 </craft>

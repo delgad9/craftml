@@ -1,26 +1,10 @@
 <craft>
     <g></g>
     <script>
-        function main(params){
-            expect(this).to.have.children(['g'])
-        }
+        expect(this.parent).to.have.children(['g','script'])
     </script>
     <g></g>
     <script>
-        function main(params){
-            expect(this).to.have.children(['g','script','g'])
-        }
-    </script>
-    <g></g>
-    <script>
-        function main(params){
-            expect(this).to.have.children(['g','script','g','script','g'])
-        }
-    </script>
-    <g></g>
-    <script>
-        function main(params){
-            expect(this).to.have.children(['g','script','g','script','g','script','g'])
-        }
+        expect(this.parent).to.have.children(['g','script','g','script'])
     </script>
 </craft>

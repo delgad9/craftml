@@ -4,14 +4,12 @@
     <parameter name="zsize" default="10" type="int"/>
     <parameter name="size" type="size"/>
     <script type="text/openjscad">
-        function main(params){
-            var size = params.size
-            if (size){
-                return cube([size.x, size.y, size.z])
-            } else {
-                // for backward compatibility
-                return cube([params.xsize, params.ysize, params.zsize])
-            }
+        var size = params.size
+        if (size){
+            this.add(cube([size.x, size.y, size.z]))
+        } else {
+            // for backward compatibility
+            this.add(cube([params.xsize, params.ysize, params.zsize]))
         }
     </script>
 </craft>

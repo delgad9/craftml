@@ -1,17 +1,11 @@
 <craft>
     <script>
-        function main(params){
-        }
     </script>
     <script type="text/openjscad">
-        function main(params){
-            return cube()
-        }
+        this.add(cube())
     </script>
     <script>
-        function main(params){
-            expect(this).to.have.children(['script','script'])
-            expect(this).to.have.solid('csg').at('1.0')
-        }
+        expect(this.parent).to.have.children(['script','script','script'])
+        expect(this.parent).to.have.solid('csg').at([1,0])
     </script>
 </craft>
