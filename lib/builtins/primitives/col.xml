@@ -1,7 +1,7 @@
 <craft name="col">
     <parameter name="spacing" type="float" default="0"/>
-    <parameter name="at" type="string" default=""/>
-    <g layout='lineupY({{spacing}}) centerX() alignZ(0%)' at="{{at}}">
+    <parameter name="layout" alias="l" type="string" default=""/>
+    <g layout='lineupY({{spacing}}) centerX() alignZ(0%) {{l}}'>
         <content></content>
     </g>
 </craft>
