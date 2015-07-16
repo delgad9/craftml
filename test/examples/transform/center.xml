@@ -1,57 +1,29 @@
 <craft>
-    <g>
-        <cube size="50 10 10" t="center(0 0 0)"></cube>
-        <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.size(50,10,10)
-                expect(c).to.have.location(-25,-5,-5)
-            }
-        </script>
-    </g>
 
-    <g>
-        <cube size="50 10 10" t="center(10 10 10)"></cube>
-        <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.size(50,10,10)
-                expect(c).to.have.location(-15,5,5)
-            }
-        </script>
-    </g>
+    <cube size="50 10 10" t="center(0 0 0)"></cube>
+    <script>
+        expect(this.prev).to.have.size(50,10,10).and.location(-25,-5,-5)
+    </script>
 
-    <g>
-        <cube size="50 10 10" t="centerX(20)"></cube>
-        <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.size(50,10,10)
-                expect(c).to.have.location(-5,0,0)
-            }
-        </script>
-    </g>
+    <cube size="50 10 10" t="center(10 10 10)"></cube>
+    <script>
+        expect(this.prev).to.have.size(50,10,10).and.location(-15,5,5)
+    </script>
 
-    <g>
-        <cube size="50 10 10" t="centerZ(20)"></cube>
-        <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.size(50,10,10)
-                expect(c).to.have.location(0,0,15)
-            }
-        </script>
-    </g>
 
-    <g>
-        <cube size="50 10 10" t="centerY()"></cube>
-        <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.size(50,10,10)
-                expect(c).to.have.location(0,-5,0)
-            }
-        </script>
-    </g>
+    <cube size="50 10 10" t="centerX(20)"></cube>
+    <script>
+        expect(this.prev).to.have.size(50,10,10).and.location(-5,0,0)
+    </script>
 
+    <cube size="50 10 10" t="centerZ(20)"></cube>
+    <script>
+        expect(this.prev).to.have.size(50,10,10).and.location(0,0,15)
+    </script>
+
+    <cube size="50 10 10" t="centerY()"></cube>
+    <script>
+        expect(this.prev).to.have.size(50,10,10).and.location(0,-5,0)
+    </script>
+        
 </craft>

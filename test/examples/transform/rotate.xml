@@ -1,47 +1,23 @@
 <craft>
 
-    <g>
-        <cube size="50 10 10"></cube>
-        <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.size(50,10,10)
-                expect(c).to.have.center(25,5,5)
-            }
-        </script>
-    </g>
+    <cube size="50 10 10"></cube>
+    <script>
+        expect(this.prev).to.have.size(50,10,10).and.center(25,5,5)
+    </script>
 
-    <g>
-        <cube size="50 10 10" t="rotateZ(90)"></cube>
-        <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.size(10,50,10)
-                expect(c).to.have.center(25,5,5)
-            }
-        </script>
-    </g>
+    <cube size="50 10 10" t="rotateZ(90)"></cube>
+    <script>
+        expect(this.prev).to.have.size(10,50,10).and.center(25,5,5)
+    </script>
 
-    <g>
-        <cube size="50 10 10" t="rotateY(90)"></cube>
-        <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.size(10,10,50)
-                expect(c).to.have.center(25,5,5)
-            }
-        </script>
-    </g>
+    <cube size="50 10 10" t="rotateY(90)"></cube>
+    <script>
+        expect(this.prev).to.have.size(10,10,50).and.center(25,5,5)
+    </script>
 
-    <g>
-        <cube size="50 10 10" t="rotateX(90)"></cube>
-        <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.size(50,10,10)
-                expect(c).to.have.center(25,5,5)
-            }
-        </script>
-    </g>
+    <cube size="50 10 10" t="rotateX(90)"></cube>
+    <script>
+        expect(this.prev).to.have.size(50,10,10).and.center(25,5,5)
+    </script>
 
 </craft>

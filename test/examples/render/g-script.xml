@@ -1,0 +1,11 @@
+<craft>
+    <cube t="translate(100 0 0)">
+    </cube>
+    <script>
+    </script>
+    <script>
+        // layout should only take into account of non-empty elements (e..g, <script>)
+        expect(this.parent).to.have.size(10,10,10)
+            .and.not.to.have.size(110,10,10)
+    </script>
+</craft>

@@ -10,7 +10,6 @@
     </g>
 
     <script>
-        this.prev.pp()
         expect(this.prev).to.have.size(110,60,10).and.location(0,0,0)
     </script>
 

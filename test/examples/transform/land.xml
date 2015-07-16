@@ -2,19 +2,12 @@
     <g t="land()">
         <cube t="translate(0 0 100)"></cube>
         <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.location(0,0,100)
-            }
+            expect(this.prev).to.have.location(0,0,100)
         </script>
     </g>
 
-    <script>
-        function main(params, scope){
-            var c = scope.solids[0]
-            expect(c).to.have.size(10,10,10)
-            expect(c).to.have.location(0,0,0)
-        }
+    <script> 
+        expect(this.prev).to.have.size(10,10,10).and.location(0,0,0)
     </script>
 
 </craft>
