@@ -1,0 +1,14 @@
+<craft>
+    <script>
+        params.xs = [1,2,3]
+    </script>
+    <repeat each="x" in="{{xs}}">
+        <cube size="{{x}} 10 10"></cube>
+    </repeat>
+    <script>
+        expect(this.parent).to.have.children(['script','cube','cube','cube','script'])
+        expect(this.parent).to.have.solid('cube').at([1]).have.size(1,10,10)
+        expect(this.parent).to.have.solid('cube').at([2]).have.size(2,10,10)
+        expect(this.parent).to.have.solid('cube').at([3]).have.size(3,10,10)
+    </script>
+</craft>
