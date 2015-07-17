@@ -2,7 +2,6 @@
     <g t="translate(20 0 0)">
     </g>
     <script>
-        // can transform even if the group has no volume
-        this.parent.pp()
+        // can transform without crashing even if the group has no volume        
     </script>
 </craft>

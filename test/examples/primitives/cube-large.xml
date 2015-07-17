@@ -1,7 +1,7 @@
 <craft>
     <cube size="50 40 30"></cube>
-    <script>        
+    <script>
         expect(this.parent).to.have.solid('cube').at('0').that.have
-            .size(50,40,30).and.location(0,0,0)
+            .size(50,40,30).and.position(0,0,0)
     </script>
 </craft>

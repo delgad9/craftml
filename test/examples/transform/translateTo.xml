@@ -2,12 +2,12 @@
 
     <cube t="translate(100 100 100) translateTo(10 20 30)"></cube>
     <script>
-        expect(this.prev).to.have.location(10,20,30)
+        expect(this.prev).to.have.position(10,20,30)
     </script>
 
     <cube t="translate(100 100 100) translateTo(-10 -20 -30)"></cube>
     <script>
-        expect(this.prev).to.have.location(-10,-20,-30)
+        expect(this.prev).to.have.position(-10,-20,-30)
     </script>
 
 </craft>

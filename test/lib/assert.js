@@ -54,9 +54,9 @@ Assertion.addMethod('center', function (x,y,z) {
   var name = getName(this._obj)
   var l = this._obj.layout;
   var s = {
-      x: l.location.x + l.size.x/2,
-      y: l.location.y + l.size.y/2,
-      z: l.location.z + l.size.z/2
+      x: l.position.x + l.size.x/2,
+      y: l.position.y + l.size.y/2,
+      z: l.position.z + l.size.z/2
   }
 
   // first, our instanceof check, shortcut
@@ -93,7 +93,7 @@ chai.use(function (_chai, utils) {
 
     Assertion.addChainableMethod('at', function (path) {
       var name = getName(this._obj)
-      //var s = this._obj.layout.location;
+      //var s = this._obj.layout.position;
 
       var solid = this._obj
 
@@ -172,9 +172,9 @@ chai.use(function (_chai, utils) {
 
 
 
-Assertion.addChainableMethod('location', function (x,y,z) {
+Assertion.addChainableMethod('position', function (x,y,z) {
   var name = getName(this._obj)
-  var s = this._obj.layout.location;
+  var s = this._obj.layout.position;
 
   // first, our instanceof check, shortcut
   // new Assertion(this._obj).to.be.eql(3)
@@ -182,8 +182,8 @@ Assertion.addChainableMethod('location', function (x,y,z) {
   // second, our type check
   this.assert(
       closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
-    , "expected " + name + "'s location to be #{exp} but got #{act}"
-    , "expected " + name + "'s location not be #{act}"
+    , "expected " + name + "'s position to be #{exp} but got #{act}"
+    , "expected " + name + "'s position not be #{act}"
     , {x:x, y:y, z:z}        // expected
     , s   // actual
   );

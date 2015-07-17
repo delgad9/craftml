@@ -2,6 +2,6 @@
     <prism></prism>
     <script>
         expect(this.parent).to.have.solid('prism').at('0').that.have
-            .size(10,10,5).and.location(0,0,0)
+            .size(10,10,5).and.position(0,0,0)
     </script>
 </craft>

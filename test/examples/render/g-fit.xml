@@ -5,12 +5,12 @@
     </g>
     <script>
         expect(this.parent).to.have.solid('g').at([0]).that.have.
-            location(-10,0,0).and.size(30,10,10)
+            position(-10,0,0).and.size(30,10,10)
 
         expect(this.parent).to.have.solid('cube').at([0,0]).that.have.
-           location(-10,0,0).and.size(10,10,10)
+           position(-10,0,0).and.size(10,10,10)
 
         expect(this.parent).to.have.solid('cube').at([0,1]).that.have.
-            location(10,0,0).and.size(10,10,10)
+            position(10,0,0).and.size(10,10,10)
     </script>
 </craft>

@@ -16,8 +16,8 @@
             var solid = scope.solids[i]
 
             var loc = {
-                x: r * Math.cos(theta) + solid.layout.location.x/2,
-                y: r * Math.sin(theta) + solid.layout.location.y/2,
+                x: r * Math.cos(theta) + solid.layout.position.x/2,
+                y: r * Math.sin(theta) + solid.layout.position.y/2,
                 z: 0
             }
             var angle = 360/n * i

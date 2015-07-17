@@ -106,7 +106,7 @@ var _root = dcodeIO.ProtoBuf.newBuilder({})['import']({
                 {
                     "rule": "required",
                     "type": "Point3D",
-                    "name": "location",
+                    "name": "position",
                     "id": 1
                 },
                 {

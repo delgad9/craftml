@@ -2,12 +2,12 @@
     <g t="land()">
         <cube t="translate(0 0 100)"></cube>
         <script>
-            expect(this.prev).to.have.location(0,0,100)
+            expect(this.prev).to.have.position(0,0,100)
         </script>
     </g>
 
     <script> 
-        expect(this.prev).to.have.size(10,10,10).and.location(0,0,0)
+        expect(this.prev).to.have.size(10,10,10).and.position(0,0,0)
     </script>
 
 </craft>

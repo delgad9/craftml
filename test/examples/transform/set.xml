@@ -1,17 +1,17 @@
 <craft>
     <cube t="setX(100)"></cube>
     <script>
-        expect(this.prev).to.have.location(100,0,0)
+        expect(this.prev).to.have.position(100,0,0)
     </script>
 
     <cube t="setY(100)"></cube>
     <script>
-        expect(this.prev).to.have.location(0,100,0)
+        expect(this.prev).to.have.position(0,100,0)
     </script>
 
     <cube t="setZ(100)"></cube>
     <script>
-        expect(this.prev).to.have.location(0,0,100)
+        expect(this.prev).to.have.position(0,0,100)
     </script>
 
 </craft>

@@ -47,7 +47,7 @@ message Box {
         required float z = 3;
     }
 
-    required Point3D location = 1;
+    required Point3D position = 1;
     required Point3D size = 2;
 }
 
