@@ -3,8 +3,8 @@
     <script>
         function main(params, scope){
             params.foo = 'foo'
-            var s = scope.solids[0]
-            s = s.save()
+            //var s = scope.solids[0]
+            //s = s.save()
         }
     </script>
     <script>

@@ -1,15 +1,13 @@
 <craft>
 
-    <craft name="spiral">
+    <craft name="spiral" grouping="off">
         <content></content>
         <script>
-        function main(params, scope){
             var r = 0
             scope.solids.forEach(function(solid){
                 solid.rotate('z', r)
                 r = r + 10
             })
-        }
         </script>
     </craft>
 

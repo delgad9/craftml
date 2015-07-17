@@ -1,0 +1,16 @@
+<craft>
+    <solidify>
+        <stack spacing="10">
+            <rectangle></rectangle>
+            <rectangle></rectangle>
+            <rectangle></rectangle>
+        </stack>
+        <script>
+            //this.prev.pp()
+        </script>
+    </solidify>
+    <script>
+        expect(this.prev).to.have.size(10,10,20).and.position(0,0,0)
+        this.prev.pp()
+    </script>
+</craft>

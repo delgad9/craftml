@@ -1,0 +1,6 @@
+<craft>
+    <circle></circle>
+    <script>
+        expect(this.prev).to.have.size(10,10,0).and.have.position(0,0,0)
+    </script>
+</craft>
