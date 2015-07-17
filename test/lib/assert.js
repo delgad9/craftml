@@ -74,6 +74,40 @@ Assertion.addMethod('center', function (x,y,z) {
 
 chai.use(function (_chai, utils) {
 
+    Assertion.addMethod('class', function (expected) {
+      var name = getName(this._obj)
+      var actual = this._obj.element.attribs['class'];
+
+      // first, our instanceof check, shortcut
+      // new Assertion(this._obj).to.be.eql(3)
+
+      // second, our type check
+      this.assert(
+          expected == actual
+        , "expected " + name + "'s id to be #{exp} but got #{act}"
+        , "expected " + name + "'s id not be #{act}"
+        , expected   // expected
+        , actual   // actual
+      );
+    })
+
+    Assertion.addMethod('id', function (expected) {
+      var name = getName(this._obj)
+      var actual = this._obj.element.attribs.id;
+
+      // first, our instanceof check, shortcut
+      // new Assertion(this._obj).to.be.eql(3)
+
+      // second, our type check
+      this.assert(
+          expected == actual
+        , "expected " + name + "'s id to be #{exp} but got #{act}"
+        , "expected " + name + "'s id not be #{act}"
+        , expected   // expected
+        , actual   // actual
+      );
+    })
+
     Assertion.addMethod('name', function (expected) {
       var name = getName(this._obj)
       var actual = this._obj.element.name;
