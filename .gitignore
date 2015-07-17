@@ -4,5 +4,6 @@ build
 .DS_Store
 *.new.*
 test/preview/js/craftml-preview.js
+examples.test.js
 fonts
 dist
