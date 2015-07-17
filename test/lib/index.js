@@ -96,8 +96,8 @@ module.exports = function(src){
             fs.readFileAsync(expectedFixtures.d3d, 'utf8').catch(function(){return null})
         ])
 
-        // .spread(function(){})
-        .spread(doChecks)
+        .spread(function(){})
+        // .spread(doChecks)
 
 
 }

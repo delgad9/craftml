@@ -1,0 +1,15 @@
+<craft>
+    <craft name="foo">
+        <sphere></sphere>
+        <content></content>
+        <sphere></sphere>
+    </craft>
+
+    <foo>
+        <cube></cube>
+    </foo>
+
+    <script>
+        expect(this.prev).to.have.children(['sphere','cube','sphere'])
+    </script>
+</craft>

@@ -1,0 +1,8 @@
+<craft>
+    <content>
+        <cube></cube>
+    </content>
+    <script>
+        expect(this.prev).to.have.name('cube')
+    </script>
+</craft>

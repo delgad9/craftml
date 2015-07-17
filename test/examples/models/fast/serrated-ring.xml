@@ -4,6 +4,11 @@
     <craft name="star-layout" src="star-layout.xml"/>
 
     <g color="red">
+
+        <script>
+            //console.log(scope.crafts)
+        </script>
+
         <star-layout radius="30">
             <repeat n="{{n}}">
                 <prism transform="rotateX(-90) rotateZ(90)"></prism>

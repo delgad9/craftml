@@ -6,7 +6,7 @@
 
     <craft name="sun-layout" src="sun-layout.xml"/>
 
-    <stack spacing="0">
+    <stack spacing="0" t="center() land()">
         <repeat n="{{levels}}">
             <sun-layout>
                 <repeat n="20">

@@ -1,0 +1,33 @@
+<craft>
+    <craft name="foo">
+        <g>
+            <cube></cube>
+            <content></content>
+            <cube></cube>
+        </g>
+    </craft>
+
+    <craft name="bar">
+        <g>
+            <cylinder></cylinder>
+            <content></content>
+            <cylinder></cylinder>
+        </g>
+    </craft>
+
+    <foo>
+        <bar>
+            <sphere></sphere>
+        </bar>
+    </foo>
+
+    <script>
+        expect(this.parent).to.have.solid('foo').at([2]).that
+            .have.solid('g').at([0]).that
+            .have.children(['cube','bar','cube'])
+
+        expect(this.parent).to.have.solid('bar').at([2,0,1]).that
+            .have.solid('g').at([0]).that
+            .have.children(['cylinder','sphere','cylinder'])
+    </script>
+</craft>

@@ -10,8 +10,10 @@
     <craft name="window" src="window.xml"/>
 
     <g layout="centerXY()" color="peru">
-        <stack at=".base">
-            <content></content>
+        <stack>
+            <content>
+                <cube></cube>
+            </content>
             <cube size="{{width}} {{depth}} 2" class="base"/>
         </stack>
 
@@ -35,5 +37,9 @@
             </col>
         </g>
     </g>
+
+    <script>
+        this.parent.pp()
+    </script>
 
 </craft>
