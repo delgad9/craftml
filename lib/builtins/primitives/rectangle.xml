@@ -1,9 +1,7 @@
 <craft name="rectangle">
-    <parameter name="width" default="5" type="float"/>
-    <parameter name="height" default="5" type="int"/>
+    <parameter name="width" default="10" type="float"/>
+    <parameter name="height" default="10" type="int"/>
     <script type="text/openjscad">
-        function main(params){
-            return new CAG.rectangle({radius: [params.width, params.height]})
-        }
+        this.add(new CAG.rectangle({radius: [params.width/2, params.height/2], center: [params.width/2, params.height/2]}))
     </script>
 </craft>
