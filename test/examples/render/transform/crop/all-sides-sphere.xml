@@ -1,0 +1,6 @@
+<craft>
+    <sphere transform="cropX(10% 10%) cropY(10% 10%) cropZ(10% 10%)"></sphere>
+    <script>
+        expect(this.prev).to.have.size(8,8,8).and.position(1,1,1)
+    </script>
+</craft>

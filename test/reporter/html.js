@@ -3,7 +3,7 @@ var _ = require('lodash')
 
 module.exports = function(titles){
 
-    var pages = _.map(_.chunk(titles, 12), function(ch, i){
+    var pages = _.map(_.chunk(titles, 4), function(ch, i){
 
         var items = _.map(ch, function(m){
 

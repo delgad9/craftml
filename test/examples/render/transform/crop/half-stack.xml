@@ -1,13 +1,10 @@
 <craft>
-    <stack>
+    <stack t="cropX(50%)">
         <cube></cube>
         <cube></cube>
         <cube></cube>
     </stack>
-
     <script>
-        this.prev.pp()
-        expect(this.prev).to.have.size(10,10,30).and.position(0,0,0)
+        expect(this.prev).to.have.size(5,10,30).and.position(5,0,0)
     </script>
-
 </craft>

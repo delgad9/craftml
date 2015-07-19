@@ -16,4 +16,7 @@
         z
         "></path>
     </solidify>
+    <script>
+        expect(this.prev).to.have.size(80,69.282,1).and.position(139,144.359,0)
+    </script>
 </craft>

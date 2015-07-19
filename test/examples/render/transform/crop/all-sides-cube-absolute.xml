@@ -1,0 +1,6 @@
+<craft>
+    <cube transform="cropX(1 2) cropY(1 2) cropZ(1 2)"></cube>
+    <script>
+        expect(this.prev).to.have.size(7,7,7).and.position(1,1,1)
+    </script>
+</craft>
