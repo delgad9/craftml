@@ -41,7 +41,7 @@ function generate(p){
     // console.log(files)
 
     var xmlFiles = _.filter(files, function(f){
-        return fs.lstatSync(f).isFile()
+        return fs.lstatSync(f).isFile() && f.match(/\.xml$/)
     })
 
     var its = _.map(xmlFiles, function(xmlFile){
