@@ -1,0 +1,12 @@
+<craft>
+    <g style="something:black;">
+
+        <g></g>
+        <script>
+            expect(this.parent).to.have.style('something', 'black')
+            expect(this.prev).to.not.have.style('something', 'black')
+        </script>
+
+    </g>
+
+</craft>

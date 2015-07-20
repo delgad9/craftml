@@ -1,0 +1,38 @@
+<craft>
+
+    <style>
+        g {
+            something: good;
+        }
+    </style>
+
+    <g>
+
+        <script>
+            expect(this.parent).to.have.style('something', 'good')
+        </script>
+
+        <style>
+            g {
+                something: great;
+            }
+        </style>
+
+        <g></g>
+
+        <script>
+            expect(this.prev).to.have.style('something', 'great')
+        </script>
+
+
+    </g>
+
+    <g>
+
+        <script>
+            expect(this.parent).to.have.style('something', 'good')
+        </script>
+
+    </g>
+
+</craft>

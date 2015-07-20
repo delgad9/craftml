@@ -1,0 +1,34 @@
+<craft>
+
+    <style>
+        #foo * {
+            something: black;
+        }
+        #bar * {
+            something: green;
+        }
+    </style>
+
+    <g id="foo">
+
+        <cube></cube>
+
+        <script>
+            expect(this.prev).to.have
+                .style('something', 'black')
+        </script>
+
+    </g>
+
+    <g id="bar">
+
+        <cube></cube>
+
+        <script>
+            expect(this.prev).to.have
+                .style('something', 'green')
+        </script>
+
+    </g>
+        
+</craft>

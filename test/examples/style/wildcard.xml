@@ -10,21 +10,16 @@
             <cube></cube>
 
             <script>
-                function main(params, scope){
-                    var c = scope.solids[0]
-                    expect(c).to.have.style('something','good')
-                }
+                expect(this.prev).to.have.style('something', 'good')
             </script>
 
         </g>
 
         <script>
-            function main(params, scope){
-                var c = scope.solids[0]
-                expect(c).to.have.style('something','good')
-            }
+            expect(this.prev).to.have.style('something', 'good')
         </script>
-        
+
+
     </g>
 
 </craft>

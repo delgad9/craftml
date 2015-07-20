@@ -1,0 +1,7 @@
+<craft>
+    <g style="">
+    </g>
+    <script>
+        expect(this.prev).to.be.ok
+    </script>
+</craft>

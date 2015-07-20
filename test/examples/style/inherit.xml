@@ -1,36 +1,24 @@
 <craft>
-    <g>
-        <style>
-            * {
-                something: inherit;
-            }
-            .foo {
-                something: green;
-            }
-        </style>
-        <g class="foo">
-
-            <cube></cube>
-
-            <script>
-                function main(params, scope){
-                    var c = scope.solids[0]
-                    expect(c).to.have.style('something','green')
-                }
-            </script>
-
-
-        </g>
+    <style>
+        * {
+            something: inherit;
+        }
+        .foo {
+            something: green;
+        }
+    </style>
+    <g class="foo">
 
         <cube></cube>
 
         <script>
-            function main(params, scope){
-                var c = scope.solids[1]
-                expect(c).to.have.style('something',undefined)
-            }
+            expect(this.prev).to.have.style('something', 'green')
+        </script>
+
+        <g></g>
+        <script>
+            expect(this.prev).to.have.style('something', 'green')
         </script>
 
     </g>
-
 </craft>

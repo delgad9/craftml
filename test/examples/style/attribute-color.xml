@@ -1,0 +1,32 @@
+<craft>
+    <style>
+        cube {
+            color: blue;
+        }
+    </style>
+
+    <cube></cube>
+    <script>
+        expect(this.prev).to.have.style('color', 'blue')
+    </script>
+
+    <cube color="black"></cube>
+    <script>
+        expect(this.prev).to.have.style('color', 'black')
+    </script>
+
+    <cube color="black" style="color:white;"></cube>
+    <script>
+        // style takes precedence
+        expect(this.prev).to.have.style('color', 'white')
+    </script>
+
+
+    <cube style="color:green;"></cube>
+    <script>
+        // style takes precedence
+        expect(this.prev).to.have.style('color', 'green')
+    </script>
+
+
+</craft>

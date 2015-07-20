@@ -1,0 +1,20 @@
+<craft>
+    <style>
+        cube {
+            something: black;
+        }
+        cylinder {
+            something: green;
+        }
+    </style>
+    <cube></cube>
+    <script>
+        expect(this.prev).to.have
+            .style('something', 'black')
+    </script>
+    <cylinder></cylinder>
+    <script>
+        expect(this.prev).to.have
+            .style('something', 'green')
+    </script>
+</craft>
