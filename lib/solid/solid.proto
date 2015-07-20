@@ -2,7 +2,7 @@ package Craftml;
 
 // Solid
 message Solid {
-    required string type = 1;
+    optional string name = 1;
     required Box layout = 2;
     required Matrix m = 3;
     repeated Polygon polygons = 4;
@@ -12,7 +12,7 @@ message Solid {
     }
 
     optional Buffer buffer = 5;
-    repeated KeyValuePair style = 6;
+    map<string, string> style = 6;
     repeated Solid children = 7;
 }
 

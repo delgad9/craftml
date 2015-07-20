@@ -12,6 +12,7 @@
         <cube></cube>
 
         <script>
+            this.prev.pp()
             expect(this.prev).to.have.style('something', 'green')
         </script>
 

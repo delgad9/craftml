@@ -13,4 +13,7 @@ sikuli/htmlparser2 fork
 
     $ gulp test:run
 
-    
+
+# ProtoBuf
+
+ ./node_modules/protobufjs/bin/pbjs lib/solid/solid.proto -t js > test/preview/js/solid.proto.js

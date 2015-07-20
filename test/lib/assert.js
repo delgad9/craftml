@@ -11,7 +11,7 @@ function closeTo(a,b){
 }
 
 function getName(solid){
-    return "solid<" + solid.element.name + ">"
+    return "solid<" + solid.name + ">"
 }
 
 // language chain method
@@ -170,7 +170,7 @@ chai.use(function (_chai, utils) {
       if (solidName = utils.flag(this, 'solid.name')) {
            //new Assertion(this._obj.element.name).to.be.eql(elementName)
            var expected = solidName
-           var actual = descendent.element.name
+           var actual = descendent.name
 
            this.assert(
              actual == expected,

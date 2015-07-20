@@ -42,8 +42,8 @@ h5 {
 
 stl {
     box-style: solid;
-    box-color: yellow;
+    box-color: pink;
     box-width: 1;
 }
-`
+
 export default css

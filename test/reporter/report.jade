@@ -31,7 +31,7 @@ body
         script(src="js/Long.min.js")
         script(src="js/ByteBufferAB.min.js")
         script(src="js/ProtoBuf.min.js")
-        script(src="js/craftml-protobuf.js")
+        script(src="js/solid.proto.js")
         script(src="js/craftml-loader.js")                            
         script.
         
@@ -52,7 +52,8 @@ body
                     console.log('title', title)
                                     
                     var preview = previews[i]
-                    load(o, function(err, solid){              
+                    load(o, function(err, solid){   
+                        console.log('loaded', solid)           
                         preview.initScene(solid.layout)
                         preview.add(solid)
                         preview.render()

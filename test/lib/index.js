@@ -60,7 +60,7 @@ function check(actual, expected, dest){
 
         mkdirp.sync(path.dirname(destNew))
         fs.writeFileAsync(destNew, actual)
-        // console.log('[new] ', destNew)
+        console.log('[new] ', destNew)
     }
 }
 

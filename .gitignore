@@ -7,3 +7,4 @@ test/preview/js/craftml-preview.js
 examples.test.js
 fonts
 dist
+*.min.js

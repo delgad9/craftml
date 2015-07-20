@@ -1,6 +1,6 @@
 var ProtoBuf = dcodeIO.ProtoBuf;
-var builder = ProtoBuf.loadJson(proto)
-var SolidProto = builder.build("Craftml").Solid
+// var builder = ProtoBuf.loadJson(proto)
+var SolidProto = _root.Craftml.Solid
 
 function load(title, cb){
 
@@ -19,6 +19,7 @@ function load(title, cb){
     xhr.onload = function(evt) {
         console.log(xhr.response)
         var solid = SolidProto.decode(xhr.response);
+        console.log(solid)
         cb(null, solid)
     }
     xhr.send(null);
