@@ -1,0 +1,14 @@
+<craft>
+    <repeat n="3">
+        <cube style="something:fat"></cube>
+    </repeat>
+    <script>
+        expect(this.parent).to.have.children(['cube','cube','cube','script'])
+        expect(this.parent.children[0]).to.have
+            .style('something','fat')
+        expect(this.parent.children[1]).to.have
+            .style('something','fat')
+        expect(this.parent.children[2]).to.have
+            .style('something','fat')        
+    </script>
+</craft>
