@@ -1,0 +1,20 @@
+<craft>
+    <craft name="octopus" stl="octopus.stl"/>
+
+
+    <g transform="translate(0 -50 0) cropY(0 50%) center()">
+
+        <g transform="rotateZ(10) cropX(50%)">
+            <stack>
+                <octopus transform="rotateZ(45)"></octopus>
+                <cube size="100 100 5"></cube>
+            </stack>
+        </g>
+
+    </g>
+
+    <script>
+        expect(this.prev).to.have
+            .polygonCount(901).position(-28.9614,-28.2256,-18.9003).size(57.9228,56.4511,37.8006)
+    </script>
+</craft>

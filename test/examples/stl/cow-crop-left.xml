@@ -1,0 +1,9 @@
+<craft>
+    <craft name="cow" stl="cow.stl"/>
+    <cow transform="cropX(50%)"></cow>
+    <script>
+        expect(this.prev).to.have.polygonCount(42039).and
+            .size(61.19572448730469,70.55770874023438,82.9753189086914)
+            .position(0.01874542236328125,-23.547454833984375,0)
+    </script>
+</craft>

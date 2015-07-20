@@ -1,0 +1,8 @@
+<craft>
+    <craft name="octopus" stl="octopus.stl"/>
+    <octopus></octopus>
+    <script>
+        expect(this.prev).to.have
+            .polygonCount(5360).position(-58.3633,-58.6617,0).size(116.7266,117.3234,32.8006)
+    </script>
+</craft>
