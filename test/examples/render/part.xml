@@ -1,0 +1,9 @@
+<craft>
+    <part name="foo">
+        <g></g>
+    </part>
+    <foo></foo>
+    <script>
+        expect(this.prev).to.have.name('foo').and.children(['g'])
+    </script>
+</craft>

@@ -1,0 +1,12 @@
+<craft>
+    <parameter name="one" type="int" default="1"/>
+
+    <part name="foo">
+        <script>
+            expect(params).to.have.property('one').and.eql(1)
+        </script>
+        <g></g>
+    </part>
+
+    <foo></foo>
+</craft>

@@ -8,6 +8,7 @@
     </part>
 
     <col l="alignY(90%)">
+
         <grow-layout xfactor="1.2" yfactor="1.17" zfactor="0.85">
             <repeat n="7">
                 <bow></bow>
@@ -16,13 +17,14 @@
         </grow-layout>
 
         <script>
-            function main(params, scope){
             var colors = ['red','orange','yellow','limegreen'
                 ,'darkslateblue', 'indigo', 'purple']
-            scope.solids.forEach(function(solid, i){
-                solid.color = colors[i]
+            scope.solids.slice(0,7).forEach(function(solid, i){
+                console.log(i)
+                solid.style.color = colors[i]
             })
-        }
+
+            this.parent.pp()
         </script>
     </col>
 </craft>

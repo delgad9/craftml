@@ -1,0 +1,12 @@
+<craft>
+    <parameter name="one" type="int" default="1"/>
+
+    <craft name="foo">
+        <script>
+            expect(params).to.not.have.property('one')
+        </script>
+        <g></g>
+    </craft>
+
+    <foo></foo>
+</craft>

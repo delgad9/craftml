@@ -1,4 +1,4 @@
-<craft name="grow">
+<craft name="grow" grouping="off">
     <parameter name="factor" type="float" default="1.2"/>
     <parameter name="xfactor" type="float" default="1"/>
     <parameter name="yfactor" type="float" default="1"/>
