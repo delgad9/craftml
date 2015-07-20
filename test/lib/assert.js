@@ -207,7 +207,7 @@ chai.use(function (_chai, utils) {
       _.forEach(children, function (c,i){
 
           var expected = names[i]
-          var actual = c.element.name
+          var actual = c.name
 
           this.assert(
             actual == expected,

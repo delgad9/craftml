@@ -1,6 +1,9 @@
 <craft>
-    <circle></circle>
+    <circle color="black"></circle>
     <script>
-        expect(this.prev).to.have.size(10,10,0).and.have.position(0,0,0)
+        expect(this.prev).to.have
+            .name('circle')
+            .size(10,10,0).and.have.position(0,0,0)
+        expect(this.prev).to.have.solid('cag').at([4,0])
     </script>
 </craft>
