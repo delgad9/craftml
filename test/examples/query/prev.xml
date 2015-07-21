@@ -1,0 +1,17 @@
+<craft>
+
+    <g id="foo">
+    </g>
+
+    <g id="bar">
+    </g>
+
+    <script>
+
+        $(this).prev().each(function(){
+            expect(this).to.have.id('bar')
+        })
+
+    </script>
+
+</craft>

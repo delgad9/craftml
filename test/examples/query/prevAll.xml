@@ -1,0 +1,18 @@
+<craft>
+
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+
+    <script>
+
+        expect($(this).prevAll()).to.have.length(4)
+
+        $(this).prevAll().each(function(){
+            expect(this).to.have.name('g')
+        })
+
+    </script>
+
+</craft>
