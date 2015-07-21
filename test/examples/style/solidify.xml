@@ -1,0 +1,29 @@
+<craft>
+
+    <style>
+        * {
+            something: inherit;
+        }
+
+        g {
+            something: great;
+        }
+    </style>
+
+    <g>
+        <solidify>
+            <stack spacing="10">
+                <rectangle></rectangle>
+                <rectangle></rectangle>
+                <rectangle></rectangle>
+            </stack>
+        </solidify>
+    </g>
+    <script>        
+        $('csg').each(function(){
+            expect(this).to.have.style('something', 'great')
+        })
+    </script>
+
+
+</craft>

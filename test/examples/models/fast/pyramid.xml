@@ -1,0 +1,19 @@
+<craft>
+    <parameter name="n" default="10" type="int"/>
+    <craft name="level">
+        <parameter name="d" default="5" type="int"/>
+        <cube size="{{d*5}} {{d*5}} 5"></cube>
+    </craft>
+    <stack>
+        <script>
+            var sizes = []
+            for (var i = 1; i <= params.n; i++){
+                sizes.push(i)
+            }
+            params.sizes = sizes
+        </script>
+        <repeat each="s" in="{{sizes}}">
+           <level d="{{s}}"></level>
+        </repeat>
+    </stack>
+</craft>

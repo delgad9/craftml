@@ -1,13 +1,13 @@
-var _root = dcodeIO.ProtoBuf.newBuilder({})['import']({
+{
     "package": "Craftml",
     "messages": [
         {
             "name": "Solid",
             "fields": [
                 {
-                    "rule": "required",
+                    "rule": "optional",
                     "type": "string",
-                    "name": "type",
+                    "name": "name",
                     "id": 1
                 },
                 {
@@ -29,10 +29,23 @@ var _root = dcodeIO.ProtoBuf.newBuilder({})['import']({
                     "id": 4
                 },
                 {
-                    "rule": "repeated",
-                    "type": "KeyValuePair",
-                    "name": "style",
+                    "rule": "optional",
+                    "type": "Buffer",
+                    "name": "buffer",
                     "id": 5
+                },
+                {
+                    "rule": "map",
+                    "type": "string",
+                    "keytype": "string",
+                    "name": "style",
+                    "id": 6
+                },
+                {
+                    "rule": "repeated",
+                    "type": "Solid",
+                    "name": "children",
+                    "id": 7
                 }
             ],
             "messages": [
@@ -46,6 +59,23 @@ var _root = dcodeIO.ProtoBuf.newBuilder({})['import']({
                             "id": 1
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "name": "Buffer",
+            "fields": [
+                {
+                    "rule": "repeated",
+                    "type": "float",
+                    "name": "vertices",
+                    "id": 1
+                },
+                {
+                    "rule": "repeated",
+                    "type": "float",
+                    "name": "normals",
+                    "id": 2
                 }
             ]
         },
@@ -257,4 +287,4 @@ var _root = dcodeIO.ProtoBuf.newBuilder({})['import']({
             ]
         }
     ]
-}).build();
+}
