@@ -1,0 +1,10 @@
+<craft>
+    <stack>
+        <braille>Hello</braille>
+        <cube size="40 10 2"></cube>
+    </stack>
+    <script>        
+        expect($('letter')).to.have.length(5)
+        expect($('dot')).to.have.length(14)
+    </script>
+</craft>
