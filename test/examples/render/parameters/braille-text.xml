@@ -1,0 +1,18 @@
+<craft>
+    <craft name="tag">
+        <parameter name="message" default="foo" type="text"/>
+        <braille>{{message}}</braille>
+    </craft>
+
+
+    <col>
+        <tag id="one"/>
+        <tag message="ba" id="two"/>
+    </col>
+
+    <script>
+        expect($('#one letter')).have.length(3)
+        expect($('#two letter')).have.length(2)
+    </script>
+
+</craft>

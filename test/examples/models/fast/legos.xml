@@ -1,0 +1,9 @@
+<craft>
+    <craft name="brick" src="lego.xml"/>
+    <row spacing="10">
+        <brick rows="2" cols="2" color="purple"/>
+        <brick rows="3" cols="2" color="purple"/>
+        <brick rows="4" cols="3" color="purple"/>
+        <brick rows="6" cols="2" color="purple" transform="rotateY(90)"/>
+    </row>
+</craft>

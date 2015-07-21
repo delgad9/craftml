@@ -4,13 +4,11 @@
     <parameter name="cols" type="int" default="4"/>
 
     <script>
-        function main(params){
-            params.xsize = params.cols * 8
-            params.ysize = params.rows * 8
-        }
+        params.xsize = params.cols * 8
+        params.ysize = params.rows * 8
     </script>
 
-    <craft name="repeat-grid" src="grid-repeat.xml"/>
+    <craft name="grid-repeat" src="grid-repeat.xml"/>
 
     <craft name="stud">
         <parameter name="radius" type="int" default="2.425"/>
@@ -27,34 +25,34 @@
     </craft>
 
     <part name="studs">
-        <repeat-grid rows="{{rows}}" cols="{{cols}}"
+        <grid-repeat rows="{{rows}}" cols="{{cols}}"
             colSpacing="{{8 - 2.425*2}}"
             rowSpacing="{{8 - 2.425*2}}"
             transform="translate(2.425,0.5,0)">
                 <stud></stud>
-        </repeat-grid>
+        </grid-repeat>
     </part>
 
     <part name="spines">
         <parameter name="size" type="size"/>
-        <repeat-grid rows="{{rows}}" cols="2"
+        <grid-repeat rows="{{rows}}" cols="2"
             colSpacing="{{xsize-3}}"
             rowSpacing="{{8 - 1}}" color="black">
             <cube size="1 1 5"></cube>
-        </repeat-grid>
-        <repeat-grid rows="2" cols="{{cols}}"
+        </grid-repeat>
+        <grid-repeat rows="2" cols="{{cols}}"
             rowSpacing="{{ysize-3}}"
             colSpacing="{{8-1}}" color="black">
             <cube size="1 1 5"></cube>
-        </repeat-grid>
+        </grid-repeat>
     </part>
 
     <part name="posts">
-        <repeat-grid rows="{{rows-1}}" cols="{{cols-1}}"
+        <grid-repeat rows="{{rows-1}}" cols="{{cols-1}}"
             colSpacing="{{8-3.25*2}}"
             rowSpacing="{{8-3.25*2}}" >
             <post></post>
-        </repeat-grid>
+        </grid-repeat>
     </part>
 
     <part name="walls">
