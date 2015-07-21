@@ -1,0 +1,35 @@
+<craft>
+
+    <style>
+        * {
+            something: inherit;
+        }
+        .foo {
+            something: good;
+        }
+    </style>
+
+    <g class="foo">
+        <cube></cube>
+        <g>
+            <cube></cube>
+            <cube></cube>
+        </g>
+        <g></g>
+    </g>
+
+    <script>
+
+        $('cube').each(function(i){
+            expect(this).to.have.style('something', 'good')
+        })
+
+        $('.foo').css('something', 'better')
+
+        $('cube').each(function(i){
+            expect(this).to.have.style('something', 'better')
+        })
+
+    </script>
+
+</craft>
