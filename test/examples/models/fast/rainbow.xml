@@ -19,12 +19,10 @@
         <script>
             var colors = ['red','orange','yellow','limegreen'
                 ,'darkslateblue', 'indigo', 'purple']
-            scope.solids.slice(0,7).forEach(function(solid, i){
-                console.log(i)
-                solid.style.color = colors[i]
-            })
 
-            this.parent.pp()
+            $('bow:not(.slice)').each(function(i){
+                $(this).css('color', colors[i])
+            })
         </script>
     </col>
 </craft>
