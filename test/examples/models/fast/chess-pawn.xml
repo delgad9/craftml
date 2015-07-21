@@ -3,11 +3,13 @@
         <title>Chess Pawn</title>
     </info>
 
-    <craft name="ring" src="../fast/ring.xml"/>
+    <craft name="ring" src="ring.xml"/>
 
     <craft name="bottom">
-        <sphere radius="20" t="scale(1,1,0.3)"></sphere>
-        <ring radius="20" thickness="2"></ring>
+        <stack spacing="-1">
+            <sphere radius="20" t="scale(1,1,0.3) cropZ(30%)"></sphere>
+            <ring radius="20" thickness="2"></ring>
+        </stack>
     </craft>
 
     <craft name="body">
@@ -22,7 +24,7 @@
         </solidify>
     </craft>
 
-    <stack spacing="-0.5" color="peru">
+    <stack spacing="-0.5" t="land()" color="peru">
         <sphere radius="8"></sphere>
 
         <stack spacing="-2">

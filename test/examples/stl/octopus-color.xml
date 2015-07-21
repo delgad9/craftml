@@ -1,0 +1,16 @@
+<craft>
+    <craft name="octopus" stl="octopus.stl"/>
+    <style>
+        octopus {
+            color: green
+        }
+    </style>
+
+    <octopus></octopus>
+
+    <script>
+        $('octopus *').each(function(){
+            expect(this).to.have.style('color','green')
+        })
+    </script>
+</craft>
