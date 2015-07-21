@@ -1,0 +1,19 @@
+<craft>
+
+    <g>
+        <cube></cube>
+        <g>
+            <cube></cube>
+        </g>
+        <g>
+            <g>
+                <cube></cube>
+            </g>
+        </g>
+    </g>
+
+    <script>
+        expect($('cube').length).to.be.equal(3)
+    </script>
+
+</craft>
