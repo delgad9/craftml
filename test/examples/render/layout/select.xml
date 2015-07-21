@@ -1,0 +1,11 @@
+<craft>
+    <g layout="select(2)">
+        <cube></cube>
+        <cube transform="translate(10,0,0)"></cube>
+    </g>
+
+    <script>
+        expect(this.prev).to.have.size(10,10,10).and.position(10,0,0)
+    </script>
+
+</craft>

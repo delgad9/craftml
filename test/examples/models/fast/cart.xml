@@ -1,0 +1,52 @@
+<craft name="cart">
+
+    <craft name="chasis">
+        <stack spacing="-2">
+
+            <content></content>
+
+            <g layout="centerXYZ()">
+
+                <cube size="40 20 10"></cube>
+
+                <g layout="lineupX(25)">
+                    <g layout="centerYZ() select(2)">
+                        <content name="axel1"></content>
+                        <cylinder id="a1"
+                            transform="scale(0.6,0.6,3)
+                                rotateX(90)"></cylinder>
+                    </g>
+                    <g layout="centerYZ() select(2)">
+                        <content name="axel2"></content>
+                        <cylinder id="a2"
+                            transform="scale(0.6,0.6,3)
+                                rotateX(90)"></cylinder>
+                    </g>
+                </g>
+            </g>
+
+        </stack>
+    </craft>
+
+    <part name="wheel">
+        <g layout="select(1 3 2) lineupZ(0) alignXY(50%)"
+            transform="rotateX(90)">
+            <repeat n="2">
+                <cylinder transform="scale(2,2,1)"></cylinder>
+            </repeat>
+            <cylinder transform="scale(0.5,0.5,3)"></cylinder>
+        </g>
+    </part>
+
+    <chasis>
+        <content>
+            <cube></cube>
+        </content>
+        <axel1>
+            <wheel></wheel>
+        </axel1>
+        <axel2>
+            <wheel></wheel>
+        </axel2>
+    </chasis>
+</craft>
