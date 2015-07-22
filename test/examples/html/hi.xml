@@ -1,0 +1,8 @@
+<craft>
+    Hi
+    <script>
+        expect($('word')).to.have.length(1)
+        expect($('char')).to.have.length(2)
+        expect($('csg')).to.have.length(3)
+    </script>
+</craft>
