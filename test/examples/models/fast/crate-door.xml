@@ -1,0 +1,40 @@
+<craft>
+    <info>
+        <title> Crate Door + Window </title>
+    </info>
+
+     <style>
+        .base { color: peru; }
+        .planks { color: saddlebrown; }
+    </style>
+
+    <g l="centerXYZ()">
+        <row class="planks">
+            <cube size="2 50 1"/>
+            <col>
+                <!-- Horizontal Bars -->
+                <col spacing="20">
+                    <cube size="16 2 1"/>
+                    <cube size="16 2 1"/>
+                </col>
+
+                <!-- Lower Slats -->
+                <row spacing="1.5">
+                    <repeat n="4">
+                        <cube size="2 24 1"/>
+                    </repeat>
+                </row>
+
+                <!-- Bottom Bar -->
+                <cube size="16 2 1"/>
+            </col>
+            <cube size="2 50 1"/>
+        </row>
+
+        <g l="centerXZ() alignY(14%)" cut=".window" class="base">
+            <cube size="13 14 5" class="window"/>
+            <cube size="20 50 0.5"></cube>
+        </g>
+    </g>
+
+</craft>

@@ -15,7 +15,7 @@ gulp.task('test', function() {
         }))
 })
 
-gulp.task('test:viz', function() {
+gulp.task('test:viz', ['test:generate'], function() {
     return gulp.src('test/examples.test.js', {
             read: false
         })

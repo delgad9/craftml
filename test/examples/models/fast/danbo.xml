@@ -1,0 +1,62 @@
+<craft name="danbo">
+    <craft name="sun-layout" src="sun-layout.xml"/>
+
+    <part name="head">
+        <g l="centerXZ() alignY(100%)" cut=".face">
+            <stack spacing="3" class="face">
+                <!-- Eyes -->
+                <row spacing="7">
+                  <cylinder radius="1.5" height="2" t="rotateX(90)"/>
+                  <cylinder radius="1.5" height="2" t="rotateX(90)"/>
+                </row>
+                <!-- Mouth -->
+                <prism width="5" length="2" t="scale(0.8,1,1)"/>
+            </stack>
+            <cube size="30 20 20"/>
+        </g>
+    </part>
+
+    <part name="arms">
+        <row spacing="11">
+            <row spacing="-3" l="alignZ(115%)">
+                <cube size="4 5 20"/>
+                <sphere radius="3"></sphere>
+            </row>
+            <row spacing="-3" l="alignZ(115%)">
+                <sphere radius="3"></sphere>
+                <cube size="4 5 20"/>
+            </row>
+        </row>
+    </part>
+
+    <g l="centerXY() alignZ(40%)" t="land()" color="wheat">
+        <arms></arms>
+        <stack>
+            <head></head>
+
+            <!-- Body -->
+            <cube size="16 16 20"/>
+            <stack spacing="-4">
+                <!-- Flaps -->
+                 <g>
+                    <sun-layout radius="8">
+                        <repeat n="4">
+                            <cube size="15 1 4" t="rotateX(25)"/>
+                        </repeat>
+                    </sun-layout>
+                </g>
+
+                <!-- Legs -->
+                <row spacing="1">
+                    <cube size="7 12 17"/>
+                    <cube size="7 12 17"/>
+                </row>
+            </stack>
+        </stack>
+    </g>
+
+    <script>
+        expect(this.prev).to.have.size(30,20,57.0478)
+    </script>
+
+</craft>
