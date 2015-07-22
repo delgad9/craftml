@@ -14,6 +14,7 @@ message Solid {
     optional Buffer buffer = 5;
     map<string, string> style = 6;
     repeated Solid children = 7;
+    optional string role = 8;
 }
 
 message Buffer {

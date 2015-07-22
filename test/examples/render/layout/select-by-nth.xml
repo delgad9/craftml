@@ -1,0 +1,12 @@
+<craft>
+    <g layout="select(1 2) lineupZ()">
+        <cube></cube>
+        <cube></cube>
+        <cylinder height="1"></cylinder>
+    </g>
+
+    <script>
+        expect(this.prev).to.have.size(10,10,20).and.position(0,0,0)
+    </script>
+
+</craft>

@@ -1,0 +1,14 @@
+<craft>
+    <style>
+        .hole {
+            color: pink;
+        }
+    </style>
+
+    <g layout="centerXY() select(1) cut(.hole)">
+        <cube size="50 50 5"></cube>
+        <cylinder radius="5" height="15"></cylinder>
+        <cylinder radius="6" height="10" class="hole"></cylinder>
+    </g>
+
+</craft>

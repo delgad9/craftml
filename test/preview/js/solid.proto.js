@@ -46,6 +46,12 @@ var _root = dcodeIO.ProtoBuf.newBuilder({})['import']({
                     "type": "Solid",
                     "name": "children",
                     "id": 7
+                },
+                {
+                    "rule": "optional",
+                    "type": "string",
+                    "name": "role",
+                    "id": 8
                 }
             ],
             "messages": [
