@@ -37,9 +37,4 @@
             </col>
         </g>
     </g>
-
-    <script>
-        this.parent.pp()
-    </script>
-
 </craft>

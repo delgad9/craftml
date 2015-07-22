@@ -7,6 +7,9 @@
                 <cube transform="scale(1,4,1)" class="hole"/>
                 <cube transform="scale(4,1,1)" class="hole"/>
             </group>
+            <script>
+                expect(this.prev).to.have.size(20,20,20)
+            </script>
         </repeat>
     </row>
 </craft>

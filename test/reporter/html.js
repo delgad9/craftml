@@ -20,10 +20,10 @@ module.exports = function(titles){
             items: items
         }
 
-        // console.log(ch)
     })
 
-    console.log(JSON.stringify(pages,null,' '))
+    // console.log(JSON.stringify(pages,null,' '))
+    console.log(pages.length, 'pages generated')
 
     var html = jade.renderFile(__dirname + '/report.jade', {pages: pages})
     return html

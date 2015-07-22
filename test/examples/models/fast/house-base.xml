@@ -11,9 +11,6 @@
         <stack>
             <cube size="11 11 3" color="firebrick"></cube>
             <cube size="10 10 20" color="white"></cube>
-            <script>
-                this.parent.pp()
-            </script>
         </stack>
     </craft>
 

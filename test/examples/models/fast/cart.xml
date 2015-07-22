@@ -10,13 +10,13 @@
                 <cube size="40 20 10"></cube>
 
                 <g layout="lineupX(25)">
-                    <g layout="centerYZ() select(2)">
+                    <g layout="centerXYZ() select(2)">
                         <content name="axel1"></content>
                         <cylinder id="a1"
                             transform="scale(0.6,0.6,3)
                                 rotateX(90)"></cylinder>
                     </g>
-                    <g layout="centerYZ() select(2)">
+                    <g layout="centerXYZ() select(2)">
                         <content name="axel2"></content>
                         <cylinder id="a2"
                             transform="scale(0.6,0.6,3)

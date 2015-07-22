@@ -2,26 +2,26 @@
 
     <cube size="10 10 10" t="scale(2 3 4)"></cube>
     <script>
-        // new size, same center
-        expect(this.prev).to.have.size(20,30,40).and.center(5,5,5)
+        // new size, same origin
+        expect(this.prev).to.have.size(20,30,40).and.position(0,0,0)
     </script>
 
     <cube size="10 10 10" t="translate(10 0 0) scale(2 3 4)"></cube>
     <script>
-        // new size, same center
-        expect(this.prev).to.have.size(20,30,40).and.center(15,5,5)
+        // new size, same origin
+        expect(this.prev).to.have.size(20,30,40).and.position(10,0,0)
     </script>
 
     <cube size="10 10 10" t="translate(-10 0 0) scale(2 3 4)"></cube>
     <script>
-        // new size, same center
-        expect(this.prev).to.have.size(20,30,40).and.center(-5,5,5)
+        // new size, same origin
+        expect(this.prev).to.have.size(20,30,40).and.position(-10,0,0)
     </script>
 
     <cube size="10 10 10" t="translate(10 10 10) scale(2)"></cube>
     <script>
-        // new size, same center
-        expect(this.prev).to.have.size(20,20,20).and.center(15,15,15)
+        // new size, same origin
+        expect(this.prev).to.have.size(20,20,20).and.position(10,10,10)
     </script>
 
 </craft>

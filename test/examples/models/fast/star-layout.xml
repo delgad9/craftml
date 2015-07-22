@@ -30,7 +30,4 @@
             }
         </script>
     </g>
-    <script>
-        this.prev.pp()
-    </script>
 </craft>

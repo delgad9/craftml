@@ -2,22 +2,22 @@
 
     <cube size="20 10 10" t="fit(10 10 10)"></cube>
     <script>
-        // new size, same center
-        expect(this.prev).to.have.size(10,5,5).to.have.center(10,5,5)
+        // new size, same origin
+        expect(this.prev).to.have.size(10,5,5).to.have.position(0,0,0)
     </script>
 
 
     <cube size="10 20 10" t="fit(20 20 20)"></cube>
     <script>
-        // new size, same center
-        expect(this.prev).to.have.size(10,20,10).to.have.center(5,10,5)
+        // new size, same origin
+        expect(this.prev).to.have.size(10,20,10).to.have.position(0,0,0)
     </script>
 
 
     <cube size="10 20 10" t="fit(40 40 40)"></cube>
     <script>
-        // new size, same center
-        expect(this.prev).to.have.size(20,40,20).to.have.center(5,10,5)
+        // new size, same origin
+        expect(this.prev).to.have.size(20,40,20).to.have.position(0,0,0)
     </script>
 
 </craft>
