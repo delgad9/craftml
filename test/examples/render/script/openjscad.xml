@@ -1,5 +1,0 @@
-<craft>
-    <script type="text/openjscad">
-        expect(cube).to.exist
-    </script>    
-</craft>

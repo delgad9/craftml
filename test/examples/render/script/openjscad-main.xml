@@ -1,6 +1,8 @@
 <craft>
     <script type="text/openjscad">
-        this.add(cube())
+        function main(params){
+            return cube()
+        }
     </script>
     <script>
         expect(this.prev).to.have.children(['csg'])
