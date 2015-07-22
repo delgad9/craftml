@@ -1,0 +1,19 @@
+<craft>
+
+    <craft name="sun-layout" src="../fast/sun-layout.xml"/>
+
+    <stack layout="centerXYZ()" cut=".cut">
+        <group class="cut">
+        <sun-layout radius="30">
+            <repeat n="8">
+                <cylinder/>
+            </repeat>
+        </sun-layout>
+        </group>
+        <cylinder transform="scale(10,10,1)"></cylinder>
+    </stack>
+
+    <script>
+        expect(this.prev).position(-45,-45,0) .size(100,100,10)
+    </script>
+</craft>

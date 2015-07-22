@@ -19,9 +19,9 @@
 
             diff = cube({
                 size: [params.width, params.width, params.width]
-            }).translate([-params.width / 2, -params.width / 2, -params.width]);
+            }).translate([-params.width / 2, -params.width / 2, -params.width])
 
-            return difference(s, diff);
+            return difference(s, diff).translate([5, 4.99013, 0])
         }
     </script>
 

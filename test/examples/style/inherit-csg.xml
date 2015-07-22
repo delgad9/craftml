@@ -3,7 +3,6 @@
     <cube style="color:red;"></cube>
 
     <script>
-        this.prev.pp()
         expect(this.prev).to.have.solid('csg').at([4,0]).that.have
             .style('color', 'red')
     </script>

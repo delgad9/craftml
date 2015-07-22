@@ -19,7 +19,7 @@
             size: [params.length, params.width, params.width]
         }).translate([0, -params.width / 2, -params.width]);
 
-        var obj = difference(c, diff).rotateZ(90);
+        var obj = difference(c, diff).rotateZ(90).translate([5,0,0]);
         this.add(obj)
     </script>
 </craft>
