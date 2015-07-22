@@ -2,20 +2,20 @@
     <info>
         <title>GearBox - Three gears - shell</title>
     </info>
-    <craft name="nutch" stl="gear.stl"></craft>
+    <craft name="nutch" stl="gear.stl"/>
 
     <craft name="gear">
         <g layout="centerXY()">
             <nutch transform="scale(0.5,0.5,0.5)"/>
+            <cylinder class="gap" radius="3" height="5" t="translate(0 0 -4)"/>
             <cylinder height="10" radius="2" transform="translate(0,0,-7)"></cylinder>
         </g>
     </craft>
 
     <craft name="box">
-        <g cut=".shell">
-            <cube size="28 28 28" transform="translate(-24,-24,-4)"/>
-
-            <cube size="26 26 26" transform="translate(-22,-23,-3)" class="shell"/>
+        <g layout="centerYZ() alignX(100%)" cut=".shell">
+            <cube size="30 30 30"/>
+            <cube size="28 28 28" class="shell"/>
         </g>
     </craft>
 
@@ -25,20 +25,14 @@
         <gear transform="rotateX(270) translate(0,14, 14)"></gear>
     </craft>
 
-    <craft name="hole">
-        <cylinder radius="3" height="5" transform="translate(-3,-3,-2)"/>
-        <cylinder radius="3" height="5" transform="rotateX(90) translate(-3,-15,12)"/>
-        <cylinder radius="3" height="5" transform="rotateX(90) translate(-3,10,12)"/>
-    </craft>
-
-
     <!-- embed gears inside the box -->
-    <g>
-        <box transform="translate(-14,-13,1)"></box>
-        <hole class="margin"></hole>
-        <gearset transform="translate(14,14,0)"></gearset>
+    <g layout="centerXY() select(box) cut(.gap)">
+        <box></box>
+        <gearset t="translate(0 0 2)"></gearset>
     </g>
 
-
+    <script>
+        this.parent.compile()
+    </script>
 
 </craft>

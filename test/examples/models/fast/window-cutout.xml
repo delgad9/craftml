@@ -1,0 +1,16 @@
+<craft>
+    <style>
+        .hole {
+            color: pink;
+        }
+    </style>
+
+    <craft name="window" src="window.xml"/>
+
+    <g layout="centerXYZ() select(.wall) cut(.hole)">
+        <cube size="50 50 2" class="wall"></cube>
+        <window transform="rotateX(90)"></window>
+        <cube size="35 35 2" class="hole"></cylinder>
+    </g>
+
+</craft>
