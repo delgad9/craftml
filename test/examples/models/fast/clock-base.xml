@@ -1,0 +1,17 @@
+<craft>
+    <craft name="clock-layout" src="clock-layout.xml"/>
+
+    <stack>
+        <g>
+            <clock-layout radius="50" start="-90" direction="clockwise">
+                <repeat each="i" in="{{[12,1,2,3,4,5,6,7,8,9,10,11]}}">
+                    <g>
+                        {{i}}
+                    </g>
+                </repeat>
+            </clock-layout>
+        </g>
+        <cylinder radius="70" height="3"></cylinder>
+    </stack>
+
+</craft>

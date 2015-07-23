@@ -1,0 +1,46 @@
+<craft>
+    <parameter name="hour" type="range" min="1" max="12" default="3"/>
+    <parameter name="minute" type="range" min="0" max="60" default="30"/>
+
+    <craft name="arm">
+        <parameter name="length" default="30" type="int"/>
+        <stack>
+            <prism></prism>
+            <cube size="10 10 {{length}} "></cube>
+        </stack>
+    </craft>
+
+    <script>
+        var hours = Number(params.hour)
+        var minutes = Number(params.minute)
+
+        params.angleHour = (hours * 60 + minutes) * 0.5 - 90
+        params.angleMinutes = minutes * 6 - 90
+    </script>
+
+    <craft name="short">
+        <g color="red">
+            <row spacing="-5">
+                <cylinder radius="10"></cylinder>
+                <arm length="30" t="rotateY(90)"></arm>
+            </row>
+        </g>
+    </craft>
+
+    <craft name="long">
+        <g color="blue">
+            <row spacing="-5">
+                <cylinder radius="10"></cylinder>
+                <arm length="40" t="rotateY(90)"></arm>
+            </row>
+        </g>
+    </craft>
+
+    <stack>
+
+        <short t="rotateZ({{angleHour}})"></short>
+        <long t="rotateZ({{angleMinutes}})"></long>
+
+    </stack>
+
+</craft>

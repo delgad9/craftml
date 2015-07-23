@@ -11,9 +11,6 @@
                 <cube size="10 2 2"></cube>
             </col>
         </g>
-        <script>
-            this.prev.pp()
-        </script>
     </stack>
 
 </craft>

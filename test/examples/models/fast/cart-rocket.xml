@@ -1,0 +1,14 @@
+<craft>
+
+    <info>
+        <title>Rocket on a cart</title>
+    </info>
+
+    <craft name="cart" src="cart.xml"/>
+    <craft name="rocket" src="rocket.xml"/>
+
+    <cart>
+        <rocket></rocket>
+    </cart>
+
+</craft>

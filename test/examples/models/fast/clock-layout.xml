@@ -1,0 +1,48 @@
+<craft name="clock-layout">
+    <parameter name="radius" type="int" default="30"/>
+    <parameter name="degrees" type="int" default="360"/>
+    <parameter name="start" type="int" default="0"/>
+    <parameter name="direction" type="string" default="clockwise"/>
+    <content>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+    </content>
+    <script>
+
+        var contentSolids = scope.solids
+
+        var tx = 0, ty = 0
+        var r = params.radius, theta = 0
+
+        var theta = params.start * Math.PI / 180
+
+        var delta = 2 * Math.PI / ((360 / params.degrees) * scope.solids.length)
+
+        if (params.direction === 'counterclockwise'){
+            delta = - delta
+        }
+
+        contentSolids.forEach(function(solid){
+            tx = (r * Math.cos(theta))
+            ty = (r * Math.sin(theta))
+
+            solid.translateTo({
+                x: tx - solid.layout.size.x / 2,
+                y: ty - solid.layout.size.y / 2,
+                z: solid.layout.position.z
+            })
+
+            theta = theta + delta
+        })
+    </script>
+</craft>
