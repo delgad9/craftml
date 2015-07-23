@@ -1,0 +1,8 @@
+<craft>
+    <div style="text-align:center;width:5">so long</div>
+    <script>
+        expect($('text-line')).to.have.length(2)
+        expect($('word')).to.have.length(2)
+        expect($('char')).to.have.length(6)
+    </script>
+</craft>
