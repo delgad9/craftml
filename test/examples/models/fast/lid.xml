@@ -1,0 +1,19 @@
+<craft>
+
+    <parameter name="day" default="Sun" type="text"/>
+
+    <stack>
+        <g>{{day}}</g>
+        <g layout="centerXY() alignZ(0) cut(.gap)">
+            <cube size="40 40 5"></cube>
+            <col spacing="36" class="gap">
+                <cube size="10 2 2"></cube>
+                <cube size="10 2 2"></cube>
+            </col>
+        </g>
+        <script>
+            this.prev.pp()
+        </script>
+    </stack>
+
+</craft>

@@ -8,6 +8,5 @@
     <script>
         //expect($('text-line')).to.have.length(10)
         //expect($('word')).to.have.length(10)
-        this.prev.pp()
     </script>
 </craft>
