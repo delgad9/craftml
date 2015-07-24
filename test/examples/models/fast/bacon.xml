@@ -1,0 +1,48 @@
+<craft name="bacon">
+    <craft name="alternate" src="alternate-layout.xml"/>
+
+    <part name="ridge">
+        <g l="centerXY() cut(.hollow)" t="cropZ(1) scale(1 1 0.8)">
+            <prism length="1" sides="50"/>
+            <prism sides="50" t="scale(0.8 1 0.8)" class="hollow"/>
+        </g>
+    </part>
+
+    <part name="strip">
+        <g l="lineupX(-1.1)">
+            <alternate axis="y" degrees="180">
+                <repeat n="5">
+                    <ridge></ridge>
+                </repeat>
+                <script>
+                    var n = scope.solids.length
+
+                    for (var i = 0; i < n; i++) {
+                        var solid = scope.solids[i]
+
+                        if (i % 2 !== 0) {
+                            solid.translateTo({
+                                x: 0,
+                                y: 0,
+                                z: -2
+                            })
+                        }
+                    }
+                </script>
+            </alternate>
+        </g>
+    </part>
+
+    <col t="scale(1 1 0.5)">
+        <strip t="scale(1 1.3 1)"></strip>
+        <strip t="scale(1 1.3 1)"></strip>
+
+        <script>
+            var colors = ['firebrick','salmon','lightsalmon','indianred']
+            $('strip').each(function(i) {
+                $(this).css('color', colors[i % 4])
+            })
+        </script>
+    </col>
+
+</craft>
