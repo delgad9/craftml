@@ -9,7 +9,7 @@
 
             // all the letter should have the same height (size y)
             $('letter').each(function(){
-                expect(this.layout.size.y).to.closeTo(6.2,0.001)
+                expect(this.size.y).to.closeTo(6.2,0.001)
             })
 
         </script>

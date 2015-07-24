@@ -17,7 +17,7 @@ function getName(solid){
 // language chain method
 Assertion.addMethod('size', function (x,y,z) {
   var name = getName(this._obj)
-  var s = this._obj.layout.size;
+  var s = this._obj.size;
 
   // first, our instanceof check, shortcut
   // new Assertion(this._obj).to.be.eql(3)
@@ -225,7 +225,7 @@ chai.use(function (_chai, utils) {
 
 Assertion.addChainableMethod('position', function (x,y,z) {
   var name = getName(this._obj)
-  var s = this._obj.layout.position;
+  var s = this._obj.position;
 
   // first, our instanceof check, shortcut
   // new Assertion(this._obj).to.be.eql(3)

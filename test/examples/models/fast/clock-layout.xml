@@ -37,9 +37,9 @@
             ty = (r * Math.sin(theta))
 
             solid.translateTo({
-                x: tx - solid.layout.size.x / 2,
-                y: ty - solid.layout.size.y / 2,
-                z: solid.layout.position.z
+                x: tx - solid.size.x / 2,
+                y: ty - solid.size.y / 2,
+                z: solid.position.z
             })
 
             theta = theta + delta
