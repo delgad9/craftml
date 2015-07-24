@@ -1,4 +1,4 @@
-<craft name="alternate-layout">
+<craft name="alternate-layout" grouping="off">
     <parameter name="degrees" type="int" default="90"/>
     <parameter name="axis" type="string" default="x"/>
     <content>
@@ -7,19 +7,17 @@
         <cube></cube>
     </content>
     <script>
-        function main(params, scope){
-            var n = scope.solids.length
-            var deg = params.degrees
-            var axis = params.axis
+        var n = scope.solids.length
+        var deg = params.degrees
+        var axis = params.axis
 
-            var ps = []
-            for (var i = 0; i < n; i++){
-                var solid = scope.solids[i]
+        var ps = []
+        for (var i = 0; i < n; i++){
+            var solid = scope.solids[i]
 
-                var angle = deg * i
+            var angle = deg * i
 
-                solid.rotate(params.axis, angle)
-            }
+            solid.rotate(params.axis, angle)
         }
     </script>
 </craft>

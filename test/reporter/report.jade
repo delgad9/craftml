@@ -11,17 +11,18 @@ body
             font-size: 80%;
             height: 50%;
             overflow: scroll;
+            overflow-x: scroll;
         }
         
     div.row
-        div.col-md-1.sidebar
+        div.col-md-2.sidebar
             each page in pages
                 a(id="page#{page.index}", href="#page#{page.index}", onClick="select(this)")= page.index
                     ul
                         each item in page.items
                             li(title=item.title)= item.name
         
-        div.col-md-11
+        div.col-md-10
             div
                 //- each i in [0,1,2,3,4,5,6,7,8,9,10,11]
                 each i in [0,1,2,3]
