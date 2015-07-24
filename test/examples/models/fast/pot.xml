@@ -20,7 +20,7 @@
     </part>
 
     <group color="coral">
-        <stack spacing="{{-height + 2}}" cut=".hole">
+        <stack spacing="{{-height + 2}}" layout="cut(.hole)">
             <base
                 baseRadius="{{baseRadius - thickness}}"
                 topRadius="{{topRadius - thickness}}"
@@ -28,5 +28,8 @@
             ></base>
             <base></base>
         </stack>
+        <script>
+            this.prev.pp()
+        </script>
     </group>
 </craft>

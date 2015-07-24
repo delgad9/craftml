@@ -1,0 +1,45 @@
+<craft name="frame">
+    <style>
+        .cap { color: white; }
+    </style>
+    <col color="limegreen">
+        <g layout="centerXY()">
+            <content name="picture">
+                <div color="black">Picture Here</div>
+            </content>
+            <script>
+                var p = scope.solids[0].layout
+                params.length = p.size.x + 5
+                params.width = p.size.y + 5
+            </script>
+
+            <col>
+                <cube size="{{length}} 3 5"></cube>
+
+                <row spacing="{{length - 6}}">
+                    <repeat n="2">
+                        <cube size="3 {{width - 6}} 5">
+                    </repeat>
+                </row>
+
+                <cube size="{{length}} 3 5"></cube>
+            </col>
+        </g>
+
+        <script>
+            var p = scope.solids[0].layout
+            params.length = p.size.x
+        </script>
+
+        <stack>
+            <content name="caption">
+                <div class="cap">Caption Here</div>
+            </content>
+            <script>
+                var c = scope.solids[0].layout
+                params.capWidth = c.size.y + 5
+            </script>
+            <cube size="{{length}} {{capWidth}} 5"></cube>
+        </stack>
+    </col>
+</craft>

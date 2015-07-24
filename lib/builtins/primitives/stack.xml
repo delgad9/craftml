@@ -1,7 +1,6 @@
 <craft name="stack">
     <parameter name="spacing" type="float" default="0"/>
-    <parameter name="layout" alias="l" type="string" default=""/>
-    <g layout='reverse() lineupZ({{spacing}}) centerXY() {{l}}'>
+    <g layout='reverse() lineupZ({{spacing}}) centerXY()' grouping="off">
         <content></content>
     </g>
 </craft>

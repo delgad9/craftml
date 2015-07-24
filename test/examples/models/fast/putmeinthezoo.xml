@@ -1,0 +1,77 @@
+<craft>
+    <info>
+        <title>Put Me in the Zoo (25)</title>
+    </info>
+
+    <style>
+        frame { color: lightseagreen; }
+        page { color: white; }
+        spot { color: red; }
+        .wall { color: burlywood; }
+    </style>
+
+    <craft name="frame" src="frame.xml"/>
+
+    <craft name="page25">
+        <craft name="page">
+    <parameter name="xmargin" type="int" default="10"/>
+    <parameter name="ymargin" type="int" default="10"/>
+    <parameter name="zmargin" type="int" default="1"/>
+
+    <stack>
+        <g>
+            <content>
+                <cube></cube>
+            </content>
+        </g>
+        <script>
+            var g = scope.solids[0].layout
+
+            params.l = g.size.x + params.xmargin
+            params.w = g.size.y + params.ymargin
+        </script>
+        <cube size="{{l}} {{w}} {{zmargin}}"></cube>
+    </stack>
+</craft>
+        <craft name="repeat-grid" src="grid-repeat.xml"/>
+        <craft name="spot">
+            <cylinder radius="2.5" height="1"/>
+        </craft>
+
+        <page xmargin="40" ymargin="20">
+            <stack>
+                <row spacing="3">
+                    <repeat n="4">
+                        <row spacing="4" layout="lineupY(-10)">
+                            <col spacing="4">
+                                <spot></spot>
+                                <spot></spot>
+                            </col>
+                            <col spacing="5">
+                                <spot></spot>
+                                <spot></spot>
+                            </col>
+                        </row>
+                    </repeat>
+                </row>
+
+                <cube size="70 20 3" class="wall"/>
+
+            </stack>
+        </page>
+    </craft>
+
+    <frame>
+        <picture>
+            <page25></page25>
+        </picture>
+        <caption>
+            <col spacing="5">
+                <braille> I can put my spots </braille>
+                <braille> up on this ball. </braille>
+                <braille> And I can put them </braille>
+                <braille> on a wall. </braille>
+            </col>
+        </caption>
+    </frame>
+</craft>

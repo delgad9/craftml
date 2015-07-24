@@ -76,7 +76,7 @@ gulp.task('test:generate', function () {
     var tests = generate(root)
 
     var all = requires + '\n\n' + tests
-    console.log(all)
+    // console.log(all)
 
     fs.writeFile('test/examples.test.js', all)
 

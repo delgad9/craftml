@@ -1,7 +1,6 @@
 <craft name="row">
     <parameter name="spacing" type="float" default="0"/>
-    <parameter name="layout" alias="l" type="string" default=""/>
-    <g layout='lineupX({{spacing}}) centerY() alignZ(0%) {{l}}'>
+    <g layout='lineupX({{spacing}}) centerY() alignZ(0%)' grouping="off">
         <content></content>
     </g>
 </craft>
