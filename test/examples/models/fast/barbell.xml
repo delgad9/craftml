@@ -1,0 +1,16 @@
+<craft>
+
+    <craft name="barbell">
+        <row layout="centerZ()">
+            <cylinder transform="scale(2,2,0.5) rotateY(90)"/>
+            <cylinder transform="rotateY(90) scale(4,0.5,0.5)" class="bar"/>
+            <cylinder transform="scale(2,2,0.5) rotateY(90)"/>
+        </row>
+    </craft>
+
+    <g layout="select(cube .bar) lineupZ() centerXY()">
+        <barbell></barbell>
+        <cube></cube>
+    </g>
+
+</craft>

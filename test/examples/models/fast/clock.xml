@@ -21,7 +21,7 @@
     <craft name="short">
         <g color="red">
             <row spacing="-5">
-                <cylinder radius="10"></cylinder>
+                <cylinder radius="10" class="center"></cylinder>
                 <arm length="30" t="rotateY(90)"></arm>
             </row>
         </g>
@@ -30,17 +30,15 @@
     <craft name="long">
         <g color="blue">
             <row spacing="-5">
-                <cylinder radius="10"></cylinder>
+                <cylinder radius="10" class="center"></cylinder>
                 <arm length="40" t="rotateY(90)"></arm>
             </row>
         </g>
     </craft>
 
-    <stack>
-
+    <g layout="select(.center) centerXY()">
         <short t="rotateZ({{angleHour}})"></short>
         <long t="rotateZ({{angleMinutes}})"></long>
-
-    </stack>
+    </g>
 
 </craft>

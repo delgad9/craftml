@@ -1,0 +1,15 @@
+<craft>
+    <g layout="select(cube) lineupZ() centerXY()">
+        <row>
+            <cube></cube>
+            <cylinder></cylinder>
+        </row>
+        <row>
+            <cylinder></cylinder>
+            <cube></cube>
+        </row>
+    </g>
+    <script>
+        this.prev.pp()
+    </script>
+</craft>
