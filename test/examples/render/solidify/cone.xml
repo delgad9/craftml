@@ -1,0 +1,16 @@
+<craft>
+
+    <solidify>
+        <stack spacing='10'>
+            <point></point>
+            <circle></circle>
+            <circle t="scale(1.2)"></circle>
+            <point></point>
+        </stack>
+    </solidify>
+
+    <script>
+        this.prev.pp()
+    </script>
+
+</craft>

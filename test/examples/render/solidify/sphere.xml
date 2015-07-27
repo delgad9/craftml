@@ -1,0 +1,35 @@
+<craft>
+
+    <script>
+
+        var i, theta
+
+        theta = -Math.PI/2
+        var dtheta = Math.PI/32
+        var cs = []
+
+        theta += dtheta
+        for (i=0; i<32-1; i++){
+            var c = {}
+            c.z = Math.sin(theta) * 10
+            c.r = Math.cos(theta) * 10
+            theta = theta + dtheta
+            cs.push(c)
+        }
+
+        params.cs = cs
+    </script>
+
+    <solidify>
+        <point x="5" y="5" z="-10"/>
+        <repeat each="c" in="{{cs}}">
+            <circle radius="{{c.r}}" t="setZ({{c.z}})"></circle>
+        </repeat>
+        <point x="5" y="5" z="10"/>
+    </solidify>
+
+    <script>
+        this.parent.pp()
+    </script>
+
+</craft>
