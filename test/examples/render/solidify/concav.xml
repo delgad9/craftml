@@ -1,0 +1,87 @@
+<craft name="swirl">
+
+<craft name="star2d">
+        <path  d="
+        M 179.000 199.000
+        L 199.000 213.641
+        L 196.321 189.000
+        L 219.000 179.000
+        L 196.321 169.000
+        L 199.000 144.359
+        L 179.000 159.000
+        L 159.000 144.359
+        L 161.679 169.000
+        L 139.000 179.000
+        L 161.679 189.000
+        L 159.000 213.641
+        z
+        "></path>
+    </craft>
+    <craft name="sun-layout" grouping="off">
+    <parameter name="radius" default="10" type="int"/>
+    <content>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+    </content>
+    <script>
+        var n = scope.solids.length
+
+        var r = params.radius, theta = 0
+        var delta = 2 * Math.PI / n
+        var ps = []
+        for (var i = 0; i < n; i++){
+
+            var solid = scope.solids[i]
+
+            var loc = {
+                x: -(r * Math.cos(theta) + solid.position.x/2),
+                y: -(r * Math.sin(theta) + solid.position.y/2),
+                z: 0
+            }
+            var angle = 360/n * (i - (n / 4))
+
+            solid.rotate('z', angle)
+            solid.center(loc)
+            theta = theta + delta
+        }
+    </script>
+</craft>
+
+
+    <row spacing="20">
+
+        <stack spacing="0">
+            <repeat each="i" in="{{[5,6,7,8]}}">
+                <solidify>
+                    <sun-layout radius="{{3*i}}">
+                        <repeat n="25">
+                             <circle radius="{{i}}" resolution="7" t="rotateY(90)"></circle>
+                        </repeat>
+                    </sun-layout>
+                </solidify>
+            </repeat>
+        </stack>
+
+
+        <solidify>
+            <stack spacing="10">
+                <repeat each="r" in="{{[1,2,3,4,5]}}">
+                     <circle radius="{{r*5}}" resolution="7"></circle>
+                </repeat>
+            </stack>
+        </solidify>
+
+
+            <solidify>
+        <stack spacing="10">
+            <star2d></star2d>
+            <star2d></star2d>
+        </stack>
+    </solidify>
+
+
+    </row>
+</craft>

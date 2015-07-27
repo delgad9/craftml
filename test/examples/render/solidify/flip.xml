@@ -1,0 +1,81 @@
+<craft>
+
+    <row spacing="5">
+
+    <g>
+    <script>
+
+        var theta
+        var dtheta = Math.PI/32
+        var cs = []
+
+        for (theta=0; theta < Math.PI/2 - dtheta; theta += dtheta){
+            var c = {}
+            c.z = Math.sin(theta) * 10
+            c.r = Math.cos(theta) * 10
+            theta = theta + dtheta
+            console.log(c.r, c.z)
+            cs.push(c)
+        }
+
+        params.cs = cs
+    </script>
+
+    <solidify>
+        <repeat each="c" in="{{cs}}">
+            <circle radius="{{c.r}}" t="setZ({{c.z}})"></circle>
+        </repeat>
+        <point x="5" y="5" z="10"/>
+    </solidify>
+
+    </g>
+
+    <g>
+        <solidify>
+            <stack spacing='10'>
+                <point></point>
+                <circle></circle>
+                <circle t="scale(1.2)"></circle>
+                <circle></circle>
+                <point></point>
+            </stack>
+        </solidify>
+    </g>
+
+    <g>
+        <solidify>
+            <g spacing='10' layout="lineupZ(10) centerXY()">
+                <point></point>
+                <circle></circle>
+                <circle t="scale(1.2)"></circle>
+                <circle></circle>
+                <point></point>
+            </g>
+        </solidify>
+    </g>
+
+    <g>
+        <solidify>
+            <g spacing='10' layout="lineupZ(10) centerXY()">
+                <point></point>
+                <circle></circle>
+                <circle t="scale(1.2)"></circle>
+            </g>
+        </solidify>
+    </g>
+
+    <g>
+        <solidify>
+            <g spacing='10' layout="lineupZ(10) centerXY()">
+                <circle t="scale(1.2)"></circle>
+                <circle></circle>
+                <point></point>
+            </g>
+        </solidify>
+    </g>
+
+
+    </row>
+
+
+</craft>

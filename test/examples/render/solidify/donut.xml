@@ -1,0 +1,10 @@
+<craft>
+    <craft name="sun-layout" src="../../models/fast/sun-layout.xml"/>
+    <solidify>
+         <sun-layout radius="20">
+             <repeat n="25">
+                  <circle radius="5" resolution="12" t="rotateY(90)"></circle>
+             </repeat>
+         </sun-layout>
+    </solidify>
+</craft>
