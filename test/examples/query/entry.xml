@@ -1,0 +1,8 @@
+<craft>
+
+    <cube id="one"></cube>
+    <script>
+        expect($('cube').get(0)).to.have.id('one')
+    </script>
+
+</craft>

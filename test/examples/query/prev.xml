@@ -1,17 +1,7 @@
-<craft>
-
-    <g id="foo">
-    </g>
-
-    <g id="bar">
-    </g>
-
+<g>
+    <circle id="foo"></circle>
+    <cube></cube>
     <script>
-
-        $(this).prev().each(function(){
-            expect(this).to.have.id('bar')
-        })
-
+        expect($('cube').prev().get(0)).to.have.id('foo').and.name('circle')
     </script>
-
-</craft>
+</g>

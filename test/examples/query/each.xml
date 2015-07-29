@@ -13,14 +13,10 @@
     </g>
 
     <script>
-        var count = 0
         $('cube').each(function(){
-            count ++
             expect(this).to.have.name('cube')
         })
-
-        expect(count).to.be.equal(3)
-
+        expect($('cube')).to.have.length(3)
     </script>
 
 </craft>

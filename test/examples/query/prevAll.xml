@@ -4,12 +4,13 @@
     <g></g>
     <g></g>
     <g></g>
+    <cube></cube>
 
     <script>
 
-        expect($(this).prevAll()).to.have.length(4)
+        expect($('cube').prevAll()).to.have.length(4)
 
-        $(this).prevAll().each(function(){
+        $('cube').prevAll().each(function(){
             expect(this).to.have.name('g')
         })
 
