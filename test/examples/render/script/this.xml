@@ -1,8 +1,10 @@
 <craft>
 
-    <script>
-        expect(this).to.have.name('g').and.role('group')
-        expect(this).to.have.children([])
-    </script>
+    <g id="foo">
+        <script>
+            expect(this).to.have
+                .name('g').id('foo').children([])
+        </script>
+    </g>
 
 </craft>

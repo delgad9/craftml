@@ -1,7 +1,8 @@
 <craft>
     <dome></dome>
     <script>
-        expect(this.parent).to.have.solid('dome').at('0').that.have
+        expect(this).to.have.children(['dome'])
+        expect(this.children[0]).to.have
             .size(10,9.9802,5).and.position(0,0,0)
     </script>
 </craft>
