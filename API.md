@@ -205,11 +205,11 @@ What if we need to access the size or location of `<remote-object>`? We can do t
 </g>
 ```
 
-The rendering engine ensures that all the pending child elements will get fully constructed before start executing a new script block. In other words, solid elements added in one script block may not necessarily be fully constructed within the same script block, but will certainly be fully constructed before the next script block begins.
+The rendering engine ensures that all the pending child elements will get fully constructed before executing a new script block. In other words, solid elements added in one script block may not necessarily be fully constructed within the same script block, but will certainly be fully constructed before the next script block begins.
 
 Q: Are transformation and layout methods also asynchronous?
 
-No. All transformation and layout methods are synchronous because they are compute-bound tasks (CPU-intensitve) and do not involve I/O operations.
+No. All transformation and layout methods are synchronous because they are compute-bound operations (matrix mulplitcations ... etc.) and do not involve I/O operations.
 
 ```html
 <g>
@@ -431,6 +431,36 @@ Iterates over the current selection.	In the callback function, `this` is bound t
 // 3
 ```
 
+## Manipulation
+
+These operations construct new solid elements. They are _asynchronous_. The effects will not be immediate within the same script block. They will take effect by the next script block.
+
+### .wrap(content)
+
+The .wrap() function can take any string or object that could be passed to the $() factory function to specify a DOM structure. This structure may be nested several levels deep, but should contain only one inmost element. A copy of this structure will be wrapped around each of the elements in the set of matched elements.
+
+```html
+<g>
+	<cube></cube>
+	<cube></cube>
+	<script>
+		$('cube').wrap('<g class="two"><repeat n="2"></repeat></g>')
+	</script>
+</g>
+
+// => solid DOM
+
+<g>
+	<g class="two">
+		<cube></cube>
+		<cube></cube>
+	</g>
+	<g class="two">
+		<cube></cube>
+		<cube></cube>
+	</g>
+</g>
+```
 
 
 # Advanced Topics
