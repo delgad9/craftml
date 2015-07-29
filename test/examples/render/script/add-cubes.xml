@@ -1,0 +1,10 @@
+<craft>
+    <script>
+        this.add('<cube></cube>')
+        this.add('<cube></cube>')
+        this.add('<cube></cube>')
+    </script>
+    <script>
+        expect(this).to.have.children(['cube','cube','cube'])
+    </script>
+</craft>

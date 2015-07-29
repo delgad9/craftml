@@ -1,0 +1,12 @@
+<craft>
+    <craft name="foo">
+        <script type="text/openjscad">
+            this.add(cube())
+        </script>
+    </craft>
+
+    <foo></foo>
+    <script>
+        this.pp()
+    </script>
+</craft>
