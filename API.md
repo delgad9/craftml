@@ -1,11 +1,11 @@
 # Script
 
-The rendering operation takes a source DOM and transforms it into a solid DOM. The `<script>`tag makes it possible to define custom transformations.
+The basic of the rendering operation is to take a source DOM and transforms it into a solid DOM. The `<script>`tag makes it possible to define custom transformations.
 
-Three special variables are available in a script block.
+Three special variables are made available in a script block.
 
 * `this` the current solid element
-* `$scope` the scope with respect to which this solid element is created
+* `$scope` the scope in which this solid element is constructed
 * `$` the query function for searching, navigating, and manipulating the solid DOM
 
 
@@ -17,80 +17,19 @@ Three special variables are available in a script block.
 </script>
 ```
 
-Most of the tag processing functionalities of `craftml` are implemented following the same function signature.
+In fact, most of the built-in rendering capabilities of `craftml` are implemented using the same three special variables.
 
 ```javascript
-function process_something($scope, $){
+function render_something($scope, $){
 	// add something
 	this.add('<cube></cube>')
 	
 	// look for something
-	$(this).find('something')
+	$('something')
 	
-	// read/write something
-	$scope.something = $scope.something + 1	
+	// read/write some parameter
+	$scope.foo = $scope.foo + 1
 }
-```
-
-
-# Concurrent Exeuction
-
-Too complex!!!
-
-```html
-<some-remote-object-1></some-remote-object-1>
-<some-remote-object-2></some-remote-object-2>
-<some-remote-object-3></some-remote-object-3>
-<script>
-	// executed only after the previous three elements were done
-	
-	$(this).prev().resolve(function(el){
-		//	el is bound to object-3
-	})
-	
-	$(this).prevAll().resolve(function(els){
-		//	els is bound to [object-1, object-2, object-3]
-	})
-	
-</script>
-```
-Suppose the first three elements require downloading some remote model files. They could be executed concurrently and completed in any order.
-
-```html
-<some-remote-object-1></some-remote-object-1>
-<some-remote-object-2>
-	<more-remote></more-remote>
-	<script>
-		// executed only after the previous sibling was done
-		// but remote-object-1 may not have been completely constructed
-	</script>	
-</some-remote-object-2>
-<some-remote-object-3></some-remote-object-3>
-<script>
-	// executed only after the previous three elements were done
-</script>
-
-```
-
-# Alternative Design
-
-`this` refers to the enclosing tag
-
-
-```html
-<g>
-	<sphere></sphere>
-</g>
-<g>
-	<cube></cube>
-	<cube></cube>
-	<script>
-		$(this).children().length
-		// => 2
-		
-		// does not have access to <sphere>
-	</script>
-</g>
 ```
 
 # `this`
@@ -393,6 +332,7 @@ Get the descendants of each element in the current set of matched elements, filt
 	<g id="g1">
 		<cube id="bar"></cube>
 	</g>	
+	<cube id="cow"></cube>
 	<script>
 	
 		$('g')
@@ -400,6 +340,9 @@ Get the descendants of each element in the current set of matched elements, filt
 	
 		$('g').find('cube')
 		// => [<cube id="foo">, <cube id="bar">]
+		
+		$('cube')
+		// => [<cube id="foo">, <cube id="bar">, <cube id="cow">]
 
 	</script>
 </g>
@@ -413,6 +356,7 @@ Retrieve the i-th matched element, if `i` is specified. If `i` is not given, ret
 <g>
 	<cube size="1 1 1"></cube>
 	<cube size="2 2 2"></cube>
+	<cube size="3 3 3"></cube>
 	<script>
 		$('cube').get(0).size.x
 		// => 1
@@ -421,7 +365,7 @@ Retrieve the i-th matched element, if `i` is specified. If `i` is not given, ret
 		// => 2
 		
 		$('cube').get().length
-		// => 2
+		// => 3
 	</script>
 </g>
 ```
@@ -435,6 +379,9 @@ Retrieve the previous sibling of the first selected element.
 	<circle></circle>
 	<cube></cube>
 	<script>
+		$('cube')
+		// => [<cube>]
+		
 		$('cube').prev()
 		// => [<circle>]
 	</script>
@@ -582,23 +529,6 @@ Example 2:
 Through `this.src`, we have access to the two sphere elements in the source DOM. In contrast, `this` does not give us access to the two sphere elements in the solid DOM, because they have not yet been constructed when the script is evaluated.
 
 
-```html
-<g>
-	<repeat n="3">
-		<cube></cube>
-	</repeat>
-	<script>
-		// find within the solid DOM
-		$('cube')
-		// => [cube, cube, cube]
-		
-		// find within the source DOM
-		$('cube', this.src)
-		// => [repeat]
-	</script>
-</g>
-```
-
 Adding elements
 
 ```html
@@ -647,9 +577,9 @@ Adding elements
 
 ## `this.def`
 
-`$(this.def)` is useful when we need to refer to the source DOM element that actually _defines_ how an instance of a craft should be constructed and inserted into a solid DOM.
+`$(this.def)` is useful when we need to refer to the source DOM element that actually _defines_ how an instance of a craft tag should be constructed and inserted into a solid DOM.
 
-Consider the example below, suppose we declare a craft to create three cubes and name it `threesome`. Then, we define two instances of this craft with `<bar>` and `<cow>` as the children elements respectively. The script block will get exeuted twice. In each exeuction, `this.def` will refer to a different `<threesome>`.
+Consider the example below, suppose we declare a craft tag for generating three cubes and name it `threesome`. Then, we define two instances of this craft tag with `<bar>` and `<cow>` as the children elements respectively. The script block will get exeuted twice. In each exeuction, `this.def` will refer to a different `<threesome>`.
 
 ```html
 // Source
@@ -754,25 +684,146 @@ Before
 </script>
 ```
 
+## auto-size
+
+```html
+<g id="foo">
+	<content></content>
+</g>
+<script>
+	var g = $('#foo').get(0)
+	$scope.s = g.size
+</script>
+<cube size="{{s.x}} {{s.y}} 1"/>
+```
+
+which is equivalent to
+
+```html
+<g id="foo">
+	<content></content>
+</g>
+<script>
+	var g = $('#foo').get(0)
+	$scope.foo = g.foo
+</script>
+<cube size="{{foo.size.x}} {{foo.size.y}} 1"/>
+```
+which is equivalent to 
+
+Proposed feature: 
+
+* Every tag has a `ref` attribute will get constructed first and made available in `$scope` for the others.
+* Limitation. A tag with a `ref` name is unable to refer to other sibilings by names, because those sibilings may not be fully constructed yet.
+* This basically results in a dependency tree of depth = 2.
+
+```html
+<g ref="foo">
+	<content></content>
+</g>
+<g>
+	<cube size="{{foo.size.x}} {{foo.size.y}} 1"/>
+</g>
+```
+
+```html
+<g>
+	<g ref="foo">
+		<cube></cube>
+	</g>
+	<g ref="bar">
+		<sphere></sphere>
+	</g>
+	<g>
+		<cube size="{{foo.size.x}} {{foo.size.y}} 1" ref="bar"/>
+	</g>
+</g>
+```
+
+```html
+<g>
+	<g ref="foo">
+		<cube></cube>
+	</g>
+	<g ref="bar">
+		<sphere></sphere>
+		<script>
+			$scope.foo
+			// => undefined	
+			// because <g ref="foo"> is also being constructed in parallel
+		</script>
+	</g>
+	<g>
+		<script>
+			$scope.foo
+			// => <g ref="foo">
+		</script>
+		<cube size="{{foo.size.x}} {{foo.size.y}} 1" ref="bar"/>
+	</g>
+</g>
+```
+
+Use
+
+Put A above B
+
+```html
+<g>
+	<cube ref="a"></cube>
+	<sphere transform="setZ({{a.size.z}})"></sphere>
+</g>
+```
+
+Alternative: let the users define references. not as good.
+
+```html
+<g id="foo">
+	<content></content>
+</g>
+<cube refs="#foo as f" size="{{f.size.x}} {{f.size.y}} 1"/>
+```
+
 # Examples
 
 ```html
 <cube></cube>
 <cube></cube>
 <script>
-	$(this).prevAll().each(function(){
+	$(this).children().each(function(){
 		this.rotateX(45)
 	})
 </script>
+```
+
+
+Select cubes and center them along X. The code below all accomplish this.
+
+```html
+<g>
+	<cube></cube>
+	<cube></cube>
+	<sphere></sphere>
+	<script>
+		$(this).children('cube').layout('centerX()')
+	</script>
+</g>
 ```
 
 ```html
 <g>
 	<cube></cube>
 	<cube></cube>
+	<sphere></sphere>
+	<script>
+		this.layout('select(cube) centerX()')
+	</script>
 </g>
-<script>
-	$(this).prev().get().layout('centerX()')
-</script>
 ```
 
+```html
+<g layout='select(cube) centerX()'>
+	<cube></cube>
+	<cube></cube>
+	<sphere></sphere>
+</g>
+```
