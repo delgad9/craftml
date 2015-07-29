@@ -6,7 +6,10 @@
     </craft>
 
     <foo></foo>
+    <foo></foo>
+
     <script>
-        this.pp()
+        expect(this).to.have.children(['foo','foo'])
     </script>
+
 </craft>

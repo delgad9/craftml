@@ -1,8 +1,0 @@
-<craft>
-    <script type="text/openjscad">
-        this.add(cube())
-    </script>
-    <script>
-        expect(this.prev).to.have.children(['csg'])
-    </script>
-</craft>
