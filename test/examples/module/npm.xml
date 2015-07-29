@@ -1,8 +1,6 @@
 <craft>
     <craft name="grow-layout" module="grow-layout"/>
     <script>
-        function main(params, scope){
-            expect(scope).to.have.property('grow-layout')
-        }
+        expect(scope.crafts).to.have.property('grow-layout')        
     </script>
 </craft>

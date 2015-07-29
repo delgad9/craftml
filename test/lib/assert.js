@@ -127,7 +127,7 @@ chai.use(function (_chai, utils) {
 
     Assertion.addMethod('name', function (expected) {
       var name = getName(this._obj)
-      var actual = this._obj.element.name;
+      var actual = this._obj.name;
 
       // first, our instanceof check, shortcut
       // new Assertion(this._obj).to.be.eql(3)
