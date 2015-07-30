@@ -1,16 +1,19 @@
 <craft>
-    <g>
+    <g id="foo">
         <cube transform="translate(-10 0 0)"></cube>
         <cube transform="translate(10 0 0)"></cube>
     </g>
     <script>
-        expect(this.parent).to.have.solid('g').at([0]).that.have.
-            position(-10,0,0).and.size(30,10,10)
+        var foo = this.children[0]
 
-        expect(this.parent).to.have.solid('cube').at([0,0]).that.have.
-           position(-10,0,0).and.size(10,10,10)
+        expect(foo).to.have
+            .name('g').position(-10,0,0).and.size(30,10,10)
 
-        expect(this.parent).to.have.solid('cube').at([0,1]).that.have.
-            position(10,0,0).and.size(10,10,10)
+        expect(foo.children[0]).to.have
+            .name('cube').position(-10,0,0).and.size(10,10,10)
+
+        expect(foo.children[1]).to.have
+            .name('cube').position(10,0,0).and.size(10,10,10)
+
     </script>
 </craft>

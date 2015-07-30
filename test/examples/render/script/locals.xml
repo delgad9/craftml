@@ -1,6 +1,0 @@
-<craft>
-    <script>
-        expect($).to.exist
-        expect(typeof cube).to.be.eql('undefined')
-    </script>
-</craft>

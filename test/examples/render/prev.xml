@@ -1,8 +1,0 @@
-<craft>
-    <g>
-    </g>
-    <script>
-        expect(this.prev).to.have.name('g')
-        expect(this.prev.next).to.have.name('script')
-    </script>
-</craft>

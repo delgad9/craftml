@@ -1,6 +1,6 @@
 <craft>
     <cube class="foo"></cube>
     <script>
-        expect(this.prev).to.have.class('foo')
+        expect(this.children[0]).to.have.class('foo')
     </script>
 </craft>

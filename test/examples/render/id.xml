@@ -1,6 +1,6 @@
 <craft>
     <cube id="foo"></cube>
     <script>
-        expect(this.prev).to.have.id('foo')        
+        expect(this.children[0]).to.have.id('foo')        
     </script>
 </craft>

@@ -7,13 +7,8 @@
     <g>
     </g>
     <script>
-        expect(this.parent).to.have.solid('g').at([0]).that.have.role('group')
-        expect(this.parent).to.have.solid('g').at([0,0]).that.have.role('group')
-        expect(this.parent).to.have.solid('g').at([0,1]).that.have.role('group')
-        expect(this.parent).to.have.solid('g').at([0,2]).that.have.role('group')
-        expect(this.parent).to.not.have.solid.at([0,3])
-
-        expect(this.parent).to.have.solid('g').at([0,1]).that.have.role('group')
-        expect(this.parent).to.not.have.solid.at([0,1,0])
+        expect(this).to.have.children(['g','g'])
+        expect(this.children[0]).to.have.children(['g','g','g'])
+        expect(this.children[1]).to.have.children([])
     </script>
 </craft>

@@ -7,20 +7,15 @@
         <g></g>
     </craft>
     <script>
-        expect(this.parent).to.have.solid('craft').at([0]).that.have.role('define')
-        expect(this.parent).to.have.solid('craft').at([1]).that.have.role('define')
+        expect(this).to.have.children([])
     </script>
     <foo></foo>
     <bar></bar>
     <script>
-        // this.pp()
+        expect(this).to.have.children(['foo','bar'])
 
-        expect(this.parent).to.have.solid('script').at([2])
+        expect(this.children[0]).to.have.children(['g','g'])
 
-        expect(this.parent).to.have.solid('foo').at([3])
-            .that.have.children(['g','g'])
-
-        expect(this.parent).to.have.solid('bar').at([4])
-            .that.have.children(['g'])
+        expect(this.children[1]).to.have.children(['g'])
     </script>
 </craft>

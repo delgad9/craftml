@@ -4,6 +4,6 @@
     </part>
     <foo></foo>
     <script>
-        expect(this.prev).to.have.name('foo').and.children(['g'])
+        expect(this).to.have.children(['foo'])
     </script>
 </craft>
