@@ -15,7 +15,7 @@
     z
     "></path>
     <script>
-        expect(this.prev).to.have
+        $('path').should.have
             .polygonCount(1) .position(139,144.3590,0) .size(80,69.2820,0)
     </script>
 </craft>

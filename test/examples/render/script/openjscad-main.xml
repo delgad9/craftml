@@ -5,6 +5,6 @@
         }
     </script>
     <script>
-        expect(this).to.have.children(['csg'])
+        expect(this).to.have.children(['polyhedron'])
     </script>
 </craft>

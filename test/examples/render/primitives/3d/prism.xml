@@ -1,8 +1,8 @@
 <craft>
     <prism></prism>
     <script>
-        expect(this).to.have.children(['prism'])
-        expect(this.children[0]).to.have
+        $('prism').should.have.children(['polyhedron']).and.have
             .size(10,10,5).and.position(0,0,0)
+            .polygonCount(5)
     </script>
 </craft>

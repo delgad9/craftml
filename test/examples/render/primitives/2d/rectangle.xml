@@ -1,0 +1,8 @@
+<craft>
+    <rectangle></rectangle>
+    <script>
+        $('rectangle').should.have.children(['polygon']).and
+            .size(10,10,0).and.have.position(0,0,0)
+            .polygonCount(1)
+    </script>
+</craft>

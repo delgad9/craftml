@@ -102,6 +102,23 @@ chai.use(function (_chai, utils) {
       )
   })
 
+  Assertion.addChainableMethod('polygonCount', function (expected) {
+    let [solid, debugName] = resolve.call(this)
+    var actual = solid.getPolygonCount()
+
+    // first, our instanceof check, shortcut
+    // new Assertion(this._obj).to.be.eql(3)
+
+    // second, our type check
+    this.assert(
+        expected == actual,
+        "expected " + debugName + "'s polygon count to be #{exp} but got #{act}",
+        "expected " + debugName + "'s polygon count  not be #{act}",
+        expected,   // expected
+        actual   // actual
+    );
+  })
+
     Assertion.addMethod('class', function (expected) {
       var name = getName(this._obj)
       var actual = this._obj.element.attribs['class'];
@@ -136,22 +153,7 @@ chai.use(function (_chai, utils) {
       );
     })
 
-    Assertion.addChainableMethod('polygonCount', function (expected) {
-      var name = getName(this._obj)
-      var actual = this._obj.getPolygonCount()
 
-      // first, our instanceof check, shortcut
-      // new Assertion(this._obj).to.be.eql(3)
-
-      // second, our type check
-      this.assert(
-          expected == actual
-        , "expected " + name + "'s polygon count to be #{exp} but got #{act}"
-        , "expected " + name + "'s polygon count  not be #{act}"
-        , expected   // expected
-        , actual   // actual
-      );
-    })
 
     Assertion.addMethod('name', function (expected) {
       var name = getName(this._obj)

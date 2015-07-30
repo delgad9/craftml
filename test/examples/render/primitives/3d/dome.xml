@@ -1,8 +1,7 @@
 <craft>
     <dome></dome>
     <script>
-        expect(this).to.have.children(['dome'])
-        expect(this.children[0]).to.have
+        $('dome').should.have.children(['polyhedron']).and.have
             .size(10,9.9802,5).and.position(0,0,0)
     </script>
 </craft>

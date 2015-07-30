@@ -1,0 +1,14 @@
+<craft>
+
+    <cube></cube>
+    <cube id="large" size="50 40 30"></cube>
+    <script>
+        $('cube').should.have.children(['polyhedron']).and.have
+            .size(10,10,10).and.position(0,0,0)
+            .polygonCount(6)
+
+        $('#large').should.have.children(['polyhedron']).and.have
+            .size(50,40,30).and.position(0,0,0)
+            .polygonCount(6)
+    </script>
+</craft>

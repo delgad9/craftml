@@ -10,6 +10,6 @@
     </foo>
     <script>
         $(this).should.have.children(['foo'])
-        $('foo').should.have.children(['g', 'csg'])
+        $('foo').should.have.children(['g', 'polyhedron'])
     </script>
 </craft>

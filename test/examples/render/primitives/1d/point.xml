@@ -1,0 +1,10 @@
+<craft>
+    <point x="0" y="0" z="0"></point>
+    <point x="5" y="5" z="5"></point>
+    <script>
+        $(this).should.have.children(['point','point'])
+        $('point').should.have
+            .first.with.position(0,0,0)
+            .second.with.position(5,5,5)
+    </script>
+</craft>

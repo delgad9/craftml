@@ -1,8 +1,0 @@
-<craft>
-    <cylinder></cylinder>
-    <script>
-        expect(this).to.have.children(['cylinder'])
-        expect(this.children[0]).to.have
-            .size(10,10,10).and.position(0,0,0)        
-    </script>
-</craft>

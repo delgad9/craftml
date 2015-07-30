@@ -1,8 +1,8 @@
 <craft>
     <sphere></sphere>
     <script>
-        expect(this).to.have.children(['sphere'])
-        expect(this.children[0]).to.have
+        $('sphere').should.have.children(['polyhedron']).and.have
             .size(10,10,10).and.position(0,0,0)
+            .polygonCount(648)
     </script>
 </craft>

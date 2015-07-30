@@ -1,7 +1,8 @@
 <craft>
     <cube size="50 40 30"></cube>
     <script>
-        expect(this.parent).to.have.solid('cube').at('0').that.have
+        $('cube').should.have.children(['polyhedron']).and.have
             .size(50,40,30).and.position(0,0,0)
+            .polygonCount(6)
     </script>
 </craft>

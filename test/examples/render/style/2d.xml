@@ -7,6 +7,6 @@
     </style>
     <circle></circle>
     <script>
-        $('cag').should.have.style('color','red')
+        $('polygon').should.have.style('color','red')
     </script>
 </craft>
