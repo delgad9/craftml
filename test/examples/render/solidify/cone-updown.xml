@@ -1,0 +1,15 @@
+<craft>
+
+    <solidify t="center()">
+        <stack spacing='10'>
+            <point></point>
+            <circle></circle>
+            <point></point>
+        </stack>
+    </solidify>
+
+    <script>
+        $('polyhedron').should.have.polygonCount(72).size(10,10,20)
+    </script>
+
+</craft>
