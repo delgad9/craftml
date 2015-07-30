@@ -20,6 +20,6 @@
     </foo>
 
     <script>
-        expect(this.prev).to.have.children(['stack','cube','stack'])
+        $('foo').should.have.children(['stack','cube','stack'])
     </script>
 </craft>

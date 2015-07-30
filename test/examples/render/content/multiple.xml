@@ -12,6 +12,6 @@
     </foo>
 
     <script>
-        expect(this.prev).to.have.children(['sphere','cube','cube','cube','sphere'])
+        $('foo').should.have.children(['sphere','cube','cube','cube','sphere'])
     </script>
 </craft>

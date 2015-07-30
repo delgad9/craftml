@@ -3,6 +3,6 @@
         <cube></cube>
     </content>
     <script>
-        expect(this.prev).to.have.name('cube')
+        $(this).should.have.children(['cube'])
     </script>
 </craft>

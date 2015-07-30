@@ -13,6 +13,6 @@
     </foo>
 
     <script>
-        expect(this.prev).to.have.children(['cylinder','cube','sphere'])
+        $('foo').should.have.children(['cylinder','cube','sphere'])
     </script>
 </craft>

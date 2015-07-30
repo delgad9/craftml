@@ -10,6 +10,6 @@
     </foo>
 
     <script>
-        expect(this.prev).to.have.children(['sphere','cube','sphere'])
+        $('foo').should.have.children(['sphere','cube','sphere'])
     </script>
 </craft>
