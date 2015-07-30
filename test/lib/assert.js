@@ -33,51 +33,61 @@ Assertion.addMethod('role', function (expected) {
   );
 })
 
-// language chain method
-Assertion.addMethod('center', function (x,y,z) {
-  var name = getName(this._obj)
-  var l = this._obj.layout;
-  var s = {
-      x: l.position.x + l.size.x/2,
-      y: l.position.y + l.size.y/2,
-      z: l.position.z + l.size.z/2
-  }
-
-  // first, our instanceof check, shortcut
-  // new Assertion(this._obj).to.be.eql(3)
-
-  // second, our type check
-  this.assert(
-      closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
-    , "expected " + name + " is centered at #{exp} but got #{act}"
-    , "expected " + name + "'s center is not at #{act}"
-    , {x:x, y:y, z:z}        // expected
-    , s   // actual
-  );
-})
-
 chai.use(function (_chai, utils) {
 
-    // language chain method
-    Assertion.addMethod('size', function (x,y,z) {
+    function resolve(){
+        let solid, debugName
+        if (utils.flag(this, 'selected')) {
+            solid = utils.flag(this, 'selected')
+            debugName = utils.flag(this, 'selected.name')
+        } else if (_.isArray(this._obj)){
+            solid = this._obj[0]
+            debugName = solid.name
+        } else {
+            solid = this._obj
+            debugName = solid.name
+        }
+        return [solid, debugName]
+    }
 
-      var solid, name
-      if (utils.flag(this, 'selected')) {
-          solid = utils.flag(this, 'selected')
-          name = utils.flag(this, 'selected.name')
-      } else {
-          solid = this._obj
-          name = solid.name
-      }
-
-      var s = solid.size
+    Assertion.addChainableMethod('size', function (x,y,z) {
+      let [solid, debugName] = resolve.call(this)
+      let s = solid.size
       this.assert(
-          closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
-        , "expected " + name + "'s size to be #{exp} but got #{act}"
-        , "expected " + name + "'s size not be #{act}"
-        , {x:x, y:y, z:z}        // expected
-        , s   // actual
+          closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z),
+          "expected " + debugName + "'s size to be #{exp} but got #{act}",
+          "expected " + debugName + "'s size not be #{act}",
+          {x:x, y:y, z:z},       // expected
+          s   // actual
       );
+    })
+
+    Assertion.addChainableMethod('position', function (x,y,z) {
+        let [solid, debugName] = resolve.call(this)
+        let s = solid.position
+        this.assert(
+            closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z),
+            "expected " + debugName + "'s position to be #{exp} but got #{act}",
+            "expected " + debugName + "'s position not be #{act}",
+            {x:x, y:y, z:z},       // expected
+            s   // actual
+        );
+    })
+
+    Assertion.addChainableMethod('center', function (x,y,z) {
+      let [solid, debugName] = resolve.call(this)
+      var s = {
+          x: solid.position.x + solid.size.x/2,
+          y: solid.position.y + solid.size.y/2,
+          z: solid.position.z + solid.size.z/2
+      }
+      this.assert(
+          closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z),
+          "expected " + debugName + "'s center to be #{exp} but got #{act}",
+          "expected " + debugName + "'s center not be #{act}",
+          {x:x, y:y, z:z},       // expected
+          s   // actual
+      )
     })
 
     Assertion.addMethod('class', function (expected) {
@@ -164,13 +174,9 @@ chai.use(function (_chai, utils) {
     Assertion.addProperty('first', _.partial(nth,1))
     Assertion.addProperty('second', _.partial(nth,2))
     Assertion.addProperty('third', _.partial(nth,3))
+    Assertion.addProperty('fourth', _.partial(nth,4))
+    Assertion.addProperty('fifth', _.partial(nth,5))
     Assertion.addProperty('with', function(){})
-    //(){
-        //nth.call(this, 1)
-    //})
-    //Assertion.addChainableMethod('second', _.partial(nth,2))
-    //Assertion.addChainableMethod('third', _.partial(nth,3))
-
 
     Assertion.addChainableMethod('at', function (path) {
       var name = getName(this._obj)
@@ -259,22 +265,22 @@ chai.use(function (_chai, utils) {
 
 
 
-Assertion.addChainableMethod('position', function (x,y,z) {
-  var name = getName(this._obj)
-  var s = this._obj.position;
-
-  // first, our instanceof check, shortcut
-  // new Assertion(this._obj).to.be.eql(3)
-
-  // second, our type check
-  this.assert(
-      closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
-    , "expected " + name + "'s position to be #{exp} but got #{act}"
-    , "expected " + name + "'s position not be #{act}"
-    , {x:x, y:y, z:z}        // expected
-    , s   // actual
-  );
-})
+// Assertion.addChainableMethod('position', function (x,y,z) {
+//   var name = getName(this._obj)
+//   var s = this._obj.position;
+//
+//   // first, our instanceof check, shortcut
+//   // new Assertion(this._obj).to.be.eql(3)
+//
+//   // second, our type check
+//   this.assert(
+//       closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
+//     , "expected " + name + "'s position to be #{exp} but got #{act}"
+//     , "expected " + name + "'s position not be #{act}"
+//     , {x:x, y:y, z:z}        // expected
+//     , s   // actual
+//   );
+// })
 
 // language chain method
 Assertion.addMethod('style', function (key, value) {

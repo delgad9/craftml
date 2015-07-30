@@ -1,6 +1,6 @@
 <craft>
     <sphere transform="cropX(50%)"></sphere>
     <script>
-        expect(this.prev).to.have.size(5,10,10).and.position(5,0,0)
+        $('sphere').should.have.size(5,10,10).and.position(5,0,0)
     </script>
 </craft>

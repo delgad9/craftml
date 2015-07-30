@@ -10,17 +10,17 @@
         <script>
             // the size of g#inside should be the size of the box containing
             // all of its children
-            expect(this.prev).to.have.size(50,10,10).and.position(-20,0,0)
+            $('#inside').should.have.size(50,10,10).and.position(-20,0,0)
 
             // the position of the cube#foo should stay the same
-            expect(this.prev.children[0]).to.have.position(-20,0,0)
+            $('#foo').should.have.position(-20,0,0)
         </script>
     </g>
 
     <script>
         // the size of g#outside should be as big as g#inside, but it position is
         // moved by 5 along x
-        expect(this.prev).to.have.size(50,10,10).and.position(-15,0,0)
+        $('#outside').should.have.size(50,10,10).and.position(-15,0,0)
     </script>
 
 </craft>

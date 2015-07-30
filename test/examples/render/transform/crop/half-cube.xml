@@ -1,6 +1,6 @@
 <craft>
     <cube transform="translate(5 5 0) cropX(50%)"></cube>
     <script>
-        expect(this.prev).to.have.size(5,10,10).and.position(10,5,0)
+        $('cube').should.have.size(5,10,10).and.position(10,5,0)
     </script>
 </craft>

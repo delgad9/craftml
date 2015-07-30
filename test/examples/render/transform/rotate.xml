@@ -1,23 +1,19 @@
 <craft>
 
     <cube size="50 10 10"></cube>
-    <script>
-        expect(this.prev).to.have.size(50,10,10).and.center(25,5,5)
-    </script>
-
     <cube size="50 10 10" t="rotateZ(90)"></cube>
-    <script>
-        expect(this.prev).to.have.size(10,50,10).and.center(25,5,5)
-    </script>
-
     <cube size="50 10 10" t="rotateY(90)"></cube>
-    <script>
-        expect(this.prev).to.have.size(10,10,50).and.center(25,5,5)
-    </script>
-
     <cube size="50 10 10" t="rotateX(90)"></cube>
+
     <script>
-        expect(this.prev).to.have.size(50,10,10).and.center(25,5,5)
+
+        // all cubes should have a new size, but kept at the same center
+
+        $('cube').should.have
+            .first.with.size(50,10,10).and.center(25,5,5)
+            .second.with.size(10,50,10).and.center(25,5,5)
+            .third.with.size(10,10,50).and.center(25,5,5)
+            .fourth.with.size(50,10,10).and.center(25,5,5)
     </script>
 
 </craft>

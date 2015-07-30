@@ -1,32 +1,17 @@
 <craft>
     <cube size="10 20 30" t="translate(10 0 0) resize(20 20 20)"></cube>
-    <script>
-        // new size, same position
-        expect(this.prev).to.have.size(20,20,20).and.to.have.position(10,0,0)
-    </script>
-
     <cube size="10 20 30" t="translate(10 0 0) resize(5 5 5)"></cube>
-    <script>
-        // new size, same position
-        expect(this.prev).to.have.size(5,5,5).and.to.have.position(10,0,0)
-    </script>
-
     <cube size="10 20 30" t="translate(10 0 0) resize(20)"></cube>
-    <script>
-        // new size, same position
-        expect(this.prev).to.have.size(20,20,20).and.to.have.position(10,0,0)
-    </script>
-
     <cube size="10 20 30" t="translate(10 0 0) resizeX(20)"></cube>
-    <script>
-        // new size, same position
-        expect(this.prev).to.have.size(20,20,30).and.to.have.position(10,0,0)
-    </script>
-
     <cube size="10 20 30" t="translate(10 0 0) resizeX(10) resizeY(10) resizeZ(10)"></cube>
     <script>
-        // new size, same position
-        expect(this.prev).to.have.size(10,10,10).and.to.have.position(10,0,0)
+        // all cubes should have a new size, reamining at the same position
+        $('cube').should.have
+            .first.with.size(20,20,20).and.position(10,0,0)
+            .second.with.size(5,5,5).and.position(10,0,0)
+            .third.with.size(20,20,20).and.position(10,0,0)
+            .fourth.with.size(20,20,30).and.position(10,0,0)
+            .fifth.size(10,10,10).and.position(10,0,0)
     </script>
 
 

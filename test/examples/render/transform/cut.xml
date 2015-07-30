@@ -1,12 +1,12 @@
 <craft>
 
-    <g cut=".foo">
+    <g cut=".foo" id="top">
         <cube></cube>
         <cube t="translate(0 0 5)" class="foo"></cube>
     </g>
 
-    <script>
-        expect(this.prev).to.have.size(10,10,5).and.position(0,0,0)
+    <script>        
+        $('#top').should.have.size(10,10,5).and.position(0,0,0)
     </script>
 
 </craft>

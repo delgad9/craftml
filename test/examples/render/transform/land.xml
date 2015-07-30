@@ -1,13 +1,13 @@
 <craft>
-    <g t="land()">
+    <g t="land()" id="top">
         <cube t="translate(0 0 100)"></cube>
         <script>
-            expect(this.prev).to.have.position(0,0,100)
+            $('cube').should.have.position(0,0,100)
         </script>
     </g>
 
-    <script> 
-        expect(this.prev).to.have.size(10,10,10).and.position(0,0,0)
+    <script>
+        $('#top').should.have.size(10,10,10).and.position(0,0,0)
     </script>
 
 </craft>

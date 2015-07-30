@@ -1,25 +1,25 @@
 <craft>
 
-    <g t="translate(10 20 30)">
+    <g t="translate(10 20 30)" id="top">
 
         <g>
             <cube t="translate(10 20 30)"></cube>
             <script>
-                expect(this.prev).to.have.position(10,20,30)
+                $('cube').should.have.position(10,20,30)
             </script>
         </g>
 
         <g>
             <cube t="translate(-10 -20 -30)"></cube>
             <script>
-                expect(this.prev).to.have.position(-10,-20,-30)
+                $('cube').should.have.position(-10,-20,-30)
             </script>
         </g>
 
     </g>
 
     <script>
-        expect(this.prev).to.have.position(0,0,0)
+        $('#top').should.have.position(0,0,0)
     </script>
 
 </craft>
