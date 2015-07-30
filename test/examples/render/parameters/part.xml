@@ -3,7 +3,7 @@
 
     <part name="foo">
         <script>
-            expect(params).to.have.property('one').and.eql(1)
+            expect($scope).to.have.property('one').and.eql(1)
         </script>
         <g></g>
     </part>

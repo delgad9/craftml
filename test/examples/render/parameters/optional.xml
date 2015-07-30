@@ -6,9 +6,9 @@
         <parameter name="three" type="int"/>
 
         <script>
-            expect(params).to.have.property('one').and.eql(1)
-            expect(params).to.not.have.property('two')
-            expect(params).to.have.property('three').and.eql(3)
+            expect($scope).to.have.property('one').and.eql(1)
+            expect($scope).to.not.have.property('two')
+            expect($scope).to.have.property('three').and.eql(3)
         </script>
     </craft>
 

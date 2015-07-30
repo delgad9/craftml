@@ -9,26 +9,26 @@
         <g>
             <content></content>
             <script>
-                expect(params).to.not.have.property('one')
-                expect(params).to.have.property('two').and.eql(2)
+                expect($scope).to.not.have.property('one')
+                expect($scope).to.have.property('two').and.eql(2)
             </script>
         </g>
 
         <script>
-            expect(params).to.not.have.property('one')
-            expect(params).to.have.property('two').and.eql(2)
+            expect($scope).to.not.have.property('one')
+            expect($scope).to.have.property('two').and.eql(2)
         </script>
 
     </craft>
 
     <foo>
         <script>
-            expect(params).to.have.property('one').and.eql(1)
-            expect(params).to.not.have.property('two')
+            expect($scope).to.have.property('one').and.eql(1)
+            expect($scope).to.not.have.property('two')
         </script>
         <foo>
             <script>
-                expect(params).to.have.property('one').and.eql(1)
+                expect($scope).to.have.property('one').and.eql(1)
             </script>
         </foo>
     </foo>

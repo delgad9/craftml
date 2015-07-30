@@ -4,8 +4,8 @@
         <parameter name="p" type="int" default="1"/>
         <parameter name="q" type="int" default="1"/>
         <script>
-            expect(params).to.have.property('p').and.eql(2)
-            expect(params).to.have.property('q').and.eql(1)
+            expect($scope).to.have.property('p').and.eql(2)
+            expect($scope).to.have.property('q').and.eql(1)
         </script>
     </craft>
 

@@ -3,7 +3,7 @@
 
     <craft name="foo">
         <script>
-            expect(params).to.not.have.property('one')
+            expect($scope).to.not.have.property('one')
         </script>
         <g></g>
     </craft>
