@@ -19,10 +19,8 @@
             </stack>
         </solidify>
     </g>
-    <script>        
-        $('csg').each(function(){
-            expect(this).to.have.style('something', 'great')
-        })
+    <script>
+        $('csg').should.have.style('something', 'great')
     </script>
 
 

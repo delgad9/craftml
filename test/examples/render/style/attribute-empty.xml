@@ -2,6 +2,6 @@
     <g style="">
     </g>
     <script>
-        expect(this.prev).to.be.ok
+        $(this).should.be.ok
     </script>
 </craft>

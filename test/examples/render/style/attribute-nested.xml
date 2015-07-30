@@ -1,12 +1,11 @@
 <craft>
-    <g style="something:black;">
-
-        <g></g>
-        <script>
-            expect(this.parent).to.have.style('something', 'black')
-            expect(this.prev).to.not.have.style('something', 'black')
-        </script>
-
+    <g style="something:black;" id="outside">
+        <g id="inside"></g>
     </g>
+
+    <script>
+        $('#outside').should.have.style('something', 'black')
+        $('#inside').should.not.have.style('something', 'black')
+    </script>
 
 </craft>

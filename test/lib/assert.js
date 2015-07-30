@@ -90,6 +90,18 @@ chai.use(function (_chai, utils) {
       )
     })
 
+    Assertion.addMethod('style', function (key, value) {
+      let [solid, debugName] = resolve.call(this)
+      var v = solid.style[key]
+      this.assert(
+          v === value,
+          "expected " + debugName + "'s style to be #{exp} but got #{act}",
+          "expected " + debugName + "'s style not to be #{act}",
+          key + '=' + value,  // expected
+          key + '=' + v  // actual
+      )
+  })
+
     Assertion.addMethod('class', function (expected) {
       var name = getName(this._obj)
       var actual = this._obj.element.attribs['class'];
@@ -178,52 +190,52 @@ chai.use(function (_chai, utils) {
     Assertion.addProperty('fifth', _.partial(nth,5))
     Assertion.addProperty('with', function(){})
 
-    Assertion.addChainableMethod('at', function (path) {
-      var name = getName(this._obj)
-      //var s = this._obj.layout.position;
+  //   Assertion.addChainableMethod('at', function (path) {
+  //     var name = getName(this._obj)
+  //     //var s = this._obj.layout.position;
+  //
+  //     var solid = this._obj
+  //
+  //     // path === [0,0]
+  //
+  //     var deepPropertyPath = _.map(path, function (p){
+  //         // p === 0
+  //         return 'children[' + p + ']'
+  //     }).join('.')
+  //
+  //     // deepPropertyPath === children[0].children[0]
+  //   //   console.log(deepPropertyPath)
+  //
+  //     if (utils.flag(this, 'negate')){
+  //         new Assertion(this._obj).to.not.have.deep.property(deepPropertyPath)
+  //     } else {
+  //         new Assertion(this._obj).to.have.deep.property(deepPropertyPath)
+  //     }
+  //
+  //     var descendent = _.get(solid, deepPropertyPath)
+  //
+  //     var solidName
+  //     if (solidName = utils.flag(this, 'solid.name')) {
+  //          //new Assertion(this._obj.element.name).to.be.eql(elementName)
+  //          var expected = solidName
+  //          var actual = descendent.name
+  //
+  //          this.assert(
+  //            actual == expected,
+  //            "expected solid at " + path + " to be #{exp} but got #{act}",
+  //            "expected solid at " + path + " not to be #{exp} but got #{act}",
+  //            expected,
+  //            actual)
+  //     }
+  //
+  //     this._obj = descendent
+  // })
 
-      var solid = this._obj
-
-      // path === [0,0]
-
-      var deepPropertyPath = _.map(path, function (p){
-          // p === 0
-          return 'children[' + p + ']'
-      }).join('.')
-
-      // deepPropertyPath === children[0].children[0]
-    //   console.log(deepPropertyPath)
-
-      if (utils.flag(this, 'negate')){
-          new Assertion(this._obj).to.not.have.deep.property(deepPropertyPath)
-      } else {
-          new Assertion(this._obj).to.have.deep.property(deepPropertyPath)
-      }
-
-      var descendent = _.get(solid, deepPropertyPath)
-
-      var solidName
-      if (solidName = utils.flag(this, 'solid.name')) {
-           //new Assertion(this._obj.element.name).to.be.eql(elementName)
-           var expected = solidName
-           var actual = descendent.name
-
-           this.assert(
-             actual == expected,
-             "expected solid at " + path + " to be #{exp} but got #{act}",
-             "expected solid at " + path + " not to be #{exp} but got #{act}",
-             expected,
-             actual)
-      }
-
-      this._obj = descendent
-  })
-
-  Assertion.addChainableMethod('solid', function (name) {
-
-      utils.flag(this, 'solid.name', name)
-
-  })
+  // Assertion.addChainableMethod('solid', function (name) {
+  //
+  //     utils.flag(this, 'solid.name', name)
+  //
+  // })
 
   Assertion.addMethod('children', function (names) {
 
@@ -283,15 +295,15 @@ chai.use(function (_chai, utils) {
 // })
 
 // language chain method
-Assertion.addMethod('style', function (key, value) {
-  var name = getName(this._obj)
-  var v = this._obj.style[key];
-
-  this.assert(
-      v === value
-    , "expected " + name + "'s style to be #{exp} but got #{act}"
-    , "expected " + name + "'s style not to be #{act}"
-    , key + '=' + value  // expected
-    , key + '=' + v  // actual
-  );
-})
+// Assertion.addMethod('style', function (key, value) {
+//   var name = getName(this._obj)
+//   var v = this._obj.style[key];
+//
+//   this.assert(
+//       v === value
+//     , "expected " + name + "'s style to be #{exp} but got #{act}"
+//     , "expected " + name + "'s style not to be #{act}"
+//     , key + '=' + value  // expected
+//     , key + '=' + v  // actual
+//   );
+// })

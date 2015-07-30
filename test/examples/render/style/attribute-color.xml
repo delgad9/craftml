@@ -6,27 +6,22 @@
     </style>
 
     <cube></cube>
-    <script>
-        expect(this.prev).to.have.style('color', 'blue')
-    </script>
 
+    <!-- inline color attribute takes precedence over stylesheet -->
     <cube color="black"></cube>
-    <script>
-        expect(this.prev).to.have.style('color', 'black')
-    </script>
 
+    <!-- inline style takes precedence over color attribute -->
     <cube color="black" style="color:white;"></cube>
-    <script>
-        // style takes precedence
-        expect(this.prev).to.have.style('color', 'white')
-    </script>
 
-
+    <!-- inline style takes precedence -->
     <cube style="color:green;"></cube>
-    <script>
-        // style takes precedence
-        expect(this.prev).to.have.style('color', 'green')
-    </script>
 
+    <script>
+        $('cube').should.have
+            .first.with.style('color', 'blue')
+            .second.with.style('color', 'black')
+            .third.with.style('color', 'white')
+            .fourth.with.style('color', 'green')
+    </script>
 
 </craft>

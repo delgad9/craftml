@@ -6,20 +6,16 @@
         }
     </style>
     <g>
-        <g>
+        <g id="inside">
             <cube></cube>
-
-            <script>
-                expect(this.prev).to.have.style('something', 'good')
-            </script>
-
         </g>
-
-        <script>
-            expect(this.prev).to.have.style('something', 'good')
-        </script>
-
-
+        <sphere></sphere>
     </g>
+
+    <script>
+        $('cube').should.have.style('something', 'good')
+        $('sphere').should.have.style('something', 'good')
+        $('#inside').should.have.style('something', 'good')
+    </script>
 
 </craft>

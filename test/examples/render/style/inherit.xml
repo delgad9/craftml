@@ -5,20 +5,14 @@
         }
         .foo {
             something: green;
+            not-to-inheirt: 10;
         }
     </style>
     <g class="foo">
-
         <cube></cube>
-
-        <script>
-            expect(this.prev).to.have.style('something', 'green')
-        </script>
-
-        <g></g>
-        <script>
-            expect(this.prev).to.have.style('something', 'green')
-        </script>
-
     </g>
+    <script>
+        $('cube').should.have.style('something', 'green')
+            .and.not.have.style('not-to-inheirt', '10')
+    </script>
 </craft>

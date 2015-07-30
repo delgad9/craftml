@@ -6,33 +6,25 @@
         }
     </style>
 
-    <g>
-
-        <script>
-            expect(this.parent).to.have.style('something', 'good')
-        </script>
-
+    <g id="good1">
         <style>
             g {
                 something: great;
             }
         </style>
 
-        <g></g>
-
-        <script>
-            expect(this.prev).to.have.style('something', 'great')
-        </script>
-
+        <g id="great"></g>
 
     </g>
 
-    <g>
-
-        <script>
-            expect(this.parent).to.have.style('something', 'good')
-        </script>
-
+    <g id="good2">
     </g>
+
+    <script>        
+        $('#great').should.have.style('something', 'great')
+        $('#good1').should.have.style('something', 'good')
+        $('#good2').should.have.style('something', 'good')
+    </script>
+
 
 </craft>

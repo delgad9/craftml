@@ -7,7 +7,6 @@
     </style>
     <circle></circle>
     <script>
-        expect(this.prev).have.solid('cag').at([4,0]).that.have
-            .style('color','red')
+        $('cag').should.have.style('color','red')
     </script>
 </craft>

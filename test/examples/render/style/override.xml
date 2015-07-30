@@ -6,11 +6,7 @@
         }
     </style>
 
-    <g></g>
-
-    <script>
-        expect(this.prev).to.have.style('something', 'good')
-    </script>
+    <g id="one"></g>
 
     <style>
         g {
@@ -18,10 +14,11 @@
         }
     </style>
 
-    <g></g>
+    <g id="two"></g>
 
     <script>
-        expect(this.prev).to.have.style('something', 'great')
+        $('#one').should.have.style('something', 'good')
+        $('#two').should.have.style('something', 'great')
     </script>
 
 </craft>

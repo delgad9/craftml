@@ -20,15 +20,15 @@
 
     <script>
 
-        $('cube').each(function(i){
-            expect(this).to.have.style('something', 'good')
-        })
+        $('cube').should.have
+            .first.with.style('something', 'good')
+            .second.with.style('something', 'good')
 
         $('.foo').css('something', 'better')
 
-        $('cube').each(function(i){
-            expect(this).to.have.style('something', 'better')
-        })
+        $('cube').should.have
+            .first.with.style('something', 'better')
+            .second.with.style('something', 'better')
 
     </script>
 

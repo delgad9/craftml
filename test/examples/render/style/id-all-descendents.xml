@@ -10,25 +10,17 @@
     </style>
 
     <g id="foo">
-
         <cube></cube>
-
-        <script>
-            expect(this.prev).to.have
-                .style('something', 'black')
-        </script>
-
     </g>
 
     <g id="bar">
-
         <cube></cube>
-
-        <script>
-            expect(this.prev).to.have
-                .style('something', 'green')
-        </script>
-
     </g>
-        
+
+    <script>
+        $('cube').should.have
+            .first.with.style('something', 'black')
+            .second.with.style('something', 'green')
+    </script>
+
 </craft>

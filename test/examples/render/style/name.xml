@@ -8,13 +8,9 @@
         }
     </style>
     <cube></cube>
-    <script>
-        expect(this.prev).to.have
-            .style('something', 'black')
-    </script>
     <cylinder></cylinder>
     <script>
-        expect(this.prev).to.have
-            .style('something', 'green')
+        $('cube').should.have.style('something', 'black')
+        $('cylinder').should.have.style('something', 'green')
     </script>
 </craft>
