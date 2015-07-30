@@ -6,7 +6,7 @@
     </row>
 
     <script>
-        expect(this.prev).to.have.size(30,10,10).and.position(0,0,0)
+        $('row').should.have.size(30,10,10).and.position(0,0,0)
     </script>
 
 </craft>

@@ -5,8 +5,8 @@
         <cube></cube>
     </stack>
 
-    <script>        
-        expect(this.prev).to.have.size(10,10,30).and.position(0,0,0)
+    <script>
+        $('stack').should.have.size(10,10,30).and.position(0,0,0)        
     </script>
 
 </craft>

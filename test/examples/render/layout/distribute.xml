@@ -1,6 +1,6 @@
 <craft>
 
-    <g layout="distributeX() distributeY()">
+    <g layout="distributeX() distributeY()" id="top">
         <cube></cube>
         <cube></cube>
         <cube></cube>
@@ -10,7 +10,7 @@
     </g>
 
     <script>
-        expect(this.prev).to.have.size(110,60,10).and.position(0,0,0)
+        $('#top').should.have.size(110,60,10).and.position(0,0,0)
     </script>
 
 </craft>

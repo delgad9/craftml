@@ -1,15 +1,27 @@
 <craft>
-    <g layout="select(cube) lineupZ() centerXY()">
+    <g layout="select(cube) lineupZ() alignX(0)">
         <row>
-            <cube></cube>
+            <cube t="translate(-20,0,0)"></cube>
             <cylinder></cylinder>
         </row>
         <row>
             <cylinder></cylinder>
             <cube></cube>
         </row>
+        <script>
+            $('cube').should.have
+                .first.with.position(-20,0,0)
+                .second.with.position(10,0,0)
+        </script>
     </g>
     <script>
-        this.prev.pp()
+
+        this.apply()
+
+        // both cubes should be aligned to x=-20, and lineup in z
+        $('cube').should.have
+            .first.with.position(-20,0,0)
+            .second.with.position(-20,0,10)
+
     </script>
 </craft>
