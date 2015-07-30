@@ -1,0 +1,10 @@
+<craft>
+    <cube t="translate(100 0 0)"></cube>
+    <parameter name='f' default="1" type="int"/>
+    <craft name="b"></craft>
+    <script></script>
+    <script>
+        // should not include (script, parameter)
+        expect(this).to.have.children(['cube'])
+    </script>
+</craft>
