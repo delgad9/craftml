@@ -14,23 +14,7 @@ function getName(solid){
     return "solid<" + solid.name + ">"
 }
 
-// language chain method
-Assertion.addMethod('size', function (x,y,z) {
-  var name = getName(this._obj)
-  var s = this._obj.size;
 
-  // first, our instanceof check, shortcut
-  // new Assertion(this._obj).to.be.eql(3)
-
-  // second, our type check
-  this.assert(
-      closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
-    , "expected " + name + "'s size to be #{exp} but got #{act}"
-    , "expected " + name + "'s size not be #{act}"
-    , {x:x, y:y, z:z}        // expected
-    , s   // actual
-  );
-})
 
 Assertion.addMethod('role', function (expected) {
   var name = getName(this._obj)
@@ -73,6 +57,28 @@ Assertion.addMethod('center', function (x,y,z) {
 })
 
 chai.use(function (_chai, utils) {
+
+    // language chain method
+    Assertion.addMethod('size', function (x,y,z) {
+
+      var solid, name
+      if (utils.flag(this, 'selected')) {
+          solid = utils.flag(this, 'selected')
+          name = utils.flag(this, 'selected.name')
+      } else {
+          solid = this._obj
+          name = solid.name
+      }
+
+      var s = solid.size
+      this.assert(
+          closeTo(s.x,x) && closeTo(s.y,y) && closeTo(s.z,z)
+        , "expected " + name + "'s size to be #{exp} but got #{act}"
+        , "expected " + name + "'s size not be #{act}"
+        , {x:x, y:y, z:z}        // expected
+        , s   // actual
+      );
+    })
 
     Assertion.addMethod('class', function (expected) {
       var name = getName(this._obj)
@@ -142,6 +148,30 @@ chai.use(function (_chai, utils) {
       );
     })
 
+    function nth(oneBasedIndex) {
+        this.assert(
+          _.has(this._obj, oneBasedIndex-1),
+          `expected selection to have the ${oneBasedIndex}-th element`,
+          `expected selection to not have the ${oneBasedIndex}-th element`)
+
+        var s = this._obj[oneBasedIndex-1]
+        var name = `${oneBasedIndex}-th selection <${s.name}>`
+        utils.flag(this, 'selected', s)
+        utils.flag(this, 'selected.name', name)
+    }
+
+    Assertion.addChainableMethod('nth', nth)
+    Assertion.addProperty('first', _.partial(nth,1))
+    Assertion.addProperty('second', _.partial(nth,2))
+    Assertion.addProperty('third', _.partial(nth,3))
+    Assertion.addProperty('with', function(){})
+    //(){
+        //nth.call(this, 1)
+    //})
+    //Assertion.addChainableMethod('second', _.partial(nth,2))
+    //Assertion.addChainableMethod('third', _.partial(nth,3))
+
+
     Assertion.addChainableMethod('at', function (path) {
       var name = getName(this._obj)
       //var s = this._obj.layout.position;
@@ -191,7 +221,13 @@ chai.use(function (_chai, utils) {
 
   Assertion.addMethod('children', function (names) {
 
-      var children = this._obj.children
+      var children
+
+      if (_.isArray(this._obj)){
+            children = this._obj[0].children
+      } else {
+            children = this._obj.children
+      }
 
       // assert the number of children should be equal
       var actual = children.length

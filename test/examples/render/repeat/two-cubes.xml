@@ -3,6 +3,6 @@
         <cube></cube>
     </repeat>
     <script>
-        expect(this.parent).to.have.children(['cube','cube','script'])
+        $(this).should.have.children(['cube','cube'])
     </script>
 </craft>
