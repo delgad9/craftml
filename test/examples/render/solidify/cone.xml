@@ -4,13 +4,11 @@
         <stack spacing='10'>
             <point></point>
             <circle></circle>
-            <circle t="scale(1.2)"></circle>
-            <point></point>
         </stack>
     </solidify>
 
     <script>
-        //this.prev.pp()
+        $('polyhedron').should.have .polygonCount(37) .position(0,0,0) .size(10,10,10)
     </script>
 
 </craft>
