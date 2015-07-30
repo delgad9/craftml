@@ -1,5 +1,6 @@
 <craft>
     <solidify>
+    <g layout="centerXY()">
         <path  d="
         M 179.000 199.000
         L 199.000 213.641
@@ -13,8 +14,9 @@
         L 139.000 179.000
         L 161.679 189.000
         L 159.000 213.641
-        z
-        "></path>
+        z"></path>
+        <rectangle></rectangle>
+    </g>
     </solidify>
     <script>
         this.pp()

@@ -1,5 +1,5 @@
 <craft>
-    <solidify>
+    <craft name="star2d">
         <path  d="
         M 179.000 199.000
         L 199.000 213.641
@@ -13,8 +13,13 @@
         L 139.000 179.000
         L 161.679 189.000
         L 159.000 213.641
-        z
-        "></path>
+        z"></path>
+    </craft>
+    <solidify>
+        <g layout="centerXY()">
+            <star2d t="scale(0.3)"/>
+            <star2d/>
+        </g>
     </solidify>
     <script>
         this.pp()

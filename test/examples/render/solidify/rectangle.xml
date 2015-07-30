@@ -1,8 +1,8 @@
 <craft>
     <solidify>
-            <rectangle></rectangle>
+        <rectangle></rectangle>
     </solidify>
     <script>
-        expect(this.prev).to.have.size(10,10,1).and.position(0,0,0)
+        $('solidify').should.have.size(10,10,1).and.position(0,0,0)
     </script>
 </craft>

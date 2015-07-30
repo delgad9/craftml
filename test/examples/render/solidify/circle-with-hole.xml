@@ -1,0 +1,16 @@
+<craft>
+    <solidify id="three">
+        <g layout="centerXY()">
+            <circle></circle>
+            <circle radius="3"></circle>
+            <circle radius="1"></circle>
+        </g>
+    </solidify>
+    <script>
+        $(this).should.have.polygonCount(430)
+        $('#three').should.have.children(['polyhedron','polyhedron'])
+        $('#three polyhedron').should.have
+            .first.with.size(10,10,1)
+            .second.with.size(2,2,1)
+    </script>
+</craft>

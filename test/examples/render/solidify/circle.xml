@@ -1,8 +1,10 @@
 <craft>
-    <solidify>
+    <solidify id="foo">
         <circle></circle>
     </solidify>
     <script>
-        expect(this.prev).to.have.size(10,10,1).and.position(0,0,0)
+        $('solidify').should.have.children(['polyhedron']).and
+            .position(0,0,0).and.size(10,10,1)
+            .polygonCount(140)
     </script>
 </craft>
