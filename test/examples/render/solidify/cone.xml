@@ -8,9 +8,8 @@
     </solidify>
 
     <script>
-        $('polyhedron').should.have
-        $('polyhedron').should.have.polygonCount(37).position(0,0,0).size(10,10,10).and
-            .allNormalsAwayFromCenter
+        $('polyhedron').should.have.polygonCount(37).position(0,0,0).size(10,10,10)
+            .normalsAwayFromCenter
     </script>
 
 </craft>

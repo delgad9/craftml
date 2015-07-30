@@ -4,5 +4,6 @@
     </solidify>
     <script>
         $('solidify').should.have.size(10,10,1).and.position(0,0,0)
+            .normalsAwayFromCenter
     </script>
 </craft>

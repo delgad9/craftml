@@ -7,4 +7,8 @@
              </repeat>
          </sun-layout>
     </solidify>
+    <script>
+        $('polyhedron').should.have.polygonCount(600).size(49.8029,49.9013,10)
+            .normals(246,354)
+    </script>
 </craft>

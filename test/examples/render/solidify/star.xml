@@ -1,5 +1,5 @@
 <craft>
-    <solidify>
+    <solidify t="center()">
         <path  d="
         M 179.000 199.000
         L 199.000 213.641
@@ -18,6 +18,8 @@
     </solidify>
     <script>
         this.pp()
+        $('polyhedron').should.have
+            .normals(10,34)
         //expect(this.prev).to.have.size(80,69.282,1).and.position(139,144.359,0)
     </script>
 </craft>

@@ -197,7 +197,7 @@ chai.use(function(_chai, utils) {
     Assertion.addProperty('with', function() {})
 
 
-    Assertion.addProperty('allNormalsAwayFromCenter', function(){
+    Assertion.addProperty('normalsAwayFromCenter', function(){
         let [solid, debugName] = resolve.call(this)
 
         let c = solid.getCenter()
@@ -206,12 +206,57 @@ chai.use(function(_chai, utils) {
                 return poly.plane.signedDistanceToPoint(new G.Vector3D(c.x, c.y, c.z))
             })
 
+            let [positive, negative] = _.partition(distancesToOrigin, v => {
+                return v > 0
+            })
+            console.log('+', positive.length, '-', negative.length)
+
 
             this.assert(
                 _.all(distancesToOrigin, v => {
                     return v < 0
                 }),
                 "expected " + debugName + "'s surface normals to be all away from the center")
+        }
+    })
+
+    Assertion.addMethod('normals', function(pos, neg){
+        let [solid, debugName] = resolve.call(this)
+
+        let c = solid.getCenter()
+        if (solid.csg) {
+            let distancesToOrigin = _.map(solid.csg.polygons, poly => {
+                return poly.plane.signedDistanceToPoint(new G.Vector3D(c.x-10,c.y-10,c.z-10))
+            })
+
+            let [positive, negative] = _.partition(distancesToOrigin, v => {
+                return v > 0
+            })
+            console.log('+', positive.length, '-', negative.length)
+
+            this.assert(
+                positive.length == pos && negative.length == neg,
+                `expected ${debugName}'s surface normals to be (+${pos}, -${neg}) from (10,10,10)
+                but got (${positive.length}, ${negative.length})`)
+        }
+    })
+
+    Assertion.addMethod('normalsAwayFromZ', function(z){
+        let [solid, debugName] = resolve.call(this)
+
+        let c = solid.getCenter()
+        if (solid.csg) {
+            let distancesToOrigin = _.map(solid.csg.polygons, poly => {
+                return poly.plane.signedDistanceToPoint(new G.Vector3D(c.x, c.y, z))
+            })
+            console.log(distancesToOrigin)
+
+
+            this.assert(
+                _.all(distancesToOrigin, v => {
+                    return v < 0
+                }),
+                `expected ${debugName}'s surface normals to be away from the z = ${z}`)
         }
     })
     //   Assertion.addChainableMethod('at', function (path) {

@@ -10,7 +10,7 @@
 
     <script>
         $('polyhedron').should.have.polygonCount(72).size(10,10,20)
-            .allNormalsAwayFromCenter
+            .normalsAwayFromCenter
     </script>
 
 </craft>
