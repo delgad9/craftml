@@ -14,7 +14,7 @@
             cs.push(c)
         }
 
-        params.cs = cs
+        $scope.cs = cs
     </script>
 
     <solidify>
@@ -25,7 +25,8 @@
     </solidify>
 
     <script>
-        this.parent.pp()
+        $('polyhedron').should.have.polygonCount(1093).size(20,20,10)
+            .allNormalsAwayFromCenter
     </script>
 
 </craft>

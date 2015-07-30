@@ -9,6 +9,7 @@
 
     <script>
         $('polyhedron').should.have .polygonCount(37) .size(10,10,10)
+            .allNormalsAwayFromCenter
     </script>
 
 </craft>
