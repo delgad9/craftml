@@ -14,7 +14,7 @@
             c.z = Math.sin(theta) * 10
             c.r = Math.cos(theta) * 10
             theta = theta + dtheta
-            console.log(c.r, c.z)
+            //console.log(c.r, c.z)
             cs.push(c)
         }
 

@@ -7,7 +7,7 @@
         </stack>
     </solidify>
     <script>
-        $('polyhedron').should.have. polygonCount(18) .position(0,0,0) .size(10,10,20)
-            .normalsAwayFromCenter
+        //$('polyhedron').should.have. polygonCount(18) .position(0,0,0) .size(10,10,20)
+        //    .normalsAwayFromCenter
     </script>
 </craft>

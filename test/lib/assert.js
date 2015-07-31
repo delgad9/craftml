@@ -205,13 +205,6 @@ chai.use(function(_chai, utils) {
             let distancesToOrigin = _.map(solid.csg.polygons, poly => {
                 return poly.plane.signedDistanceToPoint(new G.Vector3D(c.x, c.y, c.z))
             })
-
-            let [positive, negative] = _.partition(distancesToOrigin, v => {
-                return v > 0
-            })
-            console.log('+', positive.length, '-', negative.length)
-
-
             this.assert(
                 _.all(distancesToOrigin, v => {
                     return v < 0
@@ -232,8 +225,6 @@ chai.use(function(_chai, utils) {
             let [positive, negative] = _.partition(distancesToOrigin, v => {
                 return v > 0
             })
-            console.log('+', positive.length, '-', negative.length)
-
             this.assert(
                 positive.length == pos && negative.length == neg,
                 `expected ${debugName}'s surface normals to be (+${pos}, -${neg}) from (10,10,10)
