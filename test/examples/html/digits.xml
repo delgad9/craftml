@@ -1,7 +1,8 @@
 <craft>
     1234567890
     <script>
-        expect($('word')).to.have.length(1)
-        expect($('char')).to.have.length(10)        
+        $('word').should.have.length(1)
+        $('char').should.have.length(10)
+        $('polyhedron').should.have.length(10)
     </script>
 </craft>

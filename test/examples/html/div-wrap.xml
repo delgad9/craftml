@@ -1,9 +1,9 @@
 <craft>
     <div style="width:5">Hi Ti</div>
     <script>
-        expect($('text-line')).to.have.length(2)
-        expect($('word')).to.have.length(2)
-        expect($('char')).to.have.length(4)
-        expect(this.prev).to.have.size(7.9900,17.2400,1)
+        $('text-line').should.have.length(2)
+        $('word').should.have.length(2)
+        $('char').should.have.length(4)
+        $('div').should.have.size(7.9900,17.2400,1)
     </script>
 </craft>

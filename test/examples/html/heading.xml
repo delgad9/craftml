@@ -7,7 +7,8 @@
         <h5>h5 e</h5>
     </div>
     <script>
-        expect($('text-line')).to.have.length(10)
-        expect($('word')).to.have.length(10)
+        //this.pp()
+        $('text-line').should.have.length(10)
+        $('word').should.have.length(10)
     </script>
 </craft>
