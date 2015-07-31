@@ -1,14 +1,14 @@
 <craft>
     <row>
         <repeat n="5">
-            <group layout="centerXYZ()" cut=".hole">
+            <g layout="centerXYZ()" cut=".hole">
                 <cube transform="scale(2,2,2)"/>
                 <cube transform="scale(1,1,4)" class="hole"/>
                 <cube transform="scale(1,4,1)" class="hole"/>
                 <cube transform="scale(4,1,1)" class="hole"/>
-            </group>
+            </g>
             <script>
-                expect(this.prev).to.have.size(20,20,20)
+                $('g').should.have.size(20,20,20)
             </script>
         </repeat>
     </row>

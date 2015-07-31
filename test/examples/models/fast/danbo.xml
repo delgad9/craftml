@@ -29,7 +29,7 @@
         </row>
     </part>
 
-    <g l="centerXY() alignZ(40%)" t="land()" color="wheat">
+    <g l="centerXY() alignZ(40%)" t="land()" color="wheat" id="danbo">
         <arms></arms>
         <stack>
             <head></head>
@@ -56,7 +56,7 @@
     </g>
 
     <script>
-        expect(this.prev).to.have.size(30,20,57.0478)
+        $('#danbo').should.have.size(30,20,57.0478)
     </script>
 
 </craft>

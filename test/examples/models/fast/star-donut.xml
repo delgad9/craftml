@@ -1,5 +1,5 @@
 <craft>
-    <craft name="sun-layout" module="sun-layout"/>
+    <craft name="sun-layout" src="sun-layout.xml"/>
     <craft name="star2d">
         <path  d="
         M 179.000 199.000

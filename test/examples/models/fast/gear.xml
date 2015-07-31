@@ -117,9 +117,4 @@ function involuteGear(numTeeth, circularPitch, pressureAngle, clearance, thickne
   return result;
 }
 </script>
-
-<script>
-    expect(this.prev).to.have.children(['csg'])
-</script>
-
 </craft>
