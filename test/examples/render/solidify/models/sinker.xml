@@ -1,0 +1,18 @@
+<craft>
+
+    <solidify>
+        <g spacing='10' layout="lineupZ(10) centerXY()">
+            <point></point>
+            <circle></circle>
+            <circle t="scale(1.2)"></circle>
+            <circle t="scale(1.5)"></circle>
+            <circle t="scale(1.2)"></circle>
+            <circle></circle>
+            <point></point>
+        </g>
+    </solidify>
+    <script>
+        $('polyhedron').should.have
+            .normals(105,255)
+    </script>
+</craft>

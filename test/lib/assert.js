@@ -61,14 +61,8 @@ chai.use(function(_chai, utils) {
         let s = solid.size
         this.assert(
             closeTo(s.x, x) && closeTo(s.y, y) && closeTo(s.z, z),
-            "expected " + debugName + "'s size to be #{exp} but got #{act}",
-            "expected " + debugName + "'s size not be #{act}", {
-                x: x,
-                y: y,
-                z: z
-            }, // expected
-            s // actual
-        );
+            `expected ${debugName}'s size to be (${x},${y},${z}) but got (${s.x},${s.y},${s.z})`,
+            `expected ${debugName}'s size to not be (${x},${y},${z})`)
     })
 
     Assertion.addChainableMethod('position', function(x, y, z) {
@@ -202,11 +196,11 @@ chai.use(function(_chai, utils) {
 
         let c = solid.getCenter()
         if (solid.csg) {
-            let distancesToOrigin = _.map(solid.csg.polygons, poly => {
+            let distances = _.map(solid.csg.polygons, poly => {
                 return poly.plane.signedDistanceToPoint(new G.Vector3D(c.x, c.y, c.z))
             })
             this.assert(
-                _.all(distancesToOrigin, v => {
+                _.all(distances, v => {
                     return v < 0
                 }),
                 "expected " + debugName + "'s surface normals to be all away from the center")
@@ -218,11 +212,11 @@ chai.use(function(_chai, utils) {
 
         let c = solid.getCenter()
         if (solid.csg) {
-            let distancesToOrigin = _.map(solid.csg.polygons, poly => {
+            let distances = _.map(solid.csg.polygons, poly => {
                 return poly.plane.signedDistanceToPoint(new G.Vector3D(c.x-10,c.y-10,c.z-10))
             })
 
-            let [positive, negative] = _.partition(distancesToOrigin, v => {
+            let [positive, negative] = _.partition(distances, v => {
                 return v > 0
             })
             this.assert(

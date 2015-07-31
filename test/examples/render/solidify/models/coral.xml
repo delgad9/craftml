@@ -1,0 +1,63 @@
+<craft>
+
+    <craft name="spin">
+        <content></content>
+        <script>
+            var r = 0
+            this.children.forEach(function(solid){
+                solid.rotate('z', r)
+                r = r + 360/3
+            })
+        </script>
+    </craft>
+
+    <craft name="bigger" grouping="off">
+        <parameter name="ds" default="0.1" type="int"/>
+        <content></content>
+        <script>
+            var s = 1
+            var ds = $scope.ds
+            this.children.forEach(function(solid){
+                solid.scale(s)
+                s = s + ds
+            })
+        </script>
+    </craft>
+
+
+    <part name="thread">
+        <solidify>
+            <g layout="lineupZ(1 -)">
+                <bigger>
+                    <repeat n="20">
+                        <circle></circle>
+                    </repeat>
+                </bigger>
+            </g>
+        </solidify>
+        <script>
+            $('polyhedron').should.have
+                .normalsAwayFromCenter
+                .normals(1, 1369)
+        </script>
+    </part>
+
+    <row id="corals">
+        <bigger ds="0.5">
+            <repeat n="2">
+                <g>
+                    <spin>
+                        <repeat n="3">
+                            <thread></thread>
+                        </repeat>
+                    </spin>
+                </g>
+            </repeat>
+        </bigger>
+    </row>
+
+    <script>
+        $('#corals').should.have.size(99.03684,59.4221,28.5)
+    </script>
+
+</craft>

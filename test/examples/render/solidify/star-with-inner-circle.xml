@@ -19,7 +19,7 @@
     </g>
     </solidify>
     <script>
-        this.pp()
-        //expect(this.prev).to.have.size(80,69.282,1).and.position(139,144.359,0)
+        $('polyhedron').should.have
+            .normals(94, 98)
     </script>
 </craft>

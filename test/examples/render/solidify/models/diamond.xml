@@ -1,0 +1,25 @@
+<craft name="diamond">
+
+    <parameter name="baseHeight" type="int" default="5"/>
+    <parameter name="topHeight" type="int" default="2"/>
+    <parameter name="baseRadius" type="int" default="5"/>
+    <parameter name="topRadius" type="int" default="3"/>
+
+    <solidify>
+        <stack spacing="{{topHeight}}">
+            <circle radius="{{topRadius}}" resolution="12"/>
+
+            <stack spacing="{{baseHeight}}">
+                <circle radius="{{baseRadius}}" resolution="12"/>
+                <point></point>
+            </stack>
+        </stack>
+    </solidify>
+
+    <script>
+        $('polyhedron').should.have
+            .normalsAwayFromCenter
+            .normals(7, 30)
+    </script>
+
+</craft>

@@ -20,7 +20,7 @@
         </solidify>
     </g>
     <script>
-        $('csg').should.have.style('something', 'great')
+        $('polyhedron').should.have.style('something', 'great')
     </script>
 
 

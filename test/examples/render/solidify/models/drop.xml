@@ -1,0 +1,33 @@
+<craft>
+
+    <script>
+
+        var theta
+        var dtheta = Math.PI/32
+        var cs = []
+
+        for (theta=0; theta < Math.PI/2 - dtheta; theta += dtheta){
+            var c = {}
+            c.z = Math.sin(theta) * 10
+            c.r = Math.cos(theta) * 10
+            theta = theta + dtheta
+            cs.push(c)
+        }
+
+        $scope.cs = cs
+    </script>
+
+    <solidify>
+        <point x="5" y="5" z="-20"/>
+        <repeat each="c" in="{{cs}}">
+            <circle radius="{{c.r}}" t="setZ({{c.z}})"></circle>
+        </repeat>
+        <point x="5" y="5" z="10"/>
+    </solidify>
+
+    <script>
+        $('polyhedron').should.have.polygonCount(576)
+            .normalsAwayFromCenter
+    </script>
+
+</craft>

@@ -1,0 +1,54 @@
+<craft>
+    <craft name="orbit" grouping="off">
+        <content></content>
+        <script>
+            var t = 0, dt = 0.2, r = 6
+            this.children.forEach(function(solid){
+                var x = r * Math.cos(t)
+                var y = r * Math.sin(t)
+                t = t + dt
+                solid.center({
+                    x: x,
+                    y: y,
+                    z: 0
+                })
+            })
+        </script>
+    </craft>
+
+    <craft name="spin" grouping="off">
+        <content></content>
+        <script>
+            var r = 0
+            this.children.forEach(function(solid){
+                solid.rotate('z', r)
+                r = r + 360/3
+            })
+        </script>
+    </craft>
+
+    <part name="thread">
+        <solidify>
+            <g layout="lineupZ(2 +)">
+                <orbit>
+                    <repeat n="30">
+                        <circle></circle>
+                    </repeat>
+                </orbit>
+            </g>
+        </solidify>
+        <script>
+            $('polyhedron').should.have
+                .normals(796,1294)
+        </script>
+    </part>
+
+    <g>
+        <spin>
+            <repeat n="3">
+                <thread></thread>
+            </repeat>
+        </spin>
+    </g>
+
+</craft>

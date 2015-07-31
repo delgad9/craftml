@@ -1,0 +1,26 @@
+<craft>
+    <craft name="spiral" grouping="off">
+        <content></content>
+        <script>
+            var r = 0
+            this.children.forEach(function(solid){
+                solid.rotate('z', r)
+                r = r + 10
+            })
+        </script>
+    </craft>
+    <solidify>
+        <stack spacing="2">
+            <spiral>
+                <repeat n="20">
+                    <rectangle></rectangle>
+                </repeat>
+            </spiral>
+        </stack>
+    </solidify>
+
+    <script>
+        $('polyhedron').should.have            
+            .normals(56,98)
+    </script>
+</craft>
