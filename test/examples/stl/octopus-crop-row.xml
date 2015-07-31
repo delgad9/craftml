@@ -8,7 +8,7 @@
     </row>
 
     <script>
-        expect(this.prev).to.have
+        $('row').should.have
             .polygonCount(4523).position(30.0021,-58.6617,0.0000).size(116.7238,116.2680,21.3062)
     </script>
 </craft>
