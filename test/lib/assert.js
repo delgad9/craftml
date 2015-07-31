@@ -227,7 +227,7 @@ chai.use(function(_chai, utils) {
             })
             this.assert(
                 positive.length == pos && negative.length == neg,
-                `expected ${debugName}'s surface normals to be (+${pos}, -${neg}) from (10,10,10)
+                `expected ${debugName}'s surface normals to be (+${pos}, -${neg}) w.r.t. center offset (-10,-10,-10)
                 but got (${positive.length}, ${negative.length})`)
         }
     })
