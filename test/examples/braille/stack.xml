@@ -3,8 +3,8 @@
         <braille>Hello</braille>
         <cube size="40 10 2"></cube>
     </stack>
-    <script>        
-        expect($('letter')).to.have.length(5)
-        expect($('dot')).to.have.length(14)
+    <script>
+        $('letter').should.have.length(5)
+        $('dot').should.have.length(14)
     </script>
 </craft>

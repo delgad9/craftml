@@ -1,7 +1,7 @@
 <craft>
     <braille>Hello</braille>
     <script>
-        expect($('letter')).to.have.length(5)
-        expect($('dot')).to.have.length(14)
+        $('letter').should.have.length(5)
+        $('dot').should.have.length(14)
     </script>
 </craft>
