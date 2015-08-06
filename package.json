@@ -53,8 +53,10 @@
     "jade": "^1.9.2",
     "lodash": "^3.9.3",
     "opentype.js": "^0.4.9",
+    "relative": "^3.0.1",
     "request": "^2.53.0",
     "svg-path-parser": "^1.0.1",
+    "url-join": "0.0.1",
     "with": "^4.0.1"
   }
 }
