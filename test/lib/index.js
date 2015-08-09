@@ -1,4 +1,4 @@
-var craft = require('../../lib/craft'),
+var craft = require('../../lib'),
     _ = require('lodash'),
     path = require('path')
 
