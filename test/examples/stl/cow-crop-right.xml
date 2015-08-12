@@ -1,5 +1,5 @@
 <craft>
-    <craft name="cow" stl="cow.stl"/>
+    <craft name="cow" module="./cow.stl"/>
     <cow transform="cropX(0 50%)"></cow>
     <script>
         $('cow').should.have

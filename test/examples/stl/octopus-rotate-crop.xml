@@ -1,5 +1,5 @@
 <craft>
-    <craft name="octopus" stl="octopus.stl"/>
+    <craft name="octopus" module="./octopus.stl"/>
 
 
     <g transform="translate(0 -50 0) cropY(0 50%) center()" id="top">

@@ -1,5 +1,5 @@
 <craft>
-    <craft name="cow" stl="cow-text.stl"/>
+    <craft name="cow" module="./cow-text.stl"/>
     <cow></cow>
     <script>
         $('cow').should.have.polygonCount(1260).and

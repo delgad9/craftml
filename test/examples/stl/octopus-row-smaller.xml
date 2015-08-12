@@ -1,5 +1,5 @@
 <craft>
-    <craft name="octopus" stl="octopus.stl"/>
+    <craft name="octopus" module="./octopus.stl"/>
     <row>
         <octopus></octopus>
         <octopus transform="scale(0.5)"></octopus>

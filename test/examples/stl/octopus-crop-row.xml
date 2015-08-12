@@ -1,5 +1,5 @@
 <craft>
-    <craft name="octopus" stl="octopus.stl"/>
+    <craft name="octopus" module="./octopus.stl"/>
 
     <row transform="translate(30 0 0) cropZ(0 35%)">
         <repeat n="2">
