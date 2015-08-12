@@ -1,8 +1,0 @@
-<craft>
-    <div style="text-align:right;width:5">so long</div>
-    <script>
-        $('text-line').should.have.length(2)
-        $('word').should.have.length(2)
-        $('char').should.have.length(6)
-    </script>
-</craft>

@@ -1,7 +1,0 @@
-<craft>
-    <g t="rotateX(90) land()">
-        Hello World
-    </g>
-    <script>
-    </script>
-</craft>

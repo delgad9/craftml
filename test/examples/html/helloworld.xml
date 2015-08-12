@@ -1,7 +1,0 @@
-<craft>
-    Hello world
-    <script>
-        $('word').should.have.length(2)            
-        $('polyhedron').should.have.length(10)
-    </script>
-</craft>

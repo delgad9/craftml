@@ -2,7 +2,7 @@
     <info>
         <title>GearBox - Three gears - shell</title>
     </info>
-    <craft name="nutch" stl="gear.stl"/>
+    <craft name="nutch" module="./gear.stl"/>
 
     <craft name="gear">
         <g layout="centerXY()">
