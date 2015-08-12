@@ -1,0 +1,12 @@
+<craft>
+    <g layout="lineupZ({{10}})">
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+    </g>
+
+    <script>
+        $('g').should.have.size(10,10,50).and.position(0,0,0)
+    </script>
+
+</craft>

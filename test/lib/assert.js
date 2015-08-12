@@ -130,7 +130,7 @@ chai.use(function(_chai, utils) {
 
     Assertion.addMethod('class', function(expected) {
         var name = getName(this._obj)
-        var actual = this._obj.element.attribs['class'];
+        var actual = this._obj.src.attribs['class'];
 
         // first, our instanceof check, shortcut
         // new Assertion(this._obj).to.be.eql(3)
@@ -144,7 +144,7 @@ chai.use(function(_chai, utils) {
 
     Assertion.addMethod('id', function(expected) {
         var name = getName(this._obj)
-        var actual = this._obj.element.attribs.id;
+        var actual = this._obj.src.attribs.id;
 
         // first, our instanceof check, shortcut
         // new Assertion(this._obj).to.be.eql(3)

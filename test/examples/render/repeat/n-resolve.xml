@@ -1,0 +1,8 @@
+<craft>
+    <repeat n="{{1+2}}">
+        <cube></cube>
+    </repeat>
+    <script>
+        $(this).should.have.children(['cube','cube','cube'])
+    </script>
+</craft>
