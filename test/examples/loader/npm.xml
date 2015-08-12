@@ -1,0 +1,7 @@
+<craft>
+    <craft name="page" module="craft-page"/>
+    <page><cube></cube></page>
+    <script>
+        $('cube').should.have.length(2)
+    </script>
+</craft>

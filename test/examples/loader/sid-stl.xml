@@ -1,0 +1,8 @@
+<craft>
+  <craft name="octopuses" module="VkRGl"/>
+  <octopuses></octopuses>
+  <script>
+      $('octopuses').should.have.polygonCount(16080)
+      $('octopus').should.have.length(3)
+  </script>
+</craft>

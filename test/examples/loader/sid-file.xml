@@ -1,0 +1,7 @@
+<craft>
+    <craft name="head" module="EJTzg/head.xml"/>
+    <head></head>
+    <script>        
+        $('cylinder').should.have.length(1)
+    </script>
+</craft>

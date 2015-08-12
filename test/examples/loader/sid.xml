@@ -1,0 +1,7 @@
+<craft>
+    <craft name="chair" module="NkUGx"/>
+    <chair></chair>
+    <script>
+        $('cube').should.have.length(10)
+    </script>
+</craft>

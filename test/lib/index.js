@@ -16,8 +16,7 @@ function buildAsync(src) {
     return fs.readFileAsync(src, 'utf8')
         .then(function(code) {
             var options = {
-                local: true,
-                basePath: path.resolve(path.dirname(src))
+                basePath: 'file:///' + path.resolve(path.dirname(src))
             }
             // console.log(options)
         //    return Promise.join(craft.build(code, options), craft.preview1(code, options))

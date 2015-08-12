@@ -1,6 +1,0 @@
-<craft>
-    <craft name="grow-layout" module="grow-layout"/>
-    <script>
-        expect($scope.crafts).to.have.property('grow-layout')        
-    </script>
-</craft>

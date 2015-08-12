@@ -1,0 +1,8 @@
+<craft>
+    <craft name="pin" module="EJTzg"/>
+    <pin></pin>
+    <script>
+        $('head').should.have.length(1)
+        $('body').should.have.length(1)
+    </script>
+</craft>

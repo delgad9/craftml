@@ -1,0 +1,7 @@
+<craft>
+    <craft name="octopus" module="./octopus.stl"/>
+    <octopus></octopus>
+    <script>
+        $("octopus").should.have.polygonCount(5360)
+    </script>
+</craft>
