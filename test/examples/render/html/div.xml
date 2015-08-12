@@ -1,0 +1,9 @@
+<craft>
+    <div>Hi Ti</div>
+    <script>
+        $('.craftml-line').should.have.length(1)
+        $('.craftml-word').should.have.length(2)
+        $('.craftml-char').should.have.length(4)
+        $('div').should.have.size(18.75333,7.6200,1)
+    </script>
+</craft>

@@ -1,0 +1,9 @@
+<craft>
+    Hi
+    <script>
+        $('.craftml-word').should.have.length(1).and
+            .have.children(['g','g'])
+        $('.craftml-char').should.have.length(2)
+        $('polyhedron').should.have.length(3)
+    </script>
+</craft>

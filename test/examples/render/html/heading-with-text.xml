@@ -1,0 +1,11 @@
+<craft>
+    <div>
+        <h1>h1 a</h1>
+        p1
+        <h2>h2 b</h2>
+        p2
+    </div>
+    <script>
+        $('div > .craftml-line').should.have.length(4)
+    </script>
+</craft>

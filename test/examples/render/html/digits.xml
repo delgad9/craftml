@@ -1,0 +1,8 @@
+<craft>
+    1234567890
+    <script>
+        $('.craftml-word').should.have.length(1)
+        $('.craftml-char').should.have.length(10)
+        $('polyhedron').should.have.length(10)
+    </script>
+</craft>
