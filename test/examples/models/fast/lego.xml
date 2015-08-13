@@ -8,7 +8,7 @@
         params.ysize = params.rows * 8
     </script>
 
-    <craft name="grid-repeat" src="grid-repeat.xml"/>
+    <craft name="grid-repeat" module="./grid-repeat.xml"/>
 
     <craft name="stud">
         <parameter name="radius" type="int" default="2.425"/>

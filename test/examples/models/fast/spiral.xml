@@ -4,7 +4,7 @@
     <parameter name="thickness" type="int" default="1"/>
     <parameter name="levels" type="int" default="2"/>
 
-    <craft name="sun-layout" src="sun-layout.xml"/>
+    <craft name="sun-layout" module="./sun-layout.xml"/>
 
     <stack spacing="0" t="center() land()">
         <repeat n="{{levels}}">

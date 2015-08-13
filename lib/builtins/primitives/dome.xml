@@ -2,27 +2,29 @@
     <parameter name="width" type="int" default="10"/>
     <parameter name="sides" type="int" default="50"/>
 
-    <script type="text/openjscad">
-        // handles fn
-        if (params.sides > 100) { params.sides = 100; }
+    <script>
 
-        this.add(dome())
+        var theta
+        var dtheta = Math.PI/32
+        var cs = []
 
-        function dome() {
-            var s, diff;
-
-            // parts
-            s = sphere({
-                r: params.width / 2,
-                fn: params.sides
-            });
-
-            diff = cube({
-                size: [params.width, params.width, params.width]
-            }).translate([-params.width / 2, -params.width / 2, -params.width])
-
-            return difference(s, diff).translate([5, 4.99013, 0])
+        for (theta=0; theta < Math.PI/2 - dtheta; theta += dtheta){
+            var c = {}
+            c.z = Math.sin(theta) * $scope.width/2
+            c.r = Math.cos(theta) * $scope.width/2
+            theta = theta + dtheta
+            cs.push(c)
         }
+
+        $scope.cs = cs
+
     </script>
+
+    <solidify>
+        <repeat each="c" in="{{cs}}">
+            <circle radius="{{c.r}}" t="setZ({{c.z}})"></circle>
+        </repeat>
+        <point x="5" y="5" z="{{width/2}}"/>
+    </solidify>
 
 </craft>

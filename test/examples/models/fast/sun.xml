@@ -2,7 +2,7 @@
     <parameter name="spikes" type="int" default="10"/>
     <parameter name="radius" type="int" default="10"/>
     <parameter name="height" type="int" default="3"/>
-    <craft name="sun-layout" src="sun-layout.xml"/>
+    <craft name="sun-layout" module="./sun-layout.xml"/>
 
     <g layout="centerXY()">
         <!-- Flames -->

@@ -1,5 +1,5 @@
 <craft>
-    <craft name="sun-layout" src="../../models/fast/sun-layout.xml"/>
+    <craft name="sun-layout" module="./../../models/fast/sun-layout.xml"/>
     <solidify>
          <sun-layout radius="20">
              <repeat n="25">

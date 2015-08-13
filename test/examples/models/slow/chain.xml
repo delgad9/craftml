@@ -2,8 +2,8 @@
     <parameter name="spacing" type="int" default="-5"/>
     <parameter name="n" type="int" default="4"/>
 
-    <craft name="ring" src="ring.xml"/>
-    <craft name="alternate-layout" src="alternate-layout.xml"/>
+    <craft name="ring" module="./../fast/ring.xml"/>
+    <craft name="alternate-layout" module="./../fast/alternate-layout.xml"/>
 
     <row spacing="{{spacing}}" layout="centerZ()">
         <alternate-layout>

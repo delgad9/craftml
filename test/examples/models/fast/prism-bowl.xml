@@ -3,7 +3,7 @@
         <title>Prism Bowl</title>
     </info>
 
-    <craft name="star-layout" src="star-layout.xml"/>
+    <craft name="star-layout" module="./star-layout.xml"/>
 
     <part name="ring">
         <parameter name="radius" type="int" default="30"/>

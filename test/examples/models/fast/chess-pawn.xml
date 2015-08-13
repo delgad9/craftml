@@ -3,7 +3,7 @@
         <title>Chess Pawn</title>
     </info>
 
-    <craft name="ring" src="ring.xml"/>
+    <craft name="ring" module="./ring.xml"/>
 
     <craft name="bottom">
         <stack spacing="-1">

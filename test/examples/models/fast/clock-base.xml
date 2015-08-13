@@ -1,5 +1,5 @@
 <craft>
-    <craft name="clock-layout" src="clock-layout.xml"/>
+    <craft name="clock-layout" module="./clock-layout.xml"/>
 
     <stack>
         <g>

@@ -1,0 +1,41 @@
+<craft>
+
+    <craft name="halfbox">
+        <craft name="box">
+            <parameter name="width" type="int" default="30"/>
+            <parameter name="length" type="int" default="30"/>
+            <parameter name="height" type="int" default="30"/>
+
+            <g>
+                <stack>
+                    <content></content>
+                    <cube size="{{length}} {{width}} 3" t="translate(3,0,0)"/>
+                </stack>
+
+                <row spacing="{{length}}">
+                    <repeat n="2">
+                        <cube size="3 {{width}} {{height}}"/>
+                    </repeat>
+                </row>
+
+                <col spacing="{{width}}" t="translate(0,-3,0)">
+                    <repeat n="2">
+                        <cube size="{{length + 6}} 3 {{height}}"/>
+                    </repeat>
+                </col>
+            </g>
+
+        </craft>
+        <box t="rotateX(-90) cropZ(50%)"></box>
+    </craft>
+
+    <stack t="land()" id="foo">
+        <halfbox></halfbox>
+        <halfbox></halfbox>
+    </stack>
+
+    <script>
+        $('#foo').should.have.polygonCount(48).size(36,30,36)
+    </script>
+
+</craft>

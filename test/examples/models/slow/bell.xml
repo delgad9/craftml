@@ -1,5 +1,5 @@
 <craft name="bell">
-    <craft name="ring" src="../fast/ring.xml"/>
+    <craft name="ring" module="./../fast/ring.xml"/>
 
     <craft name="ball">
         <g layout="centerXYZ()" cut=".hollow">

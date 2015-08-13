@@ -3,8 +3,8 @@
         <title>Chess Rook</title>
     </info>
 
-    <craft name="ring" src="../fast/ring.xml"/>
-    <craft name="sun-layout" src="../fast/sun-layout.xml"/>
+    <craft name="ring" module="./../fast/ring.xml"/>
+    <craft name="sun-layout" module="./../fast/sun-layout.xml"/>
 
     <craft name="bottom">
         <sphere radius="22" t="scale(1,1,0.3)"></sphere>

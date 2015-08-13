@@ -1,6 +1,6 @@
 <craft name="kaleidoscope">
-    <craft name="petal" src="heart.xml"/>
-    <craft name="sun-layout" src="sun-layout.xml"/>
+    <craft name="petal" module="./heart.xml"/>
+    <craft name="sun-layout" module="./sun-layout.xml"/>
 
     <g layout="centerXYZ()">
         <g color="olive">

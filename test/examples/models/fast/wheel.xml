@@ -2,8 +2,8 @@
     <parameter name="n" default="5" type="int"/>
     <parameter name="spokeLength" default="50" type="int"/>
 
-    <craft name="donut" src="ring.xml"/>
-    <craft name="star-layout" src="star-layout.xml"/>
+    <craft name="donut" module="./ring.xml"/>
+    <craft name="star-layout" module="./star-layout.xml"/>
 
     <group layout="centerXYZ()">
         <donut radius="{{spokeLength + 2}}"/>

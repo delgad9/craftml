@@ -19,7 +19,7 @@
     </craft>
 
 
-    <craft name="sun-layout" src="../../../models/fast/sun-layout.xml"/>
+    <craft name="sun-layout" module="./../../../models/fast/sun-layout.xml"/>
     <craft name="circle-of-stars">
         <sun-layout radius="15">
              <repeat n="30">

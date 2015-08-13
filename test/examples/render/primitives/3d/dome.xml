@@ -1,7 +1,7 @@
 <craft>
     <dome></dome>
     <script>
-        $('dome').should.have.children(['polyhedron']).and.have
-            .size(10,9.9802,5).and.position(0,0,0)
+        $('dome polyhedron').should.have
+            .size(10,10,5).and.position(0,0,0)
     </script>
 </craft>

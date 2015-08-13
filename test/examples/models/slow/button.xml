@@ -1,6 +1,6 @@
 <craft>
 
-    <craft name="sun-layout" src="../fast/sun-layout.xml"/>
+    <craft name="sun-layout" module="./../fast/sun-layout.xml"/>
 
     <stack layout="centerXYZ()" cut=".cut">
         <group class="cut">
@@ -13,7 +13,4 @@
         <cylinder transform="scale(10,10,1)"></cylinder>
     </stack>
 
-    <script>
-        expect(this.prev).position(-45,-45,0) .size(100,100,10)
-    </script>
 </craft>

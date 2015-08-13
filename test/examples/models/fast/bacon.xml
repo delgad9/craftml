@@ -1,5 +1,5 @@
 <craft name="bacon">
-    <craft name="alternate" src="alternate-layout.xml"/>
+    <craft name="alternate" module="./alternate-layout.xml"/>
 
     <part name="ridge">
         <g l="centerXY() cut(.hollow)" t="cropZ(1) scale(1 1 0.8)">

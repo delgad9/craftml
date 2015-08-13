@@ -2,7 +2,7 @@
   "name": "craftml",
   "version": "0.5.0",
   "description": "craftml",
-  "main": "lib/craft.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "mocha --require babelhook"
   },

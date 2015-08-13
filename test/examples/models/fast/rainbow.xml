@@ -1,5 +1,5 @@
 <craft name="rainbow">
-    <craft name="grow-layout" src="grow-layout.xml"/>
+    <craft name="grow-layout" module="./grow-layout.xml"/>
     <part name="bow">
         <col l="alignY(100%)" cut=".slice">
             <prism width="40" sides="50" t="rotateX(-90)"/>

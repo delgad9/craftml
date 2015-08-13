@@ -7,7 +7,7 @@
     <parameter name="xCBars" type="int" default="0"/>
     <parameter name="yCBars" type="int" default="0"/>
 
-    <craft name="window" src="window.xml"/>
+    <craft name="window" module="./window.xml"/>
 
     <g layout="centerXY()" color="peru">
         <stack>

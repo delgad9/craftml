@@ -4,8 +4,8 @@
         <title>Rocket on a cart</title>
     </info>
 
-    <craft name="cart" src="cart.xml"/>
-    <craft name="rocket" src="rocket.xml"/>
+    <craft name="cart" module="./cart.xml"/>
+    <craft name="rocket" module="./rocket.xml"/>
 
     <cart>
         <rocket></rocket>

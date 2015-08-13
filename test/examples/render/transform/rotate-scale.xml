@@ -1,0 +1,13 @@
+<craft>
+    <stack spacing="-1">
+        <cube size="5 3 5" t="
+            rotateY(45)
+            scale(1 1 1.6)"/>
+        <cube size="10 3 3"/>
+        <cube size="6 3 6" t="rotateY(45)"/>
+    </stack>
+    <script>
+        $('stack').should.have
+            .polygonCount(18) .position(-2,0,-1.2426) .size(10,3,20.7990)
+    </script>
+</craft>

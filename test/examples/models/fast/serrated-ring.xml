@@ -1,7 +1,7 @@
 <craft>
     <parameter name="n" default="50" type="int"/>
 
-    <craft name="star-layout" src="star-layout.xml"/>
+    <craft name="star-layout" module="./star-layout.xml"/>
 
     <g color="red">
 

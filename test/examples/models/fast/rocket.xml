@@ -3,8 +3,8 @@
         <title>Rocket</title>
     </info>
 
-    <craft name="segment" src="cone-frustum.xml"/>
-    <craft name="tip" src="cone.xml"/>
+    <craft name="segment" module="./cone-frustum.xml"/>
+    <craft name="tip" module="./cone.xml"/>
 
     <part name="body">
         <stack transform="scale(0.8)">

@@ -1,5 +1,5 @@
 <craft name="danbo">
-    <craft name="sun-layout" src="sun-layout.xml"/>
+    <craft name="sun-layout" module="./sun-layout.xml"/>
 
     <part name="head">
         <g l="centerXZ() alignY(100%)" cut=".face">

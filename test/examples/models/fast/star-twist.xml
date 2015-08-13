@@ -6,9 +6,9 @@
     <parameter name="n" type="int" default="20"/>
     <parameter name="deg" type="int" default="6"/>
 
-    <craft name="grow-layout" src="grow-layout.xml"/>
-    <craft name="alternate-layout" src="alternate-layout.xml"/>
-    <craft name="star" src="star.xml"/>
+    <craft name="grow-layout" module="./grow-layout.xml"/>
+    <craft name="alternate-layout" module="./alternate-layout.xml"/>
+    <craft name="star" module="./star.xml"/>
 
     <stack>
         <grow-layout factor="1.1">

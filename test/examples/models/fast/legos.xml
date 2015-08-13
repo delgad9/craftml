@@ -1,5 +1,5 @@
 <craft>
-    <craft name="brick" src="lego.xml"/>
+    <craft name="brick" module="./lego.xml"/>
     <row spacing="10">
         <brick rows="2" cols="2" color="purple"/>
         <brick rows="3" cols="2" color="purple"/>
