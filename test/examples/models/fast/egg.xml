@@ -1,0 +1,25 @@
+<craft>
+    <parameter name="alignX" type="int" default="50"/>
+    <parameter name="alignY" type="int" default="50"/>
+
+    <info>
+        <title> Sunny Side Up Egg </title>
+    </info>
+
+    <style>
+        .yolk { color: gold; }
+        .white { color: white; }
+    </style>
+
+    <stack l="alignX({{alignX}}%) alignY({{alignY}}%)">
+       <dome width="8" t="scale(1,1,0.5)" class="yolk"></dome>
+
+       <g t="cropZ(50% 30%)" class="white">
+         <sphere t="scale(1.2 1.2 0.5) translate(0 2 0)"/>
+         <sphere t="scale(1.5 1.5 0.5) translate(3 -5 0)"/>
+         <sphere t="scale(1.2 1.2 0.5) translate(2 5 0)"/>
+         <sphere t="scale(0.7 1.2 0.5) translate(11 1 0) rotateZ(40)"/>
+        </g>
+    </stack>
+
+</craft>

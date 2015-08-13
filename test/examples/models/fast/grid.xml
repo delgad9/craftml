@@ -1,0 +1,23 @@
+<craft>
+    <info>
+        <title> Parameterizable Grid </title>
+    </info>
+
+    <parameter name="rows" type="int" default="8"/>
+    <parameter name="cols" type="int" default="8"/>
+    <parameter name="spacing" type="int" default="5"/>
+
+    <g l="centerXYZ()">
+        <row spacing="{{spacing}}">
+            <repeat n="{{cols}}">
+                <cube size="2 {{((rows-1)*spacing) + (rows*2)}} 2"/>
+            </repeat>
+        </row>
+        <col spacing="{{spacing}}">
+            <repeat n="{{rows}}">
+                <cube size="{{((cols-1)*spacing) + (cols *2)}} 2 2"/>
+            </repeat>
+        </col>
+    </g>
+
+</craft>

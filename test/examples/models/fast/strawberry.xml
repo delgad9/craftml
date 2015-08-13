@@ -1,0 +1,48 @@
+<craft name="strawberry">
+    <style>
+        body { color: red; }
+        top { color: green; }
+    </style>
+
+    <craft name="sun-layout" module="sun-layout"/>
+
+    <part name="body">
+        <part name="bottom">
+            <stack>
+                <solidify>
+                    <circle radius="7.5" t="translate(0 0 9)"/>
+                    <circle radius="5.5" t="translate(0 0 5.4)"/>
+                    <circle radius="4" t="translate(0 0 3)"></circle>
+                    <circle radius="2"></circle>
+                </solidify>
+                <dome width="4.63" t="rotateX(180) scale(1 1 0.75) cropZ(0% 50%)"></dome>
+            </stack>
+        </part>
+
+        <stack spacing="-3.8">
+            <sphere radius="10" t="scale(0.88 0.9 0.8)"></sphere>
+            <bottom></bottom>
+        </stack>
+    </part>
+
+    <part name="top">
+        <part name="leaf">
+            <col spacing="-1.75" cut=".scoop" t="scale(0.75 0.5 1)">
+                <sphere radius="1.5" t="scale(0.9 0.75 2)"></sphere>
+                <sphere radius="1" t="scale(1.1 1 3)" class="scoop"/>
+            </col>
+        </part>
+
+        <sun-layout radius="3">
+            <repeat n="5">
+                <leaf t="rotateX(-70)"></leaf>
+            </repeat>
+        </sun-layout>
+    </part>
+
+    <stack spacing="-1">
+        <top t="scale(1.5 1.5 1.5)"></top>
+        <body></body>
+    </stack>
+
+</craft>

@@ -1,0 +1,47 @@
+<craft>
+    <info>
+        <title>Drying Rack</title>
+    </info>
+
+    <part name="disk">
+        <cylinder t="scale(5,5,0.2)"></cylinder>
+    </part>
+
+    <craft name="grid-repeat">
+        <parameter name="rows" type="int" default="12"/>
+        <parameter name="cols" type="int" default="12"/>
+        <parameter name="rowSpacing" type="int" default="2"/>
+        <parameter name="colSpacing" type="int" default="2"/>
+        <col spacing="{{rowSpacing}}">
+            <repeat n="{{rows}}">
+                <row spacing="{{colSpacing}}">
+                    <repeat n="{{cols}}">
+                        <content>
+                            <cube></cube>
+                        </content>
+                    </repeat>
+                </row>
+            </repeat>
+        </col>
+    </craft>
+
+
+    <g l="centerXYZ() cut(#holes)">
+
+        <g l="centerXYZ() select(disk) intersect(#grid)" id="holes">
+            <g t="scale(0.6)" id="grid">
+                <grid-repeat>
+                    <cube size="5 5 10"></cube>
+                </grid-repeat>
+            </g>
+
+            <disk></disk>
+        </g>
+
+        <disk t="scale(1.1 1.1 0.8)"></disk>
+
+     </g>
+
+
+
+</craft>

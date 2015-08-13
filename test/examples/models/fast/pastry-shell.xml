@@ -1,0 +1,30 @@
+<craft>
+    <info>
+        <title> Pastry Shell </title>
+    </info>
+
+    <style>
+        .pastry { color: peru; }
+    </style>
+
+    <craft name="sun-layout" module="./sun-layout.xml"/>
+
+    <part name="border">
+        <sun-layout radius="16.5">
+            <repeat n="30">
+                <prism width="6" length="13.5" sides="50" t="
+                    scale(1 1 0.75)
+                    rotateX(-117)"/>
+            </repeat>
+        </sun-layout>
+    </part>
+
+    <g l="centerXY() alignZ(20%)">
+        <content></content>
+        <stack spacing="-1" class="pastry">
+            <border></border>
+            <cylinder radius="14" height="0.5"></cylinder>
+        </g>
+    </g>
+
+</craft>

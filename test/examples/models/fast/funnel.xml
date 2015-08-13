@@ -1,0 +1,29 @@
+<craft>
+    <info>
+        <title> Parameterizable Funnel </title>
+    </info>
+
+    <parameter name="radius" type="int" default="30"/>
+    <parameter name="funnelHeight" type="int" default="10"/>
+
+    <craft name="tube" module="./tube.xml"/>
+
+    <part name="cone">
+        <solidify>
+            <stack spacing="30">
+                <circle radius="{{radius}}"></circle>
+                <circle radius="4"></circle>
+            </stack>
+        </solidify>
+    </part>
+
+    <stack spacing="0">
+        <stack spacing="-30" l="cut(.hollow)">
+            <cone t="scale(0.9 0.9 1)" class="hollow"></cone>
+            <cone></cone>
+        </stack>
+
+        <tube topRadius="4" baseRadius="4" thickness="1" height="{{funnelHeight}}"/>
+    </stack>
+
+</craft>

@@ -1,0 +1,42 @@
+<craft>
+    <info>
+        <title> Wine Glass </title>
+    </info>
+
+    <style>
+        * { color: silver;
+            opacity: 0.5; }
+    </style>
+
+    <craft name="cone" module="craft-cone"/>
+
+    <part name="cup">
+        <g l="centerXY() cut(.hole)">
+            <sphere radius="10" t="cropZ(0% 30%)"></sphere>
+            <sphere radius="9.5" t="scale(1 1 1.1) cropZ(15%)" class="hole"></sphere>
+        </g>
+    </part>
+
+    <part name="stem">
+        <solidify>
+            <stack spacing="0.75">
+                <stack spacing="20">
+                    <circle radius="0.5"></circle>
+                    <circle radius="0.75"></circle>
+                </stack>
+                <circle radius="1"></circle>
+                <circle radius="1.5"></circle>
+                <circle radius="2.5"></circle>
+                <circle radius="4"></circle>
+            </stack>
+        </solidify>
+    </part>
+
+    <stack spacing="-1" t="land()">
+        <cup></cup>
+        <stem></stem>
+        <cone baseRadius="20" t="cropZ(55% 10%)"></cone>
+    </stack>
+
+
+</craft>

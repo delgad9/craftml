@@ -1,0 +1,94 @@
+<craft>
+    <info>
+        <title> Japanese Lamp </title>
+    </info>
+
+    <style>
+        .light { color: lemonchiffon; }
+        frame { color: saddlebrown; }
+    </style>
+
+    <part name="frame">
+        <part name="square">
+            <g l="centerXY()">
+                <row spacing="24">
+                    <cube size="8 40 5"></cube>
+                    <cube size="8 40 5"></cube>
+                </row>
+
+                <col spacing="30">
+                    <cube size="40 5 5"></cube>
+                    <cube size="40 5 5"></cube>
+                </col>
+            </g>
+        </part>
+
+        <part name="legs">
+            <parameter name="height" type="int" default="50"/>
+
+            <col spacing="30">
+                <repeat n="2">
+                    <row spacing="30">
+                        <cube size="5 5 {{height}}"></cube>
+                        <cube size="5 5 {{height}}"></cube>
+                    </row>
+                </repeat>
+            </col>
+        </part>
+
+        <part name="slats">
+            <col spacing="33" l="lineupX(6 -)">
+                <row spacing="4">
+                    <repeat n="2">
+                        <cube size="2 3 55"></cube>
+                    </repeat>
+                </row>
+
+                 <row spacing="4">
+                    <repeat n="2">
+                        <cube size="2 3 55"></cube>
+                    </repeat>
+                </row>
+            </col>
+        </part>
+
+        <part name="bars">
+            <row spacing="33">
+                <repeat n="2">
+                    <stack spacing="4">
+                        <cube size="3 35 2"></cube>
+                        <cube size="3 35 2"></cube>
+                    </stack>
+                </repeat>
+            </row>
+
+            <col spacing="33">
+                <repeat n="2">
+                    <stack spacing="4">
+                        <cube size="35 3 2"></cube>
+                        <cube size="35 3 2"></cube>
+                    </stack>
+                </repeat>
+            </col>
+        </part>
+
+        <g l="centerXYZ()">
+            <bars></bars>
+            <g l="centerXY() alignZ(84%)">
+                <slats></slats>
+                <stack>
+                    <square></square>
+                    <legs></legs>
+                    <cube size="40 40 5"></cube>
+                    <legs height="20"></legs>
+                </stack>
+            </g>
+        </g>
+    </part>
+
+    <g l="centerXY() alignZ(85%)" t="land()">
+        <frame></frame>
+        <cube size="35 35 55" class="light"></cube>
+    </g>
+
+</craft>

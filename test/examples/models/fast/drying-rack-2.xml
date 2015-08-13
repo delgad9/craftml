@@ -1,0 +1,34 @@
+<craft>
+    <info>
+        <title> Drying Rack </title>
+    </info>
+
+    <part name="disk">
+        <cylinder t="scale(5,5,0.2)"></cylinder>
+    </part>
+
+    <g l="centerXYZ()">
+        <g l="centerXYZ() intersect(#grid)">
+            <g l="centerXYZ()" id="grid">
+                <row spacing="5">
+                    <repeat n="8">
+                        <cube size="2 50 2"/>
+                    </repeat>
+                </row>
+                <col spacing="5">
+                    <repeat n="8">
+                        <cube size="50 2 2"/>
+                    </repeat>
+                </col>
+            </g>
+
+            <disk></disk>
+        </g>
+
+        <g l="centerXYZ() cut(.hole)">
+            <disk class="hole"></disk>
+            <disk t="scale(1.1 1.1 0.8)"></disk>
+        </g>
+    </g>
+
+</craft>
