@@ -16,11 +16,14 @@ function buildAsync(src) {
     return fs.readFileAsync(src, 'utf8')
         .then(function(code) {
             var options = {
-                basePath: 'file:///' + path.resolve(path.dirname(src))
+                cwd: 'file:///' + process.cwd(),
+                path: src,
+                base: path.dirname(src),
+                contents: code
             }
             // console.log(options)
         //    return Promise.join(craft.build(code, options), craft.preview1(code, options))
-            return Promise.join('', craft.preview1(code, options))
+            return Promise.join('', craft.preview1(options))
         })
 }
 

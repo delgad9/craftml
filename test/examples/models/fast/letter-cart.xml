@@ -1,0 +1,12 @@
+<craft name="letter-cart">
+    <parameter name="letter" default="A" type="string"/>
+
+    <craft name="cart" module="./cart.xml"/>
+
+    <cart>
+        <div t="rotateX(90) scale(7)">
+            {{letter}}
+        </div>
+    </cart>
+
+</craft>

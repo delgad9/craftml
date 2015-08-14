@@ -1,0 +1,4 @@
+<craft>
+    <craft name="bad" module="./unknown-tag.xml"/>
+    <bad></bad>
+</craft>
