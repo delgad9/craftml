@@ -1,0 +1,67 @@
+<craft name="scatter-plot">
+    <parameter name="data" type="json">
+        [
+            {
+            "x": 20,
+            "y": 10
+            },
+            {
+            "x": 20,
+            "y": 50
+            },
+            {
+            "x": 30,
+            "y": 45
+            },
+            {
+            "x": 40,
+            "y": 20
+            },
+            {
+            "x": 50,
+            "y": 35
+            }
+        ]
+    </parameter>
+    <parameter name="xlabel" default="xlabel" type="string"/>
+    <parameter name="ylabel" default="ylabel" type="string"/>
+    <parameter name="xfield" default="x" type="string"/>
+    <parameter name="yfield" default="y" type="string"/>
+    <parameter name="xscale" default="10" type="float"/>
+    <parameter name="yscale" default="1" type="float"/>
+
+    <part name="points">
+        <g>
+            <script>
+                $scope.ps = $scope.data.map(function(d){
+                    return {
+                        x: d[$scope.xfield] * $scope.xscale,
+                        y: d[$scope.yfield] * $scope.yscale
+                    }
+                })
+            </script>
+            <repeat each="p" in="{{ps}}">
+                <cube t="scale({{1/5}})
+                    translate({{p.x}} {{p.y}} 0)">
+                </cube>
+            </repeat>
+        </g>
+    </part>
+
+    <craft name="page" module="./page.xml"/>
+    <page>
+        <g>
+            <row spacing="5">
+                <g t="rotateZ(90) scale(0.5)">
+                    {{ylabel}}
+                </g>
+                <col spacing="5">
+                    <points></points>
+                    <g t="scale(0.5)">
+                        {{xlabel}}
+                    </g>
+                </col>
+            </row>
+        </g>
+    </page>
+</craft>

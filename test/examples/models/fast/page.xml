@@ -1,0 +1,13 @@
+<craft name="page">
+    <stack>
+        <g>
+            <content><cube></cube></content>
+        </g>
+        <script>
+            var g = this.children[0]
+            $scope.h = g.size.y + 5
+            $scope.w = g.size.x + 5
+        </script>
+        <cube size="{{w}} {{h}} 1"></cube>
+    </stack>
+</craft>

@@ -1,0 +1,17 @@
+<craft>
+
+    <craft name="test">
+        <parameter name="one" type="json">
+            {
+                "foo": 1,
+                "bar": 2
+            }
+        </parameter>
+        <script>
+            expect($scope).to.have.property('one').and.deep.eql({foo:1, bar:2})
+        </script>
+    </craft>
+
+    <test></test>
+
+</craft>
