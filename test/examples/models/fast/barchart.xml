@@ -1,0 +1,25 @@
+<craft name="barchart">
+    <parameter name="data" type="json">
+        [10, 20, 30, 40, 50]
+    </parameter>
+
+    <part name="bar">
+        <parameter name="value" type="int" default="0"/>
+        <col spacing="5">
+            <cube size="10 {{value}} 1"></cube>
+            <braille>{{value}}</braille>
+            {{value}}
+        </col>
+    </part>
+
+    <craft name="page" module="./page.xml"/>
+
+    <page>
+        <row spacing="2" l="alignY(100%)">
+            <repeat each="i" in="{{data}}">
+                <bar value="{{i}}"/>
+            </repeat>
+        </row>
+    </page>
+
+</craft>

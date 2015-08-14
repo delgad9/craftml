@@ -1,0 +1,22 @@
+<craft name="treemap">
+
+    <parameter name="data" type="json">
+        [10,20,30,40,50]
+    </parameter>
+    <parameter name="labels" type="json">
+        ["apple","orange","banana","grape","peach"]
+    </parameter>
+
+    <script src="treemap.js">
+    </script>
+
+    <g transform="scale(0.5)">
+        <repeat each="d" in="{{nodes}}">
+            <stack transform="translateTo({{d[0]}}, {{d[1]}}, 0)">
+                <g transform="scale(0.3)">{{d.label}}</g>
+                <cube xsize="{{d[2]-d[0]-1}}" ysize="{{d[3]-d[1]-1}}"/>
+            </stack>
+        </repeat>
+    </g>
+
+</craft>
