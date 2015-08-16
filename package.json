@@ -56,6 +56,7 @@
     "relative": "^3.0.1",
     "request": "^2.53.0",
     "svg-path-parser": "^1.0.1",
+    "syntax-error": "^1.1.4",
     "url-join": "0.0.1",
     "with": "^4.0.1"
   }
