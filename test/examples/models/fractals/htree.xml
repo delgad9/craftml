@@ -1,5 +1,20 @@
 <craft>
-    <parameter name="numLevels" default="5" type="int"/>
+    <parameter name="numLevels" default="4" type="int"/>
+
+    <style>
+        .level4 {
+            color: pink;
+        }
+        .level3 {
+            color: red;
+        }
+        .level2 {
+            color: green;
+        }
+        .level1 {
+            color: black;
+        }
+    </style>
 
     <craft name="fractal">
         <parameter name="level" default="1" type="int"/>
@@ -15,41 +30,35 @@
         <part name="arrange">
             <content></content>
             <script>
-            function main(params, scope){
-                var s = params.s
+                var s = $scope.s
                 var dx = s
                 var dy = s
 
-                if (scope.solids.length===4){
-                    scope.solids[0].center(0,0,0)
-                    scope.solids[1].center(0,dy,0)
-                    scope.solids[2].center(dx,0,0)
-                    scope.solids[3].center(dx,dy,0)
+                if (this.children.length > 0){
+                    this.children[0].center(0,0,0)
+                    this.children[1].center(0,dy,0)
+                    this.children[2].center(dx,0,0)
+                    this.children[3].center(dx,dy,0)
                 }
-            }
             </script>
         </part>
         <part name="children">
-            <group layout="centerXY() alignZ(0%)">
+            <group layout="centerXY() alignZ(0%)" class="level{{level}}">
                 <h length="{{s}}"></h>
-                <group>
-                    <arrange>
-                        <repeat n='4'>
-                            <fractal level='{{level-1}}' s='{{s/2}}'></fractal>
-                        </repeat>
-                    </arrange>
-                </group>
+                <arrange>
+                    <repeat n='4'>
+                        <fractal level='{{level-1}}' s='{{s/2}}'></fractal>
+                    </repeat>
+                </arrange>                
             </group>
         </part>
         <script>
-            function main(params, scope){
-                if (params.level > 0){
-                    return "<children></children>"
-                }
+            if ($scope.level > 0){
+                this.add('<children></children>')
             }
         </script>
     </craft>
 
-    <fractal level="{{numLevels}}" color="green"></fractal>
+    <fractal level="{{numLevels}}"></fractal>
 
 </craft>

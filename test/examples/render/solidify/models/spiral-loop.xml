@@ -1,0 +1,45 @@
+<craft>
+    <info>
+        <title>Spiral Loop</title>
+    </info>
+
+    <parameter name="r1" default="10" type="float"/>
+    <parameter name="r2" default="30" type="float"/>
+    <parameter name="n" default="20" type="float"/>
+
+    <solidify id="loop">
+        <repeat n="{{n}}">
+            <circle t="rotateX(90)"></circle>
+        </repeat>
+        <script>
+            var solids = this.children
+
+            var n = solids.length
+
+            var dtheta = 2 * Math.PI / n
+
+            var r1 = $scope.r1
+            var r2 = $scope.r2
+            var dr = (r2 - r1) / n
+            var r = r1
+
+            var theta = 0
+            for (var i = 0; i < n; i++){
+
+                var x = r * Math.cos(theta)
+                var y = r * Math.sin(theta)
+
+                solids[i].center(x,y,0)
+                solids[i].rotateZ(180 * (theta / Math.PI))
+
+                r += dr
+                theta += dtheta
+            }
+        </script>
+    </solidify>
+    <script>
+        $('polyhedron').should.have
+            .normals(571, 799)
+    </script>
+
+</craft>
