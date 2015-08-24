@@ -1,0 +1,4 @@
+<craft name="triangle" grouping="off">
+    <parameter name="sideLength" type="float" default="10"/>
+    <regular-polygon sides="3" sideLength="{{sideLength}}"/>
+</craft>

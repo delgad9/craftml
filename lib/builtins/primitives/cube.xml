@@ -1,15 +1,10 @@
 <craft name="cube">
-    <parameter name="xsize" default="10" type="int"/>
-    <parameter name="ysize" default="10" type="int"/>
-    <parameter name="zsize" default="10" type="int"/>
-    <parameter name="size" type="size"/>
-    <script type="text/openjscad">
-        var size = params.size
-        if (size){
-            this.add(cube([size.x, size.y, size.z]))
-        } else {
-            // for backward compatibility
-            this.add(cube([params.xsize, params.ysize, params.zsize]))
-        }
-    </script>
+    <parameter name="size" type="size" default="10 10 10"/>
+
+    <g l="lineupZ({{size.z}}) solidify(rectangle)" grouping="off">
+        <repeat n="2">
+            <rectangle width="{{size.x}}" height="{{size.y}}"></rectangle>
+        </repeat>
+    </g>
+
 </craft>

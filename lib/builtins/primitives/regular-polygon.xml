@@ -1,0 +1,30 @@
+<craft name="regular-polygon" grouping="off">
+    <parameter name="radius" type="float"/>
+    <parameter name="sides" type="int" default="3"/>
+    <parameter name="sideLength" type="float" default="10"/>
+    <script>
+        var n = $scope.sides
+        var radius
+        if ($scope.radius) {
+            radius = $scope.radius
+        } else {
+            radius = ($scope.sideLength / Math.sin(Math.PI/n)) / 2
+        }
+
+        var cs = []
+        for (var i=0; i < n; i++){
+            var theta = (i - 0.5) * 2 * Math.PI / n + Math.PI / 2
+            var c = {}
+            c.x = (1 + Math.cos(theta)) * radius
+            c.y = (1 + Math.sin(theta)) * radius
+            cs.push(c)
+        }
+
+        var points = cs.map(function(c){
+            return c.x + ',' + c.y
+        }).join(' ')
+
+        $scope.points = points
+    </script>
+    <polygon points="{{points}}"/>
+</craft>

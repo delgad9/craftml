@@ -1,25 +1,12 @@
 <craft name="prism">
-    <parameter name="width" type="int" default="10"/>
-    <parameter name="length" type="int" default="10"/>
+    <parameter name="radius" type="float"/>
+    <parameter name="height" type="float" default="10"/>
     <parameter name="sides" type="int" default="3"/>
-    <script type="text/openjscad">
-        // handles fn
-        if (params.sides > 100) { params.sides = 100; }
-
-        var c, diff;
-
-        // parts
-        c = cylinder({
-            r: params.width / 2,
-            h: params.length,
-            fn: params.sides + 1
-        }).rotateY(90);
-
-        diff = cube({
-            size: [params.length, params.width, params.width]
-        }).translate([0, -params.width / 2, -params.width]);
-
-        var obj = difference(c, diff).rotateZ(90).translate([5,0,0]);
-        this.add(obj)
-    </script>
+    <parameter name="sideLength" type="float" default="10"/>
+    <g l="lineupZ({{height}}) solidify(polygon)" grouping="off">
+        <repeat n="2">
+            <regular-polygon
+                radius="{{radius}}" sides="{{sides}}" sideLength="{{sideLength}}"/>
+        </repeat>
+    </g>
 </craft>

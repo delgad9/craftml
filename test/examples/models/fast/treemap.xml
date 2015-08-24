@@ -14,7 +14,7 @@
         <repeat each="d" in="{{nodes}}">
             <stack transform="translateTo({{d[0]}}, {{d[1]}}, 0)">
                 <g transform="scale(0.3)">{{d.label}}</g>
-                <cube xsize="{{d[2]-d[0]-1}}" ysize="{{d[3]-d[1]-1}}"/>
+                <cube size="{{d[2]-d[0]-1}} {{d[3]-d[1]-1}} 10"/>
             </stack>
         </repeat>
     </g>

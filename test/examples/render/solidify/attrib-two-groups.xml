@@ -1,0 +1,19 @@
+<craft>
+    <g l="solidify(circle) solidify(rectangle)">
+        <g l="lineupX()">
+            <stack spacing="10">
+                <circle></circle>
+                <circle></circle>
+            </stack>
+            <stack spacing="10">
+                <rectangle></rectangle>
+                <rectangle></rectangle>
+            </stack>
+        </g>
+    </g>
+    <script>
+        $('polyhedron').should.have
+            .first.with.position(0,0,0).and.size(10,10,10)
+            .second.with.position(10,0,0).and.size(10,10,10)
+    </script>
+</craft>

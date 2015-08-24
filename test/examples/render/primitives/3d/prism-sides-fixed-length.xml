@@ -1,0 +1,12 @@
+<craft>
+    <g l="centerX() alignY(100%) lineupZ(0 -)">
+        <repeat each="i" in="{{[3,4,5,6,7,8,9,10]}}">
+            <prism sides="{{i}}" sideLength="5"></prism>
+        </repeat>
+    </g>
+    <script>
+        //$('prism').should.have.children(['polyhedron']).and.have
+            //.size(10,10,5).and.position(0,0,0)
+            //.polygonCount(5)
+    </script>
+</craft>

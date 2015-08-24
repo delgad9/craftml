@@ -3,6 +3,6 @@
     <script>
         $('cube').should.have.children(['polyhedron']).and.have
             .size(50,40,30).and.position(0,0,0)
-            .polygonCount(6)
+            .polygonCount(10)
     </script>
 </craft>

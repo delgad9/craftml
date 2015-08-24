@@ -1,0 +1,12 @@
+<craft>
+    <g l="solidify(circle)">
+        <stack spacing="10">
+            <circle></circle>
+            <circle></circle>
+        </stack>
+    </g>
+    <script>
+        $('polyhedron').should.have
+            .position(0,0,0).and.size(10,10,10)
+    </script>
+</craft>

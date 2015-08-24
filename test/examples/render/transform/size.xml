@@ -1,9 +1,9 @@
 <craft>
-    <cube size="10 20 30" t="translate(10 0 0) resize(20 20 20)"></cube>
-    <cube size="10 20 30" t="translate(10 0 0) resize(5 5 5)"></cube>
-    <cube size="10 20 30" t="translate(10 0 0) resize(20)"></cube>
-    <cube size="10 20 30" t="translate(10 0 0) resizeX(20)"></cube>
-    <cube size="10 20 30" t="translate(10 0 0) resizeX(10) resizeY(10) resizeZ(10)"></cube>
+    <cube size="10 20 30" t="translate(10 0 0) size(20 20 20)"></cube>
+    <cube size="10 20 30" t="translate(10 0 0) size(5 5 5)"></cube>
+    <cube size="10 20 30" t="translate(10 0 0) size(20)"></cube>
+    <cube size="10 20 30" t="translate(10 0 0) sizeX(20)"></cube>
+    <cube size="10 20 30" t="translate(10 0 0) sizeX(10) sizeY(10) sizeZ(10)"></cube>
     <script>
         // all cubes should have a new size, reamining at the same position
         $('cube').should.have
@@ -13,4 +13,8 @@
             .fourth.with.size(20,20,30).and.position(10,0,0)
             .fifth.size(10,10,10).and.position(10,0,0)
     </script>
+
+
+
+
 </craft>

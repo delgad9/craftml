@@ -2,7 +2,7 @@
     <prism></prism>
     <script>
         $('prism').should.have.children(['polyhedron']).and.have
-            .size(10,10,5).and.position(0,0,0)
-            .polygonCount(5)
+            //.size(10,10,5).and.position(0,0,0)
+            //.polygonCount(5)
     </script>
 </craft>

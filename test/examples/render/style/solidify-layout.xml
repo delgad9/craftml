@@ -1,0 +1,25 @@
+<craft>
+
+    <style>
+        * {
+            something: inherit;
+        }
+
+        #foo {
+            something: great;
+        }
+    </style>
+
+    <g l="lineupZ(10) solidify(rectangle)" id="foo">
+        <rectangle></rectangle>
+        <rectangle></rectangle>
+        <rectangle></rectangle>
+    </g>
+    <script>
+        $('polyhedron')
+            .should.have.style('something', 'great').and
+                .position(0,0,0) .size(10,10,20)
+    </script>
+
+
+</craft>

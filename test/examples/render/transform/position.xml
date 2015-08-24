@@ -1,0 +1,13 @@
+<craft>
+
+    <cube t="translate(100 100 100) position(10 20 30)"></cube>
+    <cube t="translate(100 100 100) position(-10 -20 -30)"></cube>
+    <cube t="translate(100 100 100) positionX(30) positionY(40) positionZ(50)"></cube>
+    <script>
+        $('cube').should.have
+            .first.with.position(10,20,30)
+            .second.with.position(-10,-20,-30)
+            .third.with.position(30,40,50)
+    </script>
+
+</craft>

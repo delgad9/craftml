@@ -12,7 +12,6 @@
             var c = {}
             c.z = Math.sin(theta) * $scope.width/2
             c.r = Math.cos(theta) * $scope.width/2
-            theta = theta + dtheta
             cs.push(c)
         }
 
@@ -20,11 +19,11 @@
 
     </script>
 
-    <solidify>
+    <g l="solidify(.d)">
         <repeat each="c" in="{{cs}}">
-            <circle radius="{{c.r}}" t="setZ({{c.z}})"></circle>
+            <circle class="d" radius="{{c.r}}" t="positionZ({{c.z}})"></circle>
         </repeat>
-        <point x="5" y="5" z="{{width/2}}"/>
-    </solidify>
+        <point class="d" x="5" y="5" z="{{width/2}}"/>
+    </g>
 
 </craft>

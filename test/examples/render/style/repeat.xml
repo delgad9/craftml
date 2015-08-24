@@ -7,6 +7,6 @@
         $('cube').should.have
             .first.with.style('something','fat')
             .second.with.style('something','fat')
-            .third.with.style('something','fat')        
+            .third.with.style('something','fat')
     </script>
 </craft>

@@ -1,0 +1,12 @@
+<craft>
+    <row l="alignY(100%)">
+        <repeat each="i" in="{{[3,4,5,6,7,8,9,10]}}">
+            <prism sides="{{i}}"></prism>
+        </repeat>
+    </row>
+    <script>
+        //$('prism').should.have.children(['polyhedron']).and.have
+            //.size(10,10,5).and.position(0,0,0)
+            //.polygonCount(5)
+    </script>
+</craft>

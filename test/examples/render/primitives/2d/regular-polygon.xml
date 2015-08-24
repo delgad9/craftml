@@ -1,0 +1,7 @@
+<craft>
+    <regular-polygon sides="5"/>
+    <script>
+        $('polygon').should.have
+            //.polygonCount(1) .position(0,0,0) .size(10,15,0)
+    </script>
+</craft>

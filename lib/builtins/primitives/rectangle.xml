@@ -1,7 +1,5 @@
 <craft name="rectangle">
     <parameter name="width" default="10" type="float"/>
-    <parameter name="height" default="10" type="int"/>
-    <script type="text/openjscad">
-        this.add2D(new CAG.rectangle({radius: [params.width/2, params.height/2], center: [params.width/2, params.height/2]}))
-    </script>
+    <parameter name="height" default="10" type="float"/>
+    <polygon points="0,0 {{width}},0 {{width}},{{height}} 0,{{height}}"/>
 </craft>
