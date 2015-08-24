@@ -1,22 +1,10 @@
 # craftml
 
+3D Modeling for Web Developers
+
+Use the online editor at [craftml.io](http://craftm.io/)
 See documentation at [docs.craftml.io](http:/docs.craftml.io/)
-
-
-# Dependencies
-
-sikuli/htmlparser2 fork
-
-- don't treat <col/> as void elements
 
 # Test
 
     $ gulp test:run
-
-# ProtoBuf
-
- ./node_modules/protobufjs/bin/pbjs lib/solid/solid.proto -t js > test/preview/js/solid.proto.js
- ./node_modules/protobufjs/bin/pbjs lib/solid/solid.proto > lib/solid/solid.proto.json
-
-
-# API
