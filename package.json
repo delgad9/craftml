@@ -1,10 +1,10 @@
 {
   "name": "craftml",
-  "version": "0.5.0",
+  "version": "0.8.1",
   "description": "craftml",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha --require babelhook"
+    "test": "gulp test:run -g 'render'"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,6 @@
     "require-dir": "^0.3.0",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.6.0",
-    "stl2image": "0.0.1",
     "through2": "^2.0.0",
     "yargs": "^3.15.0"
   },

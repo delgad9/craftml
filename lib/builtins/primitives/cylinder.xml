@@ -2,9 +2,13 @@
     <parameter name="radius" default="5" type="float"/>
     <parameter name="height" default="10" type="float"/>
     <parameter name="resolution" default="24" type="int"/>
-    <g l="lineupZ({{height}}) solidify(circle)">
-        <repeat n="2">
-            <circle radius="{{radius}}" resolution="{{resolution}}"></circle>
-        </repeat>
-    </g>
+    <script type="text/openjscad">
+        var csg= new CSG.cylinder({
+            radius: params.radius,
+            resolution: params.resolution,
+            start: [params.radius, params.radius, 0],
+            end: [params.radius, params.radius, params.height]
+        })
+        this.add(csg)
+    </script>
 </craft>
