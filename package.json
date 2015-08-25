@@ -1,6 +1,6 @@
 {
   "name": "craftml",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "craftml",
   "main": "lib/index.js",
   "scripts": {
@@ -53,11 +53,13 @@
     "jade": "^1.9.2",
     "lodash": "^3.9.3",
     "opentype.js": "^0.4.9",
+    "operative": "^0.4.4",
     "protobufjs": "^4.0.0",
     "relative": "^3.0.1",
     "request": "^2.53.0",
     "standard-error": "^1.1.0",
     "svg-path-parser": "^1.0.1",
+    "syntax-error": "^1.1.4",
     "url-join": "0.0.1",
     "with": "^4.0.1"
   }
