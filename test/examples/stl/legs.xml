@@ -1,0 +1,4 @@
+<craft>
+    <craft name="legs" module="./legs.stl"/>
+    <legs></legs>
+</craft>

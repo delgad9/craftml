@@ -1,0 +1,8 @@
+<craft>
+    <craft name="mario" module="./mario.stl"/>
+    <craft name="mushroom" module="./mushroom.stl"/>
+    <row spacing="10">
+        <mario></mario>
+        <mushroom></mushroom>
+    </row>
+</craft>

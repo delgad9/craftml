@@ -36,7 +36,7 @@ body
                     div.col-md-4.cell(id="cell#{i}")
                         div.title [not loaded]
                         div.model
-        script(src="js/craftml-preview.js")
+        script(src="http://cdn.craftml.io/craftml-all-dev.js")
         script(src="js/jquery.min.js")
         script(src="js/Long.min.js")
         script(src="js/ByteBufferAB.min.js")
@@ -73,7 +73,7 @@ body
             
             function initPreview(){
                 $('.cell .model').each(function(i){
-                    var preview = new craftml.Preview(this)
+                    var preview = new Craftml.Preview(this)
                     preview.setCameraPosition(0, -2.5, 3)    
                     preview.render()
                     previews.push(preview)
