@@ -1,0 +1,15 @@
+<craft>
+
+    <param name="one" type="int" default="1"/>
+    <param name="two" type="int" default="2"/>
+    <param name="three" type="int" default="3"/>
+    <param name="text" type="string" default="foo"/>
+
+    <script>
+        expect($scope).to.have.property('one').and.eql(1)
+        expect($scope).to.have.property('two').and.eql(2)
+        expect($scope).to.have.property('three').and.eql(3)
+        expect($scope).to.have.property('text').and.equal('foo')
+    </script>
+
+</craft>

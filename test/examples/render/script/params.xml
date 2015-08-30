@@ -1,0 +1,7 @@
+<craft>
+
+    <param name="one" type="int" default="1"/>
+    <script>
+        expect($params).to.have.property('one').and.eql(1)
+    </script>
+</craft>

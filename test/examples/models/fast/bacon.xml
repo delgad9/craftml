@@ -2,14 +2,14 @@
     <craft name="alternate" module="./alternate-layout.xml"/>
 
     <part name="ridge">
-        <g l="centerXY() cut(.hollow)" t="cropZ(1) scale(1 1 0.8)">
-            <prism length="1" sides="50"/>
-            <prism sides="50" t="scale(0.8 1 0.8)" class="hollow"/>
+        <g l="centerXY() cut(.hollow)" t="scale(1 1 0.8)">
+            <cylinder radius="5" height="1" t="cropY(50%) rotateX(90)"/>
+            <cylinder radius="5" height="1" t="translate(0 0 1) cropY(50%) rotateX(90)" class="hollow"/>
         </g>
     </part>
 
     <part name="strip">
-        <g l="lineupX(-1.1)">
+        <g l="lineupX(-1.1) centerY()">
             <alternate axis="y" degrees="180">
                 <repeat n="5">
                     <ridge></ridge>
@@ -24,7 +24,7 @@
                             solid.translateTo({
                                 x: 0,
                                 y: 0,
-                                z: -2
+                                z: 0
                             })
                         }
                     }
@@ -34,7 +34,14 @@
     </part>
 
     <col t="scale(1 1 0.5)">
-        <strip t="scale(1 1.3 1)"></strip>
+        <strip t="scale(1 0.3 1)"></strip>
+        <strip t="scale(1 0.8 1)"></strip>
+        <strip t="scale(1 0.6 1)"></strip>
+        <strip t="scale(1 0.3 1)"></strip>
+        <strip></strip>
+        <strip t="scale(1 0.5 1)"></strip>
+        <strip t="scale(1 0.8 1)"></strip>
+        <strip t="scale(1 0.6 1)"></strip>
         <strip t="scale(1 1.3 1)"></strip>
 
         <script>

@@ -5,7 +5,7 @@
     <script>
 
         var theta
-        var dtheta = Math.PI/32
+        var dtheta = Math.PI/16
         var cs = []
 
         for (theta=0; theta < Math.PI/2 - dtheta; theta += dtheta){

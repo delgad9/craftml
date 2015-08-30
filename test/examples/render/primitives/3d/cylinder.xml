@@ -3,6 +3,6 @@
     <script>
         $('cylinder polyhedron').should.have
             .size(10,10,10).and.position(0,0,0)
-            .polygonCount(50)
+            .polygonCount(72)
     </script>
 </craft>

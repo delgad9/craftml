@@ -1,0 +1,15 @@
+<craft>
+    <craft name="foo" l="lineupZ()">
+        <cube></cube>
+        <cube></cube>
+        <cube></cube>
+    </craft>
+    <foo class="one"></foo>
+    <foo class="two" l="lineupZ(10)"></foo>
+    <script>
+        $('.one').should.have
+            .size(10,10,30)
+        $('.two').should.have
+            .size(10,10,50)
+    </script>
+</craft>

@@ -1,0 +1,11 @@
+<craft>
+    <craft name="foo" t="scale(2)">
+        <cube></cube>
+    </craft>
+    <foo t="scale(3) translate(15 0 0)"></foo>
+    <script>
+        $('foo').should.have
+            .position(15,0,0).and
+            .size(60,60,60)
+    </script>
+</craft>
