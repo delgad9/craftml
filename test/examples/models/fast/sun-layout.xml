@@ -1,4 +1,4 @@
-<craft name="sun-layout" grouping="off">
+<craft name="sun-layout" t="ungroup()">
     <parameter name="radius" default="10" type="int"/>
     <content>
         <cube></cube>

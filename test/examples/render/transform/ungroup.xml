@@ -1,0 +1,12 @@
+<craft>
+    <g class="top" l="lineupZ()">
+        <g t="ungroup()">
+            <cube></cube>
+            <cube></cube>
+        </g>
+    </g>
+    <script>
+        $('.top > cube').should.have.length(2)
+        $('.top').should.have.size(10,10,20)
+    </script>
+</craft>

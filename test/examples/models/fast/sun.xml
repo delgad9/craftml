@@ -9,7 +9,7 @@
         <g color="orange">
             <sun-layout radius="{{radius + 2}}">
                 <repeat n="{{spikes}}">
-                    <prism length="{{height}}" t="rotateX(-90)"/>
+                    <prism length="{{height}}" height="{{height}}"/>
                 </repeat>
             </sun-layout>
         </g>
