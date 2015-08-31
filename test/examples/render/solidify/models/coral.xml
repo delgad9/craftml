@@ -57,7 +57,7 @@
     </row>
 
     <script>
-        $('#corals').should.have.size(99.03684,59.4221,28.5)
+        $('#corals').should.have.size(81.19310,48.715862,28.5)
     </script>
 
 </craft>

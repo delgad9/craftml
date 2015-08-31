@@ -1,21 +1,19 @@
 <craft name="sun-layout" t="ungroup()">
-    <parameter name="radius" default="10" type="int"/>
+    <param name="radius" default="10" type="int"/>
     <content>
-        <cube></cube>
-        <cube></cube>
-        <cube></cube>
-        <cube></cube>
-        <cube></cube>
+        <repeat n="10">
+            <prism t="scale(0.5)"></prism>
+        </repeat>
     </content>
     <script>
-        var n = scope.solids.length
+        var n = this.children.length
 
-        var r = params.radius, theta = 0
+        var r = $params.radius, theta = 0
         var delta = 2 * Math.PI / n
         var ps = []
-        for (var i = 0; i < n; i++){
+        for (var i = 0; i < n; i++) {
 
-            var solid = scope.solids[i]
+            var solid = this.children[i]
 
             var loc = {
                 x: -(r * Math.cos(theta) + solid.position.x/2),
@@ -24,8 +22,8 @@
             }
             var angle = 360/n * (i - (n / 4))
 
+            solid.translateTo(loc)
             solid.rotate('z', angle)
-            solid.center(loc)
             theta = theta + delta
         }
     </script>

@@ -1,7 +1,7 @@
 <craft name="arm">
     <parameter name="length" default="30" type="int"/>
     <stack>
-        <prism></prism>
+        <prism t="rotateX(90)"></prism>
         <cube size="10 10 {{length}} "></cube>
     </stack>
 </craft>

@@ -1,31 +1,33 @@
 <craft name="fence">
-    <parameter name="length" type="int" default="55"/>
-    <parameter name="height" type="int" default="40"/>
+    <param name="length" type="int" default="55"/>
+    <param name="height" type="int" default="40"/>
 
-    <g color="peru">
-        <!-- Rails -->
-        <stack spacing="{{height / 3}}" transform="translate(0,0,{{height/6}})">
-            <repeat n="2">
-                <cube size="{{length}} 2 5"></cube>
+    <style>
+        * { color: chocolate; }
+    </style>
+
+    <!-- Rails -->
+    <stack spacing="{{height/3}}" t="translate(0 0 {{height/6}})">
+        <repeat n="2">
+            <cube size="{{length}} 2 5"></cube>
+        </repeat>
+    </stack>
+
+    <!-- Pickets -->
+    <stack>
+        <!-- Spikes -->
+        <row spacing="5">
+            <repeat n="{{length / 10}}">
+                <prism sideLength="5" height="3" t="rotateX(90) scale(1 1 0.7)"></prism>
             </repeat>
-        </stack>
+        </row>
 
-        <!-- Pickets -->
-        <stack>
-            <!-- Spikes -->
-            <row spacing="5">
-                <repeat n="{{length / 10}}">
-                    <prism width="5" length="3"></prism>
-                </repeat>
-            </row>
-
-            <!-- Boards -->
-            <row spacing="5">
-                <repeat n="{{length / 10}}">
-                    <cube size="5 3 {{height}}"></cube>
-                </repeat>
-            </row>
-        </stack>
-    </g>
+        <!-- Boards -->
+        <row spacing="5">
+            <repeat n="{{length / 10}}">
+                <cube size="5 3 {{height}}"></cube>
+            </repeat>
+        </row>
+    </stack>
 
 </craft>

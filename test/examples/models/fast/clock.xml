@@ -2,13 +2,7 @@
     <parameter name="hour" type="range" min="1" max="12" default="3"/>
     <parameter name="minute" type="range" min="0" max="60" default="30"/>
 
-    <craft name="arm">
-        <parameter name="length" default="30" type="int"/>
-        <stack>
-            <prism></prism>
-            <cube size="10 10 {{length}} "></cube>
-        </stack>
-    </craft>
+    <craft name="arm" module="./clock-arm.xml"/>        
 
     <script>
         var hours = Number(params.hour)

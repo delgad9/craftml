@@ -6,19 +6,19 @@
     <craft name="star-layout" module="./star-layout.xml"/>
 
     <part name="ring">
-        <parameter name="radius" type="int" default="30"/>
-        <g l="centerXY()">
+        <param name="radius" type="int" default="30"/>
+        <g l="centerXY()" t="sizeZ(5)">
             <g>
                 <star-layout radius="{{radius}}">
                     <repeat n="{{radius/1.4}}">
-                        <prism t="rotateX(180)"></prism>
+                        <prism t="rotateX(-90)"></prism>
                     </repeat>
                 </star-layout>
             </g>
             <g>
                 <star-layout radius="{{radius-5}}">
                     <repeat n="{{radius/1.4}}">
-                        <prism ></prism>
+                        <prism t="rotateX(90)"></prism>
                     </repeat>
                 </star-layout>
             </g>
